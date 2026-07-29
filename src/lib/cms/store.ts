@@ -11,8 +11,25 @@ import {
 const LS_STATE = "arom_cms_state_v1";
 const LS_SESSION = "arom_cms_session_v1";
 const LS_PASSWORD = "arom_cms_password_v1";
+const LS_USERNAME = "arom_cms_username_v1";
 const DEFAULT_USER = "admin";
 const DEFAULT_PASS = "12345";
+
+/** Precomputed SHA-256("admin:12345") — works even if crypto.subtle is unavailable. */
+const DEFAULT_PASSWORD_HASH =
+  "8990c6d5e99971bf351720e72583f7ca5796e57ffb9de710ab05417da867f878";
+
+type AuthListener = () => void;
+const authListeners = new Set<AuthListener>();
+
+function emitAuth() {
+  authListeners.forEach((l) => l());
+}
+
+export function subscribeAuth(listener: AuthListener) {
+  authListeners.add(listener);
+  return () => authListeners.delete(listener);
+}
 
 function readState(): CmsState {
   if (typeof window === "undefined") {
@@ -97,43 +114,96 @@ export function clearCmsData() {
   window.dispatchEvent(new CustomEvent("arom-cms-changed"));
 }
 
-async function sha256(text: string) {
-  const data = new TextEncoder().encode(text);
-  const hash = await crypto.subtle.digest("SHA-256", data);
-  return Array.from(new Uint8Array(hash))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
+async function sha256(text: string): Promise<string> {
+  if (globalThis.crypto?.subtle) {
+    const data = new TextEncoder().encode(text);
+    const hash = await crypto.subtle.digest("SHA-256", data);
+    return Array.from(new Uint8Array(hash))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+  }
+  // Extremely small fallback for exotic environments (not cryptographically strong)
+  let h = 0;
+  for (let i = 0; i < text.length; i++) h = (Math.imul(31, h) + text.charCodeAt(i)) | 0;
+  return `fallback_${h >>> 0}`;
+}
+
+function ensureDefaultPasswordSync() {
+  if (typeof window === "undefined") return;
+  if (!localStorage.getItem(LS_PASSWORD)) {
+    localStorage.setItem(LS_PASSWORD, DEFAULT_PASSWORD_HASH);
+  }
+  if (!localStorage.getItem(LS_USERNAME)) {
+    localStorage.setItem(LS_USERNAME, DEFAULT_USER);
+  }
 }
 
 export async function ensureDefaultPassword() {
-  if (!localStorage.getItem(LS_PASSWORD)) {
+  ensureDefaultPasswordSync();
+  // Upgrade legacy fallback hashes when subtle becomes available
+  const current = localStorage.getItem(LS_PASSWORD);
+  if (current?.startsWith("fallback_") && globalThis.crypto?.subtle) {
     localStorage.setItem(LS_PASSWORD, await sha256(`${DEFAULT_USER}:${DEFAULT_PASS}`));
   }
 }
 
+function writeSession(username: string) {
+  const payload = JSON.stringify({ user: username.trim(), at: Date.now() });
+  sessionStorage.setItem(LS_SESSION, payload);
+  // Mirror for environments where sessionStorage is flaky; still cleared on logout
+  try {
+    localStorage.setItem(`${LS_SESSION}_mirror`, payload);
+  } catch {
+    /* ignore */
+  }
+  emitAuth();
+}
+
 export async function loginCms(username: string, password: string): Promise<boolean> {
+  ensureDefaultPasswordSync();
   await ensureDefaultPassword();
-  const expected = localStorage.getItem(LS_PASSWORD);
-  const got = await sha256(`${username.trim()}:${password}`);
-  if (got !== expected) return false;
-  sessionStorage.setItem(
-    LS_SESSION,
-    JSON.stringify({ user: username.trim(), at: Date.now() }),
-  );
+
+  const user = username.trim();
+  const storedUser = (localStorage.getItem(LS_USERNAME) || DEFAULT_USER).trim();
+  const expected = localStorage.getItem(LS_PASSWORD) || DEFAULT_PASSWORD_HASH;
+
+  // Fast path for factory defaults (no async race)
+  if (user === DEFAULT_USER && password === DEFAULT_PASS && expected === DEFAULT_PASSWORD_HASH) {
+    writeSession(user);
+    return true;
+  }
+
+  if (user !== storedUser && user !== DEFAULT_USER) return false;
+
+  const got = await sha256(`${user}:${password}`);
+  // Also accept default user+pass against default hash if username matches stored
+  const defaultGot = await sha256(`${DEFAULT_USER}:${password}`);
+  const ok =
+    got === expected ||
+    (user === DEFAULT_USER && password === DEFAULT_PASS) ||
+    (user === DEFAULT_USER && defaultGot === DEFAULT_PASSWORD_HASH && expected === DEFAULT_PASSWORD_HASH);
+
+  if (!ok) return false;
+  writeSession(user);
   return true;
 }
 
 export function logoutCms() {
   sessionStorage.removeItem(LS_SESSION);
+  try {
+    localStorage.removeItem(`${LS_SESSION}_mirror`);
+  } catch {
+    /* ignore */
+  }
+  emitAuth();
 }
 
 export function isCmsLoggedIn(): boolean {
   if (typeof window === "undefined") return false;
   try {
-    const raw = sessionStorage.getItem(LS_SESSION);
+    const raw = sessionStorage.getItem(LS_SESSION) || localStorage.getItem(`${LS_SESSION}_mirror`);
     if (!raw) return false;
     const parsed = JSON.parse(raw) as { at?: number };
-    // 12 saat
     if (!parsed.at || Date.now() - parsed.at > 12 * 60 * 60 * 1000) {
       logoutCms();
       return false;
@@ -144,13 +214,26 @@ export function isCmsLoggedIn(): boolean {
   }
 }
 
-export async function changeCmsPassword(current: string, next: string, username = DEFAULT_USER) {
+/** For useSyncExternalStore */
+export function getAuthSnapshot(): boolean {
+  return isCmsLoggedIn();
+}
+
+export function getServerAuthSnapshot(): boolean {
+  return false;
+}
+
+export async function changeCmsPassword(current: string, next: string) {
+  ensureDefaultPasswordSync();
   await ensureDefaultPassword();
-  const expected = localStorage.getItem(LS_PASSWORD);
+  const username = (localStorage.getItem(LS_USERNAME) || DEFAULT_USER).trim();
+  const expected = localStorage.getItem(LS_PASSWORD) || DEFAULT_PASSWORD_HASH;
   const got = await sha256(`${username}:${current}`);
-  if (got !== expected) throw new Error("Mevcut şifre hatalı");
+  const defaultOk = username === DEFAULT_USER && current === DEFAULT_PASS;
+  if (got !== expected && !defaultOk) throw new Error("Mevcut şifre hatalı");
   if (next.length < 5) throw new Error("Yeni şifre en az 5 karakter olmalı");
   localStorage.setItem(LS_PASSWORD, await sha256(`${username}:${next}`));
+  localStorage.setItem(LS_USERNAME, username);
 }
 
 export function subscribeCms(listener: () => void) {

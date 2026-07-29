@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import {
   Boxes,
   Download,
@@ -21,12 +21,14 @@ import {
   changeCmsPassword,
   clearCmsData,
   exportCmsBackup,
+  getAuthSnapshot,
   getCmsState,
+  getServerAuthSnapshot,
   importCmsBackup,
-  isCmsLoggedIn,
   loginCms,
   logoutCms,
   saveCmsSettings,
+  subscribeAuth,
   subscribeCms,
   upsertProductOverride,
 } from "@/lib/cms/store";
@@ -34,6 +36,10 @@ import { DEFAULT_CMS_SETTINGS, type CmsSettings, type ProductOverride } from "@/
 import { formatCurrency } from "@/lib/format";
 import { withBasePath } from "@/lib/paths";
 import "@/app/admin-panel.css";
+
+const IS_STATIC =
+  process.env.NEXT_PUBLIC_STATIC_EXPORT === "true" ||
+  Boolean(process.env.NEXT_PUBLIC_BASE_PATH);
 
 type CatalogProduct = {
   id: number;
@@ -71,7 +77,8 @@ function mergeProduct(base: CatalogProduct, ov?: ProductOverride): CatalogProduc
 }
 
 export function AdminCMS() {
-  const [authed, setAuthed] = useState(false);
+  // Single source of truth: session storage via external store (fixes Pages login UI stuck)
+  const authed = useSyncExternalStore(subscribeAuth, getAuthSnapshot, getServerAuthSnapshot);
   const [tab, setTab] = useState<Tab>("dashboard");
   const [catalog, setCatalog] = useState<CatalogProduct[]>([]);
   const [overrides, setOverrides] = useState<Record<string, ProductOverride>>({});
@@ -81,8 +88,11 @@ export function AdminCMS() {
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState<CatalogProduct | null>(null);
   const [saving, setSaving] = useState(false);
+  const [loggingIn, setLoggingIn] = useState(false);
   const [orders, setOrders] = useState<unknown[]>([]);
-  const [serverMode, setServerMode] = useState(false);
+  const [username, setUsername] = useState("admin");
+  const [password, setPassword] = useState("12345");
+  const serverMode = !IS_STATIC;
 
   const refreshLocal = useCallback(() => {
     const state = getCmsState();
@@ -91,15 +101,11 @@ export function AdminCMS() {
   }, []);
 
   useEffect(() => {
-    setAuthed(isCmsLoggedIn());
     refreshLocal();
     return subscribeCms(refreshLocal);
   }, [refreshLocal]);
 
   useEffect(() => {
-    const staticMode = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true";
-    setServerMode(!staticMode);
-
     fetch(withBasePath("/data/catalog.json"))
       .then((r) => r.json())
       .then((data) => {
@@ -146,40 +152,51 @@ export function AdminCMS() {
 
   async function onLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    e.stopPropagation();
     setError(null);
-    const form = new FormData(e.currentTarget);
-    const username = String(form.get("username") || "");
-    const password = String(form.get("password") || "");
+    setLoggingIn(true);
 
-    // Prefer server login when APIs exist
-    if (serverMode) {
-      try {
-        const res = await fetch("/api/admin/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password }),
-        });
-        if (res.ok) {
-          await loginCms(username, password).catch(() => undefined);
-          setAuthed(true);
-          return;
+    const user = username.trim();
+    const pass = password;
+
+    try {
+      // Optional Node API login — never block GitHub Pages local CMS
+      if (serverMode) {
+        try {
+          const controller = new AbortController();
+          const timer = window.setTimeout(() => controller.abort(), 2500);
+          const res = await fetch(withBasePath("/api/admin/login"), {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username: user, password: pass }),
+            signal: controller.signal,
+          });
+          window.clearTimeout(timer);
+          if (res.ok) {
+            await loginCms(user, pass);
+            setLoggingIn(false);
+            return;
+          }
+        } catch {
+          /* Pages / offline: local CMS auth */
         }
-      } catch {
-        /* fall through to local */
       }
-    }
 
-    const ok = await loginCms(username, password);
-    if (!ok) {
-      setError("Kullanıcı adı veya şifre hatalı");
-      return;
+      const ok = await loginCms(user, pass);
+      if (!ok) {
+        setError("Kullanıcı adı veya şifre hatalı");
+        setLoggingIn(false);
+        return;
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Giriş yapılamadı");
+    } finally {
+      setLoggingIn(false);
     }
-    setAuthed(true);
   }
 
   function onLogout() {
     logoutCms();
-    setAuthed(false);
   }
 
   async function saveProduct(e: FormEvent<HTMLFormElement>) {
@@ -303,7 +320,14 @@ export function AdminCMS() {
           <div className="cms-fields">
             <div className="cms-field">
               <label htmlFor="username">Kullanıcı adı</label>
-              <input id="username" name="username" defaultValue="admin" required autoComplete="username" />
+              <input
+                id="username"
+                name="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                autoComplete="username"
+              />
             </div>
             <div className="cms-field">
               <label htmlFor="password">Şifre</label>
@@ -311,13 +335,14 @@ export function AdminCMS() {
                 id="password"
                 name="password"
                 type="password"
-                defaultValue="12345"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 autoComplete="current-password"
               />
             </div>
-            <button className="cms-btn" type="submit">
-              Giriş yap
+            <button className="cms-btn" type="submit" disabled={loggingIn}>
+              {loggingIn ? "Giriş yapılıyor…" : "Giriş yap"}
             </button>
           </div>
           <p className="cms-help" style={{ marginTop: "1rem" }}>
