@@ -96,7 +96,7 @@ export function productFromCacheRow(row: ProductRow): NormalizedProduct {
 
 export async function getCategories(): Promise<CatalogResult<NormalizedCategory[]>> {
   if (isStaticExport()) {
-    return { data: getStaticCategories(), source: "static", configured: false };
+    return { data: getStaticCategories(), source: "static", configured: true };
   }
 
   const configured = isTicimaxConfigured();
@@ -153,7 +153,7 @@ export async function getProducts(options?: {
   pageSize?: number;
 }): Promise<CatalogResult<NormalizedProduct[]>> {
   if (isStaticExport()) {
-    return { data: getStaticProducts(options), source: "static", configured: false };
+    return { data: getStaticProducts(options), source: "static", configured: true };
   }
 
   const configured = isTicimaxConfigured();
@@ -247,7 +247,7 @@ export async function getProducts(options?: {
 
 export async function getProductBySlug(slug: string): Promise<CatalogResult<NormalizedProduct | null>> {
   if (isStaticExport()) {
-    return { data: getStaticProductBySlug(slug), source: "static", configured: false };
+    return { data: getStaticProductBySlug(slug), source: "static", configured: true };
   }
 
   const configured = isTicimaxConfigured();

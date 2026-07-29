@@ -70,7 +70,7 @@ export default async function HomePage() {
           </div>
         </Reveal>
 
-        {!configured || products.length === 0 ? (
+        {products.length === 0 ? (
           <div className="catalog-empty">
             <span>A</span>
             <h2>Ürünler yakında burada</h2>
@@ -78,9 +78,11 @@ export default async function HomePage() {
               {message ||
                 "Henüz ürün listelenemiyor. Ticimax bağlantısını yapılandırıp admin panelinden senkronizasyon çalıştırın."}
             </p>
-            <Link className="button button-primary" href="/admin/login">
-              Admin paneli
-            </Link>
+            {!configured ? (
+              <Link className="button button-primary" href="/admin/login">
+                Admin paneli
+              </Link>
+            ) : null}
           </div>
         ) : (
           <Reveal className="product-grid" delay={0.05}>
