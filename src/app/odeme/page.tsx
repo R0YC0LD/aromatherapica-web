@@ -6,6 +6,8 @@ import { useCart } from "@/components/CartProvider";
 import { formatCurrency } from "@/lib/format";
 import { freeShippingAnnouncement, orderTotal, shippingCost, shippingProgressMessage } from "@/lib/shipping";
 
+const isStatic = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true";
+
 export default function CheckoutPage() {
   const { cart, total, clear } = useCart();
   const cargo = shippingCost(total);
@@ -25,6 +27,47 @@ export default function CheckoutPage() {
 
     const form = new FormData(e.currentTarget);
     const paymentType = Number(form.get("paymentType"));
+    const customerName = String(form.get("name") || "");
+    const customerEmail = String(form.get("email") || "");
+
+    // Static GitHub Pages: validate locally from cart stock fields
+    if (isStatic) {
+      const invalid = cart.items.find((i) => i.quantity <= 0);
+      if (invalid) {
+        setLoading(false);
+        setError("Sepet geçersiz");
+        return;
+      }
+
+      const order = {
+        id: idempotencyKey,
+        status: "CREATED",
+        paymentStatus: paymentType === 1 ? "AWAITING_TRANSFER" : "PENDING",
+        totalAmount: grand,
+        shipping: cargo,
+        customerEmail,
+        customerName,
+        createdAt: new Date().toISOString(),
+        ticimaxOrderId: null,
+        ticimaxOrderCode: null,
+        note:
+          "GitHub Pages statik yayında sipariş tarayıcıda kaydedildi. Canlı Ticimax aktarımı için Node sunucusu (.env + TICIMAX_*) gerekir.",
+        lines: cart.items,
+      };
+
+      try {
+        localStorage.setItem(`arom_order_${order.id}`, JSON.stringify(order));
+        const prev = JSON.parse(localStorage.getItem("arom_orders") || "[]") as unknown[];
+        localStorage.setItem("arom_orders", JSON.stringify([order, ...prev].slice(0, 50)));
+      } catch {
+        /* ignore */
+      }
+
+      clear();
+      setLoading(false);
+      router.push(`/siparis/sonuc/?id=${encodeURIComponent(order.id)}`);
+      return;
+    }
 
     const validateRes = await fetch("/api/cart/validate", {
       method: "POST",
@@ -50,13 +93,13 @@ export default function CheckoutPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         idempotencyKey,
-        memberId: Number(form.get("memberId")),
-        billingAddressId: Number(form.get("billingAddressId")),
-        shippingAddressId: Number(form.get("shippingAddressId")),
+        memberId: Number(form.get("memberId") || 1),
+        billingAddressId: Number(form.get("billingAddressId") || 1),
+        shippingAddressId: Number(form.get("shippingAddressId") || 1),
         paymentType,
-        paymentStatus: paymentType === 1 ? 0 : 0,
-        customerEmail: String(form.get("email")),
-        customerName: String(form.get("name")),
+        paymentStatus: 0,
+        customerEmail,
+        customerName,
         orderNote: String(form.get("note") || ""),
         lines: cart.items.map((i) => ({
           productId: i.productId,
@@ -74,8 +117,29 @@ export default function CheckoutPage() {
       return;
     }
 
+    try {
+      localStorage.setItem(
+        `arom_order_${data.orderId}`,
+        JSON.stringify({
+          id: data.orderId,
+          status: data.status,
+          paymentStatus: paymentType === 1 ? "AWAITING_TRANSFER" : "PENDING",
+          totalAmount: data.totalAmount,
+          shipping: data.shipping,
+          customerEmail,
+          customerName,
+          createdAt: new Date().toISOString(),
+          ticimaxOrderId: data.ticimaxOrderId,
+          ticimaxOrderCode: data.ticimaxOrderCode,
+          note: data.warning,
+        }),
+      );
+    } catch {
+      /* ignore */
+    }
+
     clear();
-    router.push(`/siparis/${data.orderId}`);
+    router.push(`/siparis/sonuc/?id=${encodeURIComponent(data.orderId)}`);
   }
 
   if (cart.items.length === 0) {
@@ -90,13 +154,25 @@ export default function CheckoutPage() {
     <section className="section">
       <h1 style={{ fontFamily: "var(--serif)", fontWeight: 400 }}>Ödeme</h1>
       <p className="section-lead">
-        Kart numarası veya CVV bu sitede işlenmez. Sipariş Ticimax üzerinden oluşturulur.
+        Kart numarası veya CVV bu sitede işlenmez.
+        {isStatic
+          ? " Bu yayın GitHub Pages üzerindedir; sipariş tarayıcıda kaydedilir. Canlı Ticimax aktarımı için Node sunucusu kullanın."
+          : " Sipariş Ticimax üzerinden oluşturulur."}
         {` ${freeShippingAnnouncement()}.`}
       </p>
-      <div className="admin-card" style={{ background: "rgba(255,255,255,0.55)", color: "var(--ink)", maxWidth: 520 }}>
-        <p>Ara toplam: <strong>{formatCurrency(total)}</strong></p>
-        <p>Kargo: <strong>{cargo === 0 ? "Ücretsiz" : formatCurrency(cargo)}</strong></p>
-        <p>Genel toplam: <strong>{formatCurrency(grand)}</strong></p>
+      <div
+        className="admin-card"
+        style={{ background: "rgba(255,255,255,0.55)", color: "var(--ink)", maxWidth: 520 }}
+      >
+        <p>
+          Ara toplam: <strong>{formatCurrency(total)}</strong>
+        </p>
+        <p>
+          Kargo: <strong>{cargo === 0 ? "Ücretsiz" : formatCurrency(cargo)}</strong>
+        </p>
+        <p>
+          Genel toplam: <strong>{formatCurrency(grand)}</strong>
+        </p>
         <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>{shippingProgressMessage(total)}</p>
       </div>
 
@@ -109,18 +185,27 @@ export default function CheckoutPage() {
           <label htmlFor="email">E-posta</label>
           <input id="email" name="email" type="email" required />
         </div>
-        <div className="form-field">
-          <label htmlFor="memberId">Ticimax Üye ID</label>
-          <input id="memberId" name="memberId" type="number" required min={1} />
-        </div>
-        <div className="form-field">
-          <label htmlFor="billingAddressId">Fatura Adres ID</label>
-          <input id="billingAddressId" name="billingAddressId" type="number" required min={1} />
-        </div>
-        <div className="form-field">
-          <label htmlFor="shippingAddressId">Kargo Adres ID</label>
-          <input id="shippingAddressId" name="shippingAddressId" type="number" required min={1} />
-        </div>
+        {!isStatic ? (
+          <>
+            <div className="form-field">
+              <label htmlFor="memberId">Ticimax Üye ID</label>
+              <input id="memberId" name="memberId" type="number" required min={1} />
+            </div>
+            <div className="form-field">
+              <label htmlFor="billingAddressId">Fatura Adres ID</label>
+              <input id="billingAddressId" name="billingAddressId" type="number" required min={1} />
+            </div>
+            <div className="form-field">
+              <label htmlFor="shippingAddressId">Kargo Adres ID</label>
+              <input id="shippingAddressId" name="shippingAddressId" type="number" required min={1} />
+            </div>
+          </>
+        ) : (
+          <div className="form-field">
+            <label htmlFor="phone">Telefon</label>
+            <input id="phone" name="phone" required />
+          </div>
+        )}
         <div className="form-field">
           <label htmlFor="paymentType">Ödeme tipi</label>
           <select id="paymentType" name="paymentType" defaultValue="1">

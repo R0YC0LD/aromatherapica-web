@@ -3,6 +3,11 @@ import type { Metadata } from "next";
 import { getProductBySlug } from "@/lib/catalog/service";
 import { formatCurrency } from "@/lib/format";
 import { AddToCartButton } from "@/components/AddToCartButton";
+import { getAllStaticProductSlugs } from "@/lib/catalog/static-data";
+
+export function generateStaticParams() {
+  return getAllStaticProductSlugs().map((slug) => ({ slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;

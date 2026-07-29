@@ -8,6 +8,7 @@ import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { SecretLogo } from "@/components/SecretLogo";
 import { CartBadge } from "@/components/CartBadge";
 import { freeShippingAnnouncement } from "@/lib/shipping";
+import { withBasePath } from "@/lib/paths";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -108,7 +109,7 @@ export function SiteHeader() {
 
           <SecretLogo href="/" className="wordmark">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="brand-mark-image" src="/aromatherapica-emblem.png" width={46} height={46} alt="" />
+            <img className="brand-mark-image" src={withBasePath("/aromatherapica-emblem.png")} width={46} height={46} alt="" />
             <strong>Aromatherapica</strong>
             <span>Essential Oils &amp; Aromatherapy</span>
           </SecretLogo>
@@ -179,7 +180,7 @@ export function SiteHeader() {
             <div className="drawer-header">
               <SecretLogo href="/" className="wordmark">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="brand-mark-image" src="/aromatherapica-emblem.png" width={40} height={40} alt="" />
+                <img className="brand-mark-image" src={withBasePath("/aromatherapica-emblem.png")} width={40} height={40} alt="" />
                 <strong>Aromatherapica</strong>
                 <span>Essential Oils &amp; Aromatherapy</span>
               </SecretLogo>

@@ -97,7 +97,30 @@ Aromatherapica logosuna **3 saniye içinde 5 kez** tıklanınca `/admin/login` a
 - Sipariş öncesi stok/fiyat yeniden doğrulanır
 - `idempotencyKey` ile çift sipariş engellenir
 
-## Deployment
+## GitHub Pages (statik yayın)
+
+GitHub Pages Node/API çalıştırmaz. Bu yüzden mağaza vitrini `output: 'export'` ile statik üretilir:
+
+- Ürünler `public/data/catalog.json` üzerinden gelir (138 ürün seed)
+- Sepet / ödeme tarayıcıda çalışır
+- Admin API ve Ticimax SOAP için Node sunucusu gerekir (`npm run dev` / Vercel)
+
+### Yayın adımları
+
+1. GitHub → **Settings → Pages → Source: GitHub Actions**
+2. `master`/`main` push sonrası workflow `Deploy GitHub Pages` çalışır
+3. Site: `https://r0yc0ld.github.io/aromatherapica-web/`
+
+Yerelde statik derleme:
+
+```bash
+npm run build:pages
+# çıktı: out/  (içinde index.html, .nojekyll, 404.html)
+```
+
+`basePath` otomatik olarak repo adıdır (`/aromatherapica-web`). Böylece CSS/JS yolları kırılmaz ve Pages `index.html` bulur.
+
+## Deployment (Node / Ticimax canlı)
 
 1. Repo’yu clone edin, env doldurun
 2. `npm run build && npm start` veya Vercel/Docker

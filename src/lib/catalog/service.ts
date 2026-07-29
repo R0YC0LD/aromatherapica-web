@@ -5,10 +5,17 @@ import { buildCategoryTree } from "@/lib/ticimax/mappers";
 import { fetchCategories, fetchProductById, fetchProducts } from "@/lib/ticimax/products";
 import { slugify } from "@/lib/format";
 import type { NormalizedCategory, NormalizedProduct } from "@/lib/ticimax/types";
+import {
+  getStaticCategories,
+  getStaticProductById,
+  getStaticProductBySlug,
+  getStaticProducts,
+  isStaticExport,
+} from "@/lib/catalog/static-data";
 
 export interface CatalogResult<T> {
   data: T;
-  source: "cache" | "ticimax" | "empty";
+  source: "cache" | "ticimax" | "empty" | "static";
   configured: boolean;
   message?: string;
 }
@@ -88,6 +95,10 @@ export function productFromCacheRow(row: ProductRow): NormalizedProduct {
 }
 
 export async function getCategories(): Promise<CatalogResult<NormalizedCategory[]>> {
+  if (isStaticExport()) {
+    return { data: getStaticCategories(), source: "static", configured: false };
+  }
+
   const configured = isTicimaxConfigured();
   const cacheKey = "categories:tree";
   const mem = appCache.get<NormalizedCategory[]>(cacheKey);
@@ -141,6 +152,10 @@ export async function getProducts(options?: {
   page?: number;
   pageSize?: number;
 }): Promise<CatalogResult<NormalizedProduct[]>> {
+  if (isStaticExport()) {
+    return { data: getStaticProducts(options), source: "static", configured: false };
+  }
+
   const configured = isTicimaxConfigured();
   const page = options?.page ?? 0;
   const pageSize = options?.pageSize ?? 48;
@@ -231,6 +246,10 @@ export async function getProducts(options?: {
 }
 
 export async function getProductBySlug(slug: string): Promise<CatalogResult<NormalizedProduct | null>> {
+  if (isStaticExport()) {
+    return { data: getStaticProductBySlug(slug), source: "static", configured: false };
+  }
+
   const configured = isTicimaxConfigured();
   const cached = await prisma.productCache.findUnique({ where: { slug } });
   if (cached) return { data: productFromCacheRow(cached), source: "cache", configured };
@@ -264,6 +283,7 @@ export async function getProductBySlug(slug: string): Promise<CatalogResult<Norm
 }
 
 export async function getProductById(id: number): Promise<NormalizedProduct | null> {
+  if (isStaticExport()) return getStaticProductById(id);
   const cached = await prisma.productCache.findUnique({ where: { ticimaxId: id } });
   if (cached) return productFromCacheRow(cached);
   if (!isTicimaxConfigured()) return null;

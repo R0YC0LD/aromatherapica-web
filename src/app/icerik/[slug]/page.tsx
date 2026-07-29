@@ -31,6 +31,10 @@ const PAGES: Record<string, { title: string; body: string }> = {
   },
 };
 
+export function generateStaticParams() {
+  return Object.keys(PAGES).map((slug) => ({ slug }));
+}
+
 export default async function ContentPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const page = PAGES[slug];

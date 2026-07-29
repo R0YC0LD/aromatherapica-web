@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Camera, Leaf, PackageCheck, Pin, PlayCircle, ShieldCheck } from "lucide-react";
+import { withBasePath } from "@/lib/paths";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
@@ -10,7 +11,7 @@ export function SiteFooter() {
         <div className="footer-brand">
           <Link className="wordmark wordmark-light" href="/">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="brand-mark-image" src="/aromatherapica-emblem.png" width={46} height={46} alt="" loading="lazy" />
+            <img className="brand-mark-image" src={withBasePath("/aromatherapica-emblem.png")} width={46} height={46} alt="" loading="lazy" />
             <strong>Aromatherapica</strong>
             <span>Essential Oils &amp; Aromatherapy</span>
           </Link>
