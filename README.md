@@ -20,8 +20,10 @@ cp .env.example .env
 npm install
 npx prisma generate
 npx prisma db push
-# Ticimax Excel export ürünlerini yükle (örnek dosya yolu)
-npm run import:xls -- "%USERPROFILE%\Downloads\TicimaxExport-4.xls"
+# Katalog seed (Excel'den üretilmiş 138 ürün)
+npm run db:seed
+# veya taze Excel:
+# npm run import:xls -- "%USERPROFILE%\Downloads\TicimaxExport-4.xls"
 npm run dev
 ```
 

@@ -12,7 +12,8 @@
     "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
-    "import:xls": "tsx scripts/import-ticimax-xls.ts"
+    "import:xls": "tsx scripts/import-ticimax-xls.ts",
+    "db:seed": "tsx scripts/seed-from-json.ts"
   },
   "dependencies": {
     "@prisma/client": "6.19.0",
