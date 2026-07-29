@@ -79,9 +79,9 @@ export default async function HomePage() {
                 "Henüz ürün listelenemiyor. Ticimax bağlantısını yapılandırıp admin panelinden senkronizasyon çalıştırın."}
             </p>
             {!configured ? (
-              <Link className="button button-primary" href="/admin/login">
-                Admin paneli
-              </Link>
+            <Link className="button button-primary" href="/admin/">
+              Yönetim paneli
+            </Link>
             ) : null}
           </div>
         ) : (

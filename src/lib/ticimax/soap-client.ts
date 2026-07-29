@@ -1,27 +1,30 @@
 import path from "node:path";
 import { createClientAsync, type Client } from "soap";
-import { getEnv, requireTicimaxConfig } from "@/lib/env";
+import { resolveTicimaxCredentials } from "@/lib/env";
 import { logger } from "@/lib/logger";
 import type { TicimaxServiceName, TicimaxSoapResult } from "@/lib/ticimax/types";
 
-const clientCache = new Map<TicimaxServiceName, Client>();
+const clientCache = new Map<string, Client>();
 const DEFAULT_TIMEOUT_MS = 30_000;
 
-function wsdlUrl(service: TicimaxServiceName): string {
-  const base = getEnv().TICIMAX_BASE_URL!.replace(/\/$/, "");
-  return `${base}/${service}.svc?wsdl`;
-}
+async function getClient(service: TicimaxServiceName): Promise<{ client: Client; uyeKodu: string }> {
+  const creds = await resolveTicimaxCredentials();
+  if (!creds.configured || !creds.baseUrl || !creds.uyeKodu) {
+    throw new Error(
+      "Ticimax bağlantı bilgileri eksik veya entegrasyon kapalı. Admin panelinden aktif edin veya .env dosyasını doldurun.",
+    );
+  }
 
-async function getClient(service: TicimaxServiceName): Promise<Client> {
-  requireTicimaxConfig();
-  const cached = clientCache.get(service);
-  if (cached) return cached;
+  const base = creds.baseUrl.replace(/\/$/, "");
+  const cacheKey = `${base}|${service}`;
+  const cached = clientCache.get(cacheKey);
+  if (cached) return { client: cached, uyeKodu: creds.uyeKodu };
 
-  const client = await createClientAsync(wsdlUrl(service), {
+  const client = await createClientAsync(`${base}/${service}.svc?wsdl`, {
     wsdl_options: { timeout: DEFAULT_TIMEOUT_MS },
   });
-  clientCache.set(service, client);
-  return client;
+  clientCache.set(cacheKey, client);
+  return { client, uyeKodu: creds.uyeKodu };
 }
 
 function unwrapResult<T>(response: Record<string, unknown>, operation: string): T {
@@ -41,13 +44,11 @@ export async function callTicimax<T>(
   args: Record<string, unknown>,
   options?: { includeAuth?: boolean },
 ): Promise<TicimaxSoapResult<T>> {
-  requireTicimaxConfig();
   const includeAuth = options?.includeAuth !== false;
-  const uyeKodu = getEnv().TICIMAX_UYE_KODU!;
   const started = Date.now();
 
   try {
-    const client = await getClient(service);
+    const { client, uyeKodu } = await getClient(service);
     const method = (client as Client & Record<string, unknown>)[`${operation}Async`] as
       | ((payload: Record<string, unknown>) => Promise<[Record<string, unknown>]>)
       | undefined;
@@ -81,8 +82,13 @@ export async function callTicimax<T>(
 }
 
 export async function testTicimaxConnection(): Promise<{ ok: boolean; message: string; durationMs?: number }> {
-  if (!getEnv().TICIMAX_BASE_URL || !getEnv().TICIMAX_UYE_KODU) {
-    return { ok: false, message: "Ticimax yapılandırması eksik" };
+  const creds = await resolveTicimaxCredentials();
+  if (!creds.configured) {
+    return {
+      ok: false,
+      message:
+        "Ticimax yapılandırması eksik veya entegrasyon kapalı. Admin → Ayarlar’dan bilgileri girip aktif edin.",
+    };
   }
 
   try {

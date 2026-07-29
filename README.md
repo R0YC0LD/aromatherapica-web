@@ -71,17 +71,19 @@ npm test             # vitest
 npx prisma db push   # şema uygula
 ```
 
-## Admin paneli
+## Yönetim paneli (CMS)
 
-- URL: `/admin/login`
-- Dev: `admin` / `12345` (kaynak kodda hardcode yok; `.env`)
-- Production’da varsayılan şifre → zorunlu şifre değişimi
-- Rate limit: 15 dk içinde 5 başarısız deneme
-- HttpOnly + SameSite session cookie, CSRF koruması
+- URL: `/admin/` veya `/admin.html`
+- GitHub Pages’te de çalışır (yerel CMS: görsel, fiyat, stok, açıklama, Ticimax ayarları)
+- Varsayılan giriş: `admin` / `12345` — panelden değiştirin
+- Telefon/bilgisayardan galeri ile ürün görseli yükleme (sıkıştırılmış JPEG)
+- Yedek al / yedek yükle (cihazlar arası taşıma)
+- Ticimax bilgilerini panelden girip **entegrasyonu aktif** edebilirsiniz
+- Canlı SOAP için ayrıca Node sunucusu + `.env` gerekir (aşağıdaki kurulum)
 
 ### Logo 5 tıklama
 
-Aromatherapica logosuna **3 saniye içinde 5 kez** tıklanınca `/admin/login` açılır. Bu bir güvenlik yöntemi değildir.
+Aromatherapica logosuna **3 saniye içinde 5 kez** tıklanınca `/admin/` açılır.
 
 ## Senkronizasyon
 
@@ -99,32 +101,44 @@ Aromatherapica logosuna **3 saniye içinde 5 kez** tıklanınca `/admin/login` a
 
 ## GitHub Pages (statik yayın)
 
-GitHub Pages Node/API çalıştırmaz. Bu yüzden mağaza vitrini `output: 'export'` ile statik üretilir:
+Canlı site: `https://r0yc0ld.github.io/aromatherapica-web/`  
+Yönetim: `https://r0yc0ld.github.io/aromatherapica-web/admin/`
 
-- Ürünler `public/data/catalog.json` üzerinden gelir (138 ürün seed)
-- Sepet / ödeme tarayıcıda çalışır
-- Admin API ve Ticimax SOAP için Node sunucusu gerekir (`npm run dev` / Vercel)
-
-### Yayın adımları
-
-1. GitHub → **Settings → Pages → Source: GitHub Actions**
-2. `master`/`main` push sonrası workflow `Deploy GitHub Pages` çalışır
-3. Site: `https://r0yc0ld.github.io/aromatherapica-web/`
-
-Yerelde statik derleme:
+- Ürünler `public/data/catalog.json` (138 ürün)
+- Sepet / ödeme / CMS tarayıcıda çalışır
+- `out/index.html` + `.nojekyll` ile Pages `index` ve `_next` klasörünü doğru servis eder
+- `basePath` = `/aromatherapica-web`
 
 ```bash
 npm run build:pages
-# çıktı: out/  (içinde index.html, .nojekyll, 404.html)
 ```
 
-`basePath` otomatik olarak repo adıdır (`/aromatherapica-web`). Böylece CSS/JS yolları kırılmaz ve Pages `index.html` bulur.
+## Kurulum — Ticimax canlı (Node)
 
-## Deployment (Node / Ticimax canlı)
+1. `.env.example` → `.env` kopyalayın
+2. Şunları doldurun:
 
-1. Repo’yu clone edin, env doldurun
-2. `npm run build && npm start` veya Vercel/Docker
-3. `CRON_SECRET` ile zamanlanmış sync ekleyin
+| Alan | Nereye | Örnek |
+|---|---|---|
+| `TICIMAX_BASE_URL` | `.env` ve/veya Admin → Ayarlar | `https://magaza.com/servis` |
+| `TICIMAX_UYE_KODU` | Yetki / üye kodu | Ticimax panelinden |
+| `TICIMAX_ALAN_ADI` | Mağaza alan adı | `magaza.com` |
+| `ADMIN_*` / `SESSION_SECRET` | Admin güvenliği | en az 32 karakter secret |
+| `DATABASE_URL` | SQLite/Postgres | `file:./dev.db` |
+
+3. Komutlar:
+
+```bash
+npm install
+npx prisma db push
+npm run db:seed
+npm run dev
+```
+
+4. Tarayıcıda `/admin/` → Ayarlar → Ticimax bilgilerini girin → **entegrasyonu aktif et**
+5. Node modunda SOAP test/sync `src/lib/ticimax/*` üzerinden çalışır (Urun / Siparis / Uye / Custom)
+
+**Onay:** Entegrasyon kodu hazırdır; doğru `BASE_URL` + `UYE_KODU` ile ürün/stok/sipariş Ticimax SOAP’a bağlanır. GitHub Pages SOAP çağırmaz (tarayıcı kısıtı); vitrin + CMS Pages’te, canlı Ticimax Node’da.
 
 ```bash
 docker compose up --build
@@ -133,16 +147,15 @@ docker compose up --build
 ## Güvenlik notları
 
 - `.env` Git’e eklenmez
-- API anahtarları frontend bundle’a girmez
-- Admin API’leri session + middleware ile korunur
+- SOAP anahtarları frontend’e gömülmez; Node tarafında okunur
 - Production’da `ADMIN_PASSWORD=12345` kullanmayın
+- Pages CMS şifresi tarayıcıda hash’lenir; yedek dosyanızı paylaşmayın
 
 ## Bilinen API kısıtlamaları
 
 - Ticimax SOAP’tır; REST değil
-- Ödeme gateway redirect/webhook bu örnek pakette yok; kartlı ödeme Ticimax mağaza ödeme sayfası üzerinden yapılmalıdır
-- Webhook dosyası yok; polling/cron kullanılır
-- Ürün düzenleme admin’de salt okunur (SaveUrun admin’den bilinçli tetiklenmez)
+- Kart verisi bu uygulamada işlenmez
+- Webhook yok; polling/cron kullanılır
 
 ## Lisans
 

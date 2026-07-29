@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { SecretLogo } from "@/components/SecretLogo";
 import { CartBadge } from "@/components/CartBadge";
+import { STORE_NAV_CATEGORIES } from "@/lib/cms/category-map";
 import { freeShippingAnnouncement } from "@/lib/shipping";
 import { withBasePath } from "@/lib/paths";
 
@@ -19,16 +20,7 @@ const MAIN_NAV = [
   { href: "/icerik/markamiz", label: "Markamız" },
 ];
 
-const CATEGORY_NAV = [
-  { href: "/kategori/ucucu-yaglar", label: "Uçucu Yağlar" },
-  { href: "/kategori/cilt-bakimi", label: "Cilt Bakımı" },
-  { href: "/kategori/ozel-bakim", label: "Özel Bakım" },
-  { href: "/kategori/sac-bakimi", label: "Saç Bakımı" },
-  { href: "/kategori/vucut-bakimi", label: "Vücut Bakımı" },
-  { href: "/kategori/gul-sulari", label: "Gül Suları" },
-  { href: "/kategori/dogal-sabunlar", label: "Doğal Sabunlar" },
-  { href: "/kategori/hediye-secenekleri", label: "Hediye Seçenekleri" },
-];
+const CATEGORY_NAV = STORE_NAV_CATEGORIES.map((c) => ({ ...c }));
 
 export function SiteHeader() {
   const pathname = usePathname();

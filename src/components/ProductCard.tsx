@@ -4,13 +4,18 @@ import Link from "next/link";
 import { useState } from "react";
 import { Eye, Heart, ShoppingBag } from "lucide-react";
 import { useCart } from "@/components/CartProvider";
+import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
 import { formatCurrency } from "@/lib/format";
 import type { NormalizedProduct } from "@/lib/ticimax/types";
 
-export function ProductCard({ product }: { product: NormalizedProduct }) {
+export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
   const { add } = useCart();
+  const { mergeProduct } = useCatalogOverrides();
+  const product = mergeProduct(raw);
   const [favorite, setFavorite] = useState(false);
   const [added, setAdded] = useState(false);
+
+  if (!product.active) return null;
 
   const hasSale = Boolean(product.salePrice && product.salePrice < product.price);
   const price = hasSale ? (product.salePrice as number) : product.price;

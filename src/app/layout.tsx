@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Italiana } from "next/font/google";
 import { CartProvider } from "@/components/CartProvider";
+import { CatalogOverridesProvider } from "@/components/cms/CatalogOverridesProvider";
 import { AppChrome } from "@/components/AppChrome";
 import "./globals.css";
 
@@ -36,7 +37,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="tr" className={`${dmSans.variable} ${italiana.variable}`}>
       <body>
         <CartProvider>
-          <AppChrome>{children}</AppChrome>
+          <CatalogOverridesProvider>
+            <AppChrome>{children}</AppChrome>
+          </CatalogOverridesProvider>
         </CartProvider>
       </body>
     </html>

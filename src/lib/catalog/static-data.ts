@@ -3,6 +3,7 @@ import path from "node:path";
 import type { NormalizedCategory, NormalizedProduct } from "@/lib/ticimax/types";
 import { buildCategoryTree } from "@/lib/ticimax/mappers";
 import { slugify } from "@/lib/format";
+import { getMarketingCategorySlugs, productMatchesCategorySlug } from "@/lib/cms/category-map";
 
 export type StaticProduct = {
   id: number;
@@ -168,14 +169,17 @@ export function getStaticProducts(options?: {
   let list = products.filter((p) => p.active);
 
   if (options?.categoryId) {
-    list = list.filter((p) => p.categoryId === options.categoryId);
+    const root = categories.find((c) => c.id === options.categoryId);
+    const childIds = new Set(
+      categories.filter((c) => c.parentId === options.categoryId).map((c) => c.id),
+    );
+    if (root) childIds.add(root.id);
+    list = list.filter((p) => {
+      if (p.categoryId != null && childIds.has(p.categoryId)) return true;
+      return productMatchesCategorySlug(p, root?.slug || "", categories);
+    });
   } else if (options?.categorySlug && options.categorySlug !== "tum-urunler") {
-    const cat = categories.find((c) => c.slug === options.categorySlug);
-    if (cat) list = list.filter((p) => p.categoryId === cat.id);
-    else {
-      const needle = options.categorySlug.toLowerCase();
-      list = list.filter((p) => slugify(p.categoryName || "").includes(needle));
-    }
+    list = list.filter((p) => productMatchesCategorySlug(p, options.categorySlug!, categories));
   }
 
   if (options?.q) {
@@ -222,5 +226,6 @@ export function getAllStaticCategorySlugs(): string[] {
   const slugs = loadCatalogFile()
     .categories.filter((c) => c.active)
     .map((c) => c.slug);
-  return ["tum-urunler", ...slugs];
+  const marketing = getMarketingCategorySlugs();
+  return Array.from(new Set(["tum-urunler", ...slugs, ...marketing]));
 }

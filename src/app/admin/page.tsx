@@ -1,10 +1,5 @@
-import { AdminShell } from "@/components/admin/AdminShell";
-import { AdminDashboardClient } from "@/components/admin/AdminDashboardClient";
+import { AdminCMS } from "@/components/admin/AdminCMS";
 
-export default function AdminHomePage() {
-  return (
-    <AdminShell title="Dashboard">
-      <AdminDashboardClient />
-    </AdminShell>
-  );
+export default function AdminPage() {
+  return <AdminCMS />;
 }

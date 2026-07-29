@@ -43,7 +43,7 @@ export function SecretLogo({ href = "/", className, children }: SecretLogoProps)
       if (timer.current) clearTimeout(timer.current);
 
       if (triggered) {
-        router.push("/admin/login");
+        router.push("/admin/");
         return;
       }
 

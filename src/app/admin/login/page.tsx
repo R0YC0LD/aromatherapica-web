@@ -1,10 +1,5 @@
-import { Suspense } from "react";
-import AdminLoginForm from "./AdminLoginForm";
+import { redirect } from "next/navigation";
 
-export default function AdminLoginPage() {
-  return (
-    <Suspense fallback={<div className="admin-shell"><main>Yükleniyor…</main></div>}>
-      <AdminLoginForm />
-    </Suspense>
-  );
+export default function AdminLoginRedirect() {
+  redirect("/admin/");
 }
