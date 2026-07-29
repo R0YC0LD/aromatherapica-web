@@ -20,10 +20,16 @@ cp .env.example .env
 npm install
 npx prisma generate
 npx prisma db push
+# Ticimax Excel export ürünlerini yükle (örnek dosya yolu)
+npm run import:xls -- "%USERPROFILE%\Downloads\TicimaxExport-4.xls"
 npm run dev
 ```
 
 Tarayıcı: [http://localhost:3000](http://localhost:3000)
+
+### Ücretsiz kargo
+
+Sepet ara toplamı **100.000 TL** ve üzeri olduğunda kargo ücretsizdir (`src/lib/shipping.ts`).
 
 ## Ortam değişkenleri
 

@@ -55,22 +55,35 @@ model SyncError {
 }
 
 model ProductCache {
-  ticimaxId  Int      @id
-  slug       String   @unique
-  name       String
-  categoryId Int?
-  brandId    Int?
-  price      Float
-  salePrice  Float?
-  stock      Int
-  active     Boolean  @default(true)
-  imageUrl   String?
-  raw        String
-  syncedAt   DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  ticimaxId       Int      @id
+  variantId       Int?
+  slug            String   @unique
+  name            String
+  categoryId      Int?
+  categoryName    String?
+  brandId         Int?
+  brandName       String?
+  price           Float
+  salePrice       Float?
+  stock           Int
+  active          Boolean  @default(true)
+  imageUrl        String?
+  /// Admin override — takes precedence over imageUrl when set
+  customImageUrl  String?
+  description     String?
+  shortDesc       String?
+  /// Admin override description (HTML/text)
+  customDescription String?
+  sku             String?
+  barcode         String?
+  vatRate         Float?
+  raw             String
+  syncedAt        DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@index([categoryId, active])
   @@index([active, stock])
+  @@index([categoryName])
 }
 
 model CategoryCache {

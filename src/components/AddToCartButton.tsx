@@ -1,5 +1,6 @@
 "use client";
 
+import { ShoppingBag } from "lucide-react";
 import { useCart } from "@/components/CartProvider";
 
 export function AddToCartButton(props: {
@@ -17,7 +18,7 @@ export function AddToCartButton(props: {
   return (
     <button
       type="button"
-      className="btn"
+      className="add-button product-add"
       disabled={props.disabled}
       onClick={() =>
         add({
@@ -32,6 +33,7 @@ export function AddToCartButton(props: {
         })
       }
     >
+      <ShoppingBag aria-hidden />
       {props.disabled ? "Stokta yok" : "Sepete ekle"}
     </button>
   );

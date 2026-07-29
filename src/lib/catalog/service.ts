@@ -1,8 +1,9 @@
 import { prisma } from "@/lib/db";
 import { isTicimaxConfigured } from "@/lib/env";
 import { appCache, CACHE_TTL } from "@/lib/cache/memory-cache";
-import { buildCategoryTree, mapProduct } from "@/lib/ticimax/mappers";
+import { buildCategoryTree } from "@/lib/ticimax/mappers";
 import { fetchCategories, fetchProductById, fetchProducts } from "@/lib/ticimax/products";
+import { slugify } from "@/lib/format";
 import type { NormalizedCategory, NormalizedProduct } from "@/lib/ticimax/types";
 
 export interface CatalogResult<T> {
@@ -12,37 +13,77 @@ export interface CatalogResult<T> {
   message?: string;
 }
 
-function productFromCacheRow(row: {
+type ProductRow = {
   ticimaxId: number;
+  variantId: number | null;
   slug: string;
   name: string;
   categoryId: number | null;
+  categoryName: string | null;
   brandId: number | null;
+  brandName: string | null;
   price: number;
   salePrice: number | null;
   stock: number;
   active: boolean;
   imageUrl: string | null;
+  customImageUrl: string | null;
+  description: string | null;
+  shortDesc: string | null;
+  customDescription: string | null;
+  sku: string | null;
+  barcode: string | null;
+  vatRate: number | null;
   raw: string;
-}): NormalizedProduct {
+};
+
+export function productFromCacheRow(row: ProductRow): NormalizedProduct {
+  const image = row.customImageUrl || row.imageUrl;
+  const description = row.customDescription || row.description || row.shortDesc || undefined;
+  let parsed: Partial<NormalizedProduct> = {};
   try {
-    const parsed = JSON.parse(row.raw) as NormalizedProduct;
-    if (parsed?.id) return parsed;
+    parsed = JSON.parse(row.raw) as NormalizedProduct;
   } catch {
-    /* fall through */
+    /* ignore */
   }
+
+  const variants =
+    parsed.variants && parsed.variants.length > 0
+      ? parsed.variants
+      : [
+          {
+            id: row.variantId || row.ticimaxId,
+            productId: row.ticimaxId,
+            sku: row.sku || undefined,
+            barcode: row.barcode || undefined,
+            price: row.price,
+            salePrice: row.salePrice ?? undefined,
+            stock: row.stock,
+            vatRate: row.vatRate ?? undefined,
+            active: row.active,
+            options: [],
+            imageUrl: image || undefined,
+          },
+        ];
+
   return {
     id: row.ticimaxId,
     name: row.name,
     slug: row.slug,
+    description,
     categoryId: row.categoryId ?? undefined,
+    categoryName: row.categoryName || parsed.categoryName,
     brandId: row.brandId ?? undefined,
+    brandName: row.brandName || parsed.brandName,
     active: row.active,
     price: row.price,
     salePrice: row.salePrice ?? undefined,
     stock: row.stock,
-    images: row.imageUrl ? [row.imageUrl] : [],
-    variants: [],
+    vatRate: row.vatRate ?? undefined,
+    images: image ? [image] : parsed.images || [],
+    variants,
+    seoTitle: parsed.seoTitle,
+    seoDescription: parsed.seoDescription || row.shortDesc || undefined,
   };
 }
 
@@ -74,7 +115,7 @@ export async function getCategories(): Promise<CatalogResult<NormalizedCategory[
       data: [],
       source: "empty",
       configured: false,
-      message: "Ticimax yapılandırması eksik. TICIMAX_BASE_URL ve TICIMAX_UYE_KODU ayarlayın.",
+      message: "Henüz kategori yok. Excel import veya Ticimax senkronizasyonu çalıştırın.",
     };
   }
 
@@ -105,18 +146,23 @@ export async function getProducts(options?: {
   const pageSize = options?.pageSize ?? 48;
 
   let categoryId = options?.categoryId;
-  if (!categoryId && options?.categorySlug) {
+  let categoryName: string | undefined;
+
+  if (!categoryId && options?.categorySlug && options.categorySlug !== "tum-urunler") {
     const cat = await prisma.categoryCache.findUnique({ where: { slug: options.categorySlug } });
     categoryId = cat?.ticimaxId;
+    categoryName = cat?.name;
+    if (!cat) {
+      // try match by slugified name on product categoryName
+      categoryName = options.categorySlug.replace(/-/g, " ");
+    }
   }
 
   const cached = await prisma.productCache.findMany({
     where: {
       active: true,
-      ...(categoryId ? { categoryId } : {}),
-      ...(options?.q
-        ? { name: { contains: options.q } }
-        : {}),
+      ...(categoryId ? { categoryId } : categoryName ? { categoryName: { contains: categoryName } } : {}),
+      ...(options?.q ? { OR: [{ name: { contains: options.q } }, { shortDesc: { contains: options.q } }] } : {}),
     },
     take: pageSize,
     skip: page * pageSize,
@@ -131,20 +177,33 @@ export async function getProducts(options?: {
   });
 
   if (cached.length > 0) {
-    return {
-      data: cached.map(productFromCacheRow),
-      source: "cache",
-      configured,
-    };
+    return { data: cached.map(productFromCacheRow), source: "cache", configured };
   }
 
-  if (!configured) {
+  // Fallback: if we have any products but category filter missed, try slug match on name
+  const anyCount = await prisma.productCache.count({ where: { active: true } });
+  if (anyCount > 0 && options?.categorySlug && options.categorySlug !== "tum-urunler") {
+    const all = await prisma.productCache.findMany({ where: { active: true }, take: 500 });
+    const needle = options.categorySlug.toLowerCase();
+    const filtered = all
+      .map(productFromCacheRow)
+      .filter((p) => slugify(p.categoryName || "").includes(needle) || slugify(p.categoryName || "") === needle);
+    if (filtered.length > 0) {
+      return { data: filtered.slice(0, pageSize), source: "cache", configured };
+    }
+  }
+
+  if (anyCount === 0 && !configured) {
     return {
       data: [],
       source: "empty",
       configured: false,
-      message: "Ticimax yapılandırması eksik veya henüz senkronizasyon yapılmadı.",
+      message: "Ürün bulunamadı. Excel import veya Ticimax senkronizasyonu çalıştırın.",
     };
+  }
+
+  if (!configured) {
+    return { data: [], source: "empty", configured: false, message: "Bu kategoride ürün yok." };
   }
 
   try {
@@ -156,18 +215,10 @@ export async function getProducts(options?: {
       sortBy: options?.sort === "name" ? "UrunAdi" : "ID",
       sortDir: options?.sort === "price_asc" ? "ASC" : "DESC",
     });
-
     if (options?.q) {
       const q = options.q.toLowerCase();
       products = products.filter((p) => p.name.toLowerCase().includes(q));
     }
-
-    if (options?.sort === "price_asc") {
-      products = [...products].sort((a, b) => a.price - b.price);
-    } else if (options?.sort === "price_desc") {
-      products = [...products].sort((a, b) => b.price - a.price);
-    }
-
     return { data: products, source: "ticimax", configured };
   } catch (error) {
     return {
@@ -182,39 +233,26 @@ export async function getProducts(options?: {
 export async function getProductBySlug(slug: string): Promise<CatalogResult<NormalizedProduct | null>> {
   const configured = isTicimaxConfigured();
   const cached = await prisma.productCache.findUnique({ where: { slug } });
-  if (cached) {
-    return { data: productFromCacheRow(cached), source: "cache", configured };
+  if (cached) return { data: productFromCacheRow(cached), source: "cache", configured };
+
+  const asId = Number(slug);
+  if (Number.isFinite(asId) && asId > 0) {
+    const byId = await prisma.productCache.findUnique({ where: { ticimaxId: asId } });
+    if (byId) return { data: productFromCacheRow(byId), source: "cache", configured };
   }
 
   if (!configured) {
-    return {
-      data: null,
-      source: "empty",
-      configured: false,
-      message: "Ürün bulunamadı. Ticimax bağlantısı yapılandırılmamış.",
-    };
-  }
-
-  // slug may be numeric id
-  const asId = Number(slug);
-  if (Number.isFinite(asId) && asId > 0) {
-    try {
-      const product = await fetchProductById(asId);
-      return { data: product, source: "ticimax", configured };
-    } catch (error) {
-      return {
-        data: null,
-        source: "empty",
-        configured,
-        message: error instanceof Error ? error.message : "Ürün alınamadı",
-      };
-    }
+    return { data: null, source: "empty", configured: false, message: "Ürün bulunamadı" };
   }
 
   try {
+    if (Number.isFinite(asId) && asId > 0) {
+      const product = await fetchProductById(asId);
+      return { data: product, source: product ? "ticimax" : "empty", configured };
+    }
     const products = await fetchProducts({ activeOnly: true, pageSize: 200 });
     const found = products.find((p) => p.slug === slug) ?? null;
-    return { data: found, source: found ? "ticimax" : "empty", configured, message: found ? undefined : "Ürün bulunamadı" };
+    return { data: found, source: found ? "ticimax" : "empty", configured };
   } catch (error) {
     return {
       data: null,
@@ -231,5 +269,3 @@ export async function getProductById(id: number): Promise<NormalizedProduct | nu
   if (!isTicimaxConfigured()) return null;
   return fetchProductById(id);
 }
-
-export { mapProduct };

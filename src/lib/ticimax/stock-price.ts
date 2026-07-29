@@ -1,4 +1,6 @@
 import type { CartLineInput, StockPriceValidation } from "@/lib/ticimax/types";
+import { getProductById } from "@/lib/catalog/service";
+import { isTicimaxConfigured } from "@/lib/env";
 import { fetchProductById } from "@/lib/ticimax/products";
 
 function effectivePrice(price: number, salePrice?: number): number {
@@ -8,9 +10,13 @@ function effectivePrice(price: number, salePrice?: number): number {
 export async function validateCartLines(lines: CartLineInput[]): Promise<StockPriceValidation> {
   const results: StockPriceValidation["lines"] = [];
   let total = 0;
+  const useLive = isTicimaxConfigured();
 
   for (const line of lines) {
-    const product = await fetchProductById(line.productId);
+    const product = useLive
+      ? (await fetchProductById(line.productId).catch(() => null)) || (await getProductById(line.productId))
+      : await getProductById(line.productId);
+
     if (!product) {
       results.push({
         ...line,

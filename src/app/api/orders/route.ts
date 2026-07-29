@@ -27,10 +27,6 @@ const schema = z.object({
 });
 
 export async function POST(request: Request) {
-  if (!isTicimaxConfigured()) {
-    return NextResponse.json({ error: "Ticimax yapılandırması eksik" }, { status: 503 });
-  }
-
   const body = await request.json().catch(() => null);
   const parsed = schema.safeParse(body);
   if (!parsed.success) {
@@ -74,18 +70,39 @@ export async function POST(request: Request) {
   });
 
   try {
-    const result = await createTicimaxOrder({
-      idempotencyKey: input.idempotencyKey,
-      memberId: input.memberId,
-      billingAddressId: input.billingAddressId,
-      shippingAddressId: input.shippingAddressId,
-      cargoCompanyId: input.cargoCompanyId ?? Number(process.env.DEFAULT_CARGO_COMPANY_ID || 1),
-      paymentType: input.paymentType,
-      paymentOptionId: input.paymentOptionId ?? Number(process.env.DEFAULT_PAYMENT_OPTION_ID || 1),
-      paymentStatus: input.paymentStatus,
-      lines: input.lines,
-      orderNote: input.orderNote,
-    });
+    const { validateCartLines } = await import("@/lib/ticimax/stock-price");
+    const { shippingCost } = await import("@/lib/shipping");
+    const validation = await validateCartLines(input.lines);
+    if (!validation.valid) {
+      await prisma.localOrder.update({
+        where: { id: pending.id },
+        data: { status: "FAILED", paymentStatus: "FAILED" },
+      });
+      return NextResponse.json({ error: "Sepet stok/fiyat doğrulamasından geçemedi" }, { status: 400 });
+    }
+
+    const cargo = shippingCost(validation.total);
+    const grandTotal = validation.total + cargo;
+
+    let ticimaxOrderId: number | null = null;
+    let ticimaxOrderCode: string | null = null;
+
+    if (isTicimaxConfigured()) {
+      const result = await createTicimaxOrder({
+        idempotencyKey: input.idempotencyKey,
+        memberId: input.memberId,
+        billingAddressId: input.billingAddressId,
+        shippingAddressId: input.shippingAddressId,
+        cargoCompanyId: input.cargoCompanyId ?? Number(process.env.DEFAULT_CARGO_COMPANY_ID || 1),
+        paymentType: input.paymentType,
+        paymentOptionId: input.paymentOptionId ?? Number(process.env.DEFAULT_PAYMENT_OPTION_ID || 1),
+        paymentStatus: input.paymentStatus,
+        lines: input.lines,
+        orderNote: `${input.orderNote || ""} | Kargo: ${cargo === 0 ? "Ücretsiz (100.000 TL üzeri)" : cargo}`,
+      });
+      ticimaxOrderId = result.orderId ?? null;
+      ticimaxOrderCode = result.orderCode ?? null;
+    }
 
     const updated = await prisma.localOrder.update({
       where: { id: pending.id },
@@ -93,15 +110,22 @@ export async function POST(request: Request) {
         status: "CREATED",
         paymentStatus: input.paymentType === 1 ? "AWAITING_TRANSFER" : "PENDING",
         paymentVerified: input.paymentStatus === 1,
-        ticimaxOrderId: result.orderId ?? null,
-        ticimaxOrderCode: result.orderCode ?? null,
-        totalAmount: result.total,
+        ticimaxOrderId,
+        ticimaxOrderCode,
+        totalAmount: grandTotal,
+        payload: JSON.stringify({
+          ...input,
+          validatedTotal: validation.total,
+          shipping: cargo,
+          ticimaxSubmitted: isTicimaxConfigured(),
+        }),
       },
     });
 
     logger.info("order.created", {
       localId: updated.id,
       ticimaxOrderId: updated.ticimaxOrderId,
+      ticimaxSubmitted: isTicimaxConfigured(),
     });
 
     return NextResponse.json({
@@ -111,6 +135,11 @@ export async function POST(request: Request) {
       ticimaxOrderCode: updated.ticimaxOrderCode,
       status: updated.status,
       totalAmount: updated.totalAmount,
+      shipping: cargo,
+      ticimaxSubmitted: isTicimaxConfigured(),
+      warning: isTicimaxConfigured()
+        ? undefined
+        : "Ticimax yapılandırması yok; sipariş yerel kaydedildi. TICIMAX_BASE_URL ve TICIMAX_UYE_KODU ekleyince canlı aktarım açılır.",
     });
   } catch (error) {
     await prisma.localOrder.update({

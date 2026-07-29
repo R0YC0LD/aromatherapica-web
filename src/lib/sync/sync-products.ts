@@ -99,32 +99,53 @@ export async function syncCategoriesAndProducts(): Promise<{
 
       for (const product of products) {
         try {
+          const existing = await prisma.productCache.findUnique({ where: { ticimaxId: product.id } });
+          const imageUrl = product.images[0] || existing?.imageUrl || null;
+          const description = existing?.customDescription || product.description || existing?.description || null;
           await prisma.productCache.upsert({
             where: { ticimaxId: product.id },
             create: {
               ticimaxId: product.id,
+              variantId: product.variants[0]?.id ?? null,
               slug: product.slug || String(product.id),
               name: product.name,
               categoryId: product.categoryId,
+              categoryName: product.categoryName,
               brandId: product.brandId,
+              brandName: product.brandName,
               price: product.price,
               salePrice: product.salePrice,
               stock: product.stock,
               active: product.active,
-              imageUrl: product.images[0],
+              imageUrl,
+              description: product.description,
+              sku: product.variants[0]?.sku,
+              barcode: product.variants[0]?.barcode,
+              vatRate: product.vatRate,
               raw: JSON.stringify(product),
             },
             update: {
-              slug: product.slug || String(product.id),
+              variantId: product.variants[0]?.id ?? null,
+              slug: existing?.slug || product.slug || String(product.id),
               name: product.name,
               categoryId: product.categoryId,
+              categoryName: product.categoryName,
               brandId: product.brandId,
+              brandName: product.brandName,
               price: product.price,
               salePrice: product.salePrice,
               stock: product.stock,
               active: product.active,
-              imageUrl: product.images[0],
-              raw: JSON.stringify(product),
+              imageUrl,
+              description,
+              sku: product.variants[0]?.sku,
+              barcode: product.variants[0]?.barcode,
+              vatRate: product.vatRate,
+              raw: JSON.stringify({
+                ...product,
+                description,
+                images: existing?.customImageUrl ? [existing.customImageUrl] : product.images,
+              }),
               syncedAt: new Date(),
             },
           });

@@ -4,9 +4,12 @@ import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/CartProvider";
 import { formatCurrency } from "@/lib/format";
+import { freeShippingAnnouncement, orderTotal, shippingCost, shippingProgressMessage } from "@/lib/shipping";
 
 export default function CheckoutPage() {
   const { cart, total, clear } = useCart();
+  const cargo = shippingCost(total);
+  const grand = orderTotal(total);
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -87,11 +90,15 @@ export default function CheckoutPage() {
     <section className="section">
       <h1 style={{ fontFamily: "var(--serif)", fontWeight: 400 }}>Ödeme</h1>
       <p className="section-lead">
-        Kart numarası veya CVV bu sitede işlenmez. Ticimax dokümanındaki Havale / Kapıda Ödeme tipleri kullanılır.
+        Kart numarası veya CVV bu sitede işlenmez. Sipariş Ticimax üzerinden oluşturulur.
+        {` ${freeShippingAnnouncement()}.`}
       </p>
-      <p>
-        Sipariş tutarı: <strong>{formatCurrency(total)}</strong>
-      </p>
+      <div className="admin-card" style={{ background: "rgba(255,255,255,0.55)", color: "var(--ink)", maxWidth: 520 }}>
+        <p>Ara toplam: <strong>{formatCurrency(total)}</strong></p>
+        <p>Kargo: <strong>{cargo === 0 ? "Ücretsiz" : formatCurrency(cargo)}</strong></p>
+        <p>Genel toplam: <strong>{formatCurrency(grand)}</strong></p>
+        <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>{shippingProgressMessage(total)}</p>
+      </div>
 
       <form onSubmit={onSubmit} style={{ maxWidth: 520 }}>
         <div className="form-field">

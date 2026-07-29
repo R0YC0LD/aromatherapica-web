@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { validateCartLines } from "@/lib/ticimax/stock-price";
-import { isTicimaxConfigured } from "@/lib/env";
 
 const schema = z.object({
   lines: z.array(
@@ -14,13 +13,6 @@ const schema = z.object({
 });
 
 export async function POST(request: Request) {
-  if (!isTicimaxConfigured()) {
-    return NextResponse.json(
-      { error: "Ticimax yapılandırması eksik. Stok doğrulaması yapılamıyor." },
-      { status: 503 },
-    );
-  }
-
   const body = await request.json().catch(() => null);
   const parsed = schema.safeParse(body);
   if (!parsed.success) {

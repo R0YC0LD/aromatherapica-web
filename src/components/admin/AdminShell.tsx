@@ -1,32 +1,67 @@
 "use client";
 
 import Link from "next/link";
+import {
+  LayoutDashboard,
+  Package,
+  ShoppingBag,
+  Plug,
+  KeyRound,
+  LogOut,
+  Leaf,
+} from "lucide-react";
+
+const NAV = [
+  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/urunler", label: "Ürünler", icon: Package },
+  { href: "/admin/siparisler", label: "Siparişler", icon: ShoppingBag },
+  { href: "/admin/entegrasyon", label: "Entegrasyon", icon: Plug },
+  { href: "/admin/sifre-degistir", label: "Şifre", icon: KeyRound },
+];
 
 export function AdminShell({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="admin-shell">
-      <main>
-        <nav className="admin-nav">
-          <Link href="/admin">Dashboard</Link>
-          <Link href="/admin/urunler">Ürünler</Link>
-          <Link href="/admin/siparisler">Siparişler</Link>
-          <Link href="/admin/entegrasyon">Entegrasyon</Link>
-          <Link href="/admin/sifre-degistir">Şifre</Link>
+      <aside className="admin-sidebar">
+        <div className="admin-brand">
+          <Leaf size={18} strokeWidth={1.5} />
+          <div>
+            <strong>Aromatherapica</strong>
+            <span>Yönetim</span>
+          </div>
+        </div>
+        <nav className="admin-side-nav">
+          {NAV.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link key={item.href} href={item.href} className="admin-nav-link">
+                <Icon size={18} strokeWidth={1.5} />
+                {item.label}
+              </Link>
+            );
+          })}
           <button
             type="button"
-            className="btn btn-outline"
-            style={{ padding: "0.35rem 0.8rem", fontSize: "0.85rem" }}
+            className="admin-nav-link logout"
             onClick={async () => {
               await fetch("/api/admin/logout", { method: "POST" });
               window.location.href = "/admin/login";
             }}
           >
+            <LogOut size={18} strokeWidth={1.5} />
             Çıkış
           </button>
         </nav>
-        <h1>{title}</h1>
-        {children}
-      </main>
+      </aside>
+      <div className="admin-main">
+        <header className="admin-topbar">
+          <h1>{title}</h1>
+          <Link href="/" className="admin-store-link">
+            Mağazayı gör
+          </Link>
+        </header>
+        <div className="admin-content">{children}</div>
+      </div>
     </div>
   );
 }
