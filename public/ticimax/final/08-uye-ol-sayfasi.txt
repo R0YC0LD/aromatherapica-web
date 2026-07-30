@@ -1,1 +1,15 @@
-<script>(function(){document.documentElement.setAttribute('data-ar-page','signup');window.dispatchEvent(new CustomEvent('ar:page-context',{detail:{page:'signup'}}));})();</script>
+<script>
+(function () {
+  "use strict";
+  function start() {
+    var ar = window.AromatherapicaTicimax;
+    if (!ar) return window.setTimeout(start, 80);
+    ar.addPageClass("register");
+    var root = ar.qs("form, #divIcerik") || document.body;
+    root.classList.add("ar-native-register");
+    ar.labelForms(root);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
+  else start();
+})();
+</script>

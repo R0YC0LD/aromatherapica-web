@@ -1,1 +1,20 @@
-<script>(function(){document.documentElement.setAttribute('data-ar-page','cart');window.dispatchEvent(new CustomEvent('ar:page-context',{detail:{page:'cart'}}));})();</script>
+<script>
+(function () {
+  "use strict";
+  function start() {
+    var ar = window.AromatherapicaTicimax;
+    if (!ar) return window.setTimeout(start, 80);
+    ar.addPageClass("cart");
+    var root = ar.qs(".sepetimBody, .CartPage, [class*='Sepet'], #divIcerik") || document.body;
+    root.classList.add("ar-native-cart");
+    ar.syncCartCount();
+    if (window.MutationObserver) {
+      new MutationObserver(function () { ar.syncCartCount(); }).observe(root, {
+        childList: true, subtree: true, characterData: true
+      });
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
+  else start();
+})();
+</script>

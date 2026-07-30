@@ -1,1 +1,19 @@
-<script>(function(){document.documentElement.setAttribute('data-ar-page','search');window.dispatchEvent(new CustomEvent('ar:page-context',{detail:{page:'search'}}));})();</script>
+<script>
+(function () {
+  "use strict";
+  function start() {
+    var ar = window.AromatherapicaTicimax;
+    if (!ar) return window.setTimeout(start, 80);
+    ar.addPageClass("search");
+    var root = ar.qs(".SearchPage, .searchPage, .ProductListContent, #divIcerik") || document.body;
+    root.classList.add("ar-native-search");
+    ar.enhanceProductCards(root);
+    ar.observeProducts(root);
+    ar.qsa("input[type='search'], input[name*='search'], input[name='q']", root).forEach(function (input) {
+      if (!input.getAttribute("aria-label")) input.setAttribute("aria-label", "Ürün ara");
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
+  else start();
+})();
+</script>

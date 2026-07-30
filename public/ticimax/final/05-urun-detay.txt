@@ -1,1 +1,27 @@
-<script>(function(){document.documentElement.setAttribute('data-ar-page','product');window.dispatchEvent(new CustomEvent('ar:page-context',{detail:{page:'product'}}));})();</script>
+<script>
+(function () {
+  "use strict";
+  function start() {
+    var ar = window.AromatherapicaTicimax;
+    if (!ar) return window.setTimeout(start, 80);
+    ar.addPageClass("product");
+    var root = ar.qs(".ProductDetail, .urunDetay, [class*='ProductDetail'], #divIcerik") || document.body;
+    root.classList.add("ar-native-product-detail");
+    ar.qsa("img", root).forEach(function (image) {
+      image.decoding = "async";
+      if (!image.alt) image.alt = document.title || "Aromatherapica ürünü";
+    });
+    ar.qsa(".AddToCart, .addToCart, [onclick*='AddToCart'], [onclick*='Sepet']", root).forEach(function (button) {
+      button.classList.add("ar-native-add-button");
+    });
+    ar.qsa(".favoriteslist, .favorite, [onclick*='Favorite'], [onclick*='Favori']", root).forEach(function (button) {
+      button.classList.add("ar-native-favorite");
+    });
+    if (window.MutationObserver) {
+      new MutationObserver(function () { ar.syncCartCount(); }).observe(root, { childList: true, subtree: true });
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
+  else start();
+})();
+</script>

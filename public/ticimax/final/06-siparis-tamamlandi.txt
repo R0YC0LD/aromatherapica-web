@@ -1,1 +1,18 @@
-<script>(function(){document.documentElement.setAttribute('data-ar-page','order-complete');window.dispatchEvent(new CustomEvent('ar:page-context',{detail:{page:'order-complete'}}));})();</script>
+<script>
+(function () {
+  "use strict";
+  function start() {
+    var ar = window.AromatherapicaTicimax;
+    if (!ar) return window.setTimeout(start, 80);
+    ar.addPageClass("order-success");
+    var main = ar.qs("main, #mainHolder, .mainContainer, #divIcerik");
+    if (main) {
+      main.setAttribute("role", "status");
+      main.setAttribute("aria-live", "polite");
+    }
+    ar.syncCartCount();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
+  else start();
+})();
+</script>

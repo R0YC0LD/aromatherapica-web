@@ -1,12 +1,22 @@
 <!--
-  ADIM 0 — ÖNCE BUNU YAP
-  ========================
+  ADIM 0 — ÖNCE BUNU YAP (zorunlu)
+  ================================
   Dinamik Script Yönetimi'nde içinde şunu içeren scripti SİL veya PASİFLEŞTİR:
 
     location.replace("https://r0yc0ld.github.io/aromatherapica-web")
 
-  Bu yönlendirme Ticimax ürün / sepet / ödeme sayfalarını kırıyor.
-  Silmeden alım-satım çalışmaz.
+  Bu yönlendirme ürün / kategori / anasayfa ziyaretçilerini GitHub'a atıyor.
+  Silmeden WebSitesi tasarımı Ticimax'ta görünmez; alım-satım bozulur.
 
-  Sonra Admin > Canlı Ticimax sekmesinden FINAL tema dosyalarını sırayla yapıştır.
+  Ayrıca:
+  - Eski "aromatherapica-theme" / içine gömülü "Tema Önizlemesi" HTML bloklarını kaldırın
+  - FINAL/ar-v2 stub paketini değil; bu klasördeki EXACT (WebSitesi birebir) dosyaları kullanın
+
+  Sonra:
+  1) assets/aromatherapica-emblem.png → Ticimax Dosya Yöneticisi
+     /Uploads/EditorUploads/aromatherapica-emblem.png
+  2) Admin → Canlı Ticimax → 12 Dinamik Script'i sırayla yapıştır
+  3) kategori-bloklari/*.html → ilgili kategori üst içerik alanları
+  4) Anasayfa ürün vitrinini aç (≥4–8 gerçek ürün + görsel)
+  5) Önbellek temizle · gizli sekmede test et
 -->

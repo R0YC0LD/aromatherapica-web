@@ -1,1 +1,20 @@
-<script>(function(){document.documentElement.setAttribute('data-ar-page','checkout');window.dispatchEvent(new CustomEvent('ar:page-context',{detail:{page:'checkout'}}));})();</script>
+<script>
+(function () {
+  "use strict";
+  function start() {
+    var ar = window.AromatherapicaTicimax;
+    if (!ar) return window.setTimeout(start, 80);
+    ar.addPageClass("checkout");
+    var root = ar.qs(".CheckoutPage, .OdemePage, form, #divIcerik") || document.body;
+    root.classList.add("ar-native-checkout");
+    ar.labelForms(root);
+    ar.qsa("button, input[type='submit']", root).forEach(function (button) {
+      if (/tamamla|öde|devam|sipariş/i.test(button.textContent || button.value || "")) {
+        button.classList.add("ar-native-add-button");
+      }
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
+  else start();
+})();
+</script>

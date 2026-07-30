@@ -1,1 +1,16 @@
-<script>(function(){document.documentElement.setAttribute('data-ar-page','brand');window.dispatchEvent(new CustomEvent('ar:page-context',{detail:{page:'brand'}}));})();</script>
+<script>
+(function () {
+  "use strict";
+  function start() {
+    var ar = window.AromatherapicaTicimax;
+    if (!ar) return window.setTimeout(start, 80);
+    ar.addPageClass("brand");
+    var root = ar.qs(".ProductListContent, .ProductList, .productList, #divIcerik") || document.body;
+    root.classList.add("ar-native-catalog", "ar-native-brand");
+    ar.enhanceProductCards(root);
+    ar.observeProducts(root);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start, { once: true });
+  else start();
+})();
+</script>
