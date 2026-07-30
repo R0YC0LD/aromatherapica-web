@@ -18,24 +18,23 @@ export function SiteChromeEffects() {
 
     const href = settings.faviconUrl?.startsWith("data:")
       ? settings.faviconUrl
-      : withBasePath(settings.faviconUrl || "/favicon.png");
+      : withBasePath(settings.faviconUrl || "/aromatherapica-emblem.png");
 
-    let link = document.querySelector<HTMLLinkElement>("link[rel='icon']");
-    if (!link) {
-      link = document.createElement("link");
-      link.rel = "icon";
-      document.head.appendChild(link);
-    }
-    link.type = href.startsWith("data:") ? "image/png" : "image/png";
-    link.href = href;
+    const ensureIcon = (rel: string, type?: string) => {
+      let link = document.querySelector<HTMLLinkElement>(`link[rel='${rel}']`);
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = rel;
+        document.head.appendChild(link);
+      }
+      if (type) link.type = type;
+      link.href = href;
+      return link;
+    };
 
-    let apple = document.querySelector<HTMLLinkElement>("link[rel='apple-touch-icon']");
-    if (!apple) {
-      apple = document.createElement("link");
-      apple.rel = "apple-touch-icon";
-      document.head.appendChild(apple);
-    }
-    apple.href = href;
+    ensureIcon("icon", "image/png");
+    ensureIcon("shortcut icon", "image/png");
+    ensureIcon("apple-touch-icon");
   }, [settings.faviconUrl, settings.siteName]);
 
   return null;

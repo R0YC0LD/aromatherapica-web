@@ -28,8 +28,13 @@ export const metadata: Metadata = {
   description:
     "Aromatherapica doğal bakım, aromaterapi yağları ve özenli günlük ritüeller. Ürün, stok ve sipariş Ticimax üzerinden yönetilir.",
   icons: {
-    icon: [{ url: "/favicon.png", type: "image/png" }],
-    apple: [{ url: "/apple-touch-icon.png" }],
+    icon: [
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.png", sizes: "192x192", type: "image/png" },
+      { url: "/aromatherapica-emblem.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
     shortcut: ["/favicon.png"],
   },
   openGraph: {

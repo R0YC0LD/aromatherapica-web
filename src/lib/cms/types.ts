@@ -101,7 +101,7 @@ export const DEFAULT_CMS_SETTINGS: CmsSettings = {
   announcementHref: "/kategori/ucucu-yaglar",
 
   logoUrl: "/aromatherapica-emblem.png",
-  faviconUrl: "/favicon.png",
+  faviconUrl: "/aromatherapica-emblem.png",
 
   heroImageUrl: "/hero-bottle.png",
   heroEyebrow: "Doğanın bilgisinden modern bakım ritüellerine",
