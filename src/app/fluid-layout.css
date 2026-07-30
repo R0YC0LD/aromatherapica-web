@@ -1,0 +1,511 @@
+/* ==========================================================================
+   Fluid responsive system (cascade layer)
+   Loaded after brand.css. Prefer clamp / minmax / auto-fit over brittle MQs.
+   Identity (colors, typefaces) unchanged — only layout & measure.
+   ========================================================================== */
+
+/* Global anti-overflow */
+html,
+body {
+  max-width: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Grid/flex children can shrink without forcing page overflow */
+:where(.section, .product-grid, .catalog-grid, .ritual-grid, .story-grid, .footer-columns, .header-main, .hero, .newsletter, .footer-top) > * {
+  min-width: 0;
+}
+
+.editorial-split {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  min-height: 0;
+}
+
+.editorial-image {
+  min-height: clamp(16rem, 48vw, 36rem);
+}
+
+.editorial-image::before,
+.editorial-image::after {
+  width: min(30rem, 70%);
+  aspect-ratio: 1;
+  height: auto;
+}
+
+.journal-card h3,
+.journal-card p {
+  min-height: 0;
+}
+
+.newsletter {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: clamp(1.75rem, 5vw, 6rem);
+  padding: clamp(2.75rem, 8vw, 5.75rem) max(var(--page-gutter), calc((100vw - var(--container-max)) / 2));
+}
+
+.footer-top {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: clamp(1.75rem, 5vw, 5rem);
+  padding-block: clamp(2.75rem, 7vw, 5.5rem) clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.footer-brand p {
+  max-width: min(27rem, 100%);
+}
+
+/* Soften long unbroken strings without breaking Turkish words aggressively */
+p,
+h1,
+h2,
+h3,
+h4,
+li,
+td,
+th,
+label,
+.product-info h3,
+.wordmark strong {
+  overflow-wrap: break-word;
+}
+
+/* Centered containers stay within viewport gutters */
+.section,
+.ritual-intro,
+.benefit-strip,
+.catalog-shell,
+.product-detail-layout,
+.footer-columns,
+.footer-social-row,
+.payment-marks-wide,
+.footer-bottom-nyr,
+.header-main,
+.stories-section .section,
+.footer-top,
+.footer-assurances,
+.footer-bottom > div {
+  width: var(--container);
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.announcement-bar {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+  padding-inline: var(--page-gutter);
+  height: auto;
+  min-height: var(--announcement-height);
+  gap: 0.35rem;
+}
+
+.category-nav {
+  padding-inline: max(var(--page-gutter), env(safe-area-inset-left, 0px));
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.category-nav a {
+  min-height: var(--touch-min);
+  padding-inline: clamp(0.85rem, 2vw, 1.15rem);
+  white-space: nowrap;
+}
+
+/* Product cards: balanced rows, equal visual weight */
+.product-card,
+.journal-card,
+.ritual-card {
+  height: 100%;
+}
+
+.product-info h3 {
+  min-height: 0;
+  font-size: var(--text-h3);
+  line-height: 1.3;
+}
+
+.product-image img,
+.ritual-photo,
+.newsletter-popup-media img,
+.search-suggest-item img,
+.search-bestseller-card img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.ritual-photo {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  height: auto;
+}
+
+.add-button,
+.quick-button,
+.sort-menu-trigger,
+.icon-button,
+.cms-btn,
+.back-nav-button,
+.search-submit-btn {
+  min-height: var(--touch-min);
+}
+
+input,
+select,
+textarea {
+  max-width: 100%;
+  font-size: max(1rem, 16px); /* iOS zoom guard */
+}
+
+.catalog-hero {
+  width: var(--container);
+  margin-inline: auto;
+  padding-block: clamp(1.5rem, 4vw, 3rem);
+  padding-inline: clamp(1rem, 3vw, 3.5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, min(11rem, 28vw));
+  min-height: 0;
+}
+
+@media (max-width: 768px) {
+  .catalog-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-hero-visual {
+    display: none;
+  }
+}
+
+.gift-banner,
+.newsletter,
+.editorial-copy {
+  padding-inline: clamp(1.15rem, 5vw, 6rem);
+}
+
+.gift-banner {
+  min-height: 0;
+  padding-block: clamp(2.5rem, 7vw, 5.5rem);
+}
+
+.newsletter {
+  padding-block: clamp(2.75rem, 8vw, 5.75rem);
+}
+
+.ritual-intro {
+  padding-block: clamp(2.75rem, 7vw, 7rem);
+}
+
+.footer-top {
+  width: var(--container);
+  max-width: 100%;
+  margin-inline: auto;
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  padding-block: clamp(2.75rem, 7vw, 5.5rem) clamp(1.75rem, 4vw, 2.75rem);
+}
+
+/* Commerce / catalog heroes */
+.commerce-page,
+.category-page {
+  padding-inline: 0;
+  overflow-x: clip;
+}
+
+.catalog-hero {
+  width: var(--container);
+  margin-inline: auto;
+  padding-block: clamp(1.5rem, 4vw, 3rem);
+}
+
+.catalog-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+.search-inner,
+.search-inner-nyr {
+  width: min(61rem, calc(100% - (var(--page-gutter) * 2)));
+  max-width: 100%;
+}
+
+.search-bestsellers {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 8.5rem), 1fr));
+}
+
+.newsletter-popup {
+  width: min(52rem, calc(100vw - 1.5rem));
+  max-width: 100%;
+}
+
+.mobile-drawer {
+  width: min(22rem, 100vw);
+  max-width: 100%;
+}
+
+.cms-modal,
+.cms-login-card {
+  width: min(40rem, calc(100vw - 1.5rem));
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Breakpoint polish (only where auto-fit needs help)
+   -------------------------------------------------------------------------- */
+
+/* ~phone → large phone */
+@media (max-width: 480px) {
+  :root {
+    --page-gutter: clamp(0.9rem, 4.5vw, 1.15rem);
+    --card-min: 100%;
+    --header-main-height: 3.65rem;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .hero-visual {
+    order: 2;
+    min-height: clamp(14rem, 48vh, 22rem);
+  }
+
+  .hero-copy {
+    order: 1;
+    align-items: center;
+    text-align: center;
+    padding: clamp(2rem, 8vw, 3rem) var(--page-gutter);
+  }
+
+  .hero-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .header-mobile-tools {
+    display: flex;
+  }
+
+  .desktop-search {
+    display: none;
+  }
+
+  .product-grid,
+  .catalog-grid,
+  .story-grid,
+  .ritual-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-button {
+    display: none;
+  }
+
+  .conscience-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: none;
+  }
+
+  .footer-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .benefit-strip article {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 0.9rem 0.25rem;
+  }
+
+  .announcement-bar a:not(:nth-child(2)) {
+    display: none;
+  }
+
+  .announcement-bar {
+    justify-content: center;
+    display: flex;
+  }
+}
+
+/* tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  :root {
+    --card-min: min(100%, 14rem);
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    order: 2;
+    min-height: clamp(18rem, 46vh, 26rem);
+  }
+
+  .hero-copy {
+    order: 1;
+    text-align: center;
+    align-items: center;
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .header-mobile-tools {
+    display: flex;
+  }
+
+  .desktop-search {
+    display: none;
+  }
+
+  .product-grid,
+  .catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .conscience-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* small laptop */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --container-max: 64rem;
+    --card-min: min(100%, 13.5rem);
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .product-grid,
+  .catalog-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ritual-grid,
+  .story-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .conscience-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* desktop */
+@media (min-width: 1025px) {
+  :root {
+    --container-max: 78rem;
+    --card-min: min(100%, 15rem);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ritual-grid,
+  .story-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .conscience-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .benefit-strip {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* wide desktop — keep content centered, do not stretch endlessly */
+@media (min-width: 1440px) {
+  :root {
+    --container-max: 82rem;
+    --page-gutter: clamp(2rem, 4vw, 3.5rem);
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --container-max: 88rem; /* ~1408px */
+  }
+}
+
+/* Neutralize earlier cramped overrides that fight fluid tokens */
+@media (max-width: 580px) {
+  .conscience-grid {
+    max-width: none;
+  }
+
+  .product-grid,
+  .catalog-grid {
+    gap: clamp(1.5rem, 6vw, 2.25rem);
+  }
+
+  .catalog-grid .product-image,
+  .related-products .product-image,
+  .cart-recommendations .product-image {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 1180px) {
+  :root {
+    --container: min(var(--container-max), calc(100% - (var(--page-gutter) * 2)));
+  }
+}
+
+@media (max-width: 860px) {
+  :root {
+    --container: min(100% - (var(--page-gutter) * 2), 100%);
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Product detail + editorial mid layouts */
+@media (max-width: 900px) {
+  .product-detail-layout,
+  .editorial-section,
+  .newsletter-popup {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tables → card-friendly scroll instead of page overflow */
+.cms-table-wrap,
+.commerce-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cms-table,
+.commerce-table {
+  min-width: min(100%, 36rem);
+}

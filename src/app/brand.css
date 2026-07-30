@@ -7,6 +7,7 @@
    defined in src/app/layout.tsx.
    ========================================================================== */
 :root {
+  /* Brand colors (identity preserved) */
   --ink: #112537;
   --navy: #082f6b;
   --navy-deep: #061f49;
@@ -22,10 +23,36 @@
   --white: #ffffff;
   --serif: var(--font-serif), "Libre Baskerville", "Palatino Linotype", "Book Antiqua", Georgia, serif;
   --sans: var(--font-sans), "Source Sans 3", "Segoe UI", Tahoma, sans-serif;
-  --container: min(1360px, calc(100vw - 64px));
-  --header-main-height: 84px;
-  --nav-height: 44px;
-  --announcement-height: 36px;
+
+  /* Fluid layout system — mobile-first gutters + centered max-width */
+  --page-gutter: clamp(1rem, 4vw, 2.5rem);
+  --container-max: 78rem; /* ~1248px — avoids ultra-wide stretch */
+  --container: min(var(--container-max), calc(100% - (var(--page-gutter) * 2)));
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 2rem;
+  --space-8: 2.5rem;
+  --space-9: 3.5rem;
+  --space-section: clamp(3.25rem, 8vw, 7rem);
+  --space-block: clamp(1.5rem, 4vw, 3rem);
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-pill: 999px;
+  --text-body: clamp(0.95rem, 0.9rem + 0.25vw, 1.0625rem);
+  --text-lead: clamp(1rem, 0.95rem + 0.35vw, 1.25rem);
+  --text-h1: clamp(2.15rem, 1.4rem + 3.2vw, 4.75rem);
+  --text-h2: clamp(1.75rem, 1.2rem + 2.2vw, 3.75rem);
+  --text-h3: clamp(1.15rem, 1rem + 0.7vw, 1.5rem);
+  --touch-min: 2.75rem; /* 44px tap target */
+  --card-min: min(100%, 17.5rem);
+  --header-main-height: clamp(3.75rem, 8vw, 5.25rem);
+  --nav-height: 2.75rem;
+  --announcement-height: 2.25rem;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -50,12 +77,14 @@ body {
   color: var(--ink);
   background: var(--paper);
   font-family: var(--sans);
-  font-size: 17px;
+  font-size: var(--text-body);
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.65;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 body.panel-open {
@@ -116,6 +145,7 @@ button {
 img {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 .skip-link {
@@ -458,15 +488,16 @@ img {
 
 .hero {
   display: grid;
-  grid-template-columns: 54% 46%;
-  min-height: min(720px, calc(100vh - 164px));
+  /* Fluid split — stacks via MQs; avoids rigid % crush on mid widths */
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  min-height: min(45rem, calc(100svh - 10rem));
   background: var(--sand);
   overflow: hidden;
 }
 
 .hero-visual {
   position: relative;
-  min-height: 620px;
+  min-height: clamp(18rem, 52vw, 38rem);
   overflow: hidden;
   background:
     radial-gradient(circle at 23% 26%, rgba(255, 255, 255, 0.82) 0, rgba(255, 255, 255, 0) 25%),
@@ -481,15 +512,17 @@ img {
 }
 
 .hero-orbit-one {
-  width: 590px;
-  height: 590px;
+  width: min(36rem, 90%);
+  aspect-ratio: 1;
+  height: auto;
   top: 13%;
   left: 13%;
 }
 
 .hero-orbit-two {
-  width: 390px;
-  height: 390px;
+  width: min(24rem, 68%);
+  aspect-ratio: 1;
+  height: auto;
   top: 29%;
   left: 27%;
 }
@@ -518,9 +551,9 @@ img {
   position: absolute;
   bottom: -5%;
   left: 50%;
-  width: clamp(210px, 24vw, 340px);
+  width: clamp(11rem, 28vw, 21rem);
   height: 68%;
-  min-height: 450px;
+  min-height: clamp(14rem, 40vw, 28rem);
   border-radius: 48% 48% 23% 23% / 20% 20% 13% 13%;
   background:
     linear-gradient(90deg, rgba(255,255,255,0.25), transparent 14%, transparent 74%, rgba(0,0,0,0.28)),
@@ -659,7 +692,7 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 74px clamp(40px, 8vw, 130px) 68px clamp(46px, 7vw, 110px);
+  padding: clamp(2.5rem, 6vw, 4.75rem) clamp(1.25rem, 6vw, 7rem);
   background:
     radial-gradient(circle at 80% 5%, rgba(255,255,255,0.7), transparent 27%),
     linear-gradient(135deg, #f7efe3, #efe0cf);
@@ -668,12 +701,14 @@ img {
 .hero-copy::after {
   content: "";
   position: absolute;
-  right: -160px;
-  bottom: -240px;
-  width: 440px;
-  height: 440px;
+  right: -10rem;
+  bottom: -15rem;
+  width: min(28rem, 70vw);
+  aspect-ratio: 1;
+  height: auto;
   border: 1px solid rgba(8, 47, 107, 0.14);
   border-radius: 50%;
+  pointer-events: none;
 }
 
 .eyebrow {
@@ -697,17 +732,17 @@ img {
 }
 
 .hero h1 {
-  max-width: 590px;
+  max-width: min(36rem, 100%);
   color: var(--navy);
-  font-size: clamp(58px, 6.1vw, 96px);
+  font-size: var(--text-h1);
   letter-spacing: -0.045em;
 }
 
 .hero-description {
-  max-width: 590px;
-  margin: 28px 0 0;
+  max-width: min(36rem, 100%);
+  margin: clamp(1rem, 2.5vw, 1.75rem) 0 0;
   color: #3d4a55;
-  font-size: clamp(17px, 1.35vw, 20px);
+  font-size: var(--text-lead);
   font-weight: 400;
   line-height: 1.7;
 }
@@ -723,10 +758,10 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
-  padding: 0 30px;
+  min-height: var(--touch-min);
+  padding: 0 clamp(1.1rem, 3vw, 1.9rem);
   border: 1px solid transparent;
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -788,10 +823,11 @@ img {
 
 .benefit-strip {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* auto-fit keeps 4→2→1 without brittle fixed columns */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr));
   width: var(--container);
   margin: 0 auto;
-  padding: 34px 0;
+  padding: clamp(1.25rem, 3vw, 2.15rem) 0;
   border-bottom: 1px solid var(--line);
 }
 
@@ -843,7 +879,7 @@ img {
 .section {
   width: var(--container);
   margin: 0 auto;
-  padding: 112px 0;
+  padding: var(--space-section) 0;
 }
 
 .section-heading {
@@ -863,7 +899,7 @@ img {
 .editorial-copy h2,
 .newsletter h2 {
   color: var(--ink);
-  font-size: clamp(42px, 4.6vw, 72px);
+  font-size: var(--text-h2);
   letter-spacing: -0.03em;
 }
 
@@ -893,8 +929,8 @@ img {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 26px;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
+  gap: clamp(1.25rem, 3vw, 1.75rem);
 }
 
 .product-card {
@@ -912,7 +948,7 @@ img {
   display: grid;
   place-items: center;
   aspect-ratio: 0.86;
-  min-height: 350px;
+  min-height: 0;
   overflow: hidden;
   border-radius: 2px;
   background: #f3f1ec;
@@ -1303,10 +1339,10 @@ img {
 
 .ritual-intro-copy {
   display: grid;
-  grid-template-columns: minmax(260px, 0.7fr) minmax(320px, 1fr) minmax(280px, 0.8fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
   align-items: end;
-  gap: 48px;
-  margin-bottom: 58px;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-bottom: clamp(2rem, 5vw, 3.6rem);
 }
 
 .ritual-intro-copy .eyebrow {
@@ -1327,16 +1363,16 @@ img {
 
 .ritual-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17.5rem), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.4rem);
 }
 
 .ritual-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 660px;
-  padding: 34px 36px 38px;
+  min-height: clamp(22rem, 55vw, 41rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
   overflow: hidden;
   color: #fff;
 }
@@ -1673,8 +1709,8 @@ img {
 
 .story-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: clamp(1.25rem, 3vw, 1.5rem);
 }
 
 .journal-card {
@@ -3359,9 +3395,9 @@ img {
 
 .conscience-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: clamp(18px, 3vw, 54px);
-  max-width: 1460px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+  gap: clamp(1.1rem, 3vw, 3.4rem);
+  max-width: min(91.25rem, 100%);
   margin: 0 auto;
 }
 
@@ -4842,7 +4878,9 @@ body.panel-open {
 }
 
 .catalog-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr));
+  gap: clamp(1.25rem, 3vw, 1.75rem);
 }
 
 .catalog-grid .product-image,
@@ -6345,11 +6383,11 @@ body.panel-open {
 
 .footer-columns {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  gap: clamp(1.25rem, 3vw, 1.75rem);
   width: var(--container);
   margin: 0 auto;
-  padding: 54px 0 28px;
+  padding: clamp(2rem, 5vw, 3.4rem) 0 clamp(1.25rem, 3vw, 1.75rem);
 }
 
 .footer-columns h2 {
