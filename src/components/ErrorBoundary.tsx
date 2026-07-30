@@ -14,6 +14,14 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error) {
     console.error("Aromatherapica UI error:", error);
+    try {
+      sessionStorage.setItem(
+        "arom_last_ui_error",
+        `${error.name}: ${error.message}\n${error.stack || ""}`.slice(0, 2000),
+      );
+    } catch {
+      /* ignore */
+    }
   }
 
   render() {
@@ -27,7 +35,10 @@ export class ErrorBoundary extends Component<Props, State> {
             <button
               type="button"
               className="button button-primary"
-              onClick={() => window.location.reload()}
+              onClick={() => {
+                this.setState({ error: null });
+                window.location.reload();
+              }}
             >
               Yenile
             </button>
@@ -35,6 +46,9 @@ export class ErrorBoundary extends Component<Props, State> {
               Ana sayfa
             </a>
           </div>
+          {this.state.error?.message ? (
+            <p className="app-error-detail">{this.state.error.message}</p>
+          ) : null}
         </div>
       );
     }

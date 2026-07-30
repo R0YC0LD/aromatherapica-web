@@ -1,26 +1,14 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-
+/** Lightweight route wrapper — no exit animations (safer on static GitHub Pages). */
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-
-  // Keep transitions light: no exit unmount race (safer on GitHub Pages SPA).
   return (
-    <AnimatePresence initial={false}>
-      <motion.div
-        key={pathname}
-        className="page-transition"
-        initial={{ opacity: 0.2, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.22, ease: EASE }}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <div key={pathname} className="page-transition">
+      {children}
+    </div>
   );
 }

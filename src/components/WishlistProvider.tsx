@@ -4,9 +4,9 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
-  useSyncExternalStore,
   type ReactNode,
 } from "react";
 import {
@@ -43,14 +43,33 @@ type WishlistContextValue = {
 
 const WishlistContext = createContext<WishlistContextValue | null>(null);
 
-function useWishlistSnapshot() {
-  return useSyncExternalStore(subscribeWishlist, readWishlist, () => []);
-}
+const EMPTY: WishlistContextValue = {
+  items: [],
+  count: 0,
+  has: () => false,
+  toggle: () => false,
+  drawerOpen: false,
+  openDrawer: () => undefined,
+  closeDrawer: () => undefined,
+  bursts: [],
+};
 
 export function WishlistProvider({ children }: { children: ReactNode }) {
-  const items = useWishlistSnapshot();
+  const [items, setItems] = useState<WishlistItem[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [bursts, setBursts] = useState<Burst[]>([]);
+
+  useEffect(() => {
+    const sync = () => {
+      try {
+        setItems(readWishlist());
+      } catch {
+        setItems([]);
+      }
+    };
+    sync();
+    return subscribeWishlist(sync);
+  }, []);
 
   const spawnBurst = useCallback((x: number, y: number) => {
     const id = Date.now() + Math.random();
@@ -64,20 +83,30 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
     () => ({
       items,
       count: items.length,
-      has: (productId) => isInWishlist(productId),
+      has: (productId) => {
+        try {
+          return isInWishlist(productId);
+        } catch {
+          return false;
+        }
+      },
       toggle: (item, origin) => {
-        const { added } = toggleWishlistItem({
-          productId: item.productId,
-          slug: item.slug,
-          name: item.name,
-          imageUrl: item.imageUrl,
-          price: item.price,
-          salePrice: item.salePrice,
-          stockWhenSaved: item.stock,
-        });
-        if (added && origin) spawnBurst(origin.x, origin.y);
-        if (added) setDrawerOpen(true);
-        return added;
+        try {
+          const { added } = toggleWishlistItem({
+            productId: item.productId,
+            slug: item.slug,
+            name: item.name,
+            imageUrl: item.imageUrl,
+            price: item.price,
+            salePrice: item.salePrice,
+            stockWhenSaved: item.stock,
+          });
+          if (added && origin) spawnBurst(origin.x, origin.y);
+          if (added) setDrawerOpen(true);
+          return added;
+        } catch {
+          return false;
+        }
       },
       drawerOpen,
       openDrawer: () => setDrawerOpen(true),
@@ -91,21 +120,7 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
 }
 
 export function useWishlist() {
-  const ctx = useContext(WishlistContext);
-  if (!ctx) {
-    // Never crash the storefront if provider mount order fails
-    return {
-      items: [],
-      count: 0,
-      has: () => false,
-      toggle: () => false,
-      drawerOpen: false,
-      openDrawer: () => undefined,
-      closeDrawer: () => undefined,
-      bursts: [],
-    } satisfies WishlistContextValue;
-  }
-  return ctx;
+  return useContext(WishlistContext) || EMPTY;
 }
 
 export function HeartBursts() {

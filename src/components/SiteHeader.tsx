@@ -67,10 +67,10 @@ export function SiteHeader() {
       .then((data: { products: Array<{ id: number; slug: string; name: string; imageUrl: string | null; stock: number; price: number; salePrice: number | null; active: boolean }> }) => {
         if (cancelled) return;
         const all = (data.products || []).filter((p) => p.active);
-        const ids = (settings.searchBestsellerIds || settings.featuredProductIds || "")
-          .split(",")
+        const ids = String(settings.searchBestsellerIds || settings.featuredProductIds || "")
+          .split(/[,\s]+/)
           .map((s) => Number(s.trim()))
-          .filter(Boolean);
+          .filter((n) => Number.isFinite(n) && n > 0);
         const picked = ids.length
           ? ids.map((id) => all.find((p) => p.id === id)).filter(Boolean)
           : all.slice(0, 4);

@@ -19,16 +19,26 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
     <ErrorBoundary>
       <NavHistoryProvider>
         <WishlistProvider>
-          <SiteHeader />
+          <ErrorBoundary fallbackTitle="Üst menü yüklenemedi">
+            <SiteHeader />
+          </ErrorBoundary>
           <main id="main">
             <ErrorBoundary fallbackTitle="İçerik yüklenemedi">
               <PageTransition>{children}</PageTransition>
             </ErrorBoundary>
           </main>
-          <SiteFooter />
-          <CartDrawer />
-          <WishlistDock />
-          <NewsletterPopup />
+          <ErrorBoundary fallbackTitle="Alt bilgi yüklenemedi">
+            <SiteFooter />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <CartDrawer />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <WishlistDock />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <NewsletterPopup />
+          </ErrorBoundary>
         </WishlistProvider>
       </NavHistoryProvider>
     </ErrorBoundary>

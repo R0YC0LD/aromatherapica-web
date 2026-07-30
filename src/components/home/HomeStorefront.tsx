@@ -35,7 +35,8 @@ export function HomeFeaturedProducts({
 
   const list = useMemo(() => {
     const merged = products.map(mergeProduct).filter((p) => p.active);
-    const ids = settings.featuredProductIds
+    const rawIds = settings.featuredProductIds;
+    const ids = String(rawIds || "")
       .split(/[,\s]+/)
       .map((x) => Number(x.trim()))
       .filter((n) => Number.isFinite(n) && n > 0);
