@@ -4,7 +4,7 @@ import { getProducts } from "@/lib/catalog/service";
 import { HeroSection } from "@/components/home/HeroSection";
 import { NewsletterForm } from "@/components/home/NewsletterForm";
 import { Reveal } from "@/components/Reveal";
-import { freeShippingAnnouncement } from "@/lib/shipping";
+import { ShippingBenefitText } from "@/components/ShippingBenefitText";
 import {
   HomeFeaturedProducts,
   HomeGiftBanner,
@@ -25,7 +25,9 @@ export default async function HomePage() {
           </span>
           <div>
             <strong>Ücretsiz kargo</strong>
-            <p>{freeShippingAnnouncement()}</p>
+            <p>
+              <ShippingBenefitText />
+            </p>
           </div>
         </article>
         <article>

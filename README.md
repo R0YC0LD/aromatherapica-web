@@ -31,7 +31,7 @@ Tarayıcı: [http://localhost:3000](http://localhost:3000)
 
 ### Ücretsiz kargo
 
-Kargo **her zaman ücretsizdir** — Ticimax kargo çeki ile karşılanır; müşteriden kargo ücreti alınmaz (`src/lib/shipping.ts`).
+Ücretsiz kargo limiti **yönetim panelinden** ayarlanır (Ayarlar → Ücretsiz kargo limiti). `0` = her zaman ücretsiz; örn. `500` = 500 TL ve üzeri ücretsiz. Limit altı ücret de panelden girilir.
 
 ## Ortam değişkenleri
 

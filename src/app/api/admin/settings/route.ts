@@ -6,6 +6,7 @@ import { assertCsrf } from "@/lib/auth/csrf";
 const KEYS = [
   "siteName",
   "freeShippingThreshold",
+  "shippingFee",
   "contactEmail",
   "contactPhone",
   "ticimaxBaseUrl",
@@ -27,6 +28,7 @@ export async function GET() {
     data: {
       siteName: map.siteName || "Aromatherapica",
       freeShippingThreshold: Number(map.freeShippingThreshold || 0),
+      shippingFee: Number(map.shippingFee || 99),
       contactEmail: map.contactEmail || "",
       contactPhone: map.contactPhone || "",
       ticimaxBaseUrl: map.ticimaxBaseUrl || process.env.TICIMAX_BASE_URL || "",

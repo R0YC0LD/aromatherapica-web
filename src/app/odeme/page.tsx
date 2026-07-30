@@ -4,14 +4,20 @@ import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/components/CartProvider";
 import { formatCurrency } from "@/lib/format";
+import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
 import { freeShippingAnnouncement, orderTotal, shippingCost, shippingProgressMessage } from "@/lib/shipping";
 
 const isStatic = process.env.NEXT_PUBLIC_STATIC_EXPORT === "true";
 
 export default function CheckoutPage() {
   const { cart, total, clear } = useCart();
-  const cargo = shippingCost(total);
-  const grand = orderTotal(total);
+  const { settings } = useCatalogOverrides();
+  const shippingConfig = {
+    threshold: settings.freeShippingThreshold,
+    fee: settings.shippingFee,
+  };
+  const cargo = shippingCost(total, shippingConfig);
+  const grand = orderTotal(total, shippingConfig);
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -158,7 +164,7 @@ export default function CheckoutPage() {
         {isStatic
           ? " Bu yayın GitHub Pages üzerindedir; sipariş tarayıcıda kaydedilir. Canlı Ticimax aktarımı için Node sunucusu kullanın."
           : " Sipariş Ticimax üzerinden oluşturulur."}
-        {` ${freeShippingAnnouncement()}.`}
+        {` ${freeShippingAnnouncement(shippingConfig)}.`}
       </p>
       <div
         className="admin-card"
@@ -173,7 +179,9 @@ export default function CheckoutPage() {
         <p>
           Genel toplam: <strong>{formatCurrency(grand)}</strong>
         </p>
-        <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>{shippingProgressMessage(total)}</p>
+        <p style={{ color: "var(--muted)", fontSize: "0.9rem" }}>
+          {shippingProgressMessage(total, shippingConfig)}
+        </p>
       </div>
 
       <form onSubmit={onSubmit} style={{ maxWidth: 520 }}>

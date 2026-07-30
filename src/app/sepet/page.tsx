@@ -3,12 +3,19 @@
 import Link from "next/link";
 import { Truck } from "lucide-react";
 import { useCart } from "@/components/CartProvider";
+import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
 import { formatCurrency } from "@/lib/format";
-import { shippingCost as computeShippingCost } from "@/lib/shipping";
+import { getShippingProgress, shippingCost as computeShippingCost } from "@/lib/shipping";
 
 export default function CartPage() {
   const { cart, total, setQuantity, remove } = useCart();
-  const shipping = computeShippingCost(total);
+  const { settings } = useCatalogOverrides();
+  const shippingConfig = {
+    threshold: settings.freeShippingThreshold,
+    fee: settings.shippingFee,
+  };
+  const shipping = computeShippingCost(total, shippingConfig);
+  const progress = getShippingProgress(total, shippingConfig);
   const grandTotal = total + shipping;
 
   return (
@@ -30,18 +37,32 @@ export default function CartPage() {
       ) : (
         <div className="cart-page-layout">
           <div className="cart-page-products">
-            <div className="shipping-progress is-complete">
+            <div className={`shipping-progress${progress.qualified || progress.alwaysFree ? " is-complete" : ""}`}>
               <div className="shipping-progress-head">
                 <span className="shipping-progress-icon" aria-hidden>
                   <Truck size={13} />
                 </span>
                 <div>
-                  <span>Kargo ücretsiz</span>
-                  <strong>Ticimax kargo çeki ile karşılanır</strong>
+                  {progress.alwaysFree ? (
+                    <>
+                      <span>Kargo ücretsiz</span>
+                      <strong>Tüm siparişlerde geçerli</strong>
+                    </>
+                  ) : progress.qualified ? (
+                    <>
+                      <span>Ücretsiz kargoyu hak ettiniz</span>
+                      <strong>Tebrikler</strong>
+                    </>
+                  ) : (
+                    <>
+                      <span>Ücretsiz kargoya kalan</span>
+                      <strong>{formatCurrency(progress.remaining)}</strong>
+                    </>
+                  )}
                 </div>
               </div>
               <span className="progress-track">
-                <i style={{ width: "100%" }} />
+                <i style={{ width: `${Math.round(progress.progress * 100)}%` }} />
                 <b className="progress-milestone" aria-hidden />
               </span>
             </div>

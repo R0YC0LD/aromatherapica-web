@@ -76,7 +76,11 @@ export function SiteHeader() {
           {settings.announcementText || "Saf aromaterapi yağlarını keşfedin →"}
         </Link>
         <Link href="/sepet">
-          {freeShippingAnnouncement()} <span>→</span>
+          {freeShippingAnnouncement({
+            threshold: settings.freeShippingThreshold,
+            fee: settings.shippingFee,
+          })}{" "}
+          <span>→</span>
         </Link>
       </div>
 

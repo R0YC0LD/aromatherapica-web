@@ -23,7 +23,10 @@ export type RitualCardSetting = {
 
 export type CmsSettings = {
   siteName: string;
+  /** 0 = her zaman ücretsiz; >0 = bu tutar ve üzeri ücretsiz */
   freeShippingThreshold: number;
+  /** Eşik altındayken kargo ücreti (TL) */
+  shippingFee: number;
   contactEmail: string;
   contactPhone: string;
   ticimaxBaseUrl: string;
@@ -84,6 +87,7 @@ export const CMS_VERSION = 2;
 export const DEFAULT_CMS_SETTINGS: CmsSettings = {
   siteName: "Aromatherapica",
   freeShippingThreshold: 0,
+  shippingFee: 99,
   contactEmail: "info@aromatherapica.com",
   contactPhone: "",
   ticimaxBaseUrl: "",

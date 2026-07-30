@@ -81,7 +81,15 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Sepet stok/fiyat doğrulamasından geçemedi" }, { status: 400 });
     }
 
-    const cargo = shippingCost(validation.total);
+    const meta = await prisma.appMeta.findMany({
+      where: { key: { in: ["freeShippingThreshold", "shippingFee"] } },
+    });
+    const metaMap = Object.fromEntries(meta.map((r) => [r.key, r.value]));
+    const shippingConfig = {
+      threshold: Number(metaMap.freeShippingThreshold || 0),
+      fee: Number(metaMap.shippingFee || 99),
+    };
+    const cargo = shippingCost(validation.total, shippingConfig);
     const grandTotal = validation.total + cargo;
 
     let ticimaxOrderId: number | null = null;
@@ -98,7 +106,7 @@ export async function POST(request: Request) {
         paymentOptionId: input.paymentOptionId ?? Number(process.env.DEFAULT_PAYMENT_OPTION_ID || 1),
         paymentStatus: input.paymentStatus,
         lines: input.lines,
-        orderNote: `${input.orderNote || ""} | Kargo: ${cargo === 0 ? "Ücretsiz (Ticimax kargo çeki)" : cargo}`,
+        orderNote: `${input.orderNote || ""} | Kargo: ${cargo === 0 ? "Ücretsiz" : cargo}`,
       });
       ticimaxOrderId = result.orderId ?? null;
       ticimaxOrderCode = result.orderCode ?? null;
