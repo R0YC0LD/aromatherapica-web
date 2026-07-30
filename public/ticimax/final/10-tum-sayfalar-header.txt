@@ -1,36 +1,7 @@
-<!-- Aromatherapica / Ticimax – Tüm Sayfalar Header (WebSitesi birebir) -->
 <meta name="theme-color" content="#082f6b">
-<meta name="color-scheme" content="light">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Italiana&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Italiana&display=swap" rel="stylesheet">
 <script>
-(function () {
-  "use strict";
-  try {
-    document.documentElement.classList.add("ar-exact-shell");
-    /* Header once yuklenir — GitHub yonlendirmesini Admin dahil engeller */
-    if (window.__AR_BLOCK_GH_REDIRECT__) return;
-    window.__AR_BLOCK_GH_REDIRECT__ = true;
-    var _assign = window.location.assign.bind(window.location);
-    var _replace = window.location.replace.bind(window.location);
-    function blocked(url) {
-      return /r0yc0ld\.github\.io\/aromatherapica-web/i.test(String(url || ""));
-    }
-    window.location.replace = function (url) {
-      if (blocked(url)) {
-        console.warn("[Aromatherapica] GitHub yonlendirme engellendi", url);
-        return;
-      }
-      return _replace(url);
-    };
-    window.location.assign = function (url) {
-      if (blocked(url)) {
-        console.warn("[Aromatherapica] GitHub yonlendirme engellendi", url);
-        return;
-      }
-      return _assign(url);
-    };
-  } catch (e) {}
-})();
+(function(){try{document.documentElement.classList.add("ar-exact-shell");if(window.__AR_BLOCK_GH_REDIRECT__)return;window.__AR_BLOCK_GH_REDIRECT__=true;var R=window.location.replace.bind(window.location),A=window.location.assign.bind(window.location);function bad(u){return/r0yc0ld\.github\.io\/aromatherapica-web/i.test(String(u||""));}window.location.replace=function(u){if(bad(u))return;return R(u);};window.location.assign=function(u){if(bad(u))return;return A(u);};}catch(e){}})();
 </script>
