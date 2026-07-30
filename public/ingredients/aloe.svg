@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="img" aria-label="aloe">
+  <defs>
+    <radialGradient id="g" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="hsl(130 35% 42%)"/>
+      <stop offset="100%" stop-color="hsl(130 28% 28%)"/>
+    </radialGradient>
+  </defs>
+  <circle cx="120" cy="120" r="120" fill="url(#g)"/>
+  <circle cx="120" cy="120" r="108" fill="none" stroke="hsl(150 42% 68%)" stroke-opacity="0.45" stroke-width="2"/>
+  <path d="M120 58c28 28 42 58 42 88-20 8-34 8-42 8s-22 0-42-8c0-30 14-60 42-88z" fill="hsl(150 42% 68%)" fill-opacity="0.9"/>
+         <path d="M120 70v84" stroke="#082f6b" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round"/>
+  <text x="120" y="204" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#f7f1e4" opacity="0.95">Al</text>
+</svg>

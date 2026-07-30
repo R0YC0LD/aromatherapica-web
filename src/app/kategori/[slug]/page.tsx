@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { getProducts } from "@/lib/catalog/service";
 import { CategoryProductGrid } from "@/components/CategoryProductGrid";
+import { BackButton } from "@/components/BackButton";
 import { getAllStaticCategorySlugs } from "@/lib/catalog/static-data";
 import { MARKETING_CATEGORY_RULES } from "@/lib/cms/category-map";
 
@@ -12,6 +14,20 @@ function titleForSlug(slug: string) {
   return MARKETING_CATEGORY_RULES[slug]?.label || slug.replace(/-/g, " ");
 }
 
+function blurbForSlug(slug: string) {
+  const label = titleForSlug(slug);
+  if (slug === "ucucu-yaglar") {
+    return "Saf aromatik yağlarla günlük ritüelinizi zenginleştirin. Her yağın kendine özgü karakterini keşfedin.";
+  }
+  if (slug === "sabit-tasiyici-yaglar") {
+    return "Uçucu yağları seyreltmek ve cildi beslemek için özenle seçilmiş taşıyıcı yağlar.";
+  }
+  if (slug === "cilt-bakimi") {
+    return "Cildinizin ritmine uygun, bitkisel karakterli bakım seçkisi.";
+  }
+  return `${label} kategorisindeki Aromatherapica ürünlerini keşfedin.`;
+}
+
 export default async function CategoryPage({
   params,
 }: {
@@ -19,6 +35,7 @@ export default async function CategoryPage({
 }) {
   const { slug } = await params;
   const categorySlug = slug === "tum-urunler" ? undefined : slug;
+  const title = titleForSlug(slug);
 
   const { data: products, message } = await getProducts({
     categorySlug,
@@ -27,11 +44,23 @@ export default async function CategoryPage({
   });
 
   return (
-    <section className="section">
-      <h1 style={{ fontFamily: "var(--serif)", fontWeight: 400, fontSize: "2.2rem" }}>
-        {titleForSlug(slug)}
-      </h1>
-      <CategoryProductGrid products={products} emptyMessage={message} />
+    <section className="commerce-page category-page">
+      <nav className="commerce-breadcrumb" aria-label="Sayfa yolu">
+        <BackButton fallbackHref="/" label="Ana menü" />
+        <Link href="/">Ana sayfa</Link>
+        <span>/</span>
+        <span aria-current="page">{title}</span>
+      </nav>
+
+      <header className="catalog-hero">
+        <p className="eyebrow">Kategori</p>
+        <h1>{title}</h1>
+        <p>{blurbForSlug(slug)}</p>
+      </header>
+
+      <div className="catalog-shell">
+        <CategoryProductGrid products={products} emptyMessage={message} />
+      </div>
     </section>
   );
 }

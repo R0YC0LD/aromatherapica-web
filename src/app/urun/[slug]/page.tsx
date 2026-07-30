@@ -45,10 +45,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <section className="section" style={{ display: "grid", gap: "2rem" }}>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <ProductView product={product} />
-      </section>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <ProductView product={product} />
       <RelatedProducts product={product} />
     </>
   );
