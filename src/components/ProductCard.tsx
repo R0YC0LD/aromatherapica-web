@@ -35,7 +35,7 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
       quantity: 1,
     });
     setAdded(true);
-    window.setTimeout(() => setAdded(false), 1600);
+    window.setTimeout(() => setAdded(false), 1200);
   }
 
   return (

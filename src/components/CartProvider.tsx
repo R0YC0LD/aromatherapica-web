@@ -19,10 +19,14 @@ interface CartContextValue {
   cart: Cart;
   count: number;
   total: number;
-  add: (item: CartItem) => void;
+  drawerOpen: boolean;
+  lastAdded: CartItem | null;
+  add: (item: CartItem, options?: { openDrawer?: boolean }) => void;
   setQuantity: (variantId: number, quantity: number) => void;
   remove: (variantId: number) => void;
   clear: () => void;
+  openCartDrawer: () => void;
+  closeCartDrawer: () => void;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -39,6 +43,8 @@ function persist(cart: Cart) {
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<Cart>(emptyCart());
   const [ready, setReady] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [lastAdded, setLastAdded] = useState<CartItem | null>(null);
 
   useEffect(() => {
     try {
@@ -55,21 +61,48 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     persist(next);
   }, []);
 
+  const openCartDrawer = useCallback(() => setDrawerOpen(true), []);
+  const closeCartDrawer = useCallback(() => setDrawerOpen(false), []);
+
   const value = useMemo<CartContextValue>(
     () => ({
       cart,
       count: cartCount(cart),
       total: cartTotal(cart),
-      add: (item) => update(addItem(cart, item)),
+      drawerOpen,
+      lastAdded,
+      add: (item, options) => {
+        update(addItem(cart, item));
+        setLastAdded(item);
+        if (options?.openDrawer !== false) setDrawerOpen(true);
+      },
       setQuantity: (variantId, quantity) => update(updateCartQuantity(cart, variantId, quantity)),
       remove: (variantId) => update(removeFromCart(cart, variantId)),
-      clear: () => update(emptyCart()),
+      clear: () => {
+        update(emptyCart());
+        setLastAdded(null);
+      },
+      openCartDrawer,
+      closeCartDrawer,
     }),
-    [cart, update],
+    [cart, update, drawerOpen, lastAdded, openCartDrawer, closeCartDrawer],
   );
 
   if (!ready) {
-    return <CartContext.Provider value={{ ...value, cart: emptyCart(), count: 0, total: 0 }}>{children}</CartContext.Provider>;
+    return (
+      <CartContext.Provider
+        value={{
+          ...value,
+          cart: emptyCart(),
+          count: 0,
+          total: 0,
+          drawerOpen: false,
+          lastAdded: null,
+        }}
+      >
+        {children}
+      </CartContext.Provider>
+    );
   }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { SecretLogo } from "@/components/SecretLogo";
 import { CartBadge } from "@/components/CartBadge";
+import { useCart } from "@/components/CartProvider";
 import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
 import { STORE_NAV_CATEGORIES } from "@/lib/cms/category-map";
 import { freeShippingAnnouncement } from "@/lib/shipping";
@@ -27,6 +28,7 @@ export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
   const { settings } = useCatalogOverrides();
+  const { openCartDrawer, drawerOpen } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -49,9 +51,9 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    document.body.classList.toggle("panel-open", menuOpen || searchOpen);
+    document.body.classList.toggle("panel-open", menuOpen || searchOpen || drawerOpen);
     return () => document.body.classList.remove("panel-open");
-  }, [menuOpen, searchOpen]);
+  }, [menuOpen, searchOpen, drawerOpen]);
 
   function closePanels() {
     setMenuOpen(false);
@@ -124,10 +126,15 @@ export function SiteHeader() {
             <Link href="/hesap" className="icon-button account-button" aria-label="Hesabım">
               <User size={19} />
             </Link>
-            <Link href="/sepet" className="icon-button" aria-label="Sepeti görüntüle">
+            <button
+              type="button"
+              className="icon-button"
+              aria-label="Sepeti görüntüle"
+              onClick={openCartDrawer}
+            >
               <ShoppingBag size={19} />
               <CartBadge />
-            </Link>
+            </button>
           </div>
         </div>
 

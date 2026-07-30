@@ -1,21 +1,23 @@
 import type { Metadata } from "next";
-import { DM_Sans, Italiana } from "next/font/google";
+import { Libre_Baskerville, Source_Sans_3 } from "next/font/google";
 import { CartProvider } from "@/components/CartProvider";
 import { CatalogOverridesProvider } from "@/components/cms/CatalogOverridesProvider";
 import { SiteChromeEffects } from "@/components/cms/SiteChromeEffects";
 import { AppChrome } from "@/components/AppChrome";
 import "./globals.css";
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
+/** Readable body font with strong Turkish Latin coverage */
+const sourceSans = Source_Sans_3({
+  subsets: ["latin", "latin-ext"],
   variable: "--font-sans",
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const italiana = Italiana({
-  subsets: ["latin"],
+/** Elegant display serif that stays legible at headline sizes */
+const libreBaskerville = Libre_Baskerville({
+  subsets: ["latin", "latin-ext"],
   variable: "--font-serif",
-  weight: "400",
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -40,7 +42,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="tr" className={`${dmSans.variable} ${italiana.variable}`}>
+    <html lang="tr" className={`${sourceSans.variable} ${libreBaskerville.variable}`}>
       <body>
         <CartProvider>
           <CatalogOverridesProvider>

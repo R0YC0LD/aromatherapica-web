@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProductBySlug } from "@/lib/catalog/service";
 import { ProductView } from "@/components/ProductView";
+import { RelatedProducts } from "@/components/RelatedProducts";
 import { getAllStaticProductSlugs } from "@/lib/catalog/static-data";
 
 export function generateStaticParams() {
@@ -43,9 +44,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   };
 
   return (
-    <section className="section" style={{ display: "grid", gap: "2rem" }}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <ProductView product={product} />
-    </section>
+    <>
+      <section className="section" style={{ display: "grid", gap: "2rem" }}>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <ProductView product={product} />
+      </section>
+      <RelatedProducts product={product} />
+    </>
   );
 }

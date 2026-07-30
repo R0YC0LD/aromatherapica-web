@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { CartDrawer } from "@/components/CartDrawer";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -13,6 +14,7 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
       <SiteHeader />
       <main id="main">{children}</main>
       <SiteFooter />
+      <CartDrawer />
     </>
   );
 }

@@ -710,41 +710,54 @@ export function AdminCMS() {
             </div>
           )}
 
-                    {tab === "guide" && (
+          {tab === "guide" && (
             <div className="cms-card">
-              <h2>Detayli kurulum ve sistem rehberi</h2>
-              <div className="cms-help" style={{ display: "grid", gap: "1rem" }}>
-                <p>
-                  <strong>A) Canli site (GitHub Pages)</strong>
-                  <br />
-                  Magaza: <code>https://r0yc0ld.github.io/aromatherapica-web/</code>
-                  <br />
-                  Yonetim: <code>.../admin/</code> veya <code>.../admin.html</code>
-                  <br />
-                  Giris: <code>admin</code> / <code>12345</code> (Ayarlar'dan degistirin)
-                  <br />
-                  Favicon: Aromatherapica logosu; panelden de degistirilebilir.
-                </p>
-                <p>
-                  <strong>B) Panelden yonetebilecekleriniz</strong>
-                  <br />
-                  Ana sayfa hero gorseli, logo, favicon, duyuru bandi, ritual kartlari, one
-                  cikan urun ID listesi, tum urun gorselleri/fiyat/stok/aciklama, Ticimax
-                  ayarlari, siparis listesi, yedek al/yukle.
-                </p>
-                <p>
-                  <strong>C) Gorselleri nasil eklerim?</strong>
-                  <br />
-                  1) Ana sayfa / vitrin - Hero/logo/kart gorseli sec - Kaydet
-                  <br />
-                  2) Urunler - urunu ac - Galeriden gorsel sec - Kaydet
-                  <br />
-                  Baska cihazda gormek icin Yedek al, sonra Yedek yukle.
-                </p>
-                <p>
-                  <strong>D) Ticimax canli (Node) - .env</strong>
-                </p>
-                <pre style={{ whiteSpace: "pre-wrap", background: "#efe9df", padding: "1rem", borderRadius: 12 }}>
+              <h2>Kurulum rehberi</h2>
+              <p className="cms-help">
+                Aşağıdaki adımları sırayla uygulayın. GitHub Pages vitrin için yeterlidir;
+                canlı Ticimax SOAP entegrasyonu için Node sunucu gerekir.
+              </p>
+
+              <h3 style={{ marginTop: "1.25rem" }}>1) GitHub Pages (şu anki yayın)</h3>
+              <div className="cms-step">
+                <strong>Adım 1 — Siteyi açın</strong>
+                Mağaza: <code>https://r0yc0ld.github.io/aromatherapica-web/</code>
+                <br />
+                Yönetim: <code>.../admin/</code> (veya <code>admin.html</code>)
+                <br />
+                Giriş: <code>admin</code> / <code>12345</code> — Ayarlar sekmesinden şifreyi değiştirin.
+              </div>
+              <div className="cms-step" style={{ marginTop: "0.65rem" }}>
+                <strong>Adım 2 — Vitrini düzenleyin</strong>
+                Ana sayfa / vitrin: hero görseli, logo, favicon, duyuru.
+                <br />
+                Ürünler: galeriden görsel, fiyat, stok, açıklama.
+                <br />
+                Ayarlar: ücretsiz kargo limiti ve limit altı kargo ücreti.
+              </div>
+              <div className="cms-step" style={{ marginTop: "0.65rem" }}>
+                <strong>Adım 3 — Yedek alın</strong>
+                Ürünler sekmesinden <strong>Yedek al</strong>. Başka cihazda <strong>Yedek yükle</strong> ile taşıyın.
+              </div>
+
+              <h3 style={{ marginTop: "1.5rem" }}>2) Ticimax kurulumu (adım adım)</h3>
+              <div className="cms-step">
+                <strong>Adım 1 — Ticimax panelinden bilgileri alın</strong>
+                Mağaza yöneticinizden / Ticimax destekten şunları isteyin:
+                <br />
+                • Servis adresi (BASE URL): genelde <code>https://MAGAZA-ALANI/servis</code>
+                <br />
+                • Üye / Yetki Kodu (<code>UyeKodu</code>)
+                <br />
+                • Mağaza alan adı
+                <br />
+                Örnek WSDL: <code>.../servis/UrunServis.svc?wsdl</code>
+              </div>
+              <div className="cms-step" style={{ marginTop: "0.65rem" }}>
+                <strong>Adım 2 — Projede .env oluşturun</strong>
+                Bilgisayarda proje klasöründe <code>.env.example</code> dosyasını <code>.env</code> olarak kopyalayın
+                ve aşağıdaki değerleri doldurun:
+                <pre>
                   {[
                     "ADMIN_USERNAME=admin",
                     "ADMIN_PASSWORD=guclu-sifre",
@@ -754,22 +767,61 @@ export function AdminCMS() {
                     "TICIMAX_UYE_KODU=YetkiKodu",
                     "TICIMAX_ALAN_ADI=magaza-alani",
                     "TICIMAX_STORE_URL=https://magaza-alani",
-                    "",
-                    "npm install && npx prisma db push && npm run db:seed && npm run dev",
-                    "# Sonra Admin > Ayarlar > Entegrasyonu aktif et",
                   ].join("\n")}
                 </pre>
-                <p>
-                  <strong>E) Sistem durumu</strong>
-                  <br />
-                  Vitrin/CMS/sepet Pages uzerinde calisir. SOAP sadece Node sunucusunda
-                  (src/lib/ticimax). Kartli odeme gateway yok. Pages SOAP cagirmaz.
-                </p>
-                <p>
-                  <strong>F) Yayin</strong>
-                  <br />
-                  master push sonrasi GitHub Actions Deploy. Yerel: npm run build:pages
-                </p>
+              </div>
+              <div className="cms-step" style={{ marginTop: "0.65rem" }}>
+                <strong>Adım 3 — Yerel sunucuyu çalıştırın</strong>
+                Terminalde proje klasöründe:
+                <pre>
+                  {["npm install", "npx prisma db push", "npm run db:seed", "npm run dev"].join("\n")}
+                </pre>
+                Tarayıcı: <code>http://localhost:3000</code> — yönetim: <code>/admin/</code>
+              </div>
+              <div className="cms-step" style={{ marginTop: "0.65rem" }}>
+                <strong>Adım 4 — Admin panelinden aktif edin</strong>
+                1. <code>/admin/</code> giriş yapın
+                <br />
+                2. <strong>Ayarlar</strong> / Ticimax sekmesine gidin
+                <br />
+                3. BASE URL, Üye Kodu, Alan adı, Mağaza URL alanlarını doldurun
+                <br />
+                4. <strong>Ticimax entegrasyonunu aktif et</strong> kutusunu işaretleyin
+                <br />
+                5. Ayarları kaydedin
+              </div>
+              <div className="cms-step" style={{ marginTop: "0.65rem" }}>
+                <strong>Adım 5 — Bağlantı testi ve ürün sync</strong>
+                Node modunda API açıkken entegrasyon test/sync çağrıları çalışır
+                (UrunServis SelectKategori / SelectUrun). Ürünler veritabanına cache&apos;lenir;
+                admin ürün görseli ve açıklama override&apos;ları sync sonrası korunur.
+              </div>
+              <div className="cms-step" style={{ marginTop: "0.65rem" }}>
+                <strong>Adım 6 — Sipariş akışı</strong>
+                Müşteri sepet → ödeme. Node + Ticimax açıkken sipariş SOAP ile
+                SiparisServis.SaveSiparis üzerinden gider. Kart numarası/CVV bu sitede
+                işlenmez; havale veya kapıda ödeme desteklenir.
+              </div>
+              <div className="cms-step" style={{ marginTop: "0.65rem" }}>
+                <strong>Adım 7 — Canlıya alma (Node hosting)</strong>
+                Vercel / VPS / Docker: aynı <code>.env</code> değerlerini sunucu ortamına ekleyin.
+                Cron ile <code>/api/cron/sync</code> + <code>CRON_SECRET</code> kullanabilirsiniz.
+                GitHub Pages sadece vitrin + CMS&apos;tir; SOAP Pages üzerinde çalışmaz.
+              </div>
+
+              <h3 style={{ marginTop: "1.5rem" }}>3) Hızlı kontrol listesi</h3>
+              <div className="cms-help">
+                [ ] Ticimax BASE URL ve Yetki Kodu doğru
+                <br />
+                [ ] Admin Ayarlar&apos;da entegrasyon işaretli
+                <br />
+                [ ] <code>npm run dev</code> / production Node ayakta
+                <br />
+                [ ] Ürün sync sonrası katalog dolu
+                <br />
+                [ ] Ücretsiz kargo limiti panelden ayarlı
+                <br />
+                [ ] Favicon ve hero görseli yüklü
               </div>
             </div>
           )}

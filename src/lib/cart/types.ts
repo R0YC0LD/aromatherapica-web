@@ -35,8 +35,11 @@ export function cartCount(cart: Cart): number {
 export function addToCart(cart: Cart, item: CartItem): Cart {
   const existing = cart.items.find((i) => i.variantId === item.variantId);
   if (existing) {
-    existing.quantity += item.quantity;
-    return { ...cart };
+    return {
+      items: cart.items.map((i) =>
+        i.variantId === item.variantId ? { ...i, quantity: i.quantity + item.quantity } : i,
+      ),
+    };
   }
   return { items: [...cart.items, item] };
 }
