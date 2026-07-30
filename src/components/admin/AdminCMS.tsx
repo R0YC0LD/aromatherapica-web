@@ -5,6 +5,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState, useSyncExternalSt
 import {
   Boxes,
   Download,
+  ExternalLink,
   ImagePlus,
   LayoutDashboard,
   LogOut,
@@ -48,6 +49,7 @@ import { DEFAULT_CMS_SETTINGS, type CmsSettings, type CustomProduct, type Produc
 import { formatCurrency } from "@/lib/format";
 import { withBasePath } from "@/lib/paths";
 import { AdminStorefrontPanel } from "@/components/admin/AdminStorefrontPanel";
+import { AdminTicimaxPanel } from "@/components/admin/AdminTicimaxPanel";
 import "@/app/admin-panel.css";
 
 const IS_STATIC =
@@ -76,7 +78,7 @@ type CatalogProduct = {
   isCustom?: boolean;
 };
 
-type Tab = "dashboard" | "storefront" | "products" | "orders" | "settings" | "guide";
+type Tab = "dashboard" | "storefront" | "products" | "orders" | "settings" | "ticimax" | "guide";
 
 export function AdminCMS() {
   // Single source of truth: session storage via external store (fixes Pages login UI stuck)
@@ -493,6 +495,9 @@ export function AdminCMS() {
             <button type="button" className={tab === "settings" ? "is-active" : ""} onClick={() => setTab("settings")}>
               <Settings2 size={18} /> Ayarlar / Ticimax
             </button>
+            <button type="button" className={tab === "ticimax" ? "is-active" : ""} onClick={() => setTab("ticimax")}>
+              <ExternalLink size={18} /> Canlı Ticimax
+            </button>
             <button type="button" className={tab === "guide" ? "is-active" : ""} onClick={() => setTab("guide")}>
               <Boxes size={18} /> Kurulum rehberi
             </button>
@@ -514,6 +519,7 @@ export function AdminCMS() {
                 {tab === "products" && "Ürünler"}
                 {tab === "orders" && "Siparişler"}
                 {tab === "settings" && "Ayarlar"}
+                {tab === "ticimax" && "Canlı Ticimax"}
                 {tab === "guide" && "Kurulum"}
               </h1>
               <p>
@@ -732,6 +738,16 @@ export function AdminCMS() {
                 </div>
               )}
             </div>
+          )}
+
+          {tab === "ticimax" && (
+            <AdminTicimaxPanel
+              settings={settings}
+              onSaved={(next, message) => {
+                setSettings(next);
+                setFlash(message);
+              }}
+            />
           )}
 
           {tab === "settings" && (

@@ -132,6 +132,15 @@ export default function CartPage() {
             <Link className="button button-primary" href="/odeme">
               Siparişi tamamla
             </Link>
+            {settings.ticimaxStoreUrl ? (
+              <a
+                className="button button-secondary"
+                href={`${settings.ticimaxStoreUrl.replace(/\/$/, "")}/Sepetim`}
+                rel="noreferrer"
+              >
+                Ticimax sepetinde öde
+              </a>
+            ) : null}
             <Link href="/kategori/tum-urunler">Alışverişe devam et</Link>
           </aside>
         </div>
