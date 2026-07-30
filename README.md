@@ -31,7 +31,7 @@ Tarayıcı: [http://localhost:3000](http://localhost:3000)
 
 ### Ücretsiz kargo
 
-Sepet ara toplamı **100.000 TL** ve üzeri olduğunda kargo ücretsizdir (`src/lib/shipping.ts`).
+Kargo **her zaman ücretsizdir** — Ticimax kargo çeki ile karşılanır; müşteriden kargo ücreti alınmaz (`src/lib/shipping.ts`).
 
 ## Ortam değişkenleri
 

@@ -268,7 +268,7 @@ export function AdminCMS() {
     const form = new FormData(e.currentTarget);
     const next = saveCmsSettings({
       siteName: String(form.get("siteName") || ""),
-      freeShippingThreshold: Number(form.get("freeShippingThreshold") || 100000),
+      freeShippingThreshold: Number(form.get("freeShippingThreshold") || 0),
       contactEmail: String(form.get("contactEmail") || ""),
       contactPhone: String(form.get("contactPhone") || ""),
       ticimaxBaseUrl: String(form.get("ticimaxBaseUrl") || ""),
@@ -611,11 +611,12 @@ export function AdminCMS() {
                     <input name="siteName" defaultValue={settings.siteName} />
                   </div>
                   <div className="cms-field">
-                    <label>Ücretsiz kargo eşiği (TL)</label>
+                    <label>Ücretsiz kargo eşiği (TL) — 0 = her zaman ücretsiz</label>
                     <input
                       name="freeShippingThreshold"
                       type="number"
                       defaultValue={settings.freeShippingThreshold}
+                      min={0}
                     />
                   </div>
                   <div className="cms-field">

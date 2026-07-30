@@ -1,13 +1,13 @@
-export const FREE_SHIPPING_THRESHOLD = 100_000;
-export const DEFAULT_SHIPPING_COST = 99;
+/** Always free — Ticimax kargo çeki ile karşılanır; müşteriden kargo ücreti alınmaz. */
+export const FREE_SHIPPING_THRESHOLD = 0;
+export const DEFAULT_SHIPPING_COST = 0;
 
-export function shippingCost(subtotal: number): number {
-  if (!Number.isFinite(subtotal) || subtotal <= 0) return DEFAULT_SHIPPING_COST;
-  return subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : DEFAULT_SHIPPING_COST;
+export function shippingCost(_subtotal: number): number {
+  return 0;
 }
 
 export function orderTotal(subtotal: number): number {
-  return Math.max(0, subtotal) + shippingCost(subtotal);
+  return Math.max(0, subtotal);
 }
 
 export function getShippingProgress(subtotal: number): {
@@ -16,22 +16,18 @@ export function getShippingProgress(subtotal: number): {
   progress: number;
   qualified: boolean;
 } {
-  const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - Math.max(0, subtotal));
-  const progress = Math.min(1, Math.max(0, subtotal) / FREE_SHIPPING_THRESHOLD);
   return {
-    threshold: FREE_SHIPPING_THRESHOLD,
-    remaining,
-    progress,
-    qualified: remaining === 0 && subtotal > 0,
+    threshold: 0,
+    remaining: 0,
+    progress: 1,
+    qualified: subtotal > 0,
   };
 }
 
-export function shippingProgressMessage(subtotal: number): string {
-  const { remaining, qualified } = getShippingProgress(subtotal);
-  if (qualified) return "Tebrikler — 100.000 TL ücretsiz kargo hakkınız aktif.";
-  return `Ücretsiz kargo için ${remaining.toLocaleString("tr-TR")} TL daha ekleyin.`;
+export function shippingProgressMessage(_subtotal: number): string {
+  return "Kargo ücretsizdir — Ticimax kargo çeki ile karşılanır.";
 }
 
 export function freeShippingAnnouncement(): string {
-  return "100.000 TL üzeri ücretsiz kargo";
+  return "Tüm siparişlerde ücretsiz kargo";
 }

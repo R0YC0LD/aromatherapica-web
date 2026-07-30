@@ -98,7 +98,7 @@ export async function POST(request: Request) {
         paymentOptionId: input.paymentOptionId ?? Number(process.env.DEFAULT_PAYMENT_OPTION_ID || 1),
         paymentStatus: input.paymentStatus,
         lines: input.lines,
-        orderNote: `${input.orderNote || ""} | Kargo: ${cargo === 0 ? "Ücretsiz (100.000 TL üzeri)" : cargo}`,
+        orderNote: `${input.orderNote || ""} | Kargo: ${cargo === 0 ? "Ücretsiz (Ticimax kargo çeki)" : cargo}`,
       });
       ticimaxOrderId = result.orderId ?? null;
       ticimaxOrderCode = result.orderCode ?? null;

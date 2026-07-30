@@ -26,7 +26,7 @@ export async function GET() {
   return NextResponse.json({
     data: {
       siteName: map.siteName || "Aromatherapica",
-      freeShippingThreshold: Number(map.freeShippingThreshold || 100000),
+      freeShippingThreshold: Number(map.freeShippingThreshold || 0),
       contactEmail: map.contactEmail || "",
       contactPhone: map.contactPhone || "",
       ticimaxBaseUrl: map.ticimaxBaseUrl || process.env.TICIMAX_BASE_URL || "",

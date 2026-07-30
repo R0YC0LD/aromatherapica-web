@@ -83,7 +83,7 @@ export const CMS_VERSION = 2;
 
 export const DEFAULT_CMS_SETTINGS: CmsSettings = {
   siteName: "Aromatherapica",
-  freeShippingThreshold: 100000,
+  freeShippingThreshold: 0,
   contactEmail: "info@aromatherapica.com",
   contactPhone: "",
   ticimaxBaseUrl: "",

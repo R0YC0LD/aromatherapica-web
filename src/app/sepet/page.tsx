@@ -31,18 +31,18 @@ export default function CartPage() {
       ) : (
         <div className="cart-page-layout">
           <div className="cart-page-products">
-            <div className={`shipping-progress${progress.qualified ? " is-complete" : ""}`}>
+            <div className="shipping-progress is-complete">
               <div className="shipping-progress-head">
                 <span className="shipping-progress-icon" aria-hidden>
                   <Truck size={13} />
                 </span>
                 <div>
-                  <span>{progress.qualified ? "Ücretsiz kargoyu hak ettiniz" : "Ücretsiz kargoya kalan"}</span>
-                  <strong>{progress.qualified ? "Tebrikler" : formatCurrency(progress.remaining)}</strong>
+                  <span>Kargo ücretsiz</span>
+                  <strong>Ticimax kargo çeki ile karşılanır</strong>
                 </div>
               </div>
               <span className="progress-track">
-                <i style={{ width: `${Math.round(progress.progress * 100)}%` }} />
+                <i style={{ width: "100%" }} />
                 <b className="progress-milestone" aria-hidden />
               </span>
             </div>
