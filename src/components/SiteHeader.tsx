@@ -4,10 +4,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { Menu, Search, ShoppingBag, User, X, Heart } from "lucide-react";
 import { SecretLogo } from "@/components/SecretLogo";
 import { CartBadge } from "@/components/CartBadge";
 import { useCart } from "@/components/CartProvider";
+import { useWishlist } from "@/components/WishlistProvider";
 import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
 import { STORE_NAV_CATEGORIES } from "@/lib/cms/category-map";
 import { freeShippingAnnouncement } from "@/lib/shipping";
@@ -29,11 +30,15 @@ export function SiteHeader() {
   const router = useRouter();
   const { settings } = useCatalogOverrides();
   const { openCartDrawer, drawerOpen } = useCart();
+  const { openDrawer: openWishlist, toggle: toggleWish, has: hasWish } = useWishlist();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [query, setQuery] = useState("");
+  const [bestsellers, setBestsellers] = useState<
+    Array<{ id: number; slug: string; name: string; imageUrl: string | null; stock: number; price: number; salePrice: number | null }>
+  >([]);
   const lastY = useRef(0);
   const logoSrc = settings.logoUrl?.startsWith("data:")
     ? settings.logoUrl
@@ -54,6 +59,28 @@ export function SiteHeader() {
     document.body.classList.toggle("panel-open", menuOpen || searchOpen || drawerOpen);
     return () => document.body.classList.remove("panel-open");
   }, [menuOpen, searchOpen, drawerOpen]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(withBasePath("/data/catalog.json"))
+      .then((r) => r.json())
+      .then((data: { products: Array<{ id: number; slug: string; name: string; imageUrl: string | null; stock: number; price: number; salePrice: number | null; active: boolean }> }) => {
+        if (cancelled) return;
+        const all = (data.products || []).filter((p) => p.active);
+        const ids = (settings.searchBestsellerIds || settings.featuredProductIds || "")
+          .split(",")
+          .map((s) => Number(s.trim()))
+          .filter(Boolean);
+        const picked = ids.length
+          ? ids.map((id) => all.find((p) => p.id === id)).filter(Boolean)
+          : all.slice(0, 4);
+        setBestsellers(picked as typeof bestsellers);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [settings.searchBestsellerIds, settings.featuredProductIds]);
 
   function closePanels() {
     setMenuOpen(false);
@@ -126,6 +153,14 @@ export function SiteHeader() {
             <Link href="/hesap" className="icon-button account-button" aria-label="Hesabım">
               <User size={19} />
             </Link>
+            <button
+              type="button"
+              className="icon-button"
+              aria-label="İstek listesi"
+              onClick={openWishlist}
+            >
+              <Heart size={19} />
+            </button>
             <button
               type="button"
               className="icon-button"
@@ -237,12 +272,16 @@ export function SiteHeader() {
             aria-modal="true"
             aria-label="Ürün ara"
           >
-            <div className="search-inner">
-              <div className="panel-header">
-                <div>
-                  <p>Aromatherapica seçkisinde</p>
-                  <h2>Ne arıyorsunuz?</h2>
-                </div>
+            <div className="search-inner search-inner-nyr">
+              <form className="search-field search-field-pill" onSubmit={onSearchSubmit}>
+                <Search size={20} aria-hidden />
+                <input
+                  type="search"
+                  placeholder="Search..."
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  autoFocus
+                />
                 <button
                   className="close-button"
                   type="button"
@@ -251,18 +290,48 @@ export function SiteHeader() {
                 >
                   <X size={18} />
                 </button>
-              </div>
-              <form className="search-field" onSubmit={onSearchSubmit}>
-                <Search size={20} aria-hidden />
-                <input
-                  type="search"
-                  placeholder="Ürün veya içerik ara"
-                  value={query}
-                  onChange={(event) => setQuery(event.target.value)}
-                  autoFocus
-                />
               </form>
-              <p className="search-empty">Aramanızı yazıp Enter’a basın, tüm ürünler içinde arayalım.</p>
+
+              <h3 className="search-bestsellers-title">
+                {settings.searchBestsellersTitle || "ÇOK SATANLAR…"}
+              </h3>
+              <div className="search-bestsellers">
+                {bestsellers.map((p) => (
+                  <article key={p.id} className="search-bestseller-card">
+                    <Link href={`/urun/${p.slug}`} onClick={() => setSearchOpen(false)}>
+                      {p.imageUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={p.imageUrl} alt="" />
+                      ) : (
+                        <span className="css-product-bottle" aria-hidden />
+                      )}
+                      <strong>{p.name}</strong>
+                    </Link>
+                    <button
+                      type="button"
+                      className={`favorite-button${hasWish(p.id) ? " is-active" : ""}`}
+                      aria-label="Favorilere ekle"
+                      onClick={(e) => {
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        toggleWish(
+                          {
+                            productId: p.id,
+                            slug: p.slug,
+                            name: p.name,
+                            imageUrl: p.imageUrl || undefined,
+                            price: p.price,
+                            salePrice: p.salePrice || undefined,
+                            stock: p.stock,
+                          },
+                          { x: rect.left + rect.width / 2, y: rect.top },
+                        );
+                      }}
+                    >
+                      <Heart size={16} />
+                    </button>
+                  </article>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}

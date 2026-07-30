@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import { ImagePlus, Save } from "lucide-react";
 import { compressImageFile } from "@/lib/cms/image";
 import { saveCmsSettings } from "@/lib/cms/store";
-import type { CmsSettings, RitualCardSetting } from "@/lib/cms/types";
+import type { CmsSettings, ConscienceItemSetting, RitualCardSetting } from "@/lib/cms/types";
 import { withBasePath } from "@/lib/paths";
 
 function previewSrc(url?: string | null) {
@@ -35,6 +35,14 @@ export function AdminStorefrontPanel({
       const cards = [...(d.ritualCards || [])];
       cards[index] = { ...cards[index], ...partial };
       return { ...d, ritualCards: cards };
+    });
+  }
+
+  function patchConscience(index: number, partial: Partial<ConscienceItemSetting>) {
+    setDraft((d) => {
+      const items = [...(d.conscienceItems || [])];
+      items[index] = { ...items[index], ...partial };
+      return { ...d, conscienceItems: items };
     });
   }
 
@@ -284,6 +292,143 @@ export function AdminStorefrontPanel({
           </div>
         </div>
       ))}
+
+      <h3>İndirim popup (tek seferlik)</h3>
+      <label className="cms-check">
+        <input
+          type="checkbox"
+          checked={draft.popupEnabled}
+          onChange={(e) => patch({ popupEnabled: e.target.checked })}
+        />
+        Popup aktif (5–15 sn sonra, bir kez)
+      </label>
+      <div className="cms-image-picker">
+        {previewSrc(draft.popupImageUrl) ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={previewSrc(draft.popupImageUrl)} alt="" />
+        ) : (
+          <span className="cms-thumb placeholder" style={{ width: 120, height: 120 }}>
+            Popup
+          </span>
+        )}
+        <div>
+          <strong>Popup sol görsel</strong>
+          <label className="cms-btn secondary" style={{ cursor: "pointer", marginTop: 8 }}>
+            <ImagePlus size={16} /> Görsel seç
+            <input
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={(e) =>
+                pickImage(e.target.files?.[0] || null, (url) => patch({ popupImageUrl: url }))
+              }
+            />
+          </label>
+        </div>
+      </div>
+      <div className="cms-fields two">
+        <div className="cms-field">
+          <label>Popup başlık</label>
+          <input value={draft.popupTitle} onChange={(e) => patch({ popupTitle: e.target.value })} />
+        </div>
+        <div className="cms-field">
+          <label>CTA metni</label>
+          <input value={draft.popupCta} onChange={(e) => patch({ popupCta: e.target.value })} />
+        </div>
+        <div className="cms-field">
+          <label>Popup metin</label>
+          <textarea rows={3} value={draft.popupText} onChange={(e) => patch({ popupText: e.target.value })} />
+        </div>
+        <div className="cms-field">
+          <label>Reddet metni</label>
+          <input value={draft.popupDismiss} onChange={(e) => patch({ popupDismiss: e.target.value })} />
+        </div>
+      </div>
+
+      <h3>Arama — çok satanlar</h3>
+      <div className="cms-fields two">
+        <div className="cms-field">
+          <label>Başlık</label>
+          <input
+            value={draft.searchBestsellersTitle}
+            onChange={(e) => patch({ searchBestsellersTitle: e.target.value })}
+          />
+        </div>
+        <div className="cms-field">
+          <label>Ürün ID’leri (virgülle — tıklanınca ürüne gider)</label>
+          <input
+            value={draft.searchBestsellerIds}
+            onChange={(e) => patch({ searchBestsellerIds: e.target.value })}
+            placeholder="537, 540, 512, 501"
+          />
+        </div>
+      </div>
+
+      <h3>Özenle alışveriş</h3>
+      <div className="cms-field">
+        <label>Bölüm başlığı</label>
+        <input
+          value={draft.conscienceTitle}
+          onChange={(e) => patch({ conscienceTitle: e.target.value })}
+        />
+      </div>
+      {(draft.conscienceItems || []).map((item, index) => (
+        <div key={index} className="cms-card" style={{ boxShadow: "none" }}>
+          <div className="cms-image-picker">
+            {previewSrc(item.imageUrl) ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={previewSrc(item.imageUrl)} alt="" />
+            ) : (
+              <span className="cms-thumb placeholder" style={{ width: 120, height: 120 }}>
+                İkon
+              </span>
+            )}
+            <div>
+              <label className="cms-btn secondary" style={{ cursor: "pointer" }}>
+                <ImagePlus size={16} /> Yuvarlak görsel
+                <input
+                  type="file"
+                  accept="image/*"
+                  hidden
+                  onChange={(e) =>
+                    pickImage(e.target.files?.[0] || null, (url) =>
+                      patchConscience(index, { imageUrl: url }),
+                    )
+                  }
+                />
+              </label>
+            </div>
+          </div>
+          <div className="cms-fields two" style={{ marginTop: "0.75rem" }}>
+            <div className="cms-field">
+              <label>Başlık</label>
+              <input
+                value={item.title}
+                onChange={(e) => patchConscience(index, { title: e.target.value })}
+              />
+            </div>
+            <div className="cms-field">
+              <label>Açıklama</label>
+              <input
+                value={item.text}
+                onChange={(e) => patchConscience(index, { text: e.target.value })}
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <h3>Footer</h3>
+      <div className="cms-fields">
+        <div className="cms-field">
+          <label>Footer hakkında metni</label>
+          <textarea
+            rows={2}
+            value={draft.footerAbout}
+            onChange={(e) => patch({ footerAbout: e.target.value })}
+          />
+        </div>
+      </div>
 
       <button className="cms-btn" type="submit" disabled={busy}>
         <Save size={16} /> {busy ? "İşleniyor…" : "Vitrini kaydet"}

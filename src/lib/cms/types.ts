@@ -21,6 +21,12 @@ export type RitualCardSetting = {
   imageUrl?: string | null;
 };
 
+export type ConscienceItemSetting = {
+  title: string;
+  text: string;
+  imageUrl?: string | null;
+};
+
 export type CmsSettings = {
   siteName: string;
   /** 0 = her zaman ücretsiz; >0 = bu tutar ve üzeri ücretsiz */
@@ -73,6 +79,30 @@ export type CmsSettings = {
   ritualTitle: string;
   ritualCards: RitualCardSetting[];
 
+  /** Newsletter popup */
+  popupEnabled: boolean;
+  popupTitle: string;
+  popupText: string;
+  popupCta: string;
+  popupDismiss: string;
+  popupImageUrl: string;
+  popupTermsHref: string;
+
+  /** Search bestsellers */
+  searchBestsellersTitle: string;
+  /** Comma-separated product ids */
+  searchBestsellerIds: string;
+
+  /** Özenle alışveriş */
+  conscienceTitle: string;
+  conscienceItems: ConscienceItemSetting[];
+
+  /** Footer blurb */
+  footerAbout: string;
+  footerInstagram: string;
+  footerPinterest: string;
+  footerYoutube: string;
+
   updatedAt?: string;
 };
 
@@ -82,7 +112,7 @@ export type CmsState = {
   version: number;
 };
 
-export const CMS_VERSION = 2;
+export const CMS_VERSION = 3;
 
 export const DEFAULT_CMS_SETTINGS: CmsSettings = {
   siteName: "Aromatherapica",
@@ -148,4 +178,51 @@ export const DEFAULT_CMS_SETTINGS: CmsSettings = {
       imageUrl: null,
     },
   ],
+
+  popupEnabled: true,
+  popupTitle: "İlk siparişinize %15 indirim",
+  popupText:
+    "Yeni ürünlerden ilk siz haberdar olun, özel teklifleri kaçırmayın ve indirimli alışverişe başlayın.",
+  popupCta: "KAYIT OL",
+  popupDismiss: "HAYIR, TEŞEKKÜRLER",
+  popupImageUrl: "/hero-bottle.png",
+  popupTermsHref: "/icerik/mesafeli-satis",
+
+  searchBestsellersTitle: "ÇOK SATANLAR…",
+  searchBestsellerIds: "",
+
+  conscienceTitle: "Özenle alışveriş",
+  conscienceItems: [
+    {
+      title: "Hayvan dostu",
+      text: "Ürünlerimiz hayvanlar üzerinde test edilmez.",
+      imageUrl: "/conscience/rabbit.svg",
+    },
+    {
+      title: "Bitkisel içerikler",
+      text: "Formüllerimizde doğadan gelen içeriklere öncelik veririz.",
+      imageUrl: "/conscience/leaf.svg",
+    },
+    {
+      title: "Saf özler",
+      text: "Aromaterapi seçkimiz özenle seçilmiş özlerden oluşur.",
+      imageUrl: "/conscience/drop.svg",
+    },
+    {
+      title: "Sorumlu ambalaj",
+      text: "Geri dönüştürülebilir ambalaj seçeneklerini destekleriz.",
+      imageUrl: "/conscience/recycle.svg",
+    },
+    {
+      title: "İyi yaşam",
+      text: "Bakımı günlük yaşamın sakin ve değerli bir parçası görürüz.",
+      imageUrl: "/conscience/heart.svg",
+    },
+  ],
+
+  footerAbout:
+    "Doğanın bilgisini modern bakım ritüelleriyle buluşturan, özenli ve duyusal Aromatherapica dünyası.",
+  footerInstagram: "#instagram",
+  footerPinterest: "#pinterest",
+  footerYoutube: "#youtube",
 };

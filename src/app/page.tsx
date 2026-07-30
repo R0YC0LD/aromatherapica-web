@@ -10,6 +10,7 @@ import {
   HomeGiftBanner,
   HomeRituals,
 } from "@/components/home/HomeStorefront";
+import { ConscienceSection } from "@/components/home/ConscienceSection";
 
 export default async function HomePage() {
   const { data: products, message, configured } = await getProducts({ pageSize: 48, sort: "newest" });
@@ -124,36 +125,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="conscience-section" aria-label="Sorumlu alışveriş ilkeleri">
-        <h2>Özenle alışveriş</h2>
-        <div className="conscience-grid">
-          <article>
-            <i className="conscience-icon conscience-rabbit" aria-hidden="true" />
-            <h3>Hayvan dostu</h3>
-            <p>Ürünlerimiz hayvanlar üzerinde test edilmez.</p>
-          </article>
-          <article>
-            <i className="conscience-icon conscience-leaf" aria-hidden="true" />
-            <h3>Bitkisel içerikler</h3>
-            <p>Formüllerimizde doğadan gelen içeriklere öncelik veririz.</p>
-          </article>
-          <article>
-            <i className="conscience-icon conscience-drop" aria-hidden="true" />
-            <h3>Saf özler</h3>
-            <p>Aromaterapi seçkimiz özenle seçilmiş özlerden oluşur.</p>
-          </article>
-          <article>
-            <i className="conscience-icon conscience-recycle" aria-hidden="true" />
-            <h3>Sorumlu ambalaj</h3>
-            <p>Geri dönüştürülebilir ambalaj seçeneklerini destekleriz.</p>
-          </article>
-          <article>
-            <i className="conscience-icon conscience-heart" aria-hidden="true" />
-            <h3>İyi yaşam</h3>
-            <p>Bakımı günlük yaşamın sakin ve değerli bir parçası görürüz.</p>
-          </article>
-        </div>
-      </section>
+      <ConscienceSection />
 
       <section className="newsletter">
         <div className="newsletter-copy">

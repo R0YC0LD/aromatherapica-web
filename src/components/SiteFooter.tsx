@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Camera, Leaf, PackageCheck, Pin, PlayCircle, ShieldCheck } from "lucide-react";
+import { Camera, Pin, PlayCircle } from "lucide-react";
 import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
 import { withBasePath } from "@/lib/paths";
 
@@ -13,80 +13,69 @@ export function SiteFooter() {
     : withBasePath(settings.logoUrl || "/aromatherapica-emblem.png");
 
   return (
-    <footer className="site-footer">
-      <div className="footer-top">
-        <div className="footer-brand">
-          <Link className="wordmark wordmark-light" href="/">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="brand-mark-image" src={logoSrc} width={46} height={46} alt="" loading="lazy" />
-            <strong>{settings.siteName || "Aromatherapica"}</strong>
-            <span>Essential Oils &amp; Aromatherapy</span>
-          </Link>
-          <p>
-            Doğanın bilgisini modern bakım ritüelleriyle buluşturan, özenli ve duyusal Aromatherapica
-            dünyası.
-          </p>
-          <div className="social-links" aria-label="Sosyal medya bağlantıları">
-            <a href="#instagram" aria-label="Instagram">
-              <Camera aria-hidden />
-            </a>
-            <a href="#pinterest" aria-label="Pinterest">
-              <Pin aria-hidden />
-            </a>
-            <a href="#youtube" aria-label="YouTube">
-              <PlayCircle aria-hidden />
-            </a>
-          </div>
+    <footer className="site-footer site-footer-nyr">
+      <div className="footer-columns">
+        <div>
+          <h2>HAKKIMIZDA</h2>
+          <Link href="/icerik/markamiz">Markamız</Link>
+          <Link href="/icerik/markamiz">Sürdürülebilirlik</Link>
+          <Link href="/kategori/ucucu-yaglar">İçeriklerimiz</Link>
+          <Link href="/icerik/iletisim">Mağaza bul</Link>
+          <Link href="/icerik/iletisim">Kurumsal hediyeler</Link>
         </div>
-
-        <div className="footer-links">
-          <div>
-            <h2>Yardım</h2>
-            <Link href="/icerik/iletisim">Müşteri Hizmetleri</Link>
-            <Link href="/icerik/teslimat">Kargo ve Teslimat</Link>
-            <Link href="/icerik/iade">İade ve Değişim</Link>
-            <Link href="/icerik/mesafeli-satis">Mesafeli Satış Sözleşmesi</Link>
-          </div>
-          <div>
-            <h2>Hesabım</h2>
-            <Link href="/hesap">Üyelik</Link>
-            <Link href="/hesap">Siparişlerim</Link>
-            <Link href="/sepet">Sepetim</Link>
-            <Link href="/icerik/kvkk">KVKK</Link>
-          </div>
-          <div>
-            <h2>Aromatherapica</h2>
-            <Link href="/icerik/markamiz">Markamız</Link>
-            <Link href="/kategori/tum-urunler">Tüm Ürünler</Link>
-            <Link href="/icerik/gizlilik">Gizlilik Politikası</Link>
-            <Link href="/icerik/iletisim">Bize Ulaşın</Link>
-          </div>
+        <div>
+          <h2>MÜŞTERİ HİZMETLERİ</h2>
+          <Link href="/icerik/iletisim">Bize ulaşın</Link>
+          <Link href="/hesap">Sadakat / üyelik</Link>
+          <Link href="/kategori/tum-urunler">Kampanyalar</Link>
+          <Link href="/icerik/teslimat">Teslimat seçenekleri</Link>
+          <Link href="/icerik/iade">İade ve değişim</Link>
+        </div>
+        <div>
+          <h2>YASAL</h2>
+          <Link href="/icerik/mesafeli-satis">Şartlar ve koşullar</Link>
+          <Link href="/icerik/gizlilik">Gizlilik politikası</Link>
+          <Link href="/icerik/kvkk">KVKK / Çerezler</Link>
+          <Link href="/icerik/mesafeli-satis">Mesafeli satış</Link>
+          <Link href="/icerik/iletisim">Erişilebilirlik</Link>
         </div>
       </div>
 
-      <div className="footer-assurances">
-        <span>
-          <ShieldCheck aria-hidden /> Güvenli ödeme
-        </span>
-        <span>
-          <PackageCheck aria-hidden /> Özenli paketleme
-        </span>
-        <span>
-          <Leaf aria-hidden /> Bitkisel içerikler
-        </span>
+      <div className="footer-social-row">
+        <div className="footer-brand-inline">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={logoSrc} width={36} height={36} alt="" />
+          <p>{settings.footerAbout || settings.siteName}</p>
+        </div>
+        <div className="social-links" aria-label="Sosyal medya">
+          <a href={settings.footerInstagram || "#instagram"} aria-label="Instagram">
+            <Camera aria-hidden />
+          </a>
+          <a href={settings.footerPinterest || "#pinterest"} aria-label="Pinterest">
+            <Pin aria-hidden />
+          </a>
+          <a href={settings.footerYoutube || "#youtube"} aria-label="YouTube">
+            <PlayCircle aria-hidden />
+          </a>
+        </div>
       </div>
 
-      <div className="footer-bottom">
-        <p>© {year} Aromatherapica. Tüm hakları saklıdır.</p>
+      <div className="payment-marks payment-marks-wide" aria-label="Ödeme yöntemleri">
+        <b>VISA</b>
+        <b>MC</b>
+        <b>TROY</b>
+        <b>AMEX</b>
+        <b>PayPal</b>
+        <b>Apple Pay</b>
+        <b>Google Pay</b>
+      </div>
+
+      <div className="footer-bottom footer-bottom-nyr">
+        <p>© {year} {settings.siteName || "Aromatherapica"}. Tüm hakları saklıdır.</p>
         <div>
           <Link href="/icerik/mesafeli-satis">Kullanım Koşulları</Link>
           <Link href="/icerik/gizlilik">Gizlilik</Link>
           <Link href="/icerik/kvkk">Çerezler</Link>
-        </div>
-        <div className="payment-marks" aria-label="Ödeme yöntemleri">
-          <b>VISA</b>
-          <b>MC</b>
-          <b>TROY</b>
         </div>
       </div>
     </footer>

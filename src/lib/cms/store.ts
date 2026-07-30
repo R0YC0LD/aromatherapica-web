@@ -50,6 +50,10 @@ function readState(): CmsState {
           Array.isArray(incoming.ritualCards) && incoming.ritualCards.length > 0
             ? incoming.ritualCards
             : DEFAULT_CMS_SETTINGS.ritualCards,
+        conscienceItems:
+          Array.isArray(incoming.conscienceItems) && incoming.conscienceItems.length > 0
+            ? incoming.conscienceItems
+            : DEFAULT_CMS_SETTINGS.conscienceItems,
       },
     };
   } catch {
