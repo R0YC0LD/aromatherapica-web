@@ -7,6 +7,7 @@ import { Heart, Minus, Plus, ShieldCheck, Truck } from "lucide-react";
 import { BackButton } from "@/components/BackButton";
 import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
 import { useCart } from "@/components/CartProvider";
+import { useWishlist } from "@/components/WishlistProvider";
 import { productStory, resolveIngredientsForProduct } from "@/lib/catalog/ingredients";
 import { formatCurrency, slugify } from "@/lib/format";
 import { withBasePath } from "@/lib/paths";
@@ -17,10 +18,12 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export function ProductView({ product: raw }: { product: NormalizedProduct }) {
   const { mergeProduct } = useCatalogOverrides();
   const { add } = useCart();
+  const { has, toggle } = useWishlist();
   const product = mergeProduct(raw);
   const variant = product.variants[0];
   const [qty, setQty] = useState(1);
-  const [favorite, setFavorite] = useState(false);
+  const [added, setAdded] = useState(false);
+  const favorite = has(product.id);
 
   const price =
     product.salePrice && product.salePrice < product.price ? product.salePrice : product.price;
@@ -43,6 +46,24 @@ export function ProductView({ product: raw }: { product: NormalizedProduct }) {
       salePrice: product.salePrice,
       quantity: qty,
     });
+    setAdded(true);
+    window.setTimeout(() => setAdded(false), 1400);
+  }
+
+  function handleFavorite(e: React.MouseEvent<HTMLButtonElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    toggle(
+      {
+        productId: product.id,
+        slug: product.slug,
+        name: product.name,
+        imageUrl: product.images[0],
+        price: product.price,
+        salePrice: product.salePrice,
+        stock: product.stock,
+      },
+      { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 },
+    );
   }
 
   return (
@@ -120,18 +141,19 @@ export function ProductView({ product: raw }: { product: NormalizedProduct }) {
 
             <button
               type="button"
-              className="add-button product-add"
+              className={`add-button product-add${added ? " is-added" : ""}`}
               disabled={product.stock <= 0}
               onClick={addWithQty}
             >
-              {product.stock <= 0 ? "Stokta yok" : "Sepete ekle"}
+              {product.stock <= 0 ? "Stokta yok" : added ? "Sepete eklendi" : "Sepete ekle"}
             </button>
 
             <button
               type="button"
               className={`product-favorite${favorite ? " is-active" : ""}`}
-              aria-label="Favorilere ekle"
-              onClick={() => setFavorite((v) => !v)}
+              aria-label={favorite ? "Favorilerden çıkar" : "Favorilere ekle"}
+              aria-pressed={favorite}
+              onClick={handleFavorite}
             >
               <Heart size={18} aria-hidden />
             </button>

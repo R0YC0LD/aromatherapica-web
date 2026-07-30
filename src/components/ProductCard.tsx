@@ -16,7 +16,7 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
   const product = mergeProduct(raw);
   const favorite = has(product.id);
   const [added, setAdded] = useState(false);
-  const [popping, setPopping] = useState(false);
+  const [heartFx, setHeartFx] = useState<"in" | "out" | null>(null);
 
   if (!product.active) return null;
 
@@ -38,7 +38,7 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
       quantity: 1,
     });
     setAdded(true);
-    window.setTimeout(() => setAdded(false), 1200);
+    window.setTimeout(() => setAdded(false), 1400);
   }
 
   function handleFavorite(e: React.MouseEvent<HTMLButtonElement>) {
@@ -55,10 +55,8 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
       },
       { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 },
     );
-    if (addedFav) {
-      setPopping(true);
-      window.setTimeout(() => setPopping(false), 450);
-    }
+    setHeartFx(addedFav ? "in" : "out");
+    window.setTimeout(() => setHeartFx(null), 520);
   }
 
   return (
@@ -81,11 +79,22 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
 
       <button
         type="button"
-        className={`favorite-button${favorite ? " is-active" : ""}${popping ? " is-popping" : ""}`}
+        className={`favorite-button${favorite ? " is-active" : ""}${
+          heartFx === "in" ? " is-popping" : ""
+        }${heartFx === "out" ? " is-removing" : ""}`}
         aria-label={favorite ? "Favorilerden çıkar" : "Favorilere ekle"}
+        aria-pressed={favorite}
         onClick={handleFavorite}
       >
         <Heart aria-hidden />
+        {heartFx === "in" ? (
+          <span className="favorite-sparkles" aria-hidden>
+            <i />
+            <i />
+            <i />
+            <i />
+          </span>
+        ) : null}
       </button>
 
       <div className="product-info">

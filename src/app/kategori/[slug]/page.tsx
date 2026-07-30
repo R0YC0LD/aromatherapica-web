@@ -53,9 +53,15 @@ export default async function CategoryPage({
       </nav>
 
       <header className="catalog-hero">
-        <p className="eyebrow">Kategori</p>
-        <h1>{title}</h1>
-        <p>{blurbForSlug(slug)}</p>
+        <div className="catalog-hero-copy">
+          <p className="eyebrow">Kategori</p>
+          <h1>{title}</h1>
+          <p>{blurbForSlug(slug)}</p>
+        </div>
+        <div className="catalog-hero-visual" aria-hidden="true">
+          <span className="catalog-hero-ring" />
+          <span className="catalog-hero-mark">A</span>
+        </div>
       </header>
 
       <div className="catalog-shell">

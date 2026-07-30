@@ -72,9 +72,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       drawerOpen,
       lastAdded,
       add: (item, options) => {
+        const wasEmpty = cart.items.length === 0;
         update(addItem(cart, item));
         setLastAdded(item);
-        if (options?.openDrawer !== false) setDrawerOpen(true);
+        // Auto-open only for the first item in an empty cart (or explicit true).
+        if (options?.openDrawer === true || (options?.openDrawer !== false && wasEmpty)) {
+          setDrawerOpen(true);
+        }
       },
       setQuantity: (variantId, quantity) => update(updateCartQuantity(cart, variantId, quantity)),
       remove: (variantId) => update(removeFromCart(cart, variantId)),
