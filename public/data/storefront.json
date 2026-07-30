@@ -1,0 +1,103 @@
+{
+  "version": 3,
+  "products": {},
+  "settings": {
+    "siteName": "Aromatherapica",
+    "freeShippingThreshold": 0,
+    "shippingFee": 99,
+    "contactEmail": "info@aromatherapica.com",
+    "contactPhone": "",
+    "ticimaxBaseUrl": "",
+    "ticimaxUyeKodu": "",
+    "ticimaxAlanAdi": "",
+    "ticimaxStoreUrl": "",
+    "integrationEnabled": false,
+    "adminPasswordHint": "admin / 12345 (değiştirin)",
+    "announcementText": "Saf aromaterapi yağlarını keşfedin →",
+    "announcementHref": "/kategori/ucucu-yaglar",
+    "logoUrl": "/aromatherapica-emblem.png",
+    "faviconUrl": "/aromatherapica-emblem.png",
+    "heroImageUrl": "/hero-bottle.png",
+    "heroEyebrow": "Doğanın bilgisinden modern bakım ritüellerine",
+    "heroTitle": "Saf içerikler.\nÖzenli ritüeller.",
+    "heroDescription": "Bitkilerin özünü, duyulara hitap eden etkili bakım formülleriyle buluşturuyoruz. Günlük ritüelinize iyi gelecek ürünleri keşfedin.",
+    "heroCta1Label": "Cilt bakımını keşfet",
+    "heroCta1Href": "/kategori/cilt-bakimi",
+    "heroCta2Label": "Aromaterapi yağları",
+    "heroCta2Href": "/kategori/ucucu-yaglar",
+    "heroNoteTop": "Saf bitki özleri",
+    "heroNoteBottom": "Özenli formüller",
+    "featuredEyebrow": "Aromatherapica seçkisi",
+    "featuredTitle": "Çok sevilenler",
+    "featuredProductIds": "",
+    "giftEyebrow": "Aromatherapica'dan size",
+    "giftTitle": "İlk siparişinize özel bakım hediyesi",
+    "giftText": "Seçili alışverişlerde sürpriz ritüel ürününüz bizden.",
+    "ritualEyebrow": "Kendinize ayırdığınız anlar",
+    "ritualTitle": "Ritüelinizi seçin",
+    "ritualCards": [
+      {
+        "title": "Aromaterapi Yağları",
+        "subtitle": "Saf ve konsantre",
+        "description": "Ruh halinize ve günlük ritüelinize eşlik eden bitkisel özler.",
+        "href": "/kategori/ucucu-yaglar",
+        "imageUrl": null
+      },
+      {
+        "title": "Cilt Bakım Serisi",
+        "subtitle": "Günlük bakım",
+        "description": "Cildinize özen gösteren dengeli formüller.",
+        "href": "/kategori/cilt-bakimi",
+        "imageUrl": null
+      },
+      {
+        "title": "Saç ve Vücut",
+        "subtitle": "Bütünsel bakım",
+        "description": "Günlük bakımınıza doğanın sakin ritmini taşıyan seçkiler.",
+        "href": "/kategori/vucut-bakimi",
+        "imageUrl": null
+      }
+    ],
+    "popupEnabled": true,
+    "popupTitle": "İlk siparişinize %15 indirim",
+    "popupText": "Yeni ürünlerden ilk siz haberdar olun, özel teklifleri kaçırmayın ve indirimli alışverişe başlayın.",
+    "popupCta": "KAYIT OL",
+    "popupDismiss": "HAYIR, TEŞEKKÜRLER",
+    "popupImageUrl": "/hero-bottle.png",
+    "popupTermsHref": "/icerik/mesafeli-satis",
+    "searchBestsellersTitle": "ÇOK SATANLAR…",
+    "searchBestsellerIds": "",
+    "conscienceTitle": "Özenle alışveriş",
+    "conscienceItems": [
+      {
+        "title": "Hayvan dostu",
+        "text": "Ürünlerimiz hayvanlar üzerinde test edilmez.",
+        "imageUrl": "/conscience/rabbit.svg"
+      },
+      {
+        "title": "Bitkisel içerikler",
+        "text": "Formüllerimizde doğadan gelen içeriklere öncelik veririz.",
+        "imageUrl": "/conscience/leaf.svg"
+      },
+      {
+        "title": "Saf özler",
+        "text": "Aromaterapi seçkimiz özenle seçilmiş özlerden oluşur.",
+        "imageUrl": "/conscience/drop.svg"
+      },
+      {
+        "title": "Sorumlu ambalaj",
+        "text": "Geri dönüştürülebilir ambalaj seçeneklerini destekleriz.",
+        "imageUrl": "/conscience/recycle.svg"
+      },
+      {
+        "title": "İyi yaşam",
+        "text": "Bakımı günlük yaşamın sakin ve değerli bir parçası görürüz.",
+        "imageUrl": "/conscience/heart.svg"
+      }
+    ],
+    "footerAbout": "Doğanın bilgisini modern bakım ritüelleriyle buluşturan, özenli ve duyusal Aromatherapica dünyası.",
+    "footerInstagram": "#instagram",
+    "footerPinterest": "#pinterest",
+    "footerYoutube": "#youtube"
+  }
+}

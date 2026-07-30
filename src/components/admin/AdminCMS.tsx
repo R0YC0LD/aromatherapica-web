@@ -18,6 +18,7 @@ import {
   X,
 } from "lucide-react";
 import { compressImageFile } from "@/lib/cms/image";
+import { getPublishToken, publishStorefrontToGithub } from "@/lib/cms/remote";
 import {
   changeCmsPassword,
   clearCmsData,
@@ -243,8 +244,21 @@ export function AdminCMS() {
       }
     }
 
-    setSaving(false);
-    setFlash("Ürün kaydedildi — vitrinde hemen görünür.");
+    const publishToken = getPublishToken();
+    if (publishToken) {
+      const result = await publishStorefrontToGithub(getCmsState(), publishToken);
+      setSaving(false);
+      if (result.ok) {
+        setFlash("Ürün kaydedildi ve global yayınlandı.");
+      } else {
+        setFlash(`Ürün yerelde kaydedildi; yayın hatası: ${result.error}`);
+      }
+    } else {
+      setSaving(false);
+      setFlash(
+        "Ürün yerelde kaydedildi. Global yayın için Vitrin sekmesine GitHub token ekleyin.",
+      );
+    }
     setEditing(null);
     refreshLocal();
   }
@@ -736,8 +750,9 @@ export function AdminCMS() {
                 Ayarlar: ücretsiz kargo limiti ve limit altı kargo ücreti.
               </div>
               <div className="cms-step" style={{ marginTop: "0.65rem" }}>
-                <strong>Adım 3 — Yedek alın</strong>
-                Ürünler sekmesinden <strong>Yedek al</strong>. Başka cihazda <strong>Yedek yükle</strong> ile taşıyın.
+                <strong>Adım 3 — Global yayın</strong>
+                Vitrin sekmesine GitHub token ekleyip <strong>Kaydet ve global yayınla</strong>.
+                Böylece her cihaz aynı içeriği görür. İsterseniz ayrıca <strong>Yedek al</strong> ile kopya saklayın.
               </div>
 
               <h3 style={{ marginTop: "1.5rem" }}>2) Ticimax kurulumu (adım adım)</h3>

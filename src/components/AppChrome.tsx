@@ -1,6 +1,7 @@
 "use client";
 
 import { CartDrawer } from "@/components/CartDrawer";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { NavHistoryProvider } from "@/components/NavHistoryProvider";
 import { NewsletterPopup } from "@/components/NewsletterPopup";
 import { PageTransition } from "@/components/PageTransition";
@@ -15,17 +16,21 @@ export function AppChrome({ children }: { children: React.ReactNode }) {
   const isAdmin = pathname.startsWith("/admin");
   if (isAdmin) return <>{children}</>;
   return (
-    <NavHistoryProvider>
-      <WishlistProvider>
-        <SiteHeader />
-        <main id="main">
-          <PageTransition>{children}</PageTransition>
-        </main>
-        <SiteFooter />
-        <CartDrawer />
-        <WishlistDock />
-        <NewsletterPopup />
-      </WishlistProvider>
-    </NavHistoryProvider>
+    <ErrorBoundary>
+      <NavHistoryProvider>
+        <WishlistProvider>
+          <SiteHeader />
+          <main id="main">
+            <ErrorBoundary fallbackTitle="İçerik yüklenemedi">
+              <PageTransition>{children}</PageTransition>
+            </ErrorBoundary>
+          </main>
+          <SiteFooter />
+          <CartDrawer />
+          <WishlistDock />
+          <NewsletterPopup />
+        </WishlistProvider>
+      </NavHistoryProvider>
+    </ErrorBoundary>
   );
 }

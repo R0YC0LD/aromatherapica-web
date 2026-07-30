@@ -121,6 +121,26 @@ export function importCmsBackup(json: string) {
   });
 }
 
+/** Replace local CMS with remote/global storefront (all visitors see this). */
+export function applyRemoteCmsState(remote: CmsState) {
+  writeState({
+    version: CMS_VERSION,
+    products: remote.products || {},
+    settings: {
+      ...DEFAULT_CMS_SETTINGS,
+      ...remote.settings,
+      ritualCards:
+        Array.isArray(remote.settings?.ritualCards) && remote.settings.ritualCards.length > 0
+          ? remote.settings.ritualCards
+          : DEFAULT_CMS_SETTINGS.ritualCards,
+      conscienceItems:
+        Array.isArray(remote.settings?.conscienceItems) && remote.settings.conscienceItems.length > 0
+          ? remote.settings.conscienceItems
+          : DEFAULT_CMS_SETTINGS.conscienceItems,
+    },
+  });
+}
+
 export function clearCmsData() {
   localStorage.removeItem(LS_STATE);
   window.dispatchEvent(new CustomEvent("arom-cms-changed"));

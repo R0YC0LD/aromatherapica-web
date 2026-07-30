@@ -92,7 +92,19 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
 
 export function useWishlist() {
   const ctx = useContext(WishlistContext);
-  if (!ctx) throw new Error("useWishlist must be used within WishlistProvider");
+  if (!ctx) {
+    // Never crash the storefront if provider mount order fails
+    return {
+      items: [],
+      count: 0,
+      has: () => false,
+      toggle: () => false,
+      drawerOpen: false,
+      openDrawer: () => undefined,
+      closeDrawer: () => undefined,
+      bursts: [],
+    } satisfies WishlistContextValue;
+  }
   return ctx;
 }
 

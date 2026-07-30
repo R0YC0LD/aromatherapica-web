@@ -9,15 +9,15 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
 
+  // Keep transitions light: no exit unmount race (safer on GitHub Pages SPA).
   return (
-    <AnimatePresence mode="wait" initial={false}>
+    <AnimatePresence initial={false}>
       <motion.div
         key={pathname}
         className="page-transition"
-        initial={{ opacity: 0, y: 14 }}
+        initial={{ opacity: 0.2, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.38, ease: EASE }}
+        transition={{ duration: 0.22, ease: EASE }}
       >
         {children}
       </motion.div>

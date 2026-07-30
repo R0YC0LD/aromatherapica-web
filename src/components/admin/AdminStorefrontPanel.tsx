@@ -3,7 +3,12 @@
 import { FormEvent, useEffect, useState } from "react";
 import { ImagePlus, Save } from "lucide-react";
 import { compressImageFile } from "@/lib/cms/image";
-import { saveCmsSettings } from "@/lib/cms/store";
+import {
+  getPublishToken,
+  publishStorefrontToGithub,
+  setPublishToken,
+} from "@/lib/cms/remote";
+import { getCmsState, saveCmsSettings } from "@/lib/cms/store";
 import type { CmsSettings, ConscienceItemSetting, RitualCardSetting } from "@/lib/cms/types";
 import { withBasePath } from "@/lib/paths";
 
@@ -21,9 +26,12 @@ export function AdminStorefrontPanel({
 }) {
   const [draft, setDraft] = useState<CmsSettings>(settings);
   const [busy, setBusy] = useState(false);
+  const [token, setToken] = useState("");
+  const [publishNote, setPublishNote] = useState<string | null>(null);
 
   useEffect(() => {
     setDraft(settings);
+    setToken(getPublishToken());
   }, [settings]);
 
   function patch(partial: Partial<CmsSettings>) {
@@ -59,10 +67,35 @@ export function AdminStorefrontPanel({
     }
   }
 
-  function onSave(e: FormEvent) {
+  async function onSave(e: FormEvent) {
     e.preventDefault();
-    const next = saveCmsSettings(draft);
-    onSaved(next, "Vitrin ayarları kaydedildi — ana sayfa hemen güncellenir.");
+    setBusy(true);
+    setPublishNote(null);
+    try {
+      setPublishToken(token);
+      const next = saveCmsSettings(draft);
+      const publishToken = token.trim() || getPublishToken();
+      if (publishToken) {
+        const result = await publishStorefrontToGithub(getCmsState(), publishToken);
+        if (result.ok) {
+          onSaved(
+            next,
+            "Kaydedildi ve global yayınlandı — tüm ziyaretçiler bu değişiklikleri görür.",
+          );
+          setPublishNote(`Yayınlandı: ${result.htmlUrl}`);
+        } else {
+          onSaved(next, `Yerelde kaydedildi ama yayın başarısız: ${result.error}`);
+          setPublishNote(result.error);
+        }
+      } else {
+        onSaved(
+          next,
+          "Yerelde kaydedildi. Global yayın için aşağıya GitHub token ekleyip tekrar kaydedin.",
+        );
+      }
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -430,8 +463,25 @@ export function AdminStorefrontPanel({
         </div>
       </div>
 
+      <h3>Global yayın (tüm cihazlar)</h3>
+      <p className="cms-help">
+        GitHub Fine-grained / classic PAT (repo Contents: Read+Write) girin. Kaydetince
+        <code> public/data/storefront.json </code> güncellenir; her ziyaretçi bu dosyayı okur.
+      </p>
+      <div className="cms-field">
+        <label>GitHub publish token</label>
+        <input
+          type="password"
+          value={token}
+          onChange={(e) => setToken(e.target.value)}
+          placeholder="ghp_… veya github_pat_…"
+          autoComplete="off"
+        />
+      </div>
+      {publishNote ? <p className="cms-help">{publishNote}</p> : null}
+
       <button className="cms-btn" type="submit" disabled={busy}>
-        <Save size={16} /> {busy ? "İşleniyor…" : "Vitrini kaydet"}
+        <Save size={16} /> {busy ? "Yayınlanıyor…" : "Kaydet ve global yayınla"}
       </button>
     </form>
   );
