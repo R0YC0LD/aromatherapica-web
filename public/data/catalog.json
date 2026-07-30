@@ -12,13 +12,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/biberiye-ucucu-yagi-15-ml-b0d-48.png",
       "description": "Awe Cemre Lavanta Uçucu Yağı (15 ml), lavanta çiçeklerinin özenle damıtılmasıyla elde edilen, katkısız ve yüksek saflıkta bir uçucu yağdır. Yumuşak ve dengeli aroması, zihinsel rahatlama ve duyusal denge arayanlar için ideal bir deneyim sunar.\nGünlük bakım rutinlerinde, aromaterapi uygulamalarında ya da yaşam alanlarında kullanıldığında sakinlik hissini destekler. Doğadan gelen bu saf öz, modern yaşamın temposuna karşı küçük ama etkili bir mola sunar.",
       "shortDesc": "Awe Cemre Lavanta Uçucu Yağı, lavantanın doğadan gelen sakinleştirici gücünü en saf haliyle sunar. Zihni dinginleştiren aromasıyla günlük ritüellerinize huzurlu bir dokunuş katar.",
       "sku": "1",
       "barcode": "1111",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/lavanta-ucucu-yagi-15-ml-537"
+      "ticimaxUrl": "https://aromatherapica.com/lavanta-ucucu-yagi-15-ml-537",
+      "images": [
+        "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/biberiye-ucucu-yagi-15-ml-b0d-48.png"
+      ]
     },
     {
       "id": 538,
@@ -32,14 +35,17 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/biberiye-ucucu-yagi-15-ml-b0d-48.png",
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/biberiye-ucucu-yagi-15-ml-b0d-48.png",
       "description": "Awe Cemre Biberiye Uçucu Yağı (15 ml), biberiye yapraklarının özenle damıtılmasıyla elde edilen, katkısız ve yüksek saflıkta bir uçucu yağdır. Ferah ve karakteristik aroması, zihinsel berraklık ve enerjik bir atmosfer arayanlar için ideal bir deneyim sunar. Aromaterapi uygulamalarında, bakım ritüellerinde veya yaşam alanlarında kullanıldığında odaklanma hissini destekler. Doğadan gelen bu güçlü öz, günün temposuna taze ve dengeli bir dokunuş ekler.",
       "shortDesc": "Awe Cemre Biberiye Uçucu Yağı, doğanın canlandırıcı enerjisini saf ve güçlü aromasıyla bir araya getirir. Zihni tazeleyen, odaklanmayı destekleyen aromasıyla ritüellerinize canlılık katar.",
       "sku": "2",
       "barcode": "1111",
       "vatRate": 1,
       "ticimaxUrl": "https://aromatherapica.com/biberiye-ucucu-yagi-15-ml-538",
-      "ticimaxSlug": "biberiye-ucucu-yagi-15-ml-538"
+      "ticimaxSlug": "biberiye-ucucu-yagi-15-ml-538",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/biberiye-ucucu-yagi-15-ml-b0d-48.png"
+      ]
     },
     {
       "id": 539,
@@ -59,7 +65,8 @@
       "sku": "3",
       "barcode": "1111",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/hint-yagi-30-ml-539"
+      "ticimaxUrl": "https://aromatherapica.com/hint-yagi-30-ml-539",
+      "images": []
     },
     {
       "id": 540,
@@ -79,7 +86,8 @@
       "sku": "4",
       "barcode": "1111",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/tatli-badem-yagi-100-ml-540"
+      "ticimaxUrl": "https://aromatherapica.com/tatli-badem-yagi-100-ml-540",
+      "images": []
     },
     {
       "id": 541,
@@ -99,7 +107,8 @@
       "sku": "5",
       "barcode": "1111",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/susam-yagi-100-ml-541"
+      "ticimaxUrl": "https://aromatherapica.com/susam-yagi-100-ml-541",
+      "images": []
     },
     {
       "id": 542,
@@ -119,7 +128,8 @@
       "sku": "6",
       "barcode": "1111",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/susam-yagi-15-ml-542"
+      "ticimaxUrl": "https://aromatherapica.com/susam-yagi-15-ml-542",
+      "images": []
     },
     {
       "id": 543,
@@ -139,7 +149,8 @@
       "sku": "7",
       "barcode": "2222",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/hindistan-cevizi-yagi-15-ml-543"
+      "ticimaxUrl": "https://aromatherapica.com/hindistan-cevizi-yagi-15-ml-543",
+      "images": []
     },
     {
       "id": 544,
@@ -159,7 +170,8 @@
       "sku": "8",
       "barcode": "2222",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/corekotu-yagi-15-ml-544"
+      "ticimaxUrl": "https://aromatherapica.com/corekotu-yagi-15-ml-544",
+      "images": []
     },
     {
       "id": 545,
@@ -179,7 +191,8 @@
       "sku": "9",
       "barcode": "2222",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/corekotu-yagi-100-ml-545"
+      "ticimaxUrl": "https://aromatherapica.com/corekotu-yagi-100-ml-545",
+      "images": []
     },
     {
       "id": 546,
@@ -199,7 +212,8 @@
       "sku": "10",
       "barcode": "2222",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/corekotu-yagi-200-ml-546"
+      "ticimaxUrl": "https://aromatherapica.com/corekotu-yagi-200-ml-546",
+      "images": []
     },
     {
       "id": 547,
@@ -219,7 +233,8 @@
       "sku": "11",
       "barcode": "2222",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/corekotu-yagi-250-ml-547"
+      "ticimaxUrl": "https://aromatherapica.com/corekotu-yagi-250-ml-547",
+      "images": []
     },
     {
       "id": 548,
@@ -239,7 +254,8 @@
       "sku": "12",
       "barcode": "2222",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kantaron-yagi-30-ml-548"
+      "ticimaxUrl": "https://aromatherapica.com/kantaron-yagi-30-ml-548",
+      "images": []
     },
     {
       "id": 549,
@@ -260,7 +276,10 @@
       "barcode": "3333",
       "vatRate": 20,
       "ticimaxUrl": "https://aromatherapica.com/jojoba-yagi-15-ml-549",
-      "ticimaxSlug": "jojoba-yagi-15-ml-549"
+      "ticimaxSlug": "jojoba-yagi-15-ml-549",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/jojoba-yagi-15-ml---ac33-.png"
+      ]
     },
     {
       "id": 550,
@@ -280,7 +299,8 @@
       "sku": "14",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kenevir-yagi-100-ml-550"
+      "ticimaxUrl": "https://aromatherapica.com/kenevir-yagi-100-ml-550",
+      "images": []
     },
     {
       "id": 551,
@@ -300,7 +320,8 @@
       "sku": "15",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kekik-yagi-15-ml-551"
+      "ticimaxUrl": "https://aromatherapica.com/kekik-yagi-15-ml-551",
+      "images": []
     },
     {
       "id": 553,
@@ -314,13 +335,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/okaleptus-yagi-15-ml--b-426b.png",
       "description": "Okaliptus yapraklarından elde edilen AWE CEMRE Okaliptus Yağı, kendine özgü ferah ve temiz kokusuyla öne çıkar. Doğal bakım ve aromaterapi rutinlerinde tercih edilir. Masaj yağlarına eklenerek kullanılabilir, ortam kokulandırmada ferahlatıcı bir atmosfer oluşturur. Yoğun yapısı nedeniyle seyreltilerek kullanılması önerilir.",
       "shortDesc": "AWE CEMRE Okaliptus Yağı, ferahlatıcı ve canlandırıcı aromasıyla bakım rutinlerine tazeleyici bir etki katar. Doğal yapısı sayesinde çok amaçlı kullanıma uygundur.",
       "sku": "17",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/okaleptus-yagi-15-ml-553"
+      "ticimaxUrl": "https://aromatherapica.com/okaleptus-yagi-15-ml-553",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/okaleptus-yagi-15-ml--b-426b.png"
+      ]
     },
     {
       "id": 554,
@@ -340,7 +364,8 @@
       "sku": "18",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/nane-yagi-15-ml-554"
+      "ticimaxUrl": "https://aromatherapica.com/nane-yagi-15-ml-554",
+      "images": []
     },
     {
       "id": 555,
@@ -360,7 +385,8 @@
       "sku": "19",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/aci-badem-yagi-15-ml-555"
+      "ticimaxUrl": "https://aromatherapica.com/aci-badem-yagi-15-ml-555",
+      "images": []
     },
     {
       "id": 556,
@@ -380,7 +406,8 @@
       "sku": "20",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/adacayi-yagi-15-ml-556"
+      "ticimaxUrl": "https://aromatherapica.com/adacayi-yagi-15-ml-556",
+      "images": []
     },
     {
       "id": 557,
@@ -394,13 +421,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/amber-yagi-15-ml--e93839.png",
       "description": "Awe Cemre Aloe Vera Yağı, cildin doğal nem dengesini desteklemek ve hassasiyeti yatıştırmak için özenle hazırlanmıştır. Hafif yapısı sayesinde cilt tarafından kolayca emilir ve yağlı bir his bırakmaz. Düzenli kullanımda cildin daha yumuşak, canlı ve dengeli bir görünüme kavuşmasına yardımcı olur. Saç bakımında ise saç derisini rahatlatmaya, saçlara doğal parlaklık ve pürüzsüzlük kazandırmaya destek olur. Günlük cilt ve saç bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Saf Aloe Vera yağı içeriğiyle cilt ve saç için yoğun nemlendirme sağlayan, yatıştırıcı ve dengeleyici bir bakım sunar. Hafif dokusu sayesinde günlük kullanıma uygundur.",
       "sku": "21",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/aloe-vera-yagi-15-ml-557"
+      "ticimaxUrl": "https://aromatherapica.com/aloe-vera-yagi-15-ml-557",
+      "images": [
+        "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/amber-yagi-15-ml--e93839.png"
+      ]
     },
     {
       "id": 558,
@@ -414,14 +444,17 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/amber-yagi-15-ml--e93839.png",
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/amber-yagi-15-ml--e93839.png",
       "description": "Awe Cemre Amber Yağı, cildin bakım ihtiyacını desteklemek ve daha canlı bir görünüm kazanmasına yardımcı olmak amacıyla özenle hazırlanmıştır. Zengin yapısı sayesinde cildi besler, kuruluk hissinin azalmasına katkı sağlar ve cilt yüzeyinde yumuşak bir his bırakır. Düzenli kullanımda cildin daha dengeli ve bakımlı görünmesine yardımcı olur. Masaj uygulamalarında ve günlük bakım rutinlerinde rahatlıkla tercih edilebilir.",
       "shortDesc": "Amber yağının karakteristik ve sıcak yapısıyla cilt bakımında besleyici ve dengeleyici bir bakım sunar. Günlük kullanıma uygun, zengin dokulu bir yağdır.",
       "sku": "22",
       "barcode": "3333",
       "vatRate": 20,
       "ticimaxUrl": "https://aromatherapica.com/amber-yagi-15-ml-558",
-      "ticimaxSlug": "amber-yagi-15-ml-558"
+      "ticimaxSlug": "amber-yagi-15-ml-558",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/amber-yagi-15-ml--e93839.png"
+      ]
     },
     {
       "id": 559,
@@ -435,14 +468,17 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/anason-yagi-15-ml--5-9053.png",
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/anason-yagi-15-ml--5-9053.png",
       "description": "Awe Cemre Anason Yağı, cildi desteklemeye ve bakım rutinine aromatik bir dokunuş katmaya yardımcı olmak amacıyla özenle hazırlanmıştır. Hafif yapısı sayesinde cilt tarafından kolayca emilir ve konforlu bir kullanım sunar. Düzenli kullanımda cildin daha yumuşak ve dengeli bir görünüm kazanmasına katkı sağlar. Masaj uygulamalarında ve kişisel bakım rutinlerinde rahatlıkla tercih edilebilir.",
       "shortDesc": "Anason yağının güçlü ve aromatik yapısıyla cilt bakımında dengeleyici ve rahatlatıcı bir bakım sunar. Günlük kullanım için uygundur",
       "sku": "23",
       "barcode": "3333",
       "vatRate": 20,
       "ticimaxUrl": "https://aromatherapica.com/anason-yagi-15-ml-559",
-      "ticimaxSlug": "anason-yagi-15-ml-559"
+      "ticimaxSlug": "anason-yagi-15-ml-559",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/anason-yagi-15-ml--5-9053.png"
+      ]
     },
     {
       "id": 560,
@@ -456,13 +492,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/ardic-yagi-15-ml--4d-dc6.png",
       "description": "Awe Cemre Ardıç Yağı, cildin daha dengeli ve canlı bir görünüme kavuşmasına yardımcı olmak amacıyla özenle hazırlanmıştır. Cildi arındırmaya destek olan yapısı sayesinde bakım rutinlerinde etkili bir tamamlayıcı olarak tercih edilir. Düzenli kullanımda cilt yüzeyinde ferah ve bakımlı bir his bırakır. Masaj uygulamalarında ve günlük kişisel bakımda güvenle kullanılabilir.",
       "shortDesc": "Ardıç yağının arındırıcı ve dengeleyici yapısıyla cilt bakımında güçlü ve doğal bir destek sunar. Günlük kullanıma uygun, karakteristik bir yağdır.",
       "sku": "24",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/ardic-yagi-15-ml-560"
+      "ticimaxUrl": "https://aromatherapica.com/ardic-yagi-15-ml-560",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/ardic-yagi-15-ml--4d-dc6.png"
+      ]
     },
     {
       "id": 561,
@@ -483,7 +522,10 @@
       "barcode": "3333",
       "vatRate": 20,
       "ticimaxUrl": "https://aromatherapica.com/argan-yagi-30-ml-561",
-      "ticimaxSlug": "argan-yagi-30-ml-561"
+      "ticimaxSlug": "argan-yagi-30-ml-561",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/argan-yagi-30-ml--691910.png"
+      ]
     },
     {
       "id": 562,
@@ -497,13 +539,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/at-kestanesi-yagi-30-ml--9027bb.png",
       "description": "Awe Cemre At Kestanesi Yağı, cilt bakım rutinlerinde destekleyici bir yağ olarak özenle hazırlanmıştır. Düzenli kullanımda cildin daha rahat ve dengeli hissetmesine yardımcı olur. Masaj uygulamalarında tercih edilen yapısı sayesinde cilt yüzeyinde yumuşak bir his bırakır. Günlük bakım ve masaj rutinlerinde güvenle kullanılabilir.",
       "shortDesc": "At kestanesi yağının destekleyici ve rahatlatıcı yapısıyla cilt bakımında dengeleyici ve konfor sağlayan bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "26",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/at-kestanesi-yagi-30-ml-562"
+      "ticimaxUrl": "https://aromatherapica.com/at-kestanesi-yagi-30-ml-562",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/at-kestanesi-yagi-30-ml--9027bb.png"
+      ]
     },
     {
       "id": 563,
@@ -523,7 +568,8 @@
       "sku": "27",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/avokado-yagi-15-ml-563"
+      "ticimaxUrl": "https://aromatherapica.com/avokado-yagi-15-ml-563",
+      "images": []
     },
     {
       "id": 564,
@@ -537,13 +583,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/aynisefa-yagi-15-ml--e8-ee7.png",
       "description": "Awe Cemre Avokado Yağı, cildi beslemeye ve nem dengesini desteklemeye yardımcı olmak amacıyla özenle hazırlanmıştır. Zengin dokusu sayesinde ciltte yumuşak ve konforlu bir his bırakır. Saç bakımında ise saç tellerini beslemeye, daha canlı ve parlak bir görünüm kazandırmaya destek olur. Günlük cilt ve saç bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Avokado yağının yoğun besleyici yapısıyla cilt ve saç bakımında derinlemesine bakım ve yumuşaklık sağlar. Günlük kullanıma uygundur.",
       "sku": "28",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/aynisefa-yagi-15-ml-564"
+      "ticimaxUrl": "https://aromatherapica.com/aynisefa-yagi-15-ml-564",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/aynisefa-yagi-15-ml--e8-ee7.png"
+      ]
     },
     {
       "id": 565,
@@ -557,14 +606,17 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/babassu-yagi-15-ml--ab-f72.png",
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/babassu-yagi-15-ml--ab-f72.png",
       "description": "Awe Cemre Babassu Yağı, cildi nemlendirmeye ve bakım rutinini desteklemeye yardımcı olmak amacıyla özenle hazırlanmıştır. Hafif dokusu sayesinde cilt tarafından kolayca emilir ve yağlı bir his bırakmaz. Düzenli kullanımda cildin daha pürüzsüz ve dengeli bir görünüme kavuşmasına katkı sağlar. Saç bakımında ise saç tellerini yumuşatmaya ve doğal parlaklık kazandırmaya destek olur. Günlük cilt ve saç bakımında güvenle tercih edilebilir.",
       "shortDesc": "Babassu yağının hafif ve besleyici yapısıyla cilt ve saç bakımında yumuşaklık ve dengeli nemlendirme sağlar. Günlük kullanıma uygundur.",
       "sku": "29",
       "barcode": "3333",
       "vatRate": 20,
       "ticimaxUrl": "https://aromatherapica.com/babassu-yagi-15-ml-565",
-      "ticimaxSlug": "babassu-yagi-15-ml-565"
+      "ticimaxSlug": "babassu-yagi-15-ml-565",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/babassu-yagi-15-ml--ab-f72.png"
+      ]
     },
     {
       "id": 566,
@@ -584,7 +636,8 @@
       "sku": "30",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/badem-yagi-15-ml-566"
+      "ticimaxUrl": "https://aromatherapica.com/badem-yagi-15-ml-566",
+      "images": []
     },
     {
       "id": 567,
@@ -598,13 +651,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/bergamot-yagi-15-ml--de-edc.png",
       "description": "Awe Cemre Bergamot Yağı, cilt bakım rutinine ferahlatıcı bir etki kazandırmak için özenle hazırlanmıştır. Hafif yapısı sayesinde cilt tarafından kolayca emilir ve konforlu bir kullanım sunar. Düzenli kullanımda cildin daha dengeli ve canlı bir görünüme kavuşmasına yardımcı olur. Masaj uygulamalarında ve kişisel bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Bergamot yağının ferahlatıcı ve dengeleyici aromasıyla cilt bakımına taze ve arındırıcı bir dokunuş sunar. Günlük kullanıma uygundur.",
       "sku": "31",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/bergamot-yagi-15-ml-567"
+      "ticimaxUrl": "https://aromatherapica.com/bergamot-yagi-15-ml-567",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/bergamot-yagi-15-ml--de-edc.png"
+      ]
     },
     {
       "id": 568,
@@ -624,7 +680,8 @@
       "sku": "32",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/bugday-ozu-yagi-15-ml-568"
+      "ticimaxUrl": "https://aromatherapica.com/bugday-ozu-yagi-15-ml-568",
+      "images": []
     },
     {
       "id": 569,
@@ -644,7 +701,8 @@
       "sku": "33",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/ceviz-yagi-15-ml-569"
+      "ticimaxUrl": "https://aromatherapica.com/ceviz-yagi-15-ml-569",
+      "images": []
     },
     {
       "id": 570,
@@ -664,7 +722,8 @@
       "sku": "34",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/ceviz-yagi-250-ml-570"
+      "ticimaxUrl": "https://aromatherapica.com/ceviz-yagi-250-ml-570",
+      "images": []
     },
     {
       "id": 571,
@@ -678,13 +737,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/cam-terebentin-yagi-15-ml---002f-.png",
       "description": "Awe Cemre Çam Terebentin Yağı, cilt ve saç bakımında destekleyici bir yağ olarak özenle hazırlanmıştır. Arındırıcı yapısı sayesinde bakım rutinlerinde tamamlayıcı bir rol üstlenir. Düzenli kullanımda cilt ve saçta ferah ve bakımlı bir his bırakmaya yardımcı olur. Masaj uygulamalarında ve kişisel bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Çam terebentin yağının güçlü ve karakteristik yapısıyla bakım rutinlerinde arındırıcı ve dengeleyici bir destek sunar. Günlük kullanıma uygundur.",
       "sku": "35",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/cam-terebentin-yagi-15-ml-571"
+      "ticimaxUrl": "https://aromatherapica.com/cam-terebentin-yagi-15-ml-571",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/cam-terebentin-yagi-15-ml---002f-.png"
+      ]
     },
     {
       "id": 572,
@@ -698,13 +760,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/cay-agaci-yagi-15-ml---4f92-.png",
       "description": "Awe Cemre Çay Ağacı Yağı, cilt bakım rutinlerinde arındırıcı ve dengeleyici bir bakım sunmak amacıyla özenle hazırlanmıştır. Hafif yapısı sayesinde cilt tarafından kolayca emilir ve konforlu bir kullanım sağlar. Düzenli kullanımda cildin daha dengeli ve temiz bir görünüm kazanmasına yardımcı olur. Günlük cilt bakımında ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Çay ağacı yağının arındırıcı ve dengeleyici yapısıyla cilt bakımında net ve etkili bir destek sunar. Günlük kullanıma uygundur.",
       "sku": "36",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/cay-agaci-yagi-15-ml-572"
+      "ticimaxUrl": "https://aromatherapica.com/cay-agaci-yagi-15-ml-572",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/cay-agaci-yagi-15-ml---4f92-.png"
+      ]
     },
     {
       "id": 573,
@@ -718,13 +783,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/cin-nanesi-yagi-15-ml--6-ee80.png",
       "description": "Awe Cemre Çin Nanesi Yağı, bakım rutinlerine ferahlık ve canlılık kazandırmak amacıyla özenle hazırlanmıştır. Serinletici hissiyle ciltte ferah bir etki bırakır ve konforlu bir kullanım sunar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda cilt yüzeyinde taze ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Çin nanesi yağının ferahlatıcı ve canlandırıcı yapısıyla bakım rutinlerinde taze ve dengeleyici bir etki sunar. Günlük kullanıma uygundur.",
       "sku": "37",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/cin-nanesi-yagi-15-ml-573"
+      "ticimaxUrl": "https://aromatherapica.com/cin-nanesi-yagi-15-ml-573",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/cin-nanesi-yagi-15-ml--6-ee80.png"
+      ]
     },
     {
       "id": 574,
@@ -738,13 +806,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/defne-yapragi-yagi-15-ml--2eeb3-.png",
       "description": "Awe Cemre Defne Yaprağı Yağı, cilt ve saç bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Besleyici yapısı sayesinde ciltte konforlu bir his bırakmaya yardımcı olur. Saç bakımında ise saç derisini desteklemeye ve saçlara daha canlı bir görünüm kazandırmaya katkı sağlar. Günlük bakım ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Defne yaprağı yağının karakteristik ve destekleyici yapısıyla cilt ve saç bakımında dengeli ve doğal bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "38",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/defne-yapragi-yagi-15-ml-574"
+      "ticimaxUrl": "https://aromatherapica.com/defne-yapragi-yagi-15-ml-574",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/defne-yapragi-yagi-15-ml--2eeb3-.png"
+      ]
     },
     {
       "id": 575,
@@ -758,14 +829,17 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/egza-yagi-15-ml-090-6d.png",
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/egza-yagi-15-ml-090-6d.png",
       "description": "Awe Cemre Egza Yağı, cilt bakım rutinlerinde dengeleyici bir yağ olarak özenle hazırlanmıştır. Hafif yapısı sayesinde cilt tarafından kolayca emilir ve yumuşak bir his bırakır. Düzenli kullanımda cildin daha bakımlı ve dengeli bir görünüme kavuşmasına yardımcı olur. Günlük cilt bakımında ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Egza yağının dengeli ve destekleyici yapısıyla cilt bakımında nazik ve konforlu bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "39",
       "barcode": "3333",
       "vatRate": 20,
       "ticimaxUrl": "https://aromatherapica.com/egza-yagi-15-ml-575",
-      "ticimaxSlug": "egza-yagi-15-ml-575"
+      "ticimaxSlug": "egza-yagi-15-ml-575",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/egza-yagi-15-ml-090-6d.png"
+      ]
     },
     {
       "id": 576,
@@ -779,14 +853,17 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/elma-cekirdegi-yagi-15-ml--9953-7.png",
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/elma-cekirdegi-yagi-15-ml--9953-7.png",
       "description": "Awe Cemre Elma Çekirdeği Yağı, cildi beslemeye ve bakım rutinini desteklemeye yardımcı olmak amacıyla özenle hazırlanmıştır. Hafif dokusu sayesinde cilt tarafından kolayca emilir ve konforlu bir kullanım sağlar. Düzenli kullanımda cildin daha yumuşak, canlı ve bakımlı bir görünüme kavuşmasına katkı sağlar. Günlük cilt bakımında ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Elma çekirdeği yağının hafif ve besleyici yapısıyla cilt bakımında yumuşaklık ve dengeli nemlendirme sunar. Günlük kullanıma uygundur.",
       "sku": "40",
       "barcode": "3333",
       "vatRate": 20,
       "ticimaxUrl": "https://aromatherapica.com/elma-cekirdegi-yagi-15-ml-576",
-      "ticimaxSlug": "elma-cekirdegi-yagi-15-ml-576"
+      "ticimaxSlug": "elma-cekirdegi-yagi-15-ml-576",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/elma-cekirdegi-yagi-15-ml--9953-7.png"
+      ]
     },
     {
       "id": 577,
@@ -806,7 +883,8 @@
       "sku": "41",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/feslegen-yagi-15-ml-577"
+      "ticimaxUrl": "https://aromatherapica.com/feslegen-yagi-15-ml-577",
+      "images": []
     },
     {
       "id": 578,
@@ -820,13 +898,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/gece-mumu-yagi-15-ml--f4-471.png",
       "description": "Awe Cemre Gece Mumu Yağı, cildin bakım ihtiyacını desteklemek amacıyla özenle hazırlanmıştır. Zengin yapısı sayesinde cildin daha yumuşak ve dengeli bir görünüme kavuşmasına yardımcı olur. Düzenli kullanımda ciltte konforlu ve bakımlı bir his bırakır. Günlük cilt bakım rutinlerinde ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Gece mumu yağının zengin ve destekleyici yapısıyla cilt bakımında yoğun besleyici ve dengeleyici bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "42",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/gece-mumu-yagi-15-ml-578"
+      "ticimaxUrl": "https://aromatherapica.com/gece-mumu-yagi-15-ml-578",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/gece-mumu-yagi-15-ml--f4-471.png"
+      ]
     },
     {
       "id": 579,
@@ -846,7 +927,8 @@
       "sku": "43",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/gliserin-bitkisel-15-ml-579"
+      "ticimaxUrl": "https://aromatherapica.com/gliserin-bitkisel-15-ml-579",
+      "images": []
     },
     {
       "id": 580,
@@ -860,14 +942,17 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/greyfurt-cekirdegi-yagi-15-ml--4256-b.png",
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/greyfurt-cekirdegi-yagi-15-ml--4256-b.png",
       "description": "Awe Cemre Greyfurt Çekirdeği Yağı, cilt bakım rutinlerinde dengeleyici ve ferahlatıcı bir destek sağlamak amacıyla özenle hazırlanmıştır. Hafif yapısı sayesinde cilt tarafından kolayca emilir ve konforlu bir kullanım sunar. Düzenli kullanımda cildin daha canlı ve dengeli bir görünüme kavuşmasına yardımcı olur. Günlük cilt bakımında ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Greyfurt çekirdeği yağının ferahlatıcı ve dengeleyici yapısıyla cilt bakımında arındırıcı ve tazeleyici bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "44",
       "barcode": "3333",
       "vatRate": 20,
       "ticimaxUrl": "https://aromatherapica.com/greyfurt-cekirdegi-yagi-15-ml-580",
-      "ticimaxSlug": "greyfurt-cekirdegi-yagi-15-ml-580"
+      "ticimaxSlug": "greyfurt-cekirdegi-yagi-15-ml-580",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/greyfurt-cekirdegi-yagi-15-ml--4256-b.png"
+      ]
     },
     {
       "id": 581,
@@ -881,13 +966,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/gunluk-yagi-5-ml--1b04f-.png",
       "description": "Awe Cemre Günlük Yağı, cilt bakım rutinlerinde arındırıcı ve dengeleyici bir destek sağlamak amacıyla özenle hazırlanmıştır. Hafif ve konforlu yapısı sayesinde ciltte ferah bir his bırakır. Düzenli kullanımda cildin daha dengeli ve bakımlı bir görünüme kavuşmasına yardımcı olur. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Günlük yağının karakteristik ve arındırıcı yapısıyla cilt bakımında dengeli ve doğal bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "45",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/gunluk-yagi-5-ml-581"
+      "ticimaxUrl": "https://aromatherapica.com/gunluk-yagi-5-ml-581",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/gunluk-yagi-5-ml--1b04f-.png"
+      ]
     },
     {
       "id": 582,
@@ -901,13 +989,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/hashas-yagi-15-ml---49f0-.png",
       "description": "Awe Cemre Günlük Yağı, cilt bakım rutinlerinde arındırıcı ve dengeleyici bir destek sağlamak amacıyla özenle hazırlanmıştır. Hafif ve konforlu yapısı sayesinde ciltte ferah bir his bırakır. Düzenli kullanımda cildin daha dengeli ve bakımlı bir görünüme kavuşmasına yardımcı olur. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Günlük yağının karakteristik ve arındırıcı yapısıyla cilt bakımında dengeli ve doğal bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "46",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/hashas-yagi-15-ml-582"
+      "ticimaxUrl": "https://aromatherapica.com/hashas-yagi-15-ml-582",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/hashas-yagi-15-ml---49f0-.png"
+      ]
     },
     {
       "id": 583,
@@ -927,7 +1018,8 @@
       "sku": "47",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/havuc-tohumu-yagi-15-ml-583"
+      "ticimaxUrl": "https://aromatherapica.com/havuc-tohumu-yagi-15-ml-583",
+      "images": []
     },
     {
       "id": 584,
@@ -941,13 +1033,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/hodan-yagi-15-ml-9-a2f0.png",
       "description": "Awe Cemre Hodan Yağı, cildin bakım ihtiyacını desteklemek amacıyla özenle hazırlanmıştır. Zengin yapısı sayesinde cildin daha yumuşak ve dengeli bir his kazanmasına yardımcı olur. Düzenli kullanımda cildin daha bakımlı ve canlı bir görünüme kavuşmasına katkı sağlar. Günlük cilt bakım rutinlerinde ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Hodan yağının zengin ve destekleyici yapısıyla cilt bakımında dengeli nemlendirme ve konfor sunar. Günlük kullanıma uygundur.",
       "sku": "48",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/hodan-yagi-15-ml-584"
+      "ticimaxUrl": "https://aromatherapica.com/hodan-yagi-15-ml-584",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/hodan-yagi-15-ml-9-a2f0.png"
+      ]
     },
     {
       "id": 585,
@@ -961,13 +1056,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/ihlamur-yagi-15-ml--e3a611.png",
       "description": "Awe Cemre Ihlamur Yağı, cilt bakım rutinlerinde yatıştırıcı ve destekleyici bir yağ olarak özenle hazırlanmıştır. Hafif ve konforlu yapısı sayesinde ciltte yumuşak bir his bırakır. Düzenli kullanımda cildin daha dengeli ve bakımlı bir görünüme kavuşmasına yardımcı olur. Günlük cilt bakımında ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Ihlamur yağının nazik ve yatıştırıcı yapısıyla cilt bakımında yumuşak ve dengeli bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "49",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/ihlamur-yagi-15-ml-585"
+      "ticimaxUrl": "https://aromatherapica.com/ihlamur-yagi-15-ml-585",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/ihlamur-yagi-15-ml--e3a611.png"
+      ]
     },
     {
       "id": 586,
@@ -987,7 +1085,8 @@
       "sku": "50",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/isirgan-tohumu-yagi-15-ml-586"
+      "ticimaxUrl": "https://aromatherapica.com/isirgan-tohumu-yagi-15-ml-586",
+      "images": []
     },
     {
       "id": 587,
@@ -1001,13 +1100,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/itir-yagi-15-ml--4ce8-a.png",
       "description": "Awe Cemre Itır Çiçeği Yağı, cilt bakım rutinlerine aromatik bir denge kazandırmak amacıyla özenle hazırlanmıştır. Hafif yapısı sayesinde cilt tarafından kolayca emilir ve konforlu bir kullanım sunar. Düzenli kullanımda cildin daha dengeli ve bakımlı bir görünüme kavuşmasına yardımcı olur. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Itır çiçeği yağının zarif ve aromatik yapısıyla cilt bakımında dengeleyici ve rahatlatıcı bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "51",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/itir-yagi-15-ml-587"
+      "ticimaxUrl": "https://aromatherapica.com/itir-yagi-15-ml-587",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/itir-yagi-15-ml--4ce8-a.png"
+      ]
     },
     {
       "id": 588,
@@ -1021,13 +1123,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/igde-cicegi-yagi-15-ml-6c6-c7.png",
       "description": "Awe Cemre İğde Çiçeği Yağı, cildi beslemeye ve bakım rutinini desteklemeye yardımcı olmak amacıyla özenle hazırlanmıştır. Hafif ve konforlu yapısı sayesinde ciltte yumuşak bir his bırakır. Düzenli kullanımda cildin daha bakımlı ve dengeli bir görünüme kavuşmasına katkı sağlar. Günlük cilt bakımında ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "İğde çiçeği yağının nazik ve besleyici yapısıyla cilt bakımında yumuşaklık ve denge sunar. Günlük kullanıma uygundur.",
       "sku": "52",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/igde-cicegi-yagi-15-ml-588"
+      "ticimaxUrl": "https://aromatherapica.com/igde-cicegi-yagi-15-ml-588",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/igde-cicegi-yagi-15-ml-6c6-c7.png"
+      ]
     },
     {
       "id": 589,
@@ -1041,13 +1146,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/incir-cekirdegi-yagi-30-ml--6489c6.png",
       "description": "Awe Cemre İncir Çekirdeği Yağı, cildi beslemeye ve bakım rutinini desteklemeye yardımcı olmak amacıyla özenle hazırlanmıştır. Zengin yapısı sayesinde cildin daha yumuşak, pürüzsüz ve canlı bir görünüme kavuşmasına katkı sağlar. Düzenli kullanımda ciltte konforlu ve bakımlı bir his bırakır. Günlük cilt bakım rutinlerinde ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "İncir çekirdeği yağının değerli ve besleyici yapısıyla cilt bakımında yoğun bakım ve yumuşaklık sunar. Günlük kullanıma uygundur.",
       "sku": "53",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/incir-cekirdegi-yagi-30-ml-589"
+      "ticimaxUrl": "https://aromatherapica.com/incir-cekirdegi-yagi-30-ml-589",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/incir-cekirdegi-yagi-30-ml--6489c6.png"
+      ]
     },
     {
       "id": 590,
@@ -1067,7 +1175,8 @@
       "sku": "54",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kabak-cekirdegi-yagi-15-ml-590"
+      "ticimaxUrl": "https://aromatherapica.com/kabak-cekirdegi-yagi-15-ml-590",
+      "images": []
     },
     {
       "id": 591,
@@ -1081,13 +1190,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kabak-cekirdegi-yagi-100-ml---de059.png",
       "description": "Awe Cemre Kabak Çekirdeği Yağı, cilt ve saç bakım rutinlerinde sürdürülebilir kullanım için özenle hazırlanmıştır. Zengin yapısı sayesinde cildin daha yumuşak ve bakımlı bir görünüme kavuşmasına yardımcı olur. Saç bakımında ise saç tellerini beslemeye ve daha canlı bir görünüm kazandırmaya katkı sağlar. Günlük bakım ve masaj uygulamalarında rahatlıkla tercih edilebilir.",
       "shortDesc": "Kabak çekirdeği yağının besleyici ve dengeleyici yapısıyla cilt ve saç bakımında uzun süreli ve etkili bir bakım sunar. Düzenli kullanıma uygundur.",
       "sku": "55",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kabak-cekirdegi-yagi-100-ml-591"
+      "ticimaxUrl": "https://aromatherapica.com/kabak-cekirdegi-yagi-100-ml-591",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kabak-cekirdegi-yagi-100-ml---de059.png"
+      ]
     },
     {
       "id": 592,
@@ -1101,13 +1213,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kabak-cekirdegi-yagi-250-ml--cd-66b.jpeg",
       "description": "Awe Cemre Kabak Çekirdeği Yağı, cilt ve saç bakım rutinlerinde sürdürülebilir kullanım için özenle hazırlanmıştır. Zengin yapısı sayesinde cildin daha yumuşak ve bakımlı bir görünüme kavuşmasına yardımcı olur. Saç bakımında ise saç tellerini beslemeye ve daha canlı bir görünüm kazandırmaya katkı sağlar. Günlük bakım ve masaj uygulamalarında rahatlıkla tercih edilebilir.",
       "shortDesc": "Kabak çekirdeği yağının besleyici ve dengeleyici yapısıyla cilt ve saç bakımında uzun süreli ve etkili bir bakım sunar. Düzenli kullanıma uygundur.",
       "sku": "56",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kabak-cekirdegi-yagi-250-ml-592"
+      "ticimaxUrl": "https://aromatherapica.com/kabak-cekirdegi-yagi-250-ml-592",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kabak-cekirdegi-yagi-250-ml--cd-66b.jpeg"
+      ]
     },
     {
       "id": 593,
@@ -1121,13 +1236,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kakao-yagi-15-ml--ca-fc9.png",
       "description": "Awe Cemre Kakao Yağı, cildi beslemeye ve nem dengesini desteklemeye yardımcı olmak amacıyla özenle hazırlanmıştır. Zengin yapısı sayesinde ciltte yumuşak ve konforlu bir his bırakır. Düzenli kullanımda cildin daha pürüzsüz ve bakımlı bir görünüme kavuşmasına katkı sağlar. Günlük cilt bakım rutinlerinde ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Kakao yağının yoğun besleyici ve yumuşatıcı yapısıyla cilt bakımında derinlemesine bakım ve pürüzsüzlük sunar. Günlük kullanıma uygundur.",
       "sku": "57",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/kakao-yagi-15-ml-593"
+      "ticimaxUrl": "https://aromatherapica.com/kakao-yagi-15-ml-593",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kakao-yagi-15-ml--ca-fc9.png"
+      ]
     },
     {
       "id": 594,
@@ -1141,13 +1259,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/kaktus-cicegi-gunes-kremi-50spf-uvauvb-4b-7dc.jpeg",
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kaktus-cicegi-yagi-15-ml-81-b57.png",
       "description": "Awe Cemre Kaktüs Çiçeği Yağı, cildin nem dengesini desteklemek ve daha canlı bir görünüm kazandırmak amacıyla özenle hazırlanmıştır. Hafif dokusu sayesinde cilt tarafından kolayca emilir ve konforlu bir kullanım sunar. Düzenli kullanımda cildin daha pürüzsüz, yumuşak ve bakımlı bir görünüme kavuşmasına yardımcı olur. Günlük cilt bakım rutinlerinde ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Kaktüs çiçeği yağının hafif ve değerli yapısıyla cilt bakımında yoğun nemlendirme ve canlılık sunar. Günlük kullanıma uygundur.",
       "sku": "58",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/kaktus-cicegi-yagi-15-ml-594"
+      "ticimaxUrl": "https://aromatherapica.com/kaktus-cicegi-yagi-15-ml-594",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kaktus-cicegi-yagi-15-ml-81-b57.png"
+      ]
     },
     {
       "id": 595,
@@ -1161,13 +1282,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kamelya-yagi-15-ml-716-ba.png",
       "description": "Awe Cemre Kamelya Yağı, cilt ve saç bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Hafif ve ipeksi dokusu sayesinde cilt tarafından kolayca emilir ve yağlı bir his bırakmaz. Ciltte yumuşak ve pürüzsüz bir his oluşmasına yardımcı olurken, saç bakımında saç tellerini beslemeye ve doğal parlaklık kazandırmaya destek olur. Günlük bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Kamelya yağının ipeksi ve besleyici yapısıyla cilt ve saç bakımında yumuşaklık, parlaklık ve dengeli bakım sunar. Günlük kullanıma uygundur.",
       "sku": "59",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/kamelya-yagi-15-ml-595"
+      "ticimaxUrl": "https://aromatherapica.com/kamelya-yagi-15-ml-595",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kamelya-yagi-15-ml-716-ba.png"
+      ]
     },
     {
       "id": 596,
@@ -1181,13 +1305,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kantaron-yagi-30-ml--3-a764.png",
       "description": "Awe Cemre Kantaron Yağı, cildi beslemeye ve bakım rutinini desteklemeye yardımcı olmak amacıyla özenle hazırlanmıştır. Zengin yapısı sayesinde ciltte yumuşak ve konforlu bir his bırakır. Düzenli kullanımda cildin daha bakımlı ve dengeli bir görünüme kavuşmasına katkı sağlar. Günlük cilt bakım rutinlerinde ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Kantaron yağının besleyici ve destekleyici yapısıyla cilt bakımında yoğun ve onarıcı bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "60",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kantaron-yagi-30-ml-596-596"
+      "ticimaxUrl": "https://aromatherapica.com/kantaron-yagi-30-ml-596",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kantaron-yagi-30-ml--3-a764.png"
+      ]
     },
     {
       "id": 597,
@@ -1207,7 +1334,8 @@
       "sku": "61",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kantaron-yagi-250-ml-597"
+      "ticimaxUrl": "https://aromatherapica.com/kantaron-yagi-250-ml-597",
+      "images": []
     },
     {
       "id": 598,
@@ -1221,13 +1349,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/karabasotu-yagi-15-ml-eb79e-.png",
       "description": "Awe Cemre Karabaşotu Yağı, cilt bakım rutinlerinde dengeleyici ve rahatlatıcı bir destek sağlamak amacıyla özenle hazırlanmıştır. Hafif ve konforlu yapısı sayesinde ciltte yumuşak bir his bırakır. Düzenli kullanımda cildin daha dengeli ve bakımlı bir görünüme kavuşmasına yardımcı olur. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Karabaş otu yağının aromatik ve dengeleyici yapısıyla cilt bakımında sakinleştirici ve destekleyici bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "62",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/karabasotu-yagi-15-ml-598"
+      "ticimaxUrl": "https://aromatherapica.com/karabasotu-yagi-15-ml-598",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/karabasotu-yagi-15-ml-eb79e-.png"
+      ]
     },
     {
       "id": 599,
@@ -1247,7 +1378,8 @@
       "sku": "63",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/karabiber-yagi-15-ml-599"
+      "ticimaxUrl": "https://aromatherapica.com/karabiber-yagi-15-ml-599",
+      "images": []
     },
     {
       "id": 600,
@@ -1261,13 +1393,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/karanfil-yagi-15-ml---a5dd-.png",
       "description": "Awe Cemre Karanfil Yağı, cilt bakım rutinlerinde destekleyici ve aromatik bir yağ olarak özenle hazırlanmıştır. Karakteristik yapısı sayesinde bakım uygulamalarına belirgin bir etki katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda ciltte ferah ve bakımlı bir his bırakmaya yardımcı olur.",
       "shortDesc": "Karanfil yağının güçlü ve aromatik yapısıyla bakım rutinlerinde arındırıcı ve canlandırıcı bir destek sunar. Günlük kullanıma uygundur.",
       "sku": "64",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/karanfil-yagi-15-ml-600"
+      "ticimaxUrl": "https://aromatherapica.com/karanfil-yagi-15-ml-600",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/karanfil-yagi-15-ml---a5dd-.png"
+      ]
     },
     {
       "id": 601,
@@ -1281,13 +1416,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kavun-cekirdegi-yagi-15-ml---bb4b-.png",
       "description": "Awe Cemre Kavun Çekirdeği Yağı, cildi beslemeye ve bakım rutinini desteklemeye yardımcı olmak amacıyla özenle hazırlanmıştır. Hafif dokusu sayesinde cilt tarafından kolayca emilir ve konforlu bir kullanım sunar. Düzenli kullanımda cildin daha yumuşak, pürüzsüz ve bakımlı bir görünüme kavuşmasına katkı sağlar. Günlük cilt bakımında ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Kavun çekirdeği yağının hafif ve besleyici yapısıyla cilt bakımında yumuşaklık ve dengeli nemlendirme sunar. Günlük kullanıma uygundur.",
       "sku": "65",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kavun-cekirdegi-yagi-15-ml-601"
+      "ticimaxUrl": "https://aromatherapica.com/kavun-cekirdegi-yagi-15-ml-601",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kavun-cekirdegi-yagi-15-ml---bb4b-.png"
+      ]
     },
     {
       "id": 602,
@@ -1307,7 +1445,8 @@
       "sku": "66",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kayisi-cekirdegi-yagi-15-ml-602"
+      "ticimaxUrl": "https://aromatherapica.com/kayisi-cekirdegi-yagi-15-ml-602",
+      "images": []
     },
     {
       "id": 603,
@@ -1321,13 +1460,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kenevir-tohumu-yagi-200-ml--6a80d9.png",
       "description": "Awe Cemre Kenevir Tohumu Yağı, cilt ve saç bakım rutinlerinde sürdürülebilir kullanım için özenle hazırlanmıştır. Zengin yapısı sayesinde cildin daha yumuşak ve dengeli bir görünüme kavuşmasına yardımcı olur. Saç bakımında ise saç tellerini beslemeye, daha canlı ve bakımlı bir görünüm kazandırmaya destek olur. Günlük bakım ve masaj uygulamalarında rahatlıkla tercih edilebilir.",
       "shortDesc": "Kenevir tohumu yağının dengeli ve besleyici yapısıyla cilt ve saç bakımında uzun süreli, güçlü ve doğal bir bakım sunar. Düzenli kullanıma uygundur.",
       "sku": "67",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kenevir-tohumu-yagi-200-ml-603"
+      "ticimaxUrl": "https://aromatherapica.com/kenevir-tohumu-yagi-200-ml-603",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kenevir-tohumu-yagi-200-ml--6a80d9.png"
+      ]
     },
     {
       "id": 604,
@@ -1347,7 +1489,8 @@
       "sku": "68",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/keten-tohumu-yagi-15-ml-604"
+      "ticimaxUrl": "https://aromatherapica.com/keten-tohumu-yagi-15-ml-604",
+      "images": []
     },
     {
       "id": 605,
@@ -1367,7 +1510,8 @@
       "sku": "69",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/keten-tohumu-yagi-250-ml-605"
+      "ticimaxUrl": "https://aromatherapica.com/keten-tohumu-yagi-250-ml-605",
+      "images": []
     },
     {
       "id": 606,
@@ -1381,13 +1525,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kimyon-yagi-15-ml--4f80-8.png",
       "description": "Awe Cemre Kimyon Yağı, cilt bakım rutinlerinde aromatik ve destekleyici bir yağ olarak özenle hazırlanmıştır. Kendine özgü yapısı sayesinde bakım uygulamalarına karakter katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda ciltte konforlu ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Kimyon yağının karakteristik ve aromatik yapısıyla bakım rutinlerinde dengeleyici ve destekleyici bir etki sunar. Günlük kullanıma uygundur.",
       "sku": "70",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/kimyon-yagi-15-ml-606"
+      "ticimaxUrl": "https://aromatherapica.com/kimyon-yagi-15-ml-606",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kimyon-yagi-15-ml--4f80-8.png"
+      ]
     },
     {
       "id": 607,
@@ -1401,13 +1548,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kisnis-yagi-15-ml---9d1d-.png",
       "description": "Awe Cemre Kişniş Yağı, cilt bakım rutinlerine aromatik bir denge kazandırmak amacıyla özenle hazırlanmıştır. Hafif ve konforlu yapısı sayesinde ciltte yumuşak bir his bırakır. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda cilt yüzeyinde bakımlı ve dengeli bir görünüm oluşmasına yardımcı olur.",
       "shortDesc": "Kişniş yağının aromatik ve dengeleyici yapısıyla bakım rutinlerinde yumuşak ve dengeli bir etki sunar. Günlük kullanıma uygundur.",
       "sku": "71",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/kisnis-yagi-15-ml-607"
+      "ticimaxUrl": "https://aromatherapica.com/kisnis-yagi-15-ml-607",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kisnis-yagi-15-ml---9d1d-.png"
+      ]
     },
     {
       "id": 608,
@@ -1421,13 +1571,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kukui-yagi-15-ml--81-89b.png",
       "description": "Awe Cemre Kukui Yağı, cildi beslemeye ve nem dengesini desteklemeye yardımcı olmak amacıyla özenle hazırlanmıştır. Hafif dokusu sayesinde cilt tarafından kolayca emilir ve yağlı bir his bırakmaz. Düzenli kullanımda cildin daha yumuşak, pürüzsüz ve bakımlı bir görünüme kavuşmasına katkı sağlar. Günlük cilt bakım rutinlerinde ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Kukui yağının hafif ve besleyici yapısıyla cilt bakımında yoğun nemlendirme ve yumuşaklık sunar. Günlük kullanıma uygundur.",
       "sku": "72",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/kukui-yagi-15-ml-608"
+      "ticimaxUrl": "https://aromatherapica.com/kukui-yagi-15-ml-608",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kukui-yagi-15-ml--81-89b.png"
+      ]
     },
     {
       "id": 609,
@@ -1441,13 +1594,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kusburnu-yagi-15-ml--9f2470.png",
       "description": "Awe Cemre Kuşburnu Yağı, cildi beslemeye ve bakım rutinini desteklemeye yardımcı olmak amacıyla özenle hazırlanmıştır. Hafif yapısı sayesinde cilt tarafından kolayca emilir ve konforlu bir kullanım sunar. Düzenli kullanımda cildin daha canlı, yumuşak ve bakımlı bir görünüme kavuşmasına katkı sağlar. Günlük cilt bakımında ve masaj uygulamalarında güvenle tercih edilebilir.",
       "shortDesc": "Kuşburnu yağının besleyici ve destekleyici yapısıyla cilt bakımında canlılık ve dengeli bakım sunar. Günlük kullanıma uygundur.",
       "sku": "73",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/kusburnu-yagi-15-ml-609"
+      "ticimaxUrl": "https://aromatherapica.com/kusburnu-yagi-15-ml-609",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kusburnu-yagi-15-ml--9f2470.png"
+      ]
     },
     {
       "id": 610,
@@ -1461,13 +1617,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kucuk-hindistan-cevizi-yagi-15-ml-a080c-.png",
       "description": "Awe Cemre Küçük Hindistan Cevizi Yağı, cilt bakım rutinlerinde aromatik ve destekleyici bir yağ olarak özenle hazırlanmıştır. Kendine özgü yapısı sayesinde bakım uygulamalarına karakter katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda ciltte konforlu ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Küçük hindistan cevizi yağının karakteristik ve aromatik yapısıyla bakım rutinlerinde sıcak ve destekleyici bir etki sunar. Günlük kullanıma uygundur.",
       "sku": "74",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/kucuk-hindistan-cevizi-yagi-15-ml-610"
+      "ticimaxUrl": "https://aromatherapica.com/kucuk-hindistan-cevizi-yagi-15-ml-610",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kucuk-hindistan-cevizi-yagi-15-ml-a080c-.png"
+      ]
     },
     {
       "id": 611,
@@ -1481,13 +1640,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/leylak-yagi-15-ml--58d892.png",
       "description": "Awe Cemre Leylak Yağı, cilt bakım rutinlerine zarif ve aromatik bir denge kazandırmak amacıyla özenle hazırlanmıştır. Hafif ve konforlu yapısı sayesinde ciltte yumuşak bir his bırakır. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda cilt yüzeyinde bakımlı ve ferah bir his oluşmasına yardımcı olur.",
       "shortDesc": "Leylak yağının zarif ve aromatik yapısıyla cilt bakımında yumuşak, dengeli ve ferahlatıcı bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "75",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/leylak-yagi-15-ml-611"
+      "ticimaxUrl": "https://aromatherapica.com/leylak-yagi-15-ml-611",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/leylak-yagi-15-ml--58d892.png"
+      ]
     },
     {
       "id": 612,
@@ -1501,13 +1663,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/limon-yagi-15-ml--561d45.png",
       "description": "Awe Cemre Limon Yağı, cilt bakım rutinlerine ferahlatıcı bir etki kazandırmak amacıyla özenle hazırlanmıştır. Hafif ve aromatik yapısı sayesinde ciltte taze bir his bırakır. Düzenli kullanımda cildin daha canlı ve dengeli bir görünüme kavuşmasına yardımcı olur. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Limon yağının ferahlatıcı ve arındırıcı yapısıyla cilt bakımında taze, dengeli ve canlı bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "76",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/limon-yagi-15-ml-612"
+      "ticimaxUrl": "https://aromatherapica.com/limon-yagi-15-ml-612",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/limon-yagi-15-ml--561d45.png"
+      ]
     },
     {
       "id": 613,
@@ -1521,13 +1686,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/mavi-anemon-cicegi-yagi-15-ml--4cb-d4.png",
       "description": "Awe Cemre Mavi Anemon Çiçeği Yağı, cilt bakım rutinlerine zarif ve aromatik bir denge kazandırmak amacıyla özenle hazırlanmıştır. Hafif ve konforlu yapısı sayesinde ciltte yumuşak bir his bırakır. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda cilt yüzeyinde bakımlı ve dengeli bir his oluşmasına yardımcı olur.",
       "shortDesc": "Mavi anemon çiçeği yağının zarif ve aromatik yapısıyla cilt bakımında yumuşak, dengeli ve sakinleştirici bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "77",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/mavi-anemon-cicegi-yagi-15-ml-613"
+      "ticimaxUrl": "https://aromatherapica.com/mavi-anemon-cicegi-yagi-15-ml-613",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/mavi-anemon-cicegi-yagi-15-ml--4cb-d4.png"
+      ]
     },
     {
       "id": 614,
@@ -1541,13 +1709,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/maydanoz-tohumu-yagi-15-ml--10395e.png",
       "description": "Awe Cemre Maydanoz Tohumu Yağı, cilt bakım rutinlerinde aromatik ve destekleyici bir yağ olarak özenle hazırlanmıştır. Kendine özgü yapısı sayesinde bakım uygulamalarına karakter katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda ciltte konforlu ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Maydanoz tohumu yağının karakteristik ve aromatik yapısıyla cilt bakımında dengeleyici ve destekleyici bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "78",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/maydanoz-tohumu-yagi-15-ml-614"
+      "ticimaxUrl": "https://aromatherapica.com/maydanoz-tohumu-yagi-15-ml-614",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/maydanoz-tohumu-yagi-15-ml--10395e.png"
+      ]
     },
     {
       "id": 615,
@@ -1561,13 +1732,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/melisa-yagi-15-ml--e8c9-4.png",
       "description": "Awe Cemre Melisa Yağı, cilt bakım rutinlerine sakinleştirici ve aromatik bir denge kazandırmak amacıyla özenle hazırlanmıştır. Hafif ve konforlu yapısı sayesinde ciltte yumuşak bir his bırakır. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda cilt yüzeyinde dengeli ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Melisa yağının nazik ve aromatik yapısıyla cilt bakımında yatıştırıcı ve dengeleyici bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "79",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/melisa-yagi-15-ml-615"
+      "ticimaxUrl": "https://aromatherapica.com/melisa-yagi-15-ml-615",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/melisa-yagi-15-ml--e8c9-4.png"
+      ]
     },
     {
       "id": 616,
@@ -1581,13 +1755,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/menekse-yagi-15-ml--7e-b4c.png",
       "description": "Awe Cemre Menekşe Yağı, cilt bakım rutinlerine zarif ve aromatik bir denge kazandırmak amacıyla özenle hazırlanmıştır. Hafif ve konforlu yapısı sayesinde ciltte yumuşak bir his bırakır. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda cilt yüzeyinde bakımlı ve dengeli bir his oluşmasına yardımcı olur.",
       "shortDesc": "Menekşe yağının zarif ve aromatik yapısıyla cilt bakımında yumuşak, dengeli ve sakinleştirici bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "80",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/menekse-yagi-15-ml-616"
+      "ticimaxUrl": "https://aromatherapica.com/menekse-yagi-15-ml-616",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/menekse-yagi-15-ml--7e-b4c.png"
+      ]
     },
     {
       "id": 617,
@@ -1607,7 +1784,8 @@
       "sku": "81",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/mentol-yagi-15-ml-617"
+      "ticimaxUrl": "https://aromatherapica.com/mentol-yagi-15-ml-617",
+      "images": []
     },
     {
       "id": 618,
@@ -1621,13 +1799,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/mersin-yagi-15-ml--30c-fd.png",
       "description": "Awe Cemre Mersin Yağı, cilt bakım rutinlerinde ferahlatıcı ve dengeleyici bir destek sağlamak amacıyla özenle hazırlanmıştır. Hafif ve aromatik yapısı sayesinde ciltte taze bir his bırakır. Düzenli kullanımda cildin daha dengeli ve bakımlı bir görünüme kavuşmasına yardımcı olur. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Mersin yağının ferah ve dengeleyici yapısıyla cilt bakımında arındırıcı ve tazeleyici bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "82",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/mersin-yagi-15-ml-618"
+      "ticimaxUrl": "https://aromatherapica.com/mersin-yagi-15-ml-618",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/mersin-yagi-15-ml--30c-fd.png"
+      ]
     },
     {
       "id": 619,
@@ -1641,13 +1822,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/nane-yagi-15-ml--688c6b.png",
       "description": "Awe Cemre Nane Yağı, bakım rutinlerine ferahlık ve canlılık kazandırmak amacıyla özenle hazırlanmıştır. Serinletici hissiyle ciltte taze bir etki bırakır. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda ciltte konforlu ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Nane yağının ferahlatıcı ve canlandırıcı yapısıyla cilt bakımında taze ve dengeleyici bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "83",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/nane-yagi-15-ml-619-619"
+      "ticimaxUrl": "https://aromatherapica.com/nane-yagi-15-ml-619",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/nane-yagi-15-ml--688c6b.png"
+      ]
     },
     {
       "id": 620,
@@ -1667,7 +1851,8 @@
       "sku": "84",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/nar-cekirdegi-yagi-15-ml-620"
+      "ticimaxUrl": "https://aromatherapica.com/nar-cekirdegi-yagi-15-ml-620",
+      "images": []
     },
     {
       "id": 621,
@@ -1681,13 +1866,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/nioli-yagi-15-ml--e0a-4d.png",
       "description": "Awe Cemre Nioli Yağı, cilt bakım rutinlerinde arındırıcı ve dengeleyici bir destek sağlamak amacıyla özenle hazırlanmıştır. Hafif ve konforlu yapısı sayesinde ciltte ferah bir his uyandırır. Düzenli kullanımda cildin daha dengeli ve bakımlı bir görünüme kavuşmasına yardımcı olur. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde güvenle tercih edilebilir.",
       "shortDesc": "Nioli yağının arındırıcı ve dengeleyici yapısıyla cilt bakımında ferah ve destekleyici bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "85",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/nioli-yagi-15-ml-621"
+      "ticimaxUrl": "https://aromatherapica.com/nioli-yagi-15-ml-621",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/nioli-yagi-15-ml--e0a-4d.png"
+      ]
     },
     {
       "id": 622,
@@ -1701,13 +1889,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/okaliptus-yagi-15-ml-a-9a47.png",
       "description": "Awe Cemre Okaliptüs Yağı, karakteristik ve ferah aromasıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Aromatik yapısı sayesinde bakım uygulamalarına tazelik katar ve ciltte ferah bir his bırakır. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda ciltte temiz, canlı ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Okaliptüs yağının güçlü ve ferahlatıcı yapısıyla cilt bakımında arındırıcı, tazeleyici ve dengeli bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "86",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/okaliptus-yagi-15-ml-622"
+      "ticimaxUrl": "https://aromatherapica.com/okaliptus-yagi-15-ml-622",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/okaliptus-yagi-15-ml-a-9a47.png"
+      ]
     },
     {
       "id": 623,
@@ -1721,13 +1912,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/olmez-cicek-yagi-5-ml--15ae-.png",
       "description": "Awe Cemre Ölmez Çiçek Yağı, yüksek değerli içeriğiyle cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Zengin ve karakteristik yapısı sayesinde cilt bakımına güçlü bir dokunuş katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda cildin daha dengeli, bakımlı ve canlı bir görünüme kavuşmasına yardımcı olur.",
       "shortDesc": "Ölmez çiçek yağının nadir ve değerli yapısıyla cilt bakımında yoğun, dengeli ve premium bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "87",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/olmez-cicek-yagi-5-ml-623"
+      "ticimaxUrl": "https://aromatherapica.com/olmez-cicek-yagi-5-ml-623",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/olmez-cicek-yagi-5-ml--15ae-.png"
+      ]
     },
     {
       "id": 624,
@@ -1741,13 +1935,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/paculi-yagi-15-ml-2a5-ca.png",
       "description": "Awe Cemre Paçuli Yağı, aromatik ve güçlü yapısıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Kendine özgü kokusu sayesinde bakım uygulamalarına karakter katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda ciltte sıcak, dengeli ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Paçuli yağının yoğun ve karakteristik aromasıyla cilt bakımında derin, dengeli ve güçlü bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "88",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/paculi-yagi-15-ml-624"
+      "ticimaxUrl": "https://aromatherapica.com/paculi-yagi-15-ml-624",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/paculi-yagi-15-ml-2a5-ca.png"
+      ]
     },
     {
       "id": 625,
@@ -1767,7 +1964,8 @@
       "sku": "89",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/papatya-yagi-15-ml-625"
+      "ticimaxUrl": "https://aromatherapica.com/papatya-yagi-15-ml-625",
+      "images": []
     },
     {
       "id": 626,
@@ -1781,13 +1979,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/pelesenk-yagi-15-ml-6-b02e.png",
       "description": "Awe Cemre Pelesenk Yağı, aromatik ve yoğun yapısıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Kendine özgü karakteri sayesinde bakım uygulamalarına derinlik katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda ciltte sıcak, dengeli ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Pelesenk yağının sıcak ve karakteristik yapısıyla cilt bakımında dengeli, destekleyici ve konforlu bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "90",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/pelesenk-yagi-15-ml-626"
+      "ticimaxUrl": "https://aromatherapica.com/pelesenk-yagi-15-ml-626",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/pelesenk-yagi-15-ml-6-b02e.png"
+      ]
     },
     {
       "id": 627,
@@ -1807,7 +2008,8 @@
       "sku": "91",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/pirinci-kepegi-yagi-15-ml-627"
+      "ticimaxUrl": "https://aromatherapica.com/pirinci-kepegi-yagi-15-ml-627",
+      "images": []
     },
     {
       "id": 628,
@@ -1821,13 +2023,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/portakal-yagi-15-ml---42e3-.png",
       "description": "Awe Cemre Portakal Yağı, aromatik ve ferahlatıcı yapısıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Hafif ve canlı aroması sayesinde bakım uygulamalarına tazelik katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda ciltte canlı, dengeli ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Portakal yağının ferah ve canlandırıcı yapısıyla cilt bakımında taze, dengeli ve enerjik bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "92",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/portakal-yagi-15-ml-628"
+      "ticimaxUrl": "https://aromatherapica.com/portakal-yagi-15-ml-628",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/portakal-yagi-15-ml---42e3-.png"
+      ]
     },
     {
       "id": 629,
@@ -1841,13 +2046,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/rezene-yagi-15-ml--3a4-4c.png",
       "description": "Awe Cemre Rezene Yağı, cilt bakım rutinlerinde aromatik ve dengeleyici bir destek sağlamak amacıyla özenle hazırlanmıştır. Kendine özgü yapısı sayesinde bakım uygulamalarına nazik bir karakter katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda ciltte dengeli, bakımlı ve rahatlatıcı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Rezene yağının aromatik ve dengeleyici yapısıyla cilt bakımında yumuşak, destekleyici ve konforlu bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "93",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/rezene-yagi-15-ml-629"
+      "ticimaxUrl": "https://aromatherapica.com/rezene-yagi-15-ml-629",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/rezene-yagi-15-ml--3a4-4c.png"
+      ]
     },
     {
       "id": 630,
@@ -1867,7 +2075,8 @@
       "sku": "94",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/safran-yagi-15-ml-630"
+      "ticimaxUrl": "https://aromatherapica.com/safran-yagi-15-ml-630",
+      "images": []
     },
     {
       "id": 631,
@@ -1881,13 +2090,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/sandal-agaci-yagi-15-ml--4bd92f.png",
       "description": "Awe Cemre Sandal Ağacı Yağı, karakteristik ve zengin aromasıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Yoğun ve dengeli yapısı sayesinde bakım uygulamalarına derinlik katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda ciltte sakin, dengeli ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Sandal ağacı yağının sıcak, derin ve aromatik yapısıyla cilt bakımında dengeli, sakinleştirici ve premium bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "95",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/sandal-agaci-yagi-15-ml-631"
+      "ticimaxUrl": "https://aromatherapica.com/sandal-agaci-yagi-15-ml-631",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/sandal-agaci-yagi-15-ml--4bd92f.png"
+      ]
     },
     {
       "id": 632,
@@ -1907,7 +2119,8 @@
       "sku": "96",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/sardunya-yagi-15-ml-632"
+      "ticimaxUrl": "https://aromatherapica.com/sardunya-yagi-15-ml-632",
+      "images": []
     },
     {
       "id": 633,
@@ -1921,13 +2134,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/sarimsak-yagi-15-ml--238a4b.png",
       "description": "Awe Cemre Sarımsak Yağı, kendine özgü aromatik yapısıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Yoğun karakteri sayesinde bakım uygulamalarına güçlü bir dokunuş katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda ciltte dengeli, bakımlı ve konforlu bir his oluşmasına yardımcı olur.",
       "shortDesc": "Sarımsak yağının güçlü ve karakteristik yapısıyla cilt bakımında destekleyici, dengeli ve yoğun bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "97",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/sarimsak-yagi-15-ml-633"
+      "ticimaxUrl": "https://aromatherapica.com/sarimsak-yagi-15-ml-633",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/sarimsak-yagi-15-ml--238a4b.png"
+      ]
     },
     {
       "id": 634,
@@ -1941,13 +2157,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/sedir-agaci-yagi-15-ml--5f-4cb.png",
       "description": "Awe Cemre Sedir Ağacı Yağı, güçlü ve aromatik yapısıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Odunsu ve dengeli karakteri sayesinde bakım uygulamalarına derinlik katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda ciltte dengeli, sakin ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Sedir ağacı yağının derin ve karakteristik aromasıyla cilt bakımında dengeli, arındırıcı ve sakinleştirici bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "98",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/sedir-agaci-yagi-15-ml-634"
+      "ticimaxUrl": "https://aromatherapica.com/sedir-agaci-yagi-15-ml-634",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/sedir-agaci-yagi-15-ml--5f-4cb.png"
+      ]
     },
     {
       "id": 635,
@@ -1961,13 +2180,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/susam-yagi-15-ml-c9-bdd.png",
       "description": "Awe Cemre Susam Yağı, cildi beslemeye ve bakım rutinini desteklemeye yardımcı olmak amacıyla özenle hazırlanmıştır. Zengin dokusu sayesinde ciltte yumuşak ve konforlu bir his bırakır. Masaj uygulamalarında ve günlük cilt bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda cildin daha bakımlı, dengeli ve canlı bir görünüme kavuşmasına yardımcı olur.",
       "shortDesc": "Susam yağının zengin ve besleyici yapısıyla cilt bakımında yumuşaklık, denge ve yoğun bakım sunar. Günlük kullanıma uygundur.",
       "sku": "99",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/susam-yagi-15-ml-635-635"
+      "ticimaxUrl": "https://aromatherapica.com/susam-yagi-15-ml-635",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/susam-yagi-15-ml-c9-bdd.png"
+      ]
     },
     {
       "id": 636,
@@ -1987,7 +2209,8 @@
       "sku": "100",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/susam-yagi-100-ml-636-636"
+      "ticimaxUrl": "https://aromatherapica.com/susam-yagi-100-ml-636",
+      "images": []
     },
     {
       "id": 637,
@@ -2007,7 +2230,8 @@
       "sku": "101",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/seftali-cekirdegi-yagi-15ml-637"
+      "ticimaxUrl": "https://aromatherapica.com/seftali-cekirdegi-yagi-15ml-637",
+      "images": []
     },
     {
       "id": 638,
@@ -2027,7 +2251,8 @@
       "sku": "102",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/tamanu-yagi-15ml-638"
+      "ticimaxUrl": "https://aromatherapica.com/tamanu-yagi-15ml-638",
+      "images": []
     },
     {
       "id": 639,
@@ -2041,13 +2266,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/tarcin-yagi-15ml--4faa-.png",
       "description": "Awe Cemre Tarçın Yağı, yoğun ve aromatik yapısıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Kendine özgü sıcak aroması sayesinde bakım uygulamalarına güçlü bir karakter katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda ciltte dengeli, canlı ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Tarçın yağının sıcak ve karakteristik yapısıyla cilt bakımında canlandırıcı, destekleyici ve dengeli bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "103",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/tarcin-yagi-15ml-639"
+      "ticimaxUrl": "https://aromatherapica.com/tarcin-yagi-15ml-639",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/tarcin-yagi-15ml--4faa-.png"
+      ]
     },
     {
       "id": 640,
@@ -2067,7 +2295,10 @@
       "sku": "104",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/uzum-cekirdegi-yagi-30ml-640"
+      "ticimaxUrl": "https://aromatherapica.com/uzum-cekirdegi-yagi-30ml-640",
+      "images": [
+        "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/uzum-cekirdegi-matrixyl-3000-anti-agin-ddc-91.png"
+      ]
     },
     {
       "id": 641,
@@ -2081,13 +2312,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/vanilya-yagi-15ml-8eb1-7.png",
       "description": "Awe Cemre Vanilya Yağı, karakteristik ve yumuşak aromasıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Tatlı ve dengeli yapısı sayesinde bakım uygulamalarına sıcak bir dokunuş katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda ciltte yumuşak, dengeli ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Vanilya yağının sıcak ve zarif aromasıyla cilt bakımında yumuşak, dengeli ve konforlu bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "105",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/vanilya-yagi-15ml-641"
+      "ticimaxUrl": "https://aromatherapica.com/vanilya-yagi-15ml-641",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/vanilya-yagi-15ml-8eb1-7.png"
+      ]
     },
     {
       "id": 642,
@@ -2101,13 +2335,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/vetiver-yagi-15ml-4-df38.png",
       "description": "Awe Cemre Vetiver Yağı, yoğun ve aromatik yapısıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Topraksı ve dengeli karakteri sayesinde bakım uygulamalarına derinlik katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda ciltte sakin, dengeli ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Vetiver yağının derin, topraksı ve karakteristik aromasıyla cilt bakımında dengeli, sakinleştirici ve premium bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "106",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/vetiver-yagi-15ml-642"
+      "ticimaxUrl": "https://aromatherapica.com/vetiver-yagi-15ml-642",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/vetiver-yagi-15ml-4-df38.png"
+      ]
     },
     {
       "id": 643,
@@ -2121,13 +2358,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/yasemin-yagi-5ml-dd3e61.png",
       "description": "Awe Cemre Yasemin Yağı, yüksek aromatik değeri ve zarif yapısıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Çiçeksi ve karakteristik aroması sayesinde bakım uygulamalarına sofistike bir dokunuş katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda ciltte dengeli, yumuşak ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Yasemin yağının zarif, yoğun ve çiçeksi aromasıyla cilt bakımında lüks, dengeli ve premium bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "107",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/yasemin-yagi-5ml-643"
+      "ticimaxUrl": "https://aromatherapica.com/yasemin-yagi-5ml-643",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/yasemin-yagi-5ml-dd3e61.png"
+      ]
     },
     {
       "id": 644,
@@ -2141,13 +2381,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/ylang-ylang-yagi-15ml-fe9-a3.png",
       "description": "Awe Cemre Ylang Ylang Yağı, karakteristik ve yoğun çiçeksi aromasıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Dengeli yapısı sayesinde bakım uygulamalarına zarif ve rahatlatıcı bir dokunuş katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda ciltte yumuşak, dengeli ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Ylang ylang yağının egzotik ve çiçeksi aromasıyla cilt bakımında dengeli, yumuşak ve rahatlatıcı bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "108",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/ylang-ylang-yagi-15ml-644"
+      "ticimaxUrl": "https://aromatherapica.com/ylang-ylang-yagi-15ml-644",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/ylang-ylang-yagi-15ml-fe9-a3.png"
+      ]
     },
     {
       "id": 645,
@@ -2161,13 +2404,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/zambak-tohumu-yagi-15ml-3-f676.png",
       "description": "Awe Cemre Zambak Tohumu Yağı, cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Hafif ve dengeli yapısı sayesinde ciltte konforlu bir his bırakır. Masaj uygulamalarında ve günlük cilt bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda cildin daha yumuşak, dengeli ve bakımlı bir görünüme kavuşmasına yardımcı olur.",
       "shortDesc": "Zambak tohumu yağının zarif ve besleyici yapısıyla cilt bakımında yumuşaklık, denge ve konfor sunar. Günlük kullanıma uygundur.",
       "sku": "109",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/zambak-tohumu-yagi-15ml-645"
+      "ticimaxUrl": "https://aromatherapica.com/zambak-tohumu-yagi-15ml-645",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/zambak-tohumu-yagi-15ml-3-f676.png"
+      ]
     },
     {
       "id": 646,
@@ -2187,7 +2433,8 @@
       "sku": "110",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/zencefil-yagi-5ml-646"
+      "ticimaxUrl": "https://aromatherapica.com/zencefil-yagi-5ml-646",
+      "images": []
     },
     {
       "id": 647,
@@ -2201,13 +2448,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/zencefil-yagi-15ml-cec00d.png",
       "description": "Awe Cemre Zencefil Yağı, yoğun ve karakteristik aromasıyla cilt bakım rutinlerini desteklemek amacıyla özenle hazırlanmıştır. Isıtıcı ve aromatik yapısı sayesinde bakım uygulamalarına güçlü bir etki katar. Masaj uygulamalarında ve günlük kişisel bakım rutinlerinde tercih edilebilir. Düzenli kullanımda ciltte canlı, dengeli ve bakımlı bir his oluşmasına yardımcı olur.",
       "shortDesc": "Zencefil yağının sıcak ve canlandırıcı yapısıyla cilt bakımında destekleyici, dengeli ve enerjik bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "111",
       "barcode": "3333",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/zencefil-yagi-15ml-647"
+      "ticimaxUrl": "https://aromatherapica.com/zencefil-yagi-15ml-647",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/zencefil-yagi-15ml-cec00d.png"
+      ]
     },
     {
       "id": 648,
@@ -2221,13 +2471,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/zeytin-yagi-naturel-sizma-erken-hasat--d4adee.png",
       "description": "Awe Cemre Zeytin Yağı Natürel Sızma (Erken Hasat), özenle seçilmiş zeytinlerden elde edilerek cilt bakım rutinlerini desteklemek amacıyla hazırlanmıştır. Zengin ve saf yapısı sayesinde cildi beslemeye ve yumuşaklık kazandırmaya yardımcı olur. Masaj uygulamalarında ve günlük cilt bakım rutinlerinde rahatlıkla tercih edilebilir. Düzenli kullanımda cildin daha canlı, bakımlı ve dengeli bir görünüme kavuşmasına katkı sağlar.",
       "shortDesc": "Erken hasat natürel sızma zeytin yağının saf ve zengin yapısıyla cilt bakımında yoğun besleyici, dengeli ve doğal bir bakım sunar. Günlük kullanıma uygundur.",
       "sku": "112",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/zeytin-yagi-naturel-sizma-erken-hasat-250ml-648"
+      "ticimaxUrl": "https://aromatherapica.com/zeytin-yagi-naturel-sizma-erken-hasat-250ml-648",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/zeytin-yagi-naturel-sizma-erken-hasat--d4adee.png"
+      ]
     },
     {
       "id": 649,
@@ -2247,7 +2500,8 @@
       "sku": "113",
       "barcode": "3333",
       "vatRate": 1,
-      "ticimaxUrl": "https://aromatherapica.com/zeytin-yagi-naturel-sizma-erken-hasat-500ml-649"
+      "ticimaxUrl": "https://aromatherapica.com/zeytin-yagi-naturel-sizma-erken-hasat-500ml-649",
+      "images": []
     },
     {
       "id": 650,
@@ -2261,13 +2515,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/jojoba-badem-hacimlendirici-sampuan-40-ff25-4.png",
       "description": "AWE Cemre Jojoba & Badem Hacimlendirici Şampuan, ince telli ve hacim kaybı yaşayan saçlar için özel olarak geliştirilmiştir. Jojoba yağı saç derisinin doğal dengesini desteklerken, badem yağı saç tellerini besleyerek daha dolgun ve canlı bir görünüm kazandırır.\nNazik temizleme yapısı sayesinde saçı kurutmadan arındırır, saç köklerini ağırlaştırmadan hacim hissi oluşturur. Düzenli kullanımda saçlar daha güçlü, daha parlak ve daha hacimli bir yapıya kavuşur. Günlük kullanıma uygundur ve tüm saç tipleriyle uyum sağlar.",
       "shortDesc": "Saçı ağırlaştırmadan temizleyen, hacim ve canlılık kazandıran bitkisel içerikli bakım şampuanı. Jojoba ve badem yağının dengeli etkisiyle saçlar daha dolgun, daha güçlü ve daha sağlıklı görünür.",
       "sku": "114",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/jojoba-badem-hacimlendirici-sampuan-400ml-650"
+      "ticimaxUrl": "https://aromatherapica.com/jojoba-badem-hacimlendirici-sampuan-400ml-650",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/jojoba-badem-hacimlendirici-sampuan-40-ff25-4.png"
+      ]
     },
     {
       "id": 651,
@@ -2281,13 +2538,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/calendula-babassu-nemlendirici-sampuan-65416d.png",
       "description": "AWE Cemre Calendula & Babassu Nemlendirici Şampuan, kepek ve kaşıntıya eğilimli hassas saç derileri için özel olarak formüle edilmiştir. Calendula özü saç derisini yatıştırmaya ve rahatlatmaya yardımcı olurken, Babassu yağı yoğun nem desteği sağlayarak kuruluk kaynaklı pullanma ve gerginlik hissini azaltır.\nNazik temizleme yapısı sayesinde saç derisini tahriş etmeden arındırır, nem bariyerini destekler. Düzenli kullanımda saç derisi daha dengeli bir yapıya kavuşur, saçlar daha yumuşak, parlak ve sağlıklı görünür. Günlük kullanıma uygundur ve tüm saç tipleriyle uyumludur.",
       "shortDesc": "Saç derisini nazikçe temizlerken nem dengesini koruyan, kepek ve kaşıntı oluşumunu azaltmaya yardımcı bakım şampuanı. Calendula ve Babassu yağı ile saç derisini yatıştırır, saçlara yumuşaklık ve konfor kazandırır.",
       "sku": "115",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/calendula-babassu-nemlendirici-sampuan-400ml-651"
+      "ticimaxUrl": "https://aromatherapica.com/calendula-babassu-nemlendirici-sampuan-400ml-651",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/calendula-babassu-nemlendirici-sampuan-65416d.png"
+      ]
     },
     {
       "id": 652,
@@ -2301,13 +2561,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/isirgan-sarimsak-dokulme-karsiti-sampu-9-2de3.png",
       "description": "AWE Cemre Isırgan & Sarımsak Dökülme Karşıtı Şampuan, saç dökülmesine eğilimli saçlar için özel olarak geliştirilmiştir. Isırgan özü saç köklerini beslemeye ve saç derisini dengelemeye yardımcı olurken, sarımsak özü saç tellerinin güçlenmesini destekler.\nNazik temizleme yapısı sayesinde saç derisini kurutmadan arındırır, saç köklerini ağırlaştırmadan bakım sağlar. Düzenli kullanımda saç dökülmesinin azalmasına yardımcı olur, saçların daha güçlü, daha dolgun ve sağlıklı uzamasını destekler. Günlük kullanıma uygundur ve tüm saç tipleriyle uyumludur.",
       "shortDesc": "Saç köklerini güçlendirmeye yardımcı, dökülme karşıtı bakım sunan bitkisel içerikli şampuan. Isırgan ve sarımsak özlerinin destekleyici etkisiyle saçlar daha güçlü, daha canlı ve daha dirençli bir görünüm kazanır.",
       "sku": "116",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/isirgan-sarimsak-dokulme-karsiti-sampuan-400ml-652"
+      "ticimaxUrl": "https://aromatherapica.com/isirgan-sarimsak-dokulme-karsiti-sampuan-400ml-652",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/isirgan-sarimsak-dokulme-karsiti-sampu-9-2de3.png"
+      ]
     },
     {
       "id": 653,
@@ -2321,13 +2584,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/cay-agaci-kil-ozlu-arindirici-sampuan--7ab8-3.png",
       "description": "AWE Cemre Çay Ağacı & Kil Özlü Arındırıcı Şampuan, yağlanmaya eğilimli saç ve saç derisi için özel olarak formüle edilmiştir. Çay ağacı özü saç derisini arındırmaya ve ferahlatmaya yardımcı olurken, kil özleri fazla sebumu dengelemeye destek sağlar.\nNazik ama etkili temizleme yapısı sayesinde saç derisini kurutmadan arındırır, saçların daha uzun süre temiz ve hacimli kalmasına yardımcı olur. Düzenli kullanımda saçlar daha hafif, daha canlı ve daha dengeli bir görünüme kavuşur. Günlük kullanıma uygundur ve yağlı saç tipleriyle uyumludur.",
       "shortDesc": "Yağlı saç ve saç derisini derinlemesine arındırmaya yardımcı, dengeleyici bakım sunan bitkisel içerikli şampuan. Çay ağacı ve kil özleriyle saç derisini ferahlatır, saçların daha temiz ve hafif kalmasını destekler.",
       "sku": "117",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/cay-agaci-kil-ozlu-arindirici-sampuan-400ml-653"
+      "ticimaxUrl": "https://aromatherapica.com/cay-agaci-kil-ozlu-arindirici-sampuan-400ml-653",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/cay-agaci-kil-ozlu-arindirici-sampuan--7ab8-3.png"
+      ]
     },
     {
       "id": 654,
@@ -2341,13 +2607,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/papatya-sampuani-400ml--0615-4.png",
       "description": "AWE Cemre Papatya Şampuanı, saçları nazikçe arındırırken doğal parlaklığını desteklemek için özel olarak geliştirilmiştir. Papatya özü saçların daha yumuşak, canlı ve bakımlı görünmesine yardımcı olurken, saç derisini kurutmadan temizlik sağlar.\nHafif ve dengeli temizleme yapısı sayesinde saçları ağırlaştırmaz, günlük kullanımda saçların doğal dengesini korumaya destek olur. Düzenli kullanımda saçlar daha parlak, daha yumuşak ve sağlıklı bir görünüme kavuşur. Tüm saç tipleriyle uyumludur.",
       "shortDesc": "Saçı nazikçe temizlerken aydınlık ve yumuşak bir görünüm kazandırmaya yardımcı papatya özlü bakım şampuanı. Günlük kullanıma uygun formülüyle saçlara hafiflik ve canlılık sunar.",
       "sku": "118",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/papatya-sampuani-400ml-654"
+      "ticimaxUrl": "https://aromatherapica.com/papatya-sampuani-400ml-654",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/papatya-sampuani-400ml--0615-4.png"
+      ]
     },
     {
       "id": 655,
@@ -2367,7 +2636,10 @@
       "sku": "119",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/uzum-cekirdegi-sampuani-400ml-655"
+      "ticimaxUrl": "https://aromatherapica.com/uzum-cekirdegi-sampuani-400ml-655",
+      "images": [
+        "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/uzum-cekirdegi-matrixyl-3000-anti-agin-ddc-91.png"
+      ]
     },
     {
       "id": 656,
@@ -2387,7 +2659,8 @@
       "sku": "120",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/hassas-sac-derisi-bakim-sampuani-250ml-656"
+      "ticimaxUrl": "https://aromatherapica.com/hassas-sac-derisi-bakim-sampuani-250ml-656",
+      "images": []
     },
     {
       "id": 657,
@@ -2407,7 +2680,8 @@
       "sku": "121",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/hacimlendirici-canlandirici-bakim-sampuani-400ml-657"
+      "ticimaxUrl": "https://aromatherapica.com/hacimlendirici-canlandirici-bakim-sampuani-400ml-657",
+      "images": []
     },
     {
       "id": 658,
@@ -2427,7 +2701,8 @@
       "sku": "122",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/yipranmis-saclar-icin-onarici-bakim-sampuani-400ml-658"
+      "ticimaxUrl": "https://aromatherapica.com/yipranmis-saclar-icin-onarici-bakim-sampuani-400ml-658",
+      "images": []
     },
     {
       "id": 659,
@@ -2447,7 +2722,10 @@
       "sku": "123",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/uzum-cekirdegi-sac-kremi-250ml-659"
+      "ticimaxUrl": "https://aromatherapica.com/uzum-cekirdegi-sac-kremi-250ml-659",
+      "images": [
+        "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/uzum-cekirdegi-matrixyl-3000-anti-agin-ddc-91.png"
+      ]
     },
     {
       "id": 660,
@@ -2467,7 +2745,8 @@
       "sku": "124",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/sac-bakim-yagi-100ml-660"
+      "ticimaxUrl": "https://aromatherapica.com/sac-bakim-yagi-100ml-660",
+      "images": []
     },
     {
       "id": 661,
@@ -2481,13 +2760,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/anti-aging-argireline-peptide-face-cre-b4c0d-.png",
       "description": "AWE CEMRE Anti-Aging Argireline Peptide Face Cream, yaşlanma belirtilerine karşı bakım sunmak amacıyla özel olarak formüle edilmiştir. Argireline Peptide, ince çizgi ve mimik kaynaklı kırışıklık görünümünün azalmasına yardımcı olurken, cildin daha pürüzsüz ve dengeli görünmesini destekler.\nHafif ve hızlı emilen yapısı sayesinde ciltte ağırlık hissi bırakmadan nemlendirme sağlar. Düzenli kullanımda cilt daha sıkı, daha aydınlık ve daha canlı bir görünüme kavuşur. Günlük kullanıma uygundur ve tüm cilt tipleriyle uyumludur.",
       "shortDesc": "Cildin elastikiyetini desteklemeye ve ince çizgi görünümünü azaltmaya yardımcı, Argireline Peptide içeren yaşlanma karşıtı yüz kremi. Cilde daha pürüzsüz, daha canlı ve bakımlı bir görünüm kazandırır.",
       "sku": "125",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/anti-aging-argireline-peptide-face-cream-661"
+      "ticimaxUrl": "https://aromatherapica.com/anti-aging-argireline-peptide-face-cream-661",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/anti-aging-argireline-peptide-face-cre-b4c0d-.png"
+      ]
     },
     {
       "id": 662,
@@ -2501,13 +2783,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/buyuk/nemlendirici-gul-kremi-4b-a95.png",
       "description": "AWE Cemre Coupon Krem, hassasiyet, kızarıklık ve rahatsızlık hissine eğilimli ciltler için özel olarak formüle edilmiştir. Yatıştırıcı etkili bakım bileşenleri sayesinde cildi sakinleştirmeye, çevresel faktörlere karşı cilt bariyerini desteklemeye yardımcı olur.\nHafif ve hızlı emilen yapısı ciltte yağlı bir his bırakmadan nemlendirme sağlar. Düzenli kullanımda cilt daha dengeli, daha yumuşak ve daha rahat bir his kazanır. Günlük kullanıma uygundur ve hassas ciltlerle uyumludur.",
       "shortDesc": "Hassas ve tahrişe eğilimli ciltler için yatıştırıcı bakım sunan, cilt bariyerini desteklemeye yardımcı krem. Cilde konfor, yumuşaklık ve dengeli bir görünüm kazandırır.",
       "sku": "126",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/coupon-krem-662"
+      "ticimaxUrl": "https://aromatherapica.com/coupon-krem-662",
+      "images": [
+        "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/buyuk/nemlendirici-gul-kremi-4b-a95.png"
+      ]
     },
     {
       "id": 663,
@@ -2521,13 +2806,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/nemlendirici-gul-kremi-4b-a95.png",
       "description": "AWE Cemre Nemlendirici Gül Kremi, nem ihtiyacı duyan ciltler için özel olarak formüle edilmiştir. Gül özü, cildi yatıştırmaya ve tazelemeye yardımcı olurken, cildin doğal nem dengesinin korunmasını destekler.\nHafif ve hızlı emilen yapısı sayesinde ciltte yağlı bir his bırakmadan nemlendirme sağlar. Düzenli kullanımda cilt daha yumuşak, daha pürüzsüz ve daha canlı bir görünüme kavuşur. Günlük kullanıma uygundur ve tüm cilt tipleriyle uyumludur.",
       "shortDesc": "Cildi derinlemesine nemlendirmeye yardımcı, gül özlü hafif ve ferahlatıcı bakım kremi. Cilde yumuşaklık, canlılık ve aydınlık bir görünüm kazandırır.",
       "sku": "127",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/nemlendirici-gul-kremi-663"
+      "ticimaxUrl": "https://aromatherapica.com/nemlendirici-gul-kremi-663",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/nemlendirici-gul-kremi-4b-a95.png"
+      ]
     },
     {
       "id": 664,
@@ -2541,13 +2829,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/pirinc-kepegi-leke-giderici-aydinlatic-d0f7e8.png",
       "description": "AWE Cemre Pirinç Kepeği Leke Giderici & Aydınlatıcı Yüz Kremi, ciltteki koyu leke ve renk tonu eşitsizliklerinin görünümünü azaltmaya yardımcı olmak amacıyla özel olarak formüle edilmiştir. Pirinç kepeği özü, cildin doğal ışıltısını desteklerken daha aydınlık ve canlı bir görünüm kazanmasına yardımcı olur.\nHafif ve hızlı emilen yapısı sayesinde cildi ağırlaştırmadan nemlendirir. Düzenli kullanımda cilt tonu daha eşit, cilt görünümü daha pürüzsüz ve daha parlak hale gelir. Günlük kullanıma uygundur ve tüm cilt tipleriyle uyumludur.",
       "shortDesc": "Cilt tonu eşitsizliklerinin ve leke görünümünün azalmasına yardımcı, pirinç kepeği özlü aydınlatıcı bakım kremi. Cilde daha berrak, daha aydınlık ve dengeli bir görünüm kazandırır.",
       "sku": "128",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/pirinc-kepegi-leke-giderici-aydinlatici-yuz-kremi-664"
+      "ticimaxUrl": "https://aromatherapica.com/pirinc-kepegi-leke-giderici-aydinlatici-yuz-kremi-664",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/pirinc-kepegi-leke-giderici-aydinlatic-d0f7e8.png"
+      ]
     },
     {
       "id": 665,
@@ -2561,13 +2852,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/calendula-tamanu-yatistirici-krem-e-b483.png",
       "description": "AWE Cemre Calendula & Tamanu Yatıştırıcı Krem, kuruluk ve hassasiyet kaynaklı rahatsızlık hissini azaltmaya yardımcı olmak amacıyla özel olarak geliştirilmiştir. Calendula özü cildi yatıştırmaya ve rahatlatmaya destek olurken, tamanu yağı cilt bariyerini beslemeye ve güçlendirmeye yardımcı olur.\nYoğun ama dengeli yapısı sayesinde cildi derinlemesine nemlendirir, kuruluk hissini azaltır ve cildin daha yumuşak bir görünüme kavuşmasını destekler. Düzenli kullanımda cilt daha sakin, daha dengeli ve daha sağlıklı hisseder. Günlük kullanıma uygundur ve hassas ciltlerle uyumludur.",
       "shortDesc": "Kuru ve hassas ciltler için yoğun yatıştırıcı bakım sunan, calendula ve tamanu özleriyle zenginleştirilmiş özel formüllü krem. Cildi sakinleştirir, konfor ve yumuşaklık kazandırır.",
       "sku": "129",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/calendula-tamanu-yatistirici-krem-665"
+      "ticimaxUrl": "https://aromatherapica.com/calendula-tamanu-yatistirici-krem-665",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/calendula-tamanu-yatistirici-krem-e-b483.png"
+      ]
     },
     {
       "id": 666,
@@ -2581,14 +2875,17 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/uzum-cekirdegi-matrixyl-3000-anti-agin-ddc-91.png",
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/uzum-cekirdegi-matrixyl-3000-anti-agin-ddc-91.png",
       "description": "AWE Cemre Üzüm Çekirdeği Matrixyl 3000 Anti-Aging Face Cream, ince çizgi ve kırışıklık görünümünü azaltmaya yardımcı olmak amacıyla özel olarak formüle edilmiştir. Matrixyl 3000 peptit kompleksi, cildin elastikiyetini ve sıkılığını desteklerken; üzüm çekirdeği özü cildi beslemeye ve daha canlı bir görünüm kazandırmaya yardımcı olur.\nHafif ve hızlı emilen yapısı cildi ağırlaştırmadan nemlendirir, cilt dokusunun daha pürüzsüz hissedilmesini sağlar. Düzenli kullanımda cilt daha sıkı, daha aydınlık ve daha genç bir görünüm kazanır. Günlük kullanıma uygundur ve tüm cilt tipleriyle uyumludur.",
       "shortDesc": "Yaşlanma belirtilerine karşı bakım sunan, Matrixyl 3000 ve üzüm çekirdeği özü ile zenginleştirilmiş anti-aging yüz kremi. Cildin daha sıkı, pürüzsüz ve genç görünmesini destekler.",
       "sku": "130",
       "barcode": "4444",
       "vatRate": 20,
       "ticimaxUrl": "https://aromatherapica.com/uzum-cekirdegi-matrixyl-3000-anti-aging-face-cream-666",
-      "ticimaxSlug": "uzum-cekirdegi-matrixyl-3000-anti-aging-face-cream-666"
+      "ticimaxSlug": "uzum-cekirdegi-matrixyl-3000-anti-aging-face-cream-666",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/uzum-cekirdegi-matrixyl-3000-anti-agin-ddc-91.png"
+      ]
     },
     {
       "id": 667,
@@ -2602,14 +2899,17 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/kaktus-cicegi-gunes-kremi-50spf-uvauvb-4b-7dc.jpeg",
+      "imageUrl": "https://static.ticimax.cloud/74521/uploads/urunresimleri/kaktus-cicegi-gunes-kremi-50spf-uvauvb-4b-7dc.jpeg",
       "description": "AWE Cemre Kaktüs Çiçeği Güneş Kremi SPF 50, cildi UVA ve UVB ışınlarına karşı yüksek düzeyde korumaya yardımcı olmak amacıyla geliştirilmiştir. Kaktüs çiçeği özü, cildi yatıştırmaya ve nem dengesini korumaya destek olurken, çevresel faktörlerin neden olabileceği kuruluk hissini azaltmaya yardımcı olur.\nHafif ve hızlı emilen yapısı sayesinde ciltte beyaz iz ve ağırlık hissi bırakmaz. Günlük kullanıma uygundur, makyaj altına rahatlıkla uygulanabilir. Düzenli kullanımda cilt daha konforlu, daha dengeli ve daha sağlıklı hisseder. Tüm cilt tipleriyle uyumludur.",
       "shortDesc": "Cildi güneşin zararlı etkilerine karşı yüksek koruma ile destekleyen, kaktüs çiçeği özlü hafif yapılı güneş kremi. Cildi nemlendirir, korur ve gün boyu konfor sağlar.",
       "sku": "131",
       "barcode": "4444",
       "vatRate": 20,
       "ticimaxUrl": "https://aromatherapica.com/kaktus-cicegi-gunes-kremi-50spf-uvauvb-667",
-      "ticimaxSlug": "kaktus-cicegi-gunes-kremi-50spf-uvauvb-667"
+      "ticimaxSlug": "kaktus-cicegi-gunes-kremi-50spf-uvauvb-667",
+      "images": [
+        "https://static.ticimax.cloud/74521/uploads/urunresimleri/kaktus-cicegi-gunes-kremi-50spf-uvauvb-4b-7dc.jpeg"
+      ]
     },
     {
       "id": 668,
@@ -2623,13 +2923,16 @@
       "salePrice": null,
       "stock": 999,
       "active": true,
-      "imageUrl": null,
+      "imageUrl": "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/kaktus-cicegi-gunes-kremi-50spf-uvauvb-4b-7dc.jpeg",
       "description": "AWE Cemre Cilt Bakım Yağı, cildin ihtiyaç duyduğu besleyici bakımı desteklemek amacıyla geliştirilmiştir. Dengeli bitkisel yağ içeriği sayesinde cildi derinlemesine beslemeye yardımcı olurken, cilt bariyerinin güçlenmesini destekler.\nHafif ve hızlı emilen yapısı ciltte yağlı bir his bırakmadan nemlendirme sağlar. Düzenli kullanımda cilt daha yumuşak, daha pürüzsüz ve daha canlı bir görünüme kavuşur. Yüz ve vücut bakımında kullanılabilir, tüm cilt tipleriyle uyumludur.",
       "shortDesc": "Cildi beslemeye, nemlendirmeye ve doğal ışıltısını desteklemeye yardımcı çok amaçlı bakım yağı. Hafif yapısıyla cilde yumuşaklık ve esneklik kazandırır.",
       "sku": "132",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/cilt-bakim-yagi-668"
+      "ticimaxUrl": "https://aromatherapica.com/cilt-bakim-yagi-668",
+      "images": [
+        "https://static.ticimax.cloud/74521/Uploads/UrunResimleri/kaktus-cicegi-gunes-kremi-50spf-uvauvb-4b-7dc.jpeg"
+      ]
     },
     {
       "id": 669,
@@ -2649,7 +2952,8 @@
       "sku": "133",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/gul-suyu-100-ml-669"
+      "ticimaxUrl": "https://aromatherapica.com/gul-suyu-100-ml-669",
+      "images": []
     },
     {
       "id": 670,
@@ -2669,7 +2973,8 @@
       "sku": "134",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/gul-suyu-250-ml-670"
+      "ticimaxUrl": "https://aromatherapica.com/gul-suyu-250-ml-670",
+      "images": []
     },
     {
       "id": 671,
@@ -2689,7 +2994,8 @@
       "sku": "135",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/ardic-yagi-ozlu-agri-kesici-masaj-kremi-671"
+      "ticimaxUrl": "https://aromatherapica.com/ardic-yagi-ozlu-agri-kesici-masaj-kremi-671",
+      "images": []
     },
     {
       "id": 672,
@@ -2709,7 +3015,8 @@
       "sku": "136",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/artistic-dus-jeli-672"
+      "ticimaxUrl": "https://aromatherapica.com/artistic-dus-jeli-672",
+      "images": []
     },
     {
       "id": 673,
@@ -2729,7 +3036,8 @@
       "sku": "137",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/inforce-dus-jeli-673"
+      "ticimaxUrl": "https://aromatherapica.com/inforce-dus-jeli-673",
+      "images": []
     },
     {
       "id": 674,
@@ -2749,7 +3057,8 @@
       "sku": "138",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/masaj-yagi-674"
+      "ticimaxUrl": "https://aromatherapica.com/masaj-yagi-674",
+      "images": []
     },
     {
       "id": 675,
@@ -2769,7 +3078,8 @@
       "sku": "139",
       "barcode": "4444",
       "vatRate": 20,
-      "ticimaxUrl": "https://aromatherapica.com/leg-massage-oil-675"
+      "ticimaxUrl": "https://aromatherapica.com/leg-massage-oil-675",
+      "images": []
     }
   ],
   "categories": [
@@ -2919,11 +3229,293 @@
     }
   ],
   "updatedAt": "2026-07-29T23:32:11.926Z",
-  "syncedAt": "2026-07-30T11:04:19.741Z",
-  "syncSource": "https://aromatherapica.com",
+  "syncedAt": "2026-07-30T13:56:52.950Z",
+  "syncSource": "https://www.aromatherapica.com",
   "commerce": {
     "mode": "ticimax-hybrid",
     "storeUrl": "https://aromatherapica.com",
     "note": "Sepete ekle / ödeme Ticimax ürün ve checkout sayfalarına yönlendirilir."
+  },
+  "imageSync": {
+    "withReal": 83,
+    "updated": 4,
+    "missing": 55,
+    "missingList": [
+      {
+        "id": 539,
+        "slug": "hint-yagi-30-ml",
+        "name": "Hint Yağı 30 ml"
+      },
+      {
+        "id": 540,
+        "slug": "tatli-badem-yagi-100-ml",
+        "name": "Tatlı Badem Yağı 100 ml"
+      },
+      {
+        "id": 541,
+        "slug": "susam-yagi-100-ml",
+        "name": "Susam Yağı 100 ml"
+      },
+      {
+        "id": 542,
+        "slug": "susam-yagi-15-ml",
+        "name": "Susam Yağı 15 ml"
+      },
+      {
+        "id": 543,
+        "slug": "hindistan-cevizi-yagi-15-ml",
+        "name": "Hindistan Cevizi Yağı 15 ml"
+      },
+      {
+        "id": 544,
+        "slug": "corekotu-yagi-15-ml",
+        "name": "Çörekotu Yağı 15 ml"
+      },
+      {
+        "id": 545,
+        "slug": "corekotu-yagi-100-ml",
+        "name": "Çörekotu Yağı 100 ml"
+      },
+      {
+        "id": 546,
+        "slug": "corekotu-yagi-200-ml",
+        "name": "Çörekotu Yağı 200 ml"
+      },
+      {
+        "id": 547,
+        "slug": "corekotu-yagi-250-ml",
+        "name": "Çörekotu Yağı 250 ml"
+      },
+      {
+        "id": 548,
+        "slug": "kantaron-yagi-30-ml",
+        "name": "Kantaron Yağı 30 ml"
+      },
+      {
+        "id": 550,
+        "slug": "kenevir-yagi-100-ml",
+        "name": "Kenevir Yağı 100 ml"
+      },
+      {
+        "id": 551,
+        "slug": "kekik-yagi-15-ml",
+        "name": "Kekik Yağı 15 ml"
+      },
+      {
+        "id": 554,
+        "slug": "nane-yagi-15-ml",
+        "name": "Nane Yağı 15 ml"
+      },
+      {
+        "id": 555,
+        "slug": "aci-badem-yagi-15-ml",
+        "name": "Acı Badem Yağı 15 ml"
+      },
+      {
+        "id": 556,
+        "slug": "adacayi-yagi-15-ml",
+        "name": "Adaçayı Yağı 15 ml"
+      },
+      {
+        "id": 563,
+        "slug": "avokado-yagi-15-ml",
+        "name": "Avokado Yağı 15 ml"
+      },
+      {
+        "id": 566,
+        "slug": "badem-yagi-15-ml",
+        "name": "Badem Yağı 15 ml"
+      },
+      {
+        "id": 568,
+        "slug": "bugday-ozu-yagi-15-ml",
+        "name": "Buğday Özü Yağı 15 ml"
+      },
+      {
+        "id": 569,
+        "slug": "ceviz-yagi-15-ml",
+        "name": "Ceviz Yağı 15 ml"
+      },
+      {
+        "id": 570,
+        "slug": "ceviz-yagi-250-ml",
+        "name": "Ceviz Yağı 250 ml"
+      },
+      {
+        "id": 577,
+        "slug": "feslegen-yagi-15-ml",
+        "name": "Fesleğen Yağı 15 ml"
+      },
+      {
+        "id": 579,
+        "slug": "gliserin-bitkisel-15-ml",
+        "name": "Gliserin ( Bitkisel) 15 ml"
+      },
+      {
+        "id": 583,
+        "slug": "havuc-tohumu-yagi-15-ml",
+        "name": "Havuç Tohumu Yağı 15 ml"
+      },
+      {
+        "id": 586,
+        "slug": "isirgan-tohumu-yagi-15-ml",
+        "name": "Isırgan Tohumu Yağı 15 ml"
+      },
+      {
+        "id": 590,
+        "slug": "kabak-cekirdegi-yagi-15-ml",
+        "name": "Kabak Çekirdeği Yağı 15 ml"
+      },
+      {
+        "id": 597,
+        "slug": "kantaron-yagi-250-ml",
+        "name": "Kantaron Yağı 250 ml"
+      },
+      {
+        "id": 599,
+        "slug": "karabiber-yagi-15-ml",
+        "name": "Karabiber Yağı 15 ml"
+      },
+      {
+        "id": 602,
+        "slug": "kayisi-cekirdegi-yagi-15-ml",
+        "name": "Kayısı Çekirdeği Yağı 15 ml"
+      },
+      {
+        "id": 604,
+        "slug": "keten-tohumu-yagi-15-ml",
+        "name": "Keten Tohumu Yağı 15 ml"
+      },
+      {
+        "id": 605,
+        "slug": "keten-tohumu-yagi-250-ml",
+        "name": "Keten Tohumu Yağı 250 ml"
+      },
+      {
+        "id": 617,
+        "slug": "mentol-yagi-15-ml",
+        "name": "Mentol Yağı 15 ml"
+      },
+      {
+        "id": 620,
+        "slug": "nar-cekirdegi-yagi-15-ml",
+        "name": "Nar Çekirdeği Yağı 15 ml"
+      },
+      {
+        "id": 625,
+        "slug": "papatya-yagi-15-ml",
+        "name": "Papatya Yağı 15 ml"
+      },
+      {
+        "id": 627,
+        "slug": "pirinci-kepegi-yagi-15-ml",
+        "name": "Pirinçi Kepeği Yağı 15 ml"
+      },
+      {
+        "id": 630,
+        "slug": "safran-yagi-15-ml",
+        "name": "Safran Yağı 15 ml"
+      },
+      {
+        "id": 632,
+        "slug": "sardunya-yagi-15-ml",
+        "name": "Sardunya Yağı 15 ml"
+      },
+      {
+        "id": 636,
+        "slug": "susam-yagi-100-ml-636",
+        "name": "Susam Yağı 100 ml"
+      },
+      {
+        "id": 637,
+        "slug": "seftali-cekirdegi-yagi-15ml",
+        "name": "Şeftali Çekirdeği Yağı 15ml"
+      },
+      {
+        "id": 638,
+        "slug": "tamanu-yagi-15ml",
+        "name": "Tamanu Yağı 15ml"
+      },
+      {
+        "id": 640,
+        "slug": "uzum-cekirdegi-yagi-30ml",
+        "name": "Üzüm Çekirdeği Yağı 30ml"
+      },
+      {
+        "id": 646,
+        "slug": "zencefil-yagi-5ml",
+        "name": "Zencefil Yağı 5ml"
+      },
+      {
+        "id": 649,
+        "slug": "zeytin-yagi-naturel-sizma-erken-hasat-500ml",
+        "name": "Zeytin Yağı Natürel Sızma (Erken Hasat) 500ml"
+      },
+      {
+        "id": 655,
+        "slug": "uzum-cekirdegi-sampuani-400ml",
+        "name": "Üzüm Çekirdeği Şampuanı 400ml"
+      },
+      {
+        "id": 656,
+        "slug": "hassas-sac-derisi-bakim-sampuani-250ml",
+        "name": "Hassas Saç Derisi Bakım Şampuanı 250ml"
+      },
+      {
+        "id": 657,
+        "slug": "hacimlendirici-canlandirici-bakim-sampuani-400ml",
+        "name": "Hacimlendirici & Canlandırıcı Bakım Şampuanı 400ml"
+      },
+      {
+        "id": 658,
+        "slug": "yipranmis-saclar-icin-onarici-bakim-sampuani-400ml",
+        "name": "Yıpranmış Saçlar İçin Onarıcı Bakım Şampuanı 400ml"
+      },
+      {
+        "id": 659,
+        "slug": "uzum-cekirdegi-sac-kremi-250ml",
+        "name": "Üzüm Çekirdeği Saç Kremi 250ml"
+      },
+      {
+        "id": 660,
+        "slug": "sac-bakim-yagi-100ml",
+        "name": "Saç Bakım Yağı 100ml"
+      },
+      {
+        "id": 669,
+        "slug": "gul-suyu-100-ml",
+        "name": "GÜL SUYU 100 ml"
+      },
+      {
+        "id": 670,
+        "slug": "gul-suyu-250-ml",
+        "name": "GÜL SUYU 250 ml"
+      },
+      {
+        "id": 671,
+        "slug": "ardic-yagi-ozlu-agri-kesici-masaj-kremi",
+        "name": "ARDIÇ YAĞI ÖZLÜ AĞRI KESİCİ MASAJ KREMİ"
+      },
+      {
+        "id": 672,
+        "slug": "artistic-dus-jeli",
+        "name": "ARTISTIC DUŞ JELİ"
+      },
+      {
+        "id": 673,
+        "slug": "inforce-dus-jeli",
+        "name": "INFORCE DUŞ JELİ"
+      },
+      {
+        "id": 674,
+        "slug": "masaj-yagi",
+        "name": "MASAJ YAĞI"
+      },
+      {
+        "id": 675,
+        "slug": "leg-massage-oil",
+        "name": "LEG MASSAGE OIL"
+      }
+    ]
   }
 }

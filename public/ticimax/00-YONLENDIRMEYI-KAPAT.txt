@@ -1,7 +1,31 @@
-<!-- Aromatherapica: yonlendirme KAPALI (WebSitesi exact tema sonrasi) -->
+<!--
+  TICIMAX ADMIN ACILISI + YONLENDIRME KAPATMA
+  ============================================
+  1) Opera'da su adresi YENI SEKMEDE ac (anasayfadan degil):
+     https://www.aromatherapica.com/Admin/
+
+  2) Dinamik Script > Tüm Sayfalar kodunu tamamen sil,
+     asagidaki KILL scriptini yapistir, Kaydet.
+
+  3) Sonra exact tema 01-tum-sayfalar.txt yapistir.
+-->
 <script>
 (function () {
-  /* GitHub location.replace yonlendirmesi kaldirildi.
-     Site Ticimax'ta kalir. Exact tema icin 01-tum-sayfalar.txt yapistirin. */
+  "use strict";
+  /* GitHub yonlendirmesi KAPALI — site Ticimax'ta kalir */
+  try {
+    if (window.__AR_REDIRECT_KILLED__) return;
+    window.__AR_REDIRECT_KILLED__ = true;
+    /* Eski location.replace scripti calissa bile no-op: asagidaki koruma */
+    var _replace = window.location.replace.bind(window.location);
+    window.location.replace = function (url) {
+      var target = String(url || "");
+      if (/r0yc0ld\.github\.io\/aromatherapica-web/i.test(target)) {
+        console.warn("[Aromatherapica] GitHub yonlendirmesi engellendi:", target);
+        return;
+      }
+      return _replace(url);
+    };
+  } catch (e) {}
 })();
 </script>
