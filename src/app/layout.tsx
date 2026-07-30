@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Libre_Baskerville, Source_Sans_3 } from "next/font/google";
 import { CartProvider } from "@/components/CartProvider";
 import { CatalogOverridesProvider } from "@/components/cms/CatalogOverridesProvider";
@@ -19,6 +19,13 @@ const libreBaskerville = Libre_Baskerville({
   variable: "--font-serif",
   weight: ["400", "700"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#fbfaf7",
+};
 
 export const metadata: Metadata = {
   title: {
