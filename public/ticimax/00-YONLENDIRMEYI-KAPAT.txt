@@ -1,0 +1,7 @@
+<!-- Aromatherapica: yonlendirme KAPALI (WebSitesi exact tema sonrasi) -->
+<script>
+(function () {
+  /* GitHub location.replace yonlendirmesi kaldirildi.
+     Site Ticimax'ta kalir. Exact tema icin 01-tum-sayfalar.txt yapistirin. */
+})();
+</script>
