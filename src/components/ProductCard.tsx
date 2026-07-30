@@ -6,6 +6,7 @@ import { Eye, Heart, ShoppingBag } from "lucide-react";
 import { useCart } from "@/components/CartProvider";
 import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
 import { useWishlist } from "@/components/WishlistProvider";
+import { productHref } from "@/lib/cms/product-href";
 import { formatCurrency } from "@/lib/format";
 import type { NormalizedProduct } from "@/lib/ticimax/types";
 
@@ -14,6 +15,7 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
   const { mergeProduct } = useCatalogOverrides();
   const { has, toggle } = useWishlist();
   const product = mergeProduct(raw);
+  const href = productHref(product.slug, product.id);
   const favorite = has(product.id);
   const [added, setAdded] = useState(false);
   const [heartFx, setHeartFx] = useState<"in" | "out" | null>(null);
@@ -61,7 +63,7 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
 
   return (
     <article className="product-card">
-      <Link href={`/urun/${product.slug}`} className="product-card-link" aria-label={product.name}>
+      <Link href={href} className="product-card-link" aria-label={product.name}>
         <div className="product-image">
           {product.images[0] ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -102,7 +104,7 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
           <span>{product.categoryName || product.brandName || "Aromatherapica"}</span>
         </div>
         <h3>
-          <Link href={`/urun/${product.slug}`}>{product.name}</Link>
+          <Link href={href}>{product.name}</Link>
         </h3>
         <p className="product-subtitle">
           {outOfStock ? "Şu anda stokta yok" : "Saf içeriklerle özenle hazırlanır"}
@@ -121,7 +123,7 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
             <ShoppingBag aria-hidden />
             {outOfStock ? "Stokta yok" : added ? "Sepete eklendi" : "Sepete ekle"}
           </button>
-          <Link href={`/urun/${product.slug}`} className="quick-button" aria-label="Ürünü incele">
+          <Link href={href} className="quick-button" aria-label="Ürünü incele">
             <Eye aria-hidden />
           </Link>
         </div>

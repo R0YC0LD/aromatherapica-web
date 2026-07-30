@@ -13,6 +13,26 @@ export type ProductOverride = {
   updatedAt?: string;
 };
 
+/** Full product created from admin (not in base catalog.json). */
+export type CustomProduct = {
+  id: number;
+  slug: string;
+  name: string;
+  categoryId: number | null;
+  categoryName: string;
+  brandName?: string | null;
+  price: number;
+  salePrice?: number | null;
+  stock: number;
+  active: boolean;
+  imageUrl?: string | null;
+  description?: string | null;
+  shortDesc?: string | null;
+  sku?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
 export type RitualCardSetting = {
   title: string;
   subtitle: string;
@@ -108,11 +128,15 @@ export type CmsSettings = {
 
 export type CmsState = {
   products: Record<string, ProductOverride>;
+  /** Admin-created products (published globally via storefront.json). */
+  customProducts: Record<string, CustomProduct>;
+  /** Soft-deleted base catalog product ids. */
+  deletedProductIds: number[];
   settings: CmsSettings;
   version: number;
 };
 
-export const CMS_VERSION = 3;
+export const CMS_VERSION = 4;
 
 export const DEFAULT_CMS_SETTINGS: CmsSettings = {
   siteName: "Aromatherapica",

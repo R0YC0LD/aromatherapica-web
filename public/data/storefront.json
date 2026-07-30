@@ -1,6 +1,8 @@
 {
-  "version": 3,
+  "version": 4,
   "products": {},
+  "customProducts": {},
+  "deletedProductIds": [],
   "settings": {
     "siteName": "Aromatherapica",
     "freeShippingThreshold": 0,

@@ -31,10 +31,11 @@ export function HomeFeaturedProducts({
   message?: string;
   configured?: boolean;
 }) {
-  const { settings, mergeProduct } = useCatalogOverrides();
+  const { settings, mergeProduct, catalog } = useCatalogOverrides();
 
   const list = useMemo(() => {
-    const merged = products.map(mergeProduct).filter((p) => p.active);
+    const source = catalog.length > 0 ? catalog : products;
+    const merged = source.map(mergeProduct).filter((p) => p.active);
     const rawIds = settings.featuredProductIds;
     const ids = String(rawIds || "")
       .split(/[,\s]+/)
@@ -44,7 +45,7 @@ export function HomeFeaturedProducts({
     const map = new Map(merged.map((p) => [p.id, p]));
     const picked = ids.map((id) => map.get(id)).filter(Boolean) as NormalizedProduct[];
     return picked.length > 0 ? picked : merged.slice(0, 8);
-  }, [products, mergeProduct, settings.featuredProductIds]);
+  }, [products, catalog, mergeProduct, settings.featuredProductIds]);
 
   return (
     <section className="section products-section" id="products">

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Search, ShoppingBag, User, X, Heart } from "lucide-react";
 import { SecretLogo } from "@/components/SecretLogo";
@@ -10,7 +10,9 @@ import { CartBadge } from "@/components/CartBadge";
 import { useCart } from "@/components/CartProvider";
 import { useWishlist } from "@/components/WishlistProvider";
 import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
+import { productHref } from "@/lib/cms/product-href";
 import { STORE_NAV_CATEGORIES } from "@/lib/cms/category-map";
+import { searchProducts, type SearchHit } from "@/lib/search/query";
 import { freeShippingAnnouncement } from "@/lib/shipping";
 import { withBasePath } from "@/lib/paths";
 
@@ -28,7 +30,7 @@ const CATEGORY_NAV = STORE_NAV_CATEGORIES.map((c) => ({ ...c }));
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
-  const { settings } = useCatalogOverrides();
+  const { settings, catalog, mergeProduct } = useCatalogOverrides();
   const { openCartDrawer, drawerOpen } = useCart();
   const { openDrawer: openWishlist, toggle: toggleWish, has: hasWish } = useWishlist();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -36,13 +38,49 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [query, setQuery] = useState("");
-  const [bestsellers, setBestsellers] = useState<
-    Array<{ id: number; slug: string; name: string; imageUrl: string | null; stock: number; price: number; salePrice: number | null }>
-  >([]);
+  const [submitNotice, setSubmitNotice] = useState<string | null>(null);
   const lastY = useRef(0);
   const logoSrc = settings.logoUrl?.startsWith("data:")
     ? settings.logoUrl
     : withBasePath(settings.logoUrl || "/aromatherapica-emblem.png");
+
+  const searchable = useMemo(() => {
+    const source = catalog.length
+      ? catalog.map(mergeProduct)
+      : [];
+    return source
+      .filter((p) => p.active)
+      .map((p) => ({
+        id: p.id,
+        slug: p.slug,
+        name: p.name,
+        categoryName: p.categoryName,
+        shortDesc: p.seoDescription,
+        imageUrl: p.images[0] || null,
+        price: p.price,
+        salePrice: p.salePrice ?? null,
+        stock: p.stock,
+        active: p.active,
+      }));
+  }, [catalog, mergeProduct]);
+
+  const liveSearch = useMemo(() => {
+    const q = query.trim();
+    if (!q) return null;
+    return searchProducts(searchable, q, { limit: 8, fuzzy: false });
+  }, [query, searchable]);
+
+  const bestsellers = useMemo(() => {
+    const ids = String(settings.searchBestsellerIds || settings.featuredProductIds || "")
+      .split(/[,\s]+/)
+      .map((s) => Number(s.trim()))
+      .filter((n) => Number.isFinite(n) && n > 0);
+    const all = searchable;
+    const picked = ids.length
+      ? ids.map((id) => all.find((p) => p.id === id)).filter(Boolean)
+      : all.slice(0, 4);
+    return picked as typeof searchable;
+  }, [searchable, settings.searchBestsellerIds, settings.featuredProductIds]);
 
   useEffect(() => {
     function onScroll() {
@@ -61,26 +99,11 @@ export function SiteHeader() {
   }, [menuOpen, searchOpen, drawerOpen]);
 
   useEffect(() => {
-    let cancelled = false;
-    fetch(withBasePath("/data/catalog.json"))
-      .then((r) => r.json())
-      .then((data: { products: Array<{ id: number; slug: string; name: string; imageUrl: string | null; stock: number; price: number; salePrice: number | null; active: boolean }> }) => {
-        if (cancelled) return;
-        const all = (data.products || []).filter((p) => p.active);
-        const ids = String(settings.searchBestsellerIds || settings.featuredProductIds || "")
-          .split(/[,\s]+/)
-          .map((s) => Number(s.trim()))
-          .filter((n) => Number.isFinite(n) && n > 0);
-        const picked = ids.length
-          ? ids.map((id) => all.find((p) => p.id === id)).filter(Boolean)
-          : all.slice(0, 4);
-        setBestsellers(picked as typeof bestsellers);
-      })
-      .catch(() => undefined);
-    return () => {
-      cancelled = true;
-    };
-  }, [settings.searchBestsellerIds, settings.featuredProductIds]);
+    if (!searchOpen) {
+      setQuery("");
+      setSubmitNotice(null);
+    }
+  }, [searchOpen]);
 
   function closePanels() {
     setMenuOpen(false);
@@ -90,8 +113,42 @@ export function SiteHeader() {
   function onSearchSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const q = query.trim();
+    if (!q) {
+      setSearchOpen(false);
+      router.push("/kategori/tum-urunler");
+      return;
+    }
+
+    const result = searchProducts(searchable, q, { limit: 24, fuzzy: true });
+    if (result.mode === "empty") {
+      setSubmitNotice(result.message || "Böyle bir ürün bulunamamaktadır.");
+      return;
+    }
+
     setSearchOpen(false);
-    router.push(q ? `/kategori/tum-urunler?q=${encodeURIComponent(q)}` : "/kategori/tum-urunler");
+    router.push(`/kategori/tum-urunler?q=${encodeURIComponent(q)}`);
+  }
+
+  function renderHit(hit: SearchHit) {
+    return (
+      <Link
+        key={hit.id}
+        href={productHref(hit.slug, hit.id)}
+        className="search-suggest-item"
+        onClick={() => setSearchOpen(false)}
+      >
+        {hit.imageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={hit.imageUrl} alt="" />
+        ) : (
+          <span className="css-product-bottle" aria-hidden />
+        )}
+        <span>
+          <strong>{hit.name}</strong>
+          {hit.categoryName ? <em>{hit.categoryName}</em> : null}
+        </span>
+      </Link>
+    );
   }
 
   return (
@@ -279,11 +336,20 @@ export function SiteHeader() {
                 <Search size={20} aria-hidden />
                 <input
                   type="search"
-                  placeholder="Search..."
+                  placeholder="Ürün ara…"
                   value={query}
-                  onChange={(event) => setQuery(event.target.value)}
+                  onChange={(event) => {
+                    setQuery(event.target.value);
+                    setSubmitNotice(null);
+                  }}
                   autoFocus
+                  autoComplete="off"
+                  aria-autocomplete="list"
+                  aria-controls="search-live-results"
                 />
+                <button type="submit" className="search-submit-btn">
+                  Ara
+                </button>
                 <button
                   className="close-button"
                   type="button"
@@ -294,46 +360,62 @@ export function SiteHeader() {
                 </button>
               </form>
 
-              <h3 className="search-bestsellers-title">
-                {settings.searchBestsellersTitle || "ÇOK SATANLAR…"}
-              </h3>
-              <div className="search-bestsellers">
-                {bestsellers.map((p) => (
-                  <article key={p.id} className="search-bestseller-card">
-                    <Link href={`/urun/${p.slug}`} onClick={() => setSearchOpen(false)}>
-                      {p.imageUrl ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={p.imageUrl} alt="" />
-                      ) : (
-                        <span className="css-product-bottle" aria-hidden />
-                      )}
-                      <strong>{p.name}</strong>
-                    </Link>
-                    <button
-                      type="button"
-                      className={`favorite-button${hasWish(p.id) ? " is-active" : ""}`}
-                      aria-label="Favorilere ekle"
-                      onClick={(e) => {
-                        const rect = e.currentTarget.getBoundingClientRect();
-                        toggleWish(
-                          {
-                            productId: p.id,
-                            slug: p.slug,
-                            name: p.name,
-                            imageUrl: p.imageUrl || undefined,
-                            price: p.price,
-                            salePrice: p.salePrice || undefined,
-                            stock: p.stock,
-                          },
-                          { x: rect.left + rect.width / 2, y: rect.top },
-                        );
-                      }}
-                    >
-                      <Heart size={16} />
-                    </button>
-                  </article>
-                ))}
-              </div>
+              {query.trim() ? (
+                <div id="search-live-results" className="search-suggest" role="listbox">
+                  {liveSearch && liveSearch.hits.length > 0 ? (
+                    liveSearch.hits.map(renderHit)
+                  ) : (
+                    <p className="search-suggest-empty">Eşleşen ürün yazıldıkça burada görünür.</p>
+                  )}
+                  {submitNotice ? <p className="search-suggest-warn">{submitNotice}</p> : null}
+                </div>
+              ) : (
+                <>
+                  <h3 className="search-bestsellers-title">
+                    {settings.searchBestsellersTitle || "ÇOK SATANLAR…"}
+                  </h3>
+                  <div className="search-bestsellers">
+                    {bestsellers.map((p) => (
+                      <article key={p.id} className="search-bestseller-card">
+                        <Link
+                          href={productHref(p.slug, p.id)}
+                          onClick={() => setSearchOpen(false)}
+                        >
+                          {p.imageUrl ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img src={p.imageUrl} alt="" />
+                          ) : (
+                            <span className="css-product-bottle" aria-hidden />
+                          )}
+                          <strong>{p.name}</strong>
+                        </Link>
+                        <button
+                          type="button"
+                          className={`favorite-button${hasWish(p.id) ? " is-active" : ""}`}
+                          aria-label="Favorilere ekle"
+                          onClick={(e) => {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            toggleWish(
+                              {
+                                productId: p.id,
+                                slug: p.slug,
+                                name: p.name,
+                                imageUrl: p.imageUrl || undefined,
+                                price: p.price,
+                                salePrice: p.salePrice || undefined,
+                                stock: p.stock,
+                              },
+                              { x: rect.left + rect.width / 2, y: rect.top },
+                            );
+                          }}
+                        >
+                          <Heart size={16} />
+                        </button>
+                      </article>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </motion.div>
         )}

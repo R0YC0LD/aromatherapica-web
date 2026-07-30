@@ -22,6 +22,7 @@ import { getPublishToken, publishStorefrontToGithub } from "@/lib/cms/remote";
 import {
   changeCmsPassword,
   clearCmsData,
+  deleteStorefrontProduct,
   exportCmsBackup,
   getAuthSnapshot,
   getCmsState,
@@ -32,9 +33,18 @@ import {
   saveCmsSettings,
   subscribeAuth,
   subscribeCms,
+  upsertCustomProduct,
   upsertProductOverride,
 } from "@/lib/cms/store";
-import { DEFAULT_CMS_SETTINGS, type CmsSettings, type ProductOverride } from "@/lib/cms/types";
+import {
+  emptyCustomProduct,
+  makeUniqueSlug,
+  resolveStorefrontCatalog,
+  type CatalogRow,
+} from "@/lib/cms/resolve-catalog";
+import { STORE_NAV_CATEGORIES } from "@/lib/cms/category-map";
+import { isCmsCustomProductId } from "@/lib/cms/product-href";
+import { DEFAULT_CMS_SETTINGS, type CmsSettings, type CustomProduct, type ProductOverride } from "@/lib/cms/types";
 import { formatCurrency } from "@/lib/format";
 import { withBasePath } from "@/lib/paths";
 import { AdminStorefrontPanel } from "@/components/admin/AdminStorefrontPanel";
@@ -43,6 +53,11 @@ import "@/app/admin-panel.css";
 const IS_STATIC =
   process.env.NEXT_PUBLIC_STATIC_EXPORT === "true" ||
   Boolean(process.env.NEXT_PUBLIC_BASE_PATH);
+
+const CATEGORY_OPTIONS = STORE_NAV_CATEGORIES.map((c) => ({
+  label: c.label,
+  slug: c.href.replace("/kategori/", ""),
+}));
 
 type CatalogProduct = {
   id: number;
@@ -58,26 +73,10 @@ type CatalogProduct = {
   description: string | null;
   shortDesc: string | null;
   sku: string | null;
+  isCustom?: boolean;
 };
 
 type Tab = "dashboard" | "storefront" | "products" | "orders" | "settings" | "guide";
-
-function mergeProduct(base: CatalogProduct, ov?: ProductOverride): CatalogProduct {
-  if (!ov) return base;
-  return {
-    ...base,
-    name: ov.name ?? base.name,
-    shortDesc: ov.shortDesc ?? base.shortDesc,
-    description: ov.description ?? base.description,
-    price: ov.price ?? base.price,
-    salePrice: ov.salePrice !== undefined ? ov.salePrice : base.salePrice,
-    stock: ov.stock ?? base.stock,
-    active: ov.active ?? base.active,
-    categoryName: ov.categoryName ?? base.categoryName,
-    categoryId: ov.categoryId !== undefined ? ov.categoryId : base.categoryId,
-    imageUrl: ov.imageUrl !== undefined ? ov.imageUrl : base.imageUrl,
-  };
-}
 
 export function AdminCMS() {
   // Single source of truth: session storage via external store (fixes Pages login UI stuck)
@@ -85,6 +84,8 @@ export function AdminCMS() {
   const [tab, setTab] = useState<Tab>("dashboard");
   const [catalog, setCatalog] = useState<CatalogProduct[]>([]);
   const [overrides, setOverrides] = useState<Record<string, ProductOverride>>({});
+  const [customProducts, setCustomProducts] = useState<Record<string, CustomProduct>>({});
+  const [deletedProductIds, setDeletedProductIds] = useState<number[]>([]);
   const [settings, setSettings] = useState<CmsSettings>(DEFAULT_CMS_SETTINGS);
   const [q, setQ] = useState("");
   const [flash, setFlash] = useState<string | null>(null);
@@ -100,6 +101,8 @@ export function AdminCMS() {
   const refreshLocal = useCallback(() => {
     const state = getCmsState();
     setOverrides(state.products);
+    setCustomProducts(state.customProducts || {});
+    setDeletedProductIds(state.deletedProductIds || []);
     setSettings(state.settings);
   }, []);
 
@@ -124,10 +127,29 @@ export function AdminCMS() {
     }
   }, []);
 
-  const products = useMemo(
-    () => catalog.map((p) => mergeProduct(p, overrides[String(p.id)])),
-    [catalog, overrides],
-  );
+  const products = useMemo(() => {
+    const resolved = resolveStorefrontCatalog(catalog as CatalogRow[], {
+      products: overrides,
+      customProducts,
+      deletedProductIds,
+    });
+    return resolved.map((p) => ({
+      id: p.id,
+      slug: p.slug,
+      name: p.name,
+      categoryName: p.categoryName || null,
+      categoryId: p.categoryId ?? null,
+      price: p.price,
+      salePrice: p.salePrice ?? null,
+      stock: p.stock,
+      active: p.active,
+      imageUrl: p.images[0] || null,
+      description: p.description || null,
+      shortDesc: p.seoDescription || null,
+      sku: p.variants[0]?.sku || null,
+      isCustom: isCmsCustomProductId(p.id) || Boolean(customProducts[String(p.id)]),
+    }));
+  }, [catalog, overrides, customProducts, deletedProductIds]);
 
   const filtered = useMemo(() => {
     const needle = q.trim().toLocaleLowerCase("tr");
@@ -202,6 +224,24 @@ export function AdminCMS() {
     logoutCms();
   }
 
+  async function publishAfterSave(okMessage: string) {
+    const publishToken = getPublishToken();
+    if (publishToken) {
+      const result = await publishStorefrontToGithub(getCmsState(), publishToken);
+      setSaving(false);
+      if (result.ok) {
+        setFlash(okMessage);
+      } else {
+        setFlash(`Yerelde kaydedildi; yayın hatası: ${result.error}`);
+      }
+    } else {
+      setSaving(false);
+      setFlash(
+        `${okMessage.replace(/\.$/, "")} (yerel). Global yayın için Vitrin sekmesine GitHub token ekleyin.`,
+      );
+    }
+  }
+
   async function saveProduct(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!editing) return;
@@ -209,58 +249,117 @@ export function AdminCMS() {
     setFlash(null);
     setError(null);
     const form = new FormData(e.currentTarget);
-    const patch: ProductOverride = {
-      name: String(form.get("name") || editing.name),
-      shortDesc: String(form.get("shortDesc") || ""),
-      description: String(form.get("description") || ""),
-      price: Number(form.get("price") || editing.price),
-      salePrice: form.get("salePrice") === "" ? null : Number(form.get("salePrice")),
-      stock: Number(form.get("stock") || 0),
-      active: form.get("active") === "on",
-      categoryName: String(form.get("categoryName") || editing.categoryName || ""),
-      imageUrl: editing.imageUrl,
-    };
+    const name = String(form.get("name") || editing.name);
+    const categoryName = String(form.get("categoryName") || editing.categoryName || "Genel");
+    const price = Number(form.get("price") || editing.price);
+    const saleRaw = form.get("salePrice");
+    const salePrice = saleRaw === "" || saleRaw == null ? null : Number(saleRaw);
+    const stock = Number(form.get("stock") || 0);
+    const active = form.get("active") === "on";
+    const shortDesc = String(form.get("shortDesc") || "");
+    const description = String(form.get("description") || "");
 
-    upsertProductOverride(editing.id, patch);
-
-    if (serverMode) {
-      try {
-        const session = await fetch("/api/admin/session").then((r) => r.json());
-        await fetch("/api/admin/products", {
-          method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            id: editing.id,
-            csrfToken: session.csrfToken,
-            name: patch.name,
-            shortDesc: patch.shortDesc,
-            customDescription: patch.description,
-            customImageUrl: patch.imageUrl,
-            active: patch.active,
-          }),
-        });
-      } catch {
-        /* local already saved */
-      }
-    }
-
-    const publishToken = getPublishToken();
-    if (publishToken) {
-      const result = await publishStorefrontToGithub(getCmsState(), publishToken);
-      setSaving(false);
-      if (result.ok) {
-        setFlash("Ürün kaydedildi ve global yayınlandı.");
-      } else {
-        setFlash(`Ürün yerelde kaydedildi; yayın hatası: ${result.error}`);
-      }
+    if (editing.isCustom || isCmsCustomProductId(editing.id)) {
+      const existingSlugs = new Set(products.map((p) => p.slug).filter((s) => s !== editing.slug));
+      const slug =
+        editing.slug && editing.slug !== "yeni-urun"
+          ? editing.slug
+          : makeUniqueSlug(name, existingSlugs);
+      upsertCustomProduct({
+        id: editing.id,
+        slug,
+        name,
+        categoryId: editing.categoryId,
+        categoryName,
+        brandName: "Aromatherapica",
+        price,
+        salePrice,
+        stock,
+        active,
+        imageUrl: editing.imageUrl,
+        description,
+        shortDesc,
+        sku: editing.sku,
+        createdAt: customProducts[String(editing.id)]?.createdAt,
+      });
     } else {
-      setSaving(false);
-      setFlash(
-        "Ürün yerelde kaydedildi. Global yayın için Vitrin sekmesine GitHub token ekleyin.",
-      );
+      const patch: ProductOverride = {
+        name,
+        shortDesc,
+        description,
+        price,
+        salePrice,
+        stock,
+        active,
+        categoryName,
+        imageUrl: editing.imageUrl,
+      };
+      upsertProductOverride(editing.id, patch);
+
+      if (serverMode) {
+        try {
+          const session = await fetch("/api/admin/session").then((r) => r.json());
+          await fetch("/api/admin/products", {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: editing.id,
+              csrfToken: session.csrfToken,
+              name: patch.name,
+              shortDesc: patch.shortDesc,
+              customDescription: patch.description,
+              customImageUrl: patch.imageUrl,
+              active: patch.active,
+            }),
+          });
+        } catch {
+          /* local already saved */
+        }
+      }
     }
+
+    await publishAfterSave("Ürün kaydedildi ve global yayınlandı.");
     setEditing(null);
     refreshLocal();
+  }
+
+  function startNewProduct() {
+    const draft = emptyCustomProduct({
+      name: "Yeni ürün",
+      categoryName: CATEGORY_OPTIONS[0]?.label || "Genel",
+      price: 299,
+      stock: 10,
+      active: true,
+    });
+    setEditing({
+      id: draft.id,
+      slug: draft.slug,
+      name: draft.name,
+      categoryName: draft.categoryName,
+      categoryId: draft.categoryId,
+      price: draft.price,
+      salePrice: draft.salePrice ?? null,
+      stock: draft.stock,
+      active: draft.active,
+      imageUrl: draft.imageUrl || null,
+      description: draft.description || null,
+      shortDesc: draft.shortDesc || null,
+      sku: draft.sku || null,
+      isCustom: true,
+    });
+  }
+
+  async function onDeleteProduct(product: CatalogProduct) {
+    const ok = window.confirm(
+      `"${product.name}" ürününü siteden kaldırmak istediğinize emin misiniz?`,
+    );
+    if (!ok) return;
+    setSaving(true);
+    setError(null);
+    deleteStorefrontProduct(product.id);
+    refreshLocal();
+    await publishAfterSave("Ürün silindi / yayından kaldırıldı.");
+    if (editing?.id === product.id) setEditing(null);
   }
 
   async function onPickImage(file: File | null) {
@@ -498,6 +597,9 @@ export function AdminCMS() {
                     placeholder="Ürün, kategori veya SKU ara…"
                   />
                 </div>
+                <button type="button" className="cms-btn" onClick={startNewProduct}>
+                  + Yeni ürün
+                </button>
                 <button
                   type="button"
                   className="cms-btn secondary"
@@ -534,6 +636,11 @@ export function AdminCMS() {
                 </label>
               </div>
 
+              <p className="cms-help">
+                Yeni ürün ekleyin, kategori seçin veya silin. Kaydet / sil sonrası GitHub token varsa
+                otomatik global yayınlanır (Pages otomasyonu).
+              </p>
+
               <div className="cms-table-wrap">
                 <table className="cms-table">
                   <thead>
@@ -559,14 +666,25 @@ export function AdminCMS() {
                         </td>
                         <td>
                           <strong>{p.name}</strong>
-                          <div className="cms-help">{p.sku || p.slug}</div>
+                          <div className="cms-help">
+                            {p.isCustom ? "Manuel · " : ""}
+                            {p.sku || p.slug}
+                          </div>
                         </td>
                         <td>{p.categoryName || "—"}</td>
                         <td>{formatCurrency(p.salePrice ?? p.price)}</td>
                         <td>{p.stock}</td>
-                        <td>
+                        <td style={{ whiteSpace: "nowrap" }}>
                           <button type="button" className="cms-btn secondary" onClick={() => setEditing(p)}>
                             Düzenle
+                          </button>{" "}
+                          <button
+                            type="button"
+                            className="cms-btn danger"
+                            onClick={() => onDeleteProduct(p)}
+                            disabled={saving}
+                          >
+                            Sil
                           </button>
                         </td>
                       </tr>
@@ -855,7 +973,7 @@ export function AdminCMS() {
           >
             <div className="cms-modal-head">
               <div>
-                <h2>Ürünü düzenle</h2>
+                <h2>{editing.isCustom ? "Ürün ekle / düzenle" : "Ürünü düzenle"}</h2>
                 <p className="cms-help">{editing.slug}</p>
               </div>
               <button type="button" className="cms-btn secondary" onClick={() => setEditing(null)}>
@@ -892,12 +1010,19 @@ export function AdminCMS() {
 
               <div className="cms-field">
                 <label>Ürün adı</label>
-                <input name="name" defaultValue={editing.name} required />
+                <input name="name" defaultValue={editing.name} required key={`name-${editing.id}`} />
               </div>
               <div className="cms-fields two">
                 <div className="cms-field">
                   <label>Fiyat</label>
-                  <input name="price" type="number" step="0.01" defaultValue={editing.price} required />
+                  <input
+                    name="price"
+                    type="number"
+                    step="0.01"
+                    defaultValue={editing.price}
+                    required
+                    key={`price-${editing.id}`}
+                  />
                 </div>
                 <div className="cms-field">
                   <label>İndirimli fiyat</label>
@@ -906,31 +1031,78 @@ export function AdminCMS() {
                     type="number"
                     step="0.01"
                     defaultValue={editing.salePrice ?? ""}
+                    key={`sale-${editing.id}`}
                   />
                 </div>
                 <div className="cms-field">
                   <label>Stok</label>
-                  <input name="stock" type="number" defaultValue={editing.stock} required />
+                  <input
+                    name="stock"
+                    type="number"
+                    defaultValue={editing.stock}
+                    required
+                    key={`stock-${editing.id}`}
+                  />
                 </div>
                 <div className="cms-field">
-                  <label>Kategori adı</label>
-                  <input name="categoryName" defaultValue={editing.categoryName || ""} />
+                  <label>Kategori</label>
+                  <select
+                    name="categoryName"
+                    defaultValue={editing.categoryName || CATEGORY_OPTIONS[0]?.label || ""}
+                    key={`cat-${editing.id}`}
+                  >
+                    {CATEGORY_OPTIONS.map((c) => (
+                      <option key={c.slug} value={c.label}>
+                        {c.label}
+                      </option>
+                    ))}
+                    {editing.categoryName &&
+                    !CATEGORY_OPTIONS.some((c) => c.label === editing.categoryName) ? (
+                      <option value={editing.categoryName}>{editing.categoryName}</option>
+                    ) : null}
+                  </select>
                 </div>
               </div>
               <div className="cms-field">
                 <label>Kısa açıklama</label>
-                <textarea name="shortDesc" rows={2} defaultValue={editing.shortDesc || ""} />
+                <textarea
+                  name="shortDesc"
+                  rows={2}
+                  defaultValue={editing.shortDesc || ""}
+                  key={`short-${editing.id}`}
+                />
               </div>
               <div className="cms-field">
                 <label>Detaylı açıklama</label>
-                <textarea name="description" rows={5} defaultValue={editing.description || ""} />
+                <textarea
+                  name="description"
+                  rows={5}
+                  defaultValue={editing.description || ""}
+                  key={`desc-${editing.id}`}
+                />
               </div>
               <label className="cms-check">
-                <input type="checkbox" name="active" defaultChecked={editing.active} /> Satışta
+                <input
+                  type="checkbox"
+                  name="active"
+                  defaultChecked={editing.active}
+                  key={`active-${editing.id}`}
+                />{" "}
+                Satışta
               </label>
-              <button className="cms-btn" type="submit" disabled={saving}>
-                <Save size={16} /> {saving ? "Kaydediliyor…" : "Kaydet"}
-              </button>
+              <div className="cms-toolbar" style={{ marginTop: 8 }}>
+                <button className="cms-btn" type="submit" disabled={saving}>
+                  <Save size={16} /> {saving ? "Kaydediliyor…" : "Kaydet"}
+                </button>
+                <button
+                  type="button"
+                  className="cms-btn danger"
+                  disabled={saving}
+                  onClick={() => onDeleteProduct(editing)}
+                >
+                  Ürünü sil
+                </button>
+              </div>
             </form>
           </div>
         </div>

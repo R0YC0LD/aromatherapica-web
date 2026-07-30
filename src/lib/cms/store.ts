@@ -5,6 +5,7 @@ import {
   DEFAULT_CMS_SETTINGS,
   type CmsSettings,
   type CmsState,
+  type CustomProduct,
   type ProductOverride,
 } from "@/lib/cms/types";
 
@@ -31,33 +32,42 @@ export function subscribeAuth(listener: AuthListener) {
   return () => authListeners.delete(listener);
 }
 
+function normalizeState(parsed: Partial<CmsState> | null | undefined): CmsState {
+  const incoming = (parsed?.settings || {}) as Partial<CmsSettings>;
+  return {
+    version: CMS_VERSION,
+    products: parsed?.products || {},
+    customProducts: parsed?.customProducts || {},
+    deletedProductIds: Array.isArray(parsed?.deletedProductIds)
+      ? parsed!.deletedProductIds.map(Number).filter((n) => Number.isFinite(n))
+      : [],
+    settings: {
+      ...DEFAULT_CMS_SETTINGS,
+      ...incoming,
+      ritualCards:
+        Array.isArray(incoming.ritualCards) && incoming.ritualCards.length > 0
+          ? incoming.ritualCards
+          : DEFAULT_CMS_SETTINGS.ritualCards,
+      conscienceItems:
+        Array.isArray(incoming.conscienceItems) && incoming.conscienceItems.length > 0
+          ? incoming.conscienceItems
+          : DEFAULT_CMS_SETTINGS.conscienceItems,
+    },
+  };
+}
+
+function emptyState(): CmsState {
+  return normalizeState({});
+}
+
 function readState(): CmsState {
-  if (typeof window === "undefined") {
-    return { products: {}, settings: { ...DEFAULT_CMS_SETTINGS }, version: CMS_VERSION };
-  }
+  if (typeof window === "undefined") return emptyState();
   try {
     const raw = localStorage.getItem(LS_STATE);
-    if (!raw) return { products: {}, settings: { ...DEFAULT_CMS_SETTINGS }, version: CMS_VERSION };
-    const parsed = JSON.parse(raw) as Partial<CmsState>;
-    const incoming = (parsed.settings || {}) as Partial<CmsSettings>;
-    return {
-      version: CMS_VERSION,
-      products: parsed.products || {},
-      settings: {
-        ...DEFAULT_CMS_SETTINGS,
-        ...incoming,
-        ritualCards:
-          Array.isArray(incoming.ritualCards) && incoming.ritualCards.length > 0
-            ? incoming.ritualCards
-            : DEFAULT_CMS_SETTINGS.ritualCards,
-        conscienceItems:
-          Array.isArray(incoming.conscienceItems) && incoming.conscienceItems.length > 0
-            ? incoming.conscienceItems
-            : DEFAULT_CMS_SETTINGS.conscienceItems,
-      },
-    };
+    if (!raw) return emptyState();
+    return normalizeState(JSON.parse(raw) as Partial<CmsState>);
   } catch {
-    return { products: {}, settings: { ...DEFAULT_CMS_SETTINGS }, version: CMS_VERSION };
+    return emptyState();
   }
 }
 
@@ -92,6 +102,32 @@ export function removeProductOverride(productId: number | string) {
   writeState(state);
 }
 
+export function upsertCustomProduct(product: CustomProduct) {
+  const state = readState();
+  const key = String(product.id);
+  state.customProducts[key] = {
+    ...product,
+    updatedAt: new Date().toISOString(),
+  };
+  state.deletedProductIds = state.deletedProductIds.filter((id) => id !== product.id);
+  writeState(state);
+  return state.customProducts[key];
+}
+
+/** Soft-delete base catalog products; hard-delete admin-created ones. */
+export function deleteStorefrontProduct(productId: number) {
+  const state = readState();
+  const key = String(productId);
+  if (state.customProducts[key]) {
+    delete state.customProducts[key];
+    delete state.products[key];
+  } else {
+    if (!state.deletedProductIds.includes(productId)) state.deletedProductIds.push(productId);
+    delete state.products[key];
+  }
+  writeState(state);
+}
+
 export function getCmsSettings(): CmsSettings {
   return readState().settings;
 }
@@ -112,33 +148,14 @@ export function exportCmsBackup(): string {
 }
 
 export function importCmsBackup(json: string) {
-  const parsed = JSON.parse(json) as CmsState;
+  const parsed = JSON.parse(json) as Partial<CmsState>;
   if (!parsed || typeof parsed !== "object") throw new Error("Geçersiz yedek");
-  writeState({
-    version: CMS_VERSION,
-    products: parsed.products || {},
-    settings: { ...DEFAULT_CMS_SETTINGS, ...(parsed.settings || {}) },
-  });
+  writeState(normalizeState(parsed));
 }
 
 /** Replace local CMS with remote/global storefront (all visitors see this). */
 export function applyRemoteCmsState(remote: CmsState) {
-  writeState({
-    version: CMS_VERSION,
-    products: remote.products || {},
-    settings: {
-      ...DEFAULT_CMS_SETTINGS,
-      ...remote.settings,
-      ritualCards:
-        Array.isArray(remote.settings?.ritualCards) && remote.settings.ritualCards.length > 0
-          ? remote.settings.ritualCards
-          : DEFAULT_CMS_SETTINGS.ritualCards,
-      conscienceItems:
-        Array.isArray(remote.settings?.conscienceItems) && remote.settings.conscienceItems.length > 0
-          ? remote.settings.conscienceItems
-          : DEFAULT_CMS_SETTINGS.conscienceItems,
-    },
-  });
+  writeState(normalizeState(remote));
 }
 
 export function clearCmsData() {

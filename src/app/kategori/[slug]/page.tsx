@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { getProducts } from "@/lib/catalog/service";
+import { CategorySearchAwareGrid } from "@/components/CategorySearchAwareGrid";
 import { CategoryProductGrid } from "@/components/CategoryProductGrid";
 import { BackButton } from "@/components/BackButton";
 import { getAllStaticCategorySlugs } from "@/lib/catalog/static-data";
@@ -65,7 +67,11 @@ export default async function CategoryPage({
       </header>
 
       <div className="catalog-shell">
-        <CategoryProductGrid products={products} emptyMessage={message} />
+        <Suspense
+          fallback={<CategoryProductGrid products={products} emptyMessage={message} />}
+        >
+          <CategorySearchAwareGrid products={products} emptyMessage={message} />
+        </Suspense>
       </div>
     </section>
   );

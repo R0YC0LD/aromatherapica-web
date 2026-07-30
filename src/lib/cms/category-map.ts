@@ -140,6 +140,10 @@ export function productMatchesCategorySlug(
 
   if (productCatSlug && allowedSlugs.has(productCatSlug)) return true;
 
+  // Admin panel stores STORE_NAV labels (e.g. "Hediye", "Taşıyıcı Yağlar")
+  const navMatch = STORE_NAV_CATEGORIES.find((c) => c.href === `/kategori/${categorySlug}`);
+  if (navMatch && (product.categoryName || "").trim() === navMatch.label) return true;
+
   const name = (product.name || "").toLocaleLowerCase("tr");
   const catName = (product.categoryName || "").toLocaleLowerCase("tr");
   if (rule?.nameIncludes?.some((k) => name.includes(k) || catName.includes(k))) return true;

@@ -33,6 +33,10 @@ export function normalizeCmsState(input: Partial<CmsState> | null | undefined): 
   return {
     version: CMS_VERSION,
     products: input?.products || {},
+    customProducts: input?.customProducts || {},
+    deletedProductIds: Array.isArray(input?.deletedProductIds)
+      ? input!.deletedProductIds.map(Number).filter((n) => Number.isFinite(n))
+      : [],
     settings: {
       ...DEFAULT_CMS_SETTINGS,
       ...incoming,
@@ -50,11 +54,12 @@ export function normalizeCmsState(input: Partial<CmsState> | null | undefined): 
 
 /** Public payload — never include secrets. */
 export function toPublishPayload(state: CmsState): CmsState {
-  const settings = { ...state.settings };
   return {
     version: CMS_VERSION,
     products: state.products || {},
-    settings,
+    customProducts: state.customProducts || {},
+    deletedProductIds: state.deletedProductIds || [],
+    settings: { ...state.settings },
   };
 }
 
