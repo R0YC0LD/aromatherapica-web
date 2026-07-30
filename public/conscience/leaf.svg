@@ -1,5 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <circle cx="60" cy="60" r="58" fill="#eef6f0" stroke="#082f6b" stroke-opacity=".18"/>
-  <path d="M60 28c22 18 32 40 32 56-16 8-26 8-32 8s-16 0-32-8c0-16 10-38 32-56z" fill="#2f6b4f"/>
-  <path d="M60 40v48" stroke="#eef6f0" stroke-width="3" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" role="img" aria-hidden="true">
+  <defs>
+    <radialGradient id="lfBg" cx="42%" cy="32%" r="68%">
+      <stop offset="0%" stop-color="#f5faf6"/>
+      <stop offset="100%" stop-color="#dce9df"/>
+    </radialGradient>
+    <linearGradient id="lfBody" x1="56" y1="36" x2="108" y2="124">
+      <stop offset="0%" stop-color="#4a8f68"/>
+      <stop offset="55%" stop-color="#2f6b4f"/>
+      <stop offset="100%" stop-color="#245540"/>
+    </linearGradient>
+  </defs>
+  <circle cx="80" cy="80" r="76" fill="url(#lfBg)"/>
+  <circle cx="80" cy="80" r="76" fill="none" stroke="#082f6b" stroke-opacity=".1" stroke-width="1.2"/>
+  <!-- leaf -->
+  <path d="M80 34c26 20 40 48 40 72-18 12-30 14-40 14s-22-2-40-14c0-24 14-52 40-72z" fill="url(#lfBody)"/>
+  <path d="M80 46c16 14 26 34 28 52" stroke="#e8f3eb" stroke-opacity=".45" stroke-width="2" stroke-linecap="round"/>
+  <path d="M80 48v68" stroke="#eef6f0" stroke-width="2.6" stroke-linecap="round"/>
+  <!-- veins -->
+  <path d="M80 62c-10 8-16 18-18 28M80 78c10 7 15 16 17 26M80 94c-8 6-12 12-14 18M80 94c8 6 12 12 14 18" stroke="#e8f3eb" stroke-opacity=".55" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- tiny bud accent -->
+  <circle cx="108" cy="52" r="5" fill="#c9a962" fill-opacity=".55"/>
+  <circle cx="108" cy="52" r="2.5" fill="#f7f1e4" fill-opacity=".7"/>
 </svg>

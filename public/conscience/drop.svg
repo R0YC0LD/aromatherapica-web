@@ -1,5 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <circle cx="60" cy="60" r="58" fill="#eef3f8" stroke="#082f6b" stroke-opacity=".18"/>
-  <path d="M60 26c18 24 28 38 28 52a28 28 0 1 1-56 0c0-14 10-28 28-52z" fill="#082f6b"/>
-  <ellipse cx="52" cy="68" rx="7" ry="10" fill="#fff" fill-opacity=".28"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none" role="img" aria-hidden="true">
+  <defs>
+    <radialGradient id="drBg" cx="38%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f4f8fb"/>
+      <stop offset="100%" stop-color="#d8e4ef"/>
+    </radialGradient>
+    <linearGradient id="drDrop" x1="68" y1="34" x2="100" y2="124">
+      <stop offset="0%" stop-color="#3d6a9a"/>
+      <stop offset="100%" stop-color="#082f6b"/>
+    </linearGradient>
+  </defs>
+  <circle cx="80" cy="80" r="76" fill="url(#drBg)"/>
+  <circle cx="80" cy="80" r="76" fill="none" stroke="#082f6b" stroke-opacity=".1" stroke-width="1.2"/>
+  <!-- main drop -->
+  <path d="M80 36c18 24 30 42 30 58a30 30 0 1 1-60 0c0-16 12-34 30-58z" fill="url(#drDrop)"/>
+  <!-- highlight -->
+  <path d="M68 70c-2 10 0 22 8 30" stroke="#fff" stroke-opacity=".28" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="70" cy="78" rx="6" ry="10" fill="#fff" fill-opacity=".18"/>
+  <!-- oil shimmer -->
+  <circle cx="92" cy="96" r="4" fill="#c9a962" fill-opacity=".55"/>
+  <path d="M54 48c8-4 14-2 18 4" stroke="#c9a962" stroke-opacity=".45" stroke-width="1.8" stroke-linecap="round"/>
 </svg>
