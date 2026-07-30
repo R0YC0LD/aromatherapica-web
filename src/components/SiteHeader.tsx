@@ -115,23 +115,33 @@ export function SiteHeader() {
 
       <header className={`site-header${scrolled ? " is-scrolled" : ""}${hidden ? " is-hidden" : ""}`}>
         <div className="header-main">
-          <div className="header-mobile-tools">
-            <button
-              className="icon-button menu-button"
-              type="button"
-              aria-label="Menüyü aç"
-              onClick={() => setMenuOpen(true)}
-            >
-              <Menu size={20} />
-            </button>
-            <button
-              className="icon-button search-button"
-              type="button"
-              aria-label="Arama yap"
-              onClick={() => setSearchOpen(true)}
-            >
-              <Search size={19} />
-            </button>
+          <div className="header-left">
+            <div className="header-mobile-tools">
+              <button
+                className="icon-button menu-button"
+                type="button"
+                aria-label="Menüyü aç"
+                onClick={() => setMenuOpen(true)}
+              >
+                <Menu size={20} />
+              </button>
+              <button
+                className="icon-button search-button"
+                type="button"
+                aria-label="Arama yap"
+                onClick={() => setSearchOpen(true)}
+              >
+                <Search size={19} />
+              </button>
+            </div>
+
+            <nav className="main-nav" aria-label="Ana menü">
+              {MAIN_NAV.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
           </div>
 
           <SecretLogo href="/" className="wordmark">
@@ -172,14 +182,6 @@ export function SiteHeader() {
             </button>
           </div>
         </div>
-
-        <nav className="main-nav" aria-label="Ana menü">
-          {MAIN_NAV.map((item) => (
-            <Link key={item.href} href={item.href}>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
 
         <nav className="category-nav" aria-label="Ürün kategorileri">
           {CATEGORY_NAV.map((item) => (
