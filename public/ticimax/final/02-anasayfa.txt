@@ -1,0 +1,589 @@
+<style>
+.ar-v2 .ar-home {
+  overflow: clip;
+  background: var(--ar-paper);
+}
+
+.ar-v2 .ar-native-home-source {
+  display: none !important;
+}
+
+.ar-v2 .ar-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  min-height: min(790px, calc(100vh - 120px));
+  background: linear-gradient(130deg, #dcebea, #eef4f2 48%, #d8e8e2);
+}
+
+.ar-v2 .ar-hero-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 620px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 65% 22%, rgba(255,255,255,.76), transparent 17%),
+    radial-gradient(circle at 48% 50%, rgba(8,47,107,.08), transparent 42%);
+}
+
+.ar-v2 .ar-hero-media::before,
+.ar-v2 .ar-hero-media::after {
+  content: "";
+  position: absolute;
+  width: min(70vw, 660px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(8,47,107,.17);
+  border-radius: 50%;
+  animation: ar-orbit 34s linear infinite;
+}
+
+.ar-v2 .ar-hero-media::after {
+  width: min(53vw, 490px);
+  animation-direction: reverse;
+  animation-duration: 27s;
+}
+
+.ar-v2 .ar-hero-product {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: min(68%, 520px);
+  height: min(72%, 600px);
+}
+
+.ar-v2 .ar-hero-product img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 46px 35px rgba(8,47,107,.22));
+}
+
+.ar-v2 .ar-hero-brand-visual {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: min(52%, 340px);
+  aspect-ratio: 1;
+  padding: 14%;
+  border: 1px solid rgba(8,47,107,.14);
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  box-shadow: 0 40px 80px rgba(8,47,107,.12);
+}
+
+.ar-v2 .ar-hero-brand-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 24px rgba(8,47,107,.16));
+}
+
+.ar-v2 .ar-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(64px, 9vw, 145px);
+  background: rgba(250,248,242,.77);
+}
+
+.ar-v2 .ar-hero-copy h1 {
+  margin: 0;
+  font-family: var(--ar-serif);
+  font-size: clamp(58px, 6.2vw, 96px);
+  font-weight: 500;
+  line-height: .96;
+  letter-spacing: -.025em;
+}
+
+.ar-v2 .ar-hero-copy > p:not(.ar-eyebrow) {
+  max-width: 620px;
+  margin: 28px 0 34px;
+  color: var(--ar-muted);
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.78;
+}
+
+.ar-v2 .ar-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ar-v2 .ar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 12px 24px;
+  border: 1px solid var(--ar-navy);
+  color: #fff;
+  background: var(--ar-navy);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  transition: color .25s ease, background .25s ease, transform .25s var(--ar-ease);
+}
+
+.ar-v2 .ar-button:hover { transform: translateY(-2px); }
+.ar-v2 .ar-button-outline { color: var(--ar-navy); background: transparent; }
+
+.ar-v2 .ar-hero-values {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 38px 0 0;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--ar-line);
+  list-style: none;
+  color: var(--ar-muted);
+  font-size: 11px;
+}
+
+.ar-v2 .ar-hero-values li::before {
+  content: "◇";
+  margin-right: 7px;
+  color: var(--ar-gold);
+}
+
+.ar-v2 .ar-gift {
+  padding: clamp(58px, 7vw, 96px) 24px;
+  color: var(--ar-navy);
+  background: var(--ar-mist);
+  text-align: center;
+}
+
+.ar-v2 .ar-gift h2 {
+  max-width: 900px;
+  margin: 0 auto 16px;
+  font-family: var(--ar-serif);
+  font-size: clamp(38px, 4.6vw, 66px);
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.ar-v2 .ar-gift p { margin: 0 0 24px; color: var(--ar-muted); }
+
+.ar-v2 .ar-text-link {
+  display: inline-flex;
+  gap: 9px;
+  align-items: center;
+  padding-bottom: 5px;
+  border-bottom: 1px solid currentColor;
+  color: var(--ar-navy);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.ar-v2 .ar-rituals {
+  width: var(--ar-container);
+  margin-inline: auto;
+  padding: clamp(80px, 10vw, 140px) 0;
+}
+
+.ar-v2 .ar-ritual-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr);
+  gap: 48px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+
+.ar-v2 .ar-ritual-intro h2 {
+  margin: 0;
+  font-family: var(--ar-serif);
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.ar-v2 .ar-ritual-intro > div:last-child p {
+  margin: 0 0 22px;
+  color: var(--ar-muted);
+  line-height: 1.75;
+}
+
+.ar-v2 .ar-ritual-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.ar-v2 .ar-ritual-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 640px;
+  padding: 38px;
+  overflow: hidden;
+  color: #fff;
+  background: var(--ar-navy);
+  isolation: isolate;
+}
+
+.ar-v2 .ar-ritual-card:nth-child(2) { color: #392828; background: linear-gradient(145deg, #ddb3a5, #b86d6f); }
+.ar-v2 .ar-ritual-card:nth-child(3) { color: #193b35; background: linear-gradient(145deg, #cbdac3, #82a793); }
+
+.ar-v2 .ar-ritual-card::before,
+.ar-v2 .ar-ritual-card::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 74%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255,255,255,.28);
+  border-radius: 50%;
+  top: 10%;
+  right: -20%;
+  transition: transform .8s var(--ar-ease);
+}
+
+.ar-v2 .ar-ritual-card::after { width: 46%; top: 24%; right: -7%; }
+.ar-v2 .ar-ritual-card:hover::before { transform: rotate(16deg) scale(1.04); }
+
+.ar-v2 .ar-ritual-card small {
+  margin-bottom: 10px;
+  font-size: 10px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+}
+
+.ar-v2 .ar-ritual-card h3 {
+  margin: 0;
+  font-family: var(--ar-serif);
+  font-size: clamp(36px, 3vw, 50px);
+  font-weight: 500;
+  line-height: 1.06;
+}
+
+.ar-v2 .ar-ritual-card p {
+  min-height: 54px;
+  margin: 18px 0 24px;
+  opacity: .82;
+}
+
+.ar-v2 .ar-editorial {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 720px;
+  background: #e8eeec;
+}
+
+.ar-v2 .ar-editorial-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 640px;
+  overflow: hidden;
+  background: radial-gradient(circle at 25% 22%, rgba(255,255,255,.8), transparent 24%), linear-gradient(145deg, #c8ded7, #9dbfb8);
+}
+
+.ar-v2 .ar-editorial-media img {
+  width: min(70%, 520px);
+  height: min(75%, 600px);
+  object-fit: contain;
+  filter: drop-shadow(0 44px 34px rgba(8,47,107,.2));
+}
+
+.ar-v2 .ar-editorial-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(64px, 8vw, 130px);
+  background: #f4f0e8;
+}
+
+.ar-v2 .ar-editorial-copy h2 {
+  margin: 0;
+  font-family: var(--ar-serif);
+  font-size: clamp(46px, 5vw, 74px);
+  font-weight: 500;
+  line-height: 1.02;
+}
+
+.ar-v2 .ar-editorial-copy > p:not(.ar-eyebrow) {
+  margin: 26px 0;
+  color: var(--ar-muted);
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.ar-v2 .ar-editorial-points {
+  margin: 8px 0 34px;
+  border-top: 1px solid var(--ar-line);
+}
+
+.ar-v2 .ar-editorial-points div {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  align-items: center;
+  min-height: 60px;
+  border-bottom: 1px solid var(--ar-line);
+  font-size: 13px;
+}
+
+.ar-v2 .ar-editorial-points b { color: var(--ar-gold); }
+.ar-v2 .ar-editorial-copy .ar-button { align-self: flex-start; }
+
+.ar-v2 .ar-marquee {
+  display: flex;
+  align-items: center;
+  height: 78px;
+  overflow: hidden;
+  color: #fff;
+  background: var(--ar-navy);
+}
+
+.ar-v2 .ar-marquee-track {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 38px;
+  min-width: max-content;
+  padding-left: 38px;
+  animation: ar-marquee 34s linear infinite;
+}
+
+.ar-v2 .ar-marquee span { font-family: var(--ar-serif); font-size: 24px; }
+.ar-v2 .ar-marquee i { width: 7px; height: 7px; border: 1px solid #d7bd71; border-radius: 50%; }
+
+.ar-v2 .ar-brand-statement {
+  padding: clamp(84px, 10vw, 150px) 24px;
+  color: var(--ar-ink);
+  background: #f4f0e8;
+  text-align: center;
+}
+
+.ar-v2 .ar-brand-statement h2 {
+  max-width: 1480px;
+  margin: 24px auto 46px;
+  font-family: var(--ar-serif);
+  font-size: clamp(34px, 4vw, 62px);
+  font-weight: 500;
+  line-height: 1.18;
+}
+
+.ar-v2 .ar-brand-statement strong,
+.ar-v2 .ar-brand-statement span { display: block; }
+.ar-v2 .ar-brand-statement strong { font-family: var(--ar-serif); font-size: 28px; }
+.ar-v2 .ar-brand-statement span { margin-top: 8px; letter-spacing: .22em; }
+
+@keyframes ar-orbit { to { transform: rotate(360deg); } }
+@keyframes ar-marquee { to { transform: translateX(-50%); } }
+
+@media (max-width: 980px) {
+  .ar-v2 .ar-hero { grid-template-columns: 1fr; }
+  .ar-v2 .ar-hero-copy { order: -1; padding: 76px max(28px, 7vw); }
+  .ar-v2 .ar-hero-media { min-height: 560px; }
+  .ar-v2 .ar-ritual-grid { grid-template-columns: 1fr 1fr; }
+  .ar-v2 .ar-ritual-card:last-child { grid-column: 1 / -1; min-height: 500px; }
+  .ar-v2 .ar-editorial { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .ar-v2 .ar-hero-copy { padding: 62px 24px; }
+  .ar-v2 .ar-hero-copy h1 { font-size: clamp(52px, 17vw, 72px); }
+  .ar-v2 .ar-hero-media { min-height: 450px; }
+  .ar-v2 .ar-hero-product { width: 76%; height: 75%; }
+  .ar-v2 .ar-hero-values { display: grid; gap: 10px; }
+  .ar-v2 .ar-ritual-intro { grid-template-columns: 1fr; gap: 24px; }
+  .ar-v2 .ar-ritual-grid { grid-template-columns: 1fr; }
+  .ar-v2 .ar-ritual-card,
+  .ar-v2 .ar-ritual-card:last-child { grid-column: auto; min-height: 520px; padding: 30px; }
+  .ar-v2 .ar-editorial-media { min-height: 460px; }
+  .ar-v2 .ar-editorial-copy { padding: 62px 24px; }
+}
+
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var VERSION = "2026.07.29-final-home-1";
+  if (window.__AR_FINAL_HOME__ === VERSION) return;
+  window.__AR_FINAL_HOME__ = VERSION;
+
+  var doc = document;
+
+  function qs(selector, scope) {
+    try { return (scope || doc).querySelector(selector); } catch (error) { return null; }
+  }
+
+  function qsa(selector, scope) {
+    try { return Array.prototype.slice.call((scope || doc).querySelectorAll(selector)); } catch (error) { return []; }
+  }
+
+  function imageSource(img) {
+    if (!img) return "";
+    var source = img.currentSrc || img.getAttribute("src") || img.getAttribute("data-src") || img.getAttribute("data-original") || "";
+    if (!source || /noimage|no-image|resim-hazirlaniyor|placeholder|default-product|data:image\/gif/i.test(source)) return "";
+    return source;
+  }
+
+  function productImage(item) {
+    return imageSource(qs(".productImage img, [class*='productImage'] img, img", item));
+  }
+
+  function categoryOf(item) {
+    var detail = qs(".productDetail", item);
+    var value = detail && detail.dataset ? (detail.dataset.category1 || detail.dataset.category || "") : "";
+    return String(value || item.getAttribute("data-category") || item.textContent || "").toLocaleLowerCase("tr-TR");
+  }
+
+  function assetVisual(source, className, alt) {
+    if (source) {
+      return '<div class="' + className + '"><img src="' + source + '" alt="' + (alt || "") + '" width="640" height="720" decoding="async"></div>';
+    }
+    var emblem = (window.AR_THEME_CONFIG && window.AR_THEME_CONFIG.emblemUrl) || "/Uploads/EditorUploads/aromatherapica-emblem.png";
+    return '<div class="ar-hero-brand-visual"><img src="' + emblem + '" alt="Aromatherapica amblemi" width="320" height="320"></div>';
+  }
+
+  function collectNativeProducts() {
+    var seen = [];
+    return qsa(".productItem, [class~='productItem']").filter(function (item) {
+      if (item.closest("#ar-site-header, #ar-site-footer, .ar-home")) return false;
+      if (seen.indexOf(item) >= 0) return false;
+      seen.push(item);
+      return true;
+    }).slice(0, 8);
+  }
+
+  function sourceRoot(products) {
+    if (!products.length) return null;
+    return products[0].closest("#divIcerik, .mainContainer, .contentWrapper, .HomePage, main");
+  }
+
+  function build(products) {
+    if (qs("#ar-main")) return;
+    var firstImage = products.map(productImage).find(Boolean) || "";
+    var secondImage = products.slice(1).map(productImage).find(Boolean) || firstImage;
+    var main = doc.createElement("main");
+    main.id = "ar-main";
+    main.className = "ar-home";
+    main.innerHTML =
+      '<section class="ar-hero">' +
+        '<div class="ar-hero-media">' + assetVisual(firstImage, "ar-hero-product", "") + "</div>" +
+        '<div class="ar-hero-copy">' +
+          '<p class="ar-eyebrow">Doğanın bilgisinden modern bakım ritüellerine</p>' +
+          '<h1>Saf içerikler.<br>Özenli ritüeller.</h1>' +
+          '<p>Bitkilerin özünü, duyulara hitap eden etkili bakım formülleriyle buluşturuyoruz. Günlük ritüelinize iyi gelecek gerçek Aromatherapica ürünlerini keşfedin.</p>' +
+          '<div class="ar-actions"><a class="ar-button" href="/cilt-bakimi">Cilt bakımını keşfet</a><a class="ar-button ar-button-outline" href="/ucucu-yaglar">Aromaterapi yağları</a></div>' +
+          '<ul class="ar-hero-values"><li>Bitkisel içerikler</li><li>Özenli formüller</li><li>Güvenli ödeme</li></ul>' +
+        "</div>" +
+      "</section>" +
+      '<section class="ar-gift ar-reveal"><p class="ar-eyebrow">Aromatherapica’dan size</p><h2>Bakım ritüelinize eşlik eden özenli seçkiler</h2><p>Güncel kampanyaları ve gerçek ürünleri tek yerde keşfedin.</p><a class="ar-text-link" href="/urunler">Şimdi keşfet <span>→</span></a></section>' +
+      '<section class="ar-product-zone" aria-labelledby="ar-products-title">' +
+        '<div class="ar-section-head ar-reveal"><div><p class="ar-eyebrow">Aromatherapica seçkisi</p><h2 id="ar-products-title">Çok sevilenler</h2></div>' +
+          '<div class="ar-filters" role="group" aria-label="Ürün filtreleri"><button class="is-active" type="button" data-ar-filter="all">Tümü</button><button type="button" data-ar-filter="cilt">Cilt Bakımı</button><button type="button" data-ar-filter="yağ">Uçucu Yağlar</button><button type="button" data-ar-filter="özel">Özel Bakım</button></div>' +
+        "</div>" +
+        '<div class="ar-product-grid" id="ar-real-products"></div>' +
+      "</section>" +
+      '<section class="ar-rituals">' +
+        '<div class="ar-ritual-intro ar-reveal"><div><p class="ar-eyebrow">Kendinize ayırdığınız anlar</p><h2>Ritüelinizi seçin</h2></div><div><p>Saf bitkisel içeriklerle hazırlanan ürünleri bakım ihtiyacınıza göre keşfedin.</p><a class="ar-text-link" href="/urunler">Tüm ürünleri gör <span>→</span></a></div></div>' +
+        '<div class="ar-ritual-grid">' +
+          '<article class="ar-ritual-card ar-reveal"><small>Saf ve konsantre</small><h3>Aromaterapi Yağları</h3><p>Ruh halinize ve günlük ritüelinize eşlik eden bitkisel özler.</p><a class="ar-text-link" href="/ucucu-yaglar">Keşfet <span>→</span></a></article>' +
+          '<article class="ar-ritual-card ar-reveal"><small>Günlük bakım</small><h3>Cilt Bakım Serisi</h3><p>Cildin dengesini gözeten zengin ve nazik formüller.</p><a class="ar-text-link" href="/cilt-bakimi">Keşfet <span>→</span></a></article>' +
+          '<article class="ar-ritual-card ar-reveal"><small>Bütünsel bakım</small><h3>Saç ve Vücut</h3><p>Günlük bakımınıza doğanın sakin ritmini taşıyan seçkiler.</p><a class="ar-text-link" href="/sac-bakimi">Keşfet <span>→</span></a></article>' +
+        "</div>" +
+      "</section>" +
+      '<section class="ar-editorial">' +
+        '<div class="ar-editorial-media ar-reveal">' + assetVisual(secondImage, "ar-hero-product", "") + "</div>" +
+        '<div class="ar-editorial-copy ar-reveal"><p class="ar-eyebrow">Bitkilerden ilham alan formüller</p><h2>Cildinizin ritmini dinleyin</h2><p>Aromatherapica ürünlerini ihtiyacınıza göre seçin ve bakımınızı sürdürülebilir bir ritüele dönüştürün.</p><div class="ar-editorial-points"><div><b>01</b><span>İhtiyacınızı belirleyin</span></div><div><b>02</b><span>Doğru ürünü seçin</span></div><div><b>03</b><span>Ritüelinizi düzenli uygulayın</span></div></div><a class="ar-button" href="/urunler">Bakım seçkisini keşfet</a></div>' +
+      "</section>" +
+      '<section class="ar-marquee" aria-label="Öne çıkan içerikler"><div class="ar-marquee-track"><span>Lavanta</span><i></i><span>Calendula</span><i></i><span>Tamanu</span><i></i><span>Üzüm Çekirdeği</span><i></i><span>Pirinç Kepeği</span><i></i><span>Biberiye</span><i></i><span>Lavanta</span><i></i><span>Calendula</span><i></i><span>Tamanu</span><i></i><span>Üzüm Çekirdeği</span><i></i></div></section>' +
+      '<section class="ar-brand-statement ar-reveal"><p class="ar-eyebrow">Doğanın bilgisinden ilham alıyoruz</p><h2>Aromatherapica, bitkisel içerikleri duyusal ve özenli bakım ritüelleriyle buluşturur.</h2><strong>ÖDÜNSÜZ BAKIM</strong><span>SAF. ÖZENLİ. ETKİLİ.</span></section>';
+
+    var footer = qs("#ar-site-footer");
+    bodyInsert(main, footer);
+
+    var grid = qs("#ar-real-products", main);
+    if (products.length) {
+      products.forEach(function (item) {
+        item.dataset.arHomeCategory = categoryOf(item);
+        grid.appendChild(item);
+      });
+    } else {
+      grid.innerHTML = '<div class="ar-empty-state"><div><strong>Ürünler yükleniyor</strong><span>Ticimax vitrini etkinleştiğinde gerçek ürünler bu alanda gösterilir.</span></div></div>';
+    }
+
+    bindFilters(grid);
+    watchLateProducts(grid);
+    reveal(main);
+  }
+
+  function bodyInsert(node, before) {
+    if (before && before.parentNode) before.parentNode.insertBefore(node, before);
+    else doc.body.appendChild(node);
+  }
+
+  function bindFilters(grid) {
+    qsa("[data-ar-filter]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var filter = button.getAttribute("data-ar-filter");
+        qsa("[data-ar-filter]").forEach(function (item) { item.classList.toggle("is-active", item === button); });
+        // Ticimax native .productItem nodes (enhanced as .ar-product-card)
+        qsa(".ar-product-card, .productItem", grid).forEach(function (card) {
+          var category = card.dataset.arHomeCategory || categoryOf(card);
+          card.hidden = filter !== "all" && category.indexOf(filter) < 0;
+        });
+      });
+    });
+  }
+
+  function watchLateProducts(grid) {
+    if (!window.MutationObserver || !grid) return;
+    var tries = 0;
+    var timer = window.setInterval(function () {
+      tries += 1;
+      var extras = collectNativeProducts().filter(function (item) {
+        return !grid.contains(item);
+      });
+      extras.forEach(function (item) {
+        item.dataset.arHomeCategory = categoryOf(item);
+        grid.appendChild(item);
+      });
+      if (extras.length && qs(".ar-empty-state", grid)) {
+        var empty = qs(".ar-empty-state", grid);
+        if (empty && empty.parentNode) empty.parentNode.removeChild(empty);
+      }
+      if (tries >= 20) window.clearInterval(timer);
+    }, 500);
+  }
+
+  function reveal(scope) {
+    var items = qsa(".ar-reveal", scope);
+    if (!("IntersectionObserver" in window)) {
+      items.forEach(function (item) { item.classList.add("is-visible"); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: .07, rootMargin: "0px 0px -6% 0px" });
+    items.forEach(function (item) { observer.observe(item); });
+  }
+
+  function init() {
+    if (!doc.body || !doc.body.classList.contains("ar-page-home")) return;
+    var products = collectNativeProducts();
+    var source = sourceRoot(products);
+    build(products);
+    if (source && source !== doc.body && !source.contains(qs("#ar-main"))) {
+      source.classList.add("ar-native-home-source");
+    }
+  }
+
+  if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", init, { once: true });
+  else init();
+  window.addEventListener("ar:core-ready", init, { once: true });
+})();
+
+</script>

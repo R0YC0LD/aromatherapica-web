@@ -740,15 +740,7 @@ export function AdminCMS() {
             </div>
           )}
 
-          {tab === "ticimax" && (
-            <AdminTicimaxPanel
-              settings={settings}
-              onSaved={(next, message) => {
-                setSettings(next);
-                setFlash(message);
-              }}
-            />
-          )}
+          {tab === "ticimax" && <AdminTicimaxPanel />}
 
           {tab === "settings" && (
             <div style={{ display: "grid", gap: "1rem" }}>

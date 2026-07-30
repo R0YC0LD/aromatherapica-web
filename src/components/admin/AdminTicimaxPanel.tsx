@@ -1,145 +1,181 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Check, Copy, ExternalLink } from "lucide-react";
-import {
-  CUSTOM_SITE_URL,
-  TICIMAX_DINAMIK_URL,
-  buildEmbedScript,
-  buildRedirectScript,
-} from "@/lib/ticimax/dinamik-script";
-import type { CmsSettings } from "@/lib/cms/types";
-import { saveCmsSettings } from "@/lib/cms/store";
+import { withBasePath } from "@/lib/paths";
 
-export function AdminTicimaxPanel({
-  settings,
-  onSaved,
-}: {
-  settings: CmsSettings;
-  onSaved: (next: CmsSettings, message: string) => void;
-}) {
-  const [mode, setMode] = useState<"redirect" | "embed">("redirect");
-  const [customUrl, setCustomUrl] = useState(CUSTOM_SITE_URL);
-  const [storeUrl, setStoreUrl] = useState(settings.ticimaxStoreUrl || "https://aromatherapica.com");
-  const [copied, setCopied] = useState(false);
+const TICIMAX_DINAMIK_URL =
+  "https://aromatherapica.com/Admin/DinamikScriptYonetimi.aspx?adminlang=tr&lang=tr";
 
-  const script = useMemo(
-    () => (mode === "redirect" ? buildRedirectScript(customUrl) : buildEmbedScript(customUrl)),
-    [mode, customUrl],
-  );
+/** WebSitesi FINAL_TICIMAX_SITE panel paste order */
+const PANEL_SCRIPTS: Array<{
+  id: string;
+  file: string;
+  target: string;
+  note?: string;
+}> = [
+  {
+    id: "01",
+    file: "01-tum-sayfalar.txt",
+    target: "Tüm Sayfalar",
+    note: "Global CSS+JS — header, footer, ürün kartları, arama",
+  },
+  {
+    id: "10",
+    file: "10-tum-sayfalar-header.txt",
+    target: "Tüm Sayfalar - Header",
+  },
+  {
+    id: "02",
+    file: "02-anasayfa.txt",
+    target: "Anasayfa",
+    note: "Hero + Ticimax .productItem vitrini (otomatik ürün çekimi)",
+  },
+  { id: "03", file: "03-kategori.txt", target: "Kategori" },
+  { id: "04", file: "04-marka.txt", target: "Marka" },
+  { id: "05", file: "05-urun-detay.txt", target: "Ürün Detay" },
+  { id: "07", file: "07-sepet.txt", target: "Sepet" },
+  { id: "13", file: "13-arama.txt", target: "Arama" },
+  { id: "08", file: "08-uye-ol-sayfasi.txt", target: "Üye Ol Sayfası" },
+  { id: "09", file: "09-uyelik-tamamlandi.txt", target: "Üyelik Tamamlandı" },
+  { id: "14", file: "14-siparis-tamamla.txt", target: "Sipariş Tamamla" },
+  { id: "06", file: "06-siparis-tamamlandi.txt", target: "Sipariş Tamamlandı" },
+];
 
-  async function copyScript() {
+export function AdminTicimaxPanel() {
+  const [contents, setContents] = useState<Record<string, string>>({});
+  const [copied, setCopied] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    setError(null);
     try {
-      await navigator.clipboard.writeText(script);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2000);
+      const entries = await Promise.all(
+        PANEL_SCRIPTS.map(async (item) => {
+          const res = await fetch(withBasePath(`/ticimax/final/${item.file}`));
+          if (!res.ok) throw new Error(`${item.file} yüklenemedi (${res.status})`);
+          return [item.file, await res.text()] as const;
+        }),
+      );
+      setContents(Object.fromEntries(entries));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Panel dosyaları okunamadı");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  async function copyText(key: string, text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
     } catch {
-      /* fallback */
       const ta = document.createElement("textarea");
-      ta.value = script;
+      ta.value = text;
       document.body.appendChild(ta);
       ta.select();
       document.execCommand("copy");
       document.body.removeChild(ta);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2000);
     }
-  }
-
-  function saveHybrid() {
-    const next = saveCmsSettings({
-      ticimaxStoreUrl: storeUrl.trim(),
-      ticimaxAlanAdi: settings.ticimaxAlanAdi || "aromatherapica.com",
-      ticimaxBaseUrl: settings.ticimaxBaseUrl || "https://aromatherapica.com/servis",
-    });
-    onSaved(next, "Ticimax mağaza URL kaydedildi. Sepet/ödeme hibrit linkleri bu adresi kullanır.");
+    setCopied(key);
+    window.setTimeout(() => setCopied(null), 1800);
   }
 
   return (
     <div className="cms-card">
-      <h2>Ticimax canlı aktivasyon</h2>
+      <h2>Ticimax yönetim paneli — tema aktarımı</h2>
       <p className="cms-help">
-        SOAP kurmadan, hazır özel vitrini <strong>aromatherapica.com</strong> üzerinden açmak için
-        Ticimax <em>Dinamik Script Yönetimi</em> paneline aşağıdaki kodu yapıştırın. Admin, üye
-        girişi, sepet ve ödeme Ticimax’te kalır; vitrin özel siteye taşınır.
+        Yönetim paneli olarak <strong>Ticimax Admin</strong> kullanılır. Aşağıdaki kodlar{" "}
+        <em>WebSitesi / FINAL_TICIMAX_SITE</em> paketinden üretilmiştir. Ürünler Ticimax’te yüklü
+        olan gerçek <code>.productItem</code> kartlarından otomatik çekilir; sepet, ödeme, üyelik
+        Ticimax native kalır.
       </p>
 
-      <ol className="cms-help" style={{ paddingLeft: "1.2rem", lineHeight: 1.7 }}>
+      <div className="cms-flash" style={{ marginBottom: "1rem" }}>
+        Önemli: Daha önce eklenen <strong>GitHub Pages yönlendirme</strong> scriptini (varsa)
+        Dinamik Script listesinden <strong>silin veya pasifleştirin</strong>. Aksi halde tema
+        yerine GitHub sitesine kaçar.
+      </div>
+
+      <ol className="cms-help" style={{ paddingLeft: "1.2rem", lineHeight: 1.75 }}>
         <li>
-          Ticimax’e yönetici olarak giriş yapın →{" "}
           <a href={TICIMAX_DINAMIK_URL} target="_blank" rel="noreferrer">
             Dinamik Script Yönetimi <ExternalLink size={12} style={{ display: "inline" }} />
-          </a>
+          </a>{" "}
+          → yönetici girişi
         </li>
+        <li>Eski özel CSS/JS scriptlerini yedekleyip kapatın</li>
         <li>
-          <strong>Yeni Script</strong> → Ad: <code>Aromatherapica Ozel Vitrin</code>
+          Amblemi yükleyin: <code>/Uploads/EditorUploads/aromatherapica-emblem.png</code>
         </li>
-        <li>
-          Konum: <strong>Head</strong> (veya sayfa sonu) · Sayfalar: <strong>Tüm sayfalar</strong> ·
-          Durum: <strong>Aktif</strong>
-        </li>
-        <li>Aşağıdaki kodu yapıştırıp kaydedin. Önbelleği temizleyip ana sayfayı kontrol edin.</li>
+        <li>Aşağıdaki sırayla her satır için “Kopyala” → ilgili alana yapıştır → Kaydet</li>
+        <li>Önbelleği temizleyin · Anasayfada gerçek ürün vitrininin açık olduğunu doğrulayın</li>
       </ol>
 
-      <div className="cms-toolbar" style={{ marginTop: "1rem", flexWrap: "wrap" }}>
-        <button
-          type="button"
-          className={`cms-btn${mode === "redirect" ? "" : " secondary"}`}
-          onClick={() => setMode("redirect")}
-        >
-          1) Yönlendirme (önerilen)
-        </button>
-        <button
-          type="button"
-          className={`cms-btn${mode === "embed" ? "" : " secondary"}`}
-          onClick={() => setMode("embed")}
-        >
-          2) Iframe gömme
-        </button>
+      {loading ? <p className="cms-help">Panel dosyaları yükleniyor…</p> : null}
+      {error ? <p className="cms-flash error">{error}</p> : null}
+
+      <div className="cms-table-wrap" style={{ marginTop: "1rem" }}>
+        <table className="cms-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Ticimax alanı</th>
+              <th>Not</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {PANEL_SCRIPTS.map((item, index) => {
+              const body = contents[item.file] || "";
+              return (
+                <tr key={item.id}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <strong>{item.target}</strong>
+                    <div className="cms-help">{item.file}</div>
+                  </td>
+                  <td className="cms-help">{item.note || "Sayfa bağlamı"}</td>
+                  <td style={{ whiteSpace: "nowrap" }}>
+                    <button
+                      type="button"
+                      className="cms-btn secondary"
+                      disabled={!body}
+                      onClick={() => copyText(item.file, body)}
+                    >
+                      {copied === item.file ? <Check size={16} /> : <Copy size={16} />}{" "}
+                      {copied === item.file ? "Kopyalandı" : "Kopyala"}
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </div>
 
-      <div className="cms-field" style={{ marginTop: "1rem" }}>
-        <label>Özel site URL</label>
-        <input value={customUrl} onChange={(e) => setCustomUrl(e.target.value)} />
-      </div>
-
-      <div className="cms-field">
-        <label>Yapıştırılacak Dinamik Script</label>
-        <textarea
-          readOnly
-          rows={14}
-          value={script}
-          style={{ fontFamily: "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace", fontSize: 12 }}
-        />
-      </div>
-
-      <div className="cms-toolbar">
-        <button type="button" className="cms-btn" onClick={copyScript}>
-          {copied ? <Check size={16} /> : <Copy size={16} />}{" "}
-          {copied ? "Kopyalandı" : "Kodu kopyala"}
-        </button>
-        <a className="cms-btn secondary" href={TICIMAX_DINAMIK_URL} target="_blank" rel="noreferrer">
+      <div className="cms-toolbar" style={{ marginTop: "1rem" }}>
+        <a className="cms-btn" href={TICIMAX_DINAMIK_URL} target="_blank" rel="noreferrer">
           Ticimax panele git
         </a>
+        <button type="button" className="cms-btn secondary" onClick={load}>
+          Dosyaları yenile
+        </button>
       </div>
 
-      <hr style={{ margin: "1.5rem 0", border: 0, borderTop: "1px solid var(--line, #ddd)" }} />
+      <hr style={{ margin: "1.5rem 0", border: 0, borderTop: "1px solid #ddd" }} />
 
-      <h3>Hibrit mağaza URL</h3>
+      <h3>Otomatik ürün çekimi nasıl çalışır?</h3>
       <p className="cms-help">
-        Özel sitedeki “Ödemeye geç” gibi linkler istenirse Ticimax mağazasına yönlendirilir.
+        Tema, anasayfadaki Ticimax ürün vitrinindeki gerçek <code>.productItem</code> düğümlerini
+        okur; bağlantı, fiyat, görsel, favori ve sepete ekle düğmelerini korur. Ürün ekleme/silme
+        işlemini yalnızca Ticimax Ürün Yönetimi’nden yapın — vitrin otomatik güncellenir.
       </p>
-      <div className="cms-field">
-        <label>Ticimax mağaza adresi</label>
-        <input
-          value={storeUrl}
-          onChange={(e) => setStoreUrl(e.target.value)}
-          placeholder="https://aromatherapica.com"
-        />
-      </div>
-      <button type="button" className="cms-btn secondary" onClick={saveHybrid}>
-        Mağaza URL kaydet
-      </button>
     </div>
   );
 }

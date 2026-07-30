@@ -1,0 +1,1 @@
+<script>(function(){document.documentElement.setAttribute('data-ar-page','product');window.dispatchEvent(new CustomEvent('ar:page-context',{detail:{page:'product'}}));})();</script>
