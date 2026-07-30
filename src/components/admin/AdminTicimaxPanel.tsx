@@ -14,9 +14,15 @@ const PANEL_SCRIPTS: Array<{
   note?: string;
 }> = [
   {
+    id: "00",
+    file: "00-YONLENDIRMEYI-KAPAT.txt",
+    target: "Tüm Sayfalar (önce bunu yapıştır — yönlendirmeyi kapat)",
+    note: "GitHub location.replace’i siler; site Ticimax’ta kalır",
+  },
+  {
     id: "01",
     file: "01-tum-sayfalar.txt",
-    target: "Tüm Sayfalar",
+    target: "Tüm Sayfalar (sonra exact tema)",
     note: "WebSitesi birebir global CSS+JS (header, footer, ürün kartı)",
   },
   {
@@ -66,7 +72,11 @@ export function AdminTicimaxPanel() {
     try {
       const scriptEntries = await Promise.all(
         PANEL_SCRIPTS.map(async (item) => {
-          const res = await fetch(withBasePath(`/ticimax/final/${item.file}`));
+          const path =
+            item.file.startsWith("00-")
+              ? `/ticimax/${item.file}`
+              : `/ticimax/final/${item.file}`;
+          const res = await fetch(withBasePath(path));
           if (!res.ok) throw new Error(`${item.file} yüklenemedi (${res.status})`);
           return [item.file, await res.text()] as const;
         }),
