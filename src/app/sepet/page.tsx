@@ -4,11 +4,10 @@ import Link from "next/link";
 import { Truck } from "lucide-react";
 import { useCart } from "@/components/CartProvider";
 import { formatCurrency } from "@/lib/format";
-import { getShippingProgress, shippingCost as computeShippingCost } from "@/lib/shipping";
+import { shippingCost as computeShippingCost } from "@/lib/shipping";
 
 export default function CartPage() {
   const { cart, total, setQuantity, remove } = useCart();
-  const progress = getShippingProgress(total);
   const shipping = computeShippingCost(total);
   const grandTotal = total + shipping;
 
