@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { SecretLogo } from "@/components/SecretLogo";
 import { CartBadge } from "@/components/CartBadge";
+import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
 import { STORE_NAV_CATEGORIES } from "@/lib/cms/category-map";
 import { freeShippingAnnouncement } from "@/lib/shipping";
 import { withBasePath } from "@/lib/paths";
@@ -25,12 +26,16 @@ const CATEGORY_NAV = STORE_NAV_CATEGORIES.map((c) => ({ ...c }));
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
+  const { settings } = useCatalogOverrides();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [query, setQuery] = useState("");
   const lastY = useRef(0);
+  const logoSrc = settings.logoUrl?.startsWith("data:")
+    ? settings.logoUrl
+    : withBasePath(settings.logoUrl || "/aromatherapica-emblem.png");
 
   useEffect(() => {
     function onScroll() {
@@ -67,11 +72,8 @@ export function SiteHeader() {
       </a>
 
       <div className="announcement-bar">
-        <Link href="/kategori/tum-urunler">
-          Seçili ürünlerde avantajlı fiyatlar <span>→</span>
-        </Link>
-        <Link href="/kategori/ucucu-yaglar">
-          Saf aromaterapi yağlarını keşfedin <span>→</span>
+        <Link href={settings.announcementHref || "/kategori/ucucu-yaglar"}>
+          {settings.announcementText || "Saf aromaterapi yağlarını keşfedin →"}
         </Link>
         <Link href="/sepet">
           {freeShippingAnnouncement()} <span>→</span>
@@ -101,8 +103,8 @@ export function SiteHeader() {
 
           <SecretLogo href="/" className="wordmark">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="brand-mark-image" src={withBasePath("/aromatherapica-emblem.png")} width={46} height={46} alt="" />
-            <strong>Aromatherapica</strong>
+            <img className="brand-mark-image" src={logoSrc} width={46} height={46} alt="" />
+            <strong>{settings.siteName || "Aromatherapica"}</strong>
             <span>Essential Oils &amp; Aromatherapy</span>
           </SecretLogo>
 
@@ -172,8 +174,8 @@ export function SiteHeader() {
             <div className="drawer-header">
               <SecretLogo href="/" className="wordmark">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="brand-mark-image" src={withBasePath("/aromatherapica-emblem.png")} width={40} height={40} alt="" />
-                <strong>Aromatherapica</strong>
+                <img className="brand-mark-image" src={logoSrc} width={40} height={40} alt="" />
+                <strong>{settings.siteName || "Aromatherapica"}</strong>
                 <span>Essential Oils &amp; Aromatherapy</span>
               </SecretLogo>
               <button

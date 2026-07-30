@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
+import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
+import { withBasePath } from "@/lib/paths";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -18,6 +20,14 @@ const item: Variants = {
 };
 
 export function HeroSection() {
+  const { settings } = useCatalogOverrides();
+  const heroImage = settings.heroImageUrl
+    ? settings.heroImageUrl.startsWith("data:")
+      ? settings.heroImageUrl
+      : withBasePath(settings.heroImageUrl)
+    : "";
+  const titleLines = (settings.heroTitle || "").split("\n");
+
   return (
     <section className="hero" id="top">
       <motion.div
@@ -31,35 +41,42 @@ export function HeroSection() {
         <div className="hero-orbit hero-orbit-two" />
         <div className="botanical-leaf leaf-one" />
         <div className="botanical-leaf leaf-two" />
-        <div className="hero-bottle">
-          <span className="bottle-cap" />
-          <span className="bottle-glow" />
-          <span className="bottle-emblem">A</span>
-          <span className="bottle-label">AROMATHERAPICA</span>
-        </div>
-        <p className="visual-note visual-note-top">Saf bitki özleri</p>
-        <p className="visual-note visual-note-bottom">Özenli formüller</p>
+        {heroImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="hero-photo" src={heroImage} alt="" />
+        ) : (
+          <div className="hero-bottle">
+            <span className="bottle-cap" />
+            <span className="bottle-glow" />
+            <span className="bottle-emblem">A</span>
+            <span className="bottle-label">AROMATHERAPICA</span>
+          </div>
+        )}
+        <p className="visual-note visual-note-top">{settings.heroNoteTop}</p>
+        <p className="visual-note visual-note-bottom">{settings.heroNoteBottom}</p>
       </motion.div>
 
       <motion.div className="hero-copy" variants={container} initial="hidden" animate="show">
         <motion.p className="eyebrow" variants={item}>
-          Doğanın bilgisinden modern bakım ritüellerine
+          {settings.heroEyebrow}
         </motion.p>
         <motion.h1 variants={item}>
-          Saf içerikler.
-          <br />
-          Özenli ritüeller.
+          {titleLines.map((line, i) => (
+            <span key={`${line}-${i}`}>
+              {line}
+              {i < titleLines.length - 1 ? <br /> : null}
+            </span>
+          ))}
         </motion.h1>
         <motion.p className="hero-description" variants={item}>
-          Bitkilerin özünü, duyulara hitap eden etkili bakım formülleriyle buluşturuyoruz. Günlük
-          ritüelinize iyi gelecek ürünleri keşfedin.
+          {settings.heroDescription}
         </motion.p>
         <motion.div className="hero-actions" variants={item}>
-          <Link className="button button-primary" href="/kategori/cilt-bakimi">
-            Cilt bakımını keşfet
+          <Link className="button button-primary" href={settings.heroCta1Href || "/kategori/cilt-bakimi"}>
+            {settings.heroCta1Label}
           </Link>
-          <Link className="button button-outline" href="/kategori/ucucu-yaglar">
-            Aromaterapi yağları
+          <Link className="button button-outline" href={settings.heroCta2Href || "/kategori/ucucu-yaglar"}>
+            {settings.heroCta2Label}
           </Link>
         </motion.div>
         <motion.ul className="hero-assurances" variants={item} aria-label="Marka değerleri">

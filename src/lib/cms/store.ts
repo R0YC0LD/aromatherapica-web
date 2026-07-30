@@ -39,10 +39,18 @@ function readState(): CmsState {
     const raw = localStorage.getItem(LS_STATE);
     if (!raw) return { products: {}, settings: { ...DEFAULT_CMS_SETTINGS }, version: CMS_VERSION };
     const parsed = JSON.parse(raw) as Partial<CmsState>;
+    const incoming = (parsed.settings || {}) as Partial<CmsSettings>;
     return {
       version: CMS_VERSION,
       products: parsed.products || {},
-      settings: { ...DEFAULT_CMS_SETTINGS, ...(parsed.settings || {}) },
+      settings: {
+        ...DEFAULT_CMS_SETTINGS,
+        ...incoming,
+        ritualCards:
+          Array.isArray(incoming.ritualCards) && incoming.ritualCards.length > 0
+            ? incoming.ritualCards
+            : DEFAULT_CMS_SETTINGS.ritualCards,
+      },
     };
   } catch {
     return { products: {}, settings: { ...DEFAULT_CMS_SETTINGS }, version: CMS_VERSION };

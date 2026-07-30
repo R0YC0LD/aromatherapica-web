@@ -469,6 +469,26 @@ img {
   left: 27%;
 }
 
+.hero-photo {
+  position: absolute;
+  inset: 8% 10% 12%;
+  width: auto;
+  max-width: min(420px, 78%);
+  max-height: 78%;
+  object-fit: contain;
+  margin: auto;
+  filter: drop-shadow(0 28px 40px rgba(8, 47, 107, 0.18));
+  z-index: 2;
+}
+
+.ritual-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
+}
+
 .hero-bottle {
   position: absolute;
   bottom: -5%;

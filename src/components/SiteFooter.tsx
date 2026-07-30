@@ -1,9 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import { Camera, Leaf, PackageCheck, Pin, PlayCircle, ShieldCheck } from "lucide-react";
+import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
 import { withBasePath } from "@/lib/paths";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const { settings } = useCatalogOverrides();
+  const logoSrc = settings.logoUrl?.startsWith("data:")
+    ? settings.logoUrl
+    : withBasePath(settings.logoUrl || "/aromatherapica-emblem.png");
 
   return (
     <footer className="site-footer">
@@ -11,8 +18,8 @@ export function SiteFooter() {
         <div className="footer-brand">
           <Link className="wordmark wordmark-light" href="/">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="brand-mark-image" src={withBasePath("/aromatherapica-emblem.png")} width={46} height={46} alt="" loading="lazy" />
-            <strong>Aromatherapica</strong>
+            <img className="brand-mark-image" src={logoSrc} width={46} height={46} alt="" loading="lazy" />
+            <strong>{settings.siteName || "Aromatherapica"}</strong>
             <span>Essential Oils &amp; Aromatherapy</span>
           </Link>
           <p>

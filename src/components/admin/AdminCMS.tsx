@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   LogOut,
   Package,
+  PanelTop,
   Save,
   Search,
   Settings2,
@@ -35,6 +36,7 @@ import {
 import { DEFAULT_CMS_SETTINGS, type CmsSettings, type ProductOverride } from "@/lib/cms/types";
 import { formatCurrency } from "@/lib/format";
 import { withBasePath } from "@/lib/paths";
+import { AdminStorefrontPanel } from "@/components/admin/AdminStorefrontPanel";
 import "@/app/admin-panel.css";
 
 const IS_STATIC =
@@ -57,7 +59,7 @@ type CatalogProduct = {
   sku: string | null;
 };
 
-type Tab = "dashboard" | "products" | "orders" | "settings" | "guide";
+type Tab = "dashboard" | "storefront" | "products" | "orders" | "settings" | "guide";
 
 function mergeProduct(base: CatalogProduct, ov?: ProductOverride): CatalogProduct {
   if (!ov) return base;
@@ -365,6 +367,9 @@ export function AdminCMS() {
             <button type="button" className={tab === "dashboard" ? "is-active" : ""} onClick={() => setTab("dashboard")}>
               <LayoutDashboard size={18} /> Özet
             </button>
+            <button type="button" className={tab === "storefront" ? "is-active" : ""} onClick={() => setTab("storefront")}>
+              <PanelTop size={18} /> Ana sayfa / vitrin
+            </button>
             <button type="button" className={tab === "products" ? "is-active" : ""} onClick={() => setTab("products")}>
               <Package size={18} /> Ürünler & görseller
             </button>
@@ -391,6 +396,7 @@ export function AdminCMS() {
             <div>
               <h1>
                 {tab === "dashboard" && "Özet"}
+                {tab === "storefront" && "Ana sayfa / vitrin"}
                 {tab === "products" && "Ürünler"}
                 {tab === "orders" && "Siparişler"}
                 {tab === "settings" && "Ayarlar"}
@@ -442,7 +448,10 @@ export function AdminCMS() {
                   4) Canlı SOAP için Node sunucusunda `.env` ile aynı bilgileri kullanın.
                 </p>
                 <div className="cms-toolbar" style={{ marginTop: "1rem" }}>
-                  <button type="button" className="cms-btn" onClick={() => setTab("products")}>
+                  <button type="button" className="cms-btn" onClick={() => setTab("storefront")}>
+                    Ana sayfa görselleri
+                  </button>
+                  <button type="button" className="cms-btn secondary" onClick={() => setTab("products")}>
                     Ürünleri yönet
                   </button>
                   <button type="button" className="cms-btn secondary" onClick={() => setTab("settings")}>
@@ -451,6 +460,16 @@ export function AdminCMS() {
                 </div>
               </div>
             </>
+          )}
+
+          {tab === "storefront" && (
+            <AdminStorefrontPanel
+              settings={settings}
+              onSaved={(next, message) => {
+                setSettings(next);
+                setFlash(message);
+              }}
+            />
           )}
 
           {tab === "products" && (
@@ -678,48 +697,70 @@ export function AdminCMS() {
             </div>
           )}
 
-          {tab === "guide" && (
+                    {tab === "guide" && (
             <div className="cms-card">
-              <h2>Kurulum — neyi nereye koyacaksınız?</h2>
-              <div className="cms-help">
+              <h2>Detayli kurulum ve sistem rehberi</h2>
+              <div className="cms-help" style={{ display: "grid", gap: "1rem" }}>
                 <p>
-                  <strong>1. GitHub Pages (şimdiki yayın)</strong>
+                  <strong>A) Canli site (GitHub Pages)</strong>
                   <br />
-                  Site: <code>https://r0yc0ld.github.io/aromatherapica-web/</code>
+                  Magaza: <code>https://r0yc0ld.github.io/aromatherapica-web/</code>
                   <br />
-                  Yönetim: <code>.../admin/</code> veya <code>.../admin.html</code>
+                  Yonetim: <code>.../admin/</code> veya <code>.../admin.html</code>
                   <br />
-                  Ürün görselleri ve düzenlemeler tarayıcıda saklanır. Aynı cihazda / aynı tarayıcıda
-                  kalır; yedek alıp başka cihaza yükleyebilirsiniz.
+                  Giris: <code>admin</code> / <code>12345</code> (Ayarlar'dan degistirin)
+                  <br />
+                  Favicon: Aromatherapica logosu; panelden de degistirilebilir.
                 </p>
                 <p>
-                  <strong>2. Ticimax canlı entegrasyon (Node)</strong>
+                  <strong>B) Panelden yonetebilecekleriniz</strong>
                   <br />
-                  Projede <code>.env</code> oluşturun (<code>.env.example</code> kopyası):
+                  Ana sayfa hero gorseli, logo, favicon, duyuru bandi, ritual kartlari, one
+                  cikan urun ID listesi, tum urun gorselleri/fiyat/stok/aciklama, Ticimax
+                  ayarlari, siparis listesi, yedek al/yukle.
+                </p>
+                <p>
+                  <strong>C) Gorselleri nasil eklerim?</strong>
+                  <br />
+                  1) Ana sayfa / vitrin - Hero/logo/kart gorseli sec - Kaydet
+                  <br />
+                  2) Urunler - urunu ac - Galeriden gorsel sec - Kaydet
+                  <br />
+                  Baska cihazda gormek icin Yedek al, sonra Yedek yukle.
+                </p>
+                <p>
+                  <strong>D) Ticimax canli (Node) - .env</strong>
                 </p>
                 <pre style={{ whiteSpace: "pre-wrap", background: "#efe9df", padding: "1rem", borderRadius: 12 }}>
-{`ADMIN_USERNAME=admin
-ADMIN_PASSWORD=guclu-sifre
-SESSION_SECRET=en-az-32-karakter-gizli-anahtar
-DATABASE_URL=file:./dev.db
-TICIMAX_BASE_URL=https://MAGAZA-ALANI/servis
-TICIMAX_UYE_KODU=YetkiKodu
-TICIMAX_ALAN_ADI=magaza-alani
-TICIMAX_STORE_URL=https://magaza-alani`}
+                  {[
+                    "ADMIN_USERNAME=admin",
+                    "ADMIN_PASSWORD=guclu-sifre",
+                    "SESSION_SECRET=en-az-32-karakter-gizli-anahtar",
+                    "DATABASE_URL=file:./dev.db",
+                    "TICIMAX_BASE_URL=https://MAGAZA-ALANI/servis",
+                    "TICIMAX_UYE_KODU=YetkiKodu",
+                    "TICIMAX_ALAN_ADI=magaza-alani",
+                    "TICIMAX_STORE_URL=https://magaza-alani",
+                    "",
+                    "npm install && npx prisma db push && npm run db:seed && npm run dev",
+                    "# Sonra Admin > Ayarlar > Entegrasyonu aktif et",
+                  ].join("\n")}
                 </pre>
                 <p>
-                  Sonra: <code>npm install && npx prisma db push && npm run db:seed && npm run dev</code>
+                  <strong>E) Sistem durumu</strong>
                   <br />
-                  Admin’den entegrasyonu işaretleyin → test/sync (Node API ile).
+                  Vitrin/CMS/sepet Pages uzerinde calisir. SOAP sadece Node sunucusunda
+                  (src/lib/ticimax). Kartli odeme gateway yok. Pages SOAP cagirmaz.
                 </p>
                 <p>
-                  <strong>Onay:</strong> SOAP istemcisi <code>src/lib/ticimax/*</code> altında; ürün,
-                  stok, sipariş ve üye servisleri bağlanmıştır. Pages’te SOAP çalışmaz (tarayıcı
-                  kısıtı); Node/Vercel’de çalışır.
+                  <strong>F) Yayin</strong>
+                  <br />
+                  master push sonrasi GitHub Actions Deploy. Yerel: npm run build:pages
                 </p>
               </div>
             </div>
           )}
+
         </main>
       </div>
 

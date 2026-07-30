@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, Italiana } from "next/font/google";
 import { CartProvider } from "@/components/CartProvider";
 import { CatalogOverridesProvider } from "@/components/cms/CatalogOverridesProvider";
+import { SiteChromeEffects } from "@/components/cms/SiteChromeEffects";
 import { AppChrome } from "@/components/AppChrome";
 import "./globals.css";
 
@@ -24,6 +25,11 @@ export const metadata: Metadata = {
   },
   description:
     "Aromatherapica doğal bakım, aromaterapi yağları ve özenli günlük ritüeller. Ürün, stok ve sipariş Ticimax üzerinden yönetilir.",
+  icons: {
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    apple: [{ url: "/apple-touch-icon.png" }],
+    shortcut: ["/favicon.png"],
+  },
   openGraph: {
     title: "Aromatherapica",
     description: "Doğadan gelen bakım ritüelleri",
@@ -38,6 +44,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <CartProvider>
           <CatalogOverridesProvider>
+            <SiteChromeEffects />
             <AppChrome>{children}</AppChrome>
           </CatalogOverridesProvider>
         </CartProvider>

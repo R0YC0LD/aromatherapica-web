@@ -1,14 +1,18 @@
 import Link from "next/link";
 import { Leaf, PackageCheck, ShieldCheck, Truck } from "lucide-react";
 import { getProducts } from "@/lib/catalog/service";
-import { ProductCard } from "@/components/ProductCard";
 import { HeroSection } from "@/components/home/HeroSection";
 import { NewsletterForm } from "@/components/home/NewsletterForm";
 import { Reveal } from "@/components/Reveal";
 import { freeShippingAnnouncement } from "@/lib/shipping";
+import {
+  HomeFeaturedProducts,
+  HomeGiftBanner,
+  HomeRituals,
+} from "@/components/home/HomeStorefront";
 
 export default async function HomePage() {
-  const { data: products, message, configured } = await getProducts({ pageSize: 8, sort: "newest" });
+  const { data: products, message, configured } = await getProducts({ pageSize: 48, sort: "newest" });
 
   return (
     <>
@@ -53,95 +57,11 @@ export default async function HomePage() {
         </article>
       </section>
 
-      <section className="gift-banner" id="delivery" aria-label="Alışveriş fırsatı">
-        <p className="eyebrow">Aromatherapica&apos;dan size</p>
-        <h2>İlk siparişinize özel bakım hediyesi</h2>
-        <p>Seçili alışverişlerde sürpriz ritüel ürününüz bizden.</p>
-        <Link className="text-link" href="/kategori/tum-urunler">
-          Şimdi keşfet <span>→</span>
-        </Link>
-      </section>
+      <HomeGiftBanner />
 
-      <section className="section products-section" id="products">
-        <Reveal className="section-heading">
-          <div>
-            <p className="eyebrow">Aromatherapica seçkisi</p>
-            <h2>Çok sevilenler</h2>
-          </div>
-        </Reveal>
+      <HomeFeaturedProducts products={products} message={message} configured={configured} />
 
-        {products.length === 0 ? (
-          <div className="catalog-empty">
-            <span>A</span>
-            <h2>Ürünler yakında burada</h2>
-            <p>
-              {message ||
-                "Henüz ürün listelenemiyor. Ticimax bağlantısını yapılandırıp admin panelinden senkronizasyon çalıştırın."}
-            </p>
-            {!configured ? (
-            <Link className="button button-primary" href="/admin/">
-              Yönetim paneli
-            </Link>
-            ) : null}
-          </div>
-        ) : (
-          <Reveal className="product-grid" delay={0.05}>
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </Reveal>
-        )}
-
-        <div className="section-footer-action">
-          <Link className="text-link" href="/kategori/tum-urunler">
-            Tüm ürünleri görüntüle <span>→</span>
-          </Link>
-        </div>
-      </section>
-
-      <section className="ritual-intro" id="rituals">
-        <div className="ritual-intro-copy">
-          <p className="eyebrow">Kendinize ayırdığınız anlar</p>
-          <h2>Ritüelinizi seçin</h2>
-          <p>Saf bitkisel içeriklerle hazırlanan ürünleri bakım ihtiyacınıza göre keşfedin.</p>
-          <Link className="text-link" href="/kategori/tum-urunler">
-            Tüm ürünleri gör <span>→</span>
-          </Link>
-        </div>
-
-        <div className="ritual-grid">
-          <article className="ritual-card ritual-blue">
-            <span className="ritual-number">01</span>
-            <div className="ritual-art ritual-art-oil" aria-hidden="true" />
-            <div className="ritual-card-copy">
-              <p>Saf ve konsantre</p>
-              <h3>Aromaterapi Yağları</h3>
-              <span>Ruh halinize ve günlük ritüelinize eşlik eden bitkisel özler.</span>
-              <Link href="/kategori/ucucu-yaglar">Keşfet</Link>
-            </div>
-          </article>
-          <article className="ritual-card ritual-clay">
-            <span className="ritual-number">02</span>
-            <div className="ritual-art ritual-art-cream" aria-hidden="true" />
-            <div className="ritual-card-copy">
-              <p>Günlük bakım</p>
-              <h3>Cilt Bakım Serisi</h3>
-              <span>Cildin dengesini gözeten zengin ve nazik formüller.</span>
-              <Link href="/kategori/cilt-bakimi">Keşfet</Link>
-            </div>
-          </article>
-          <article className="ritual-card ritual-sage">
-            <span className="ritual-number">03</span>
-            <div className="ritual-art ritual-art-flower" aria-hidden="true" />
-            <div className="ritual-card-copy">
-              <p>Bütünsel bakım</p>
-              <h3>Saç ve Vücut</h3>
-              <span>Günlük bakımınıza doğanın sakin ritmini taşıyan seçkiler.</span>
-              <Link href="/kategori/ozel-bakim">Keşfet</Link>
-            </div>
-          </article>
-        </div>
-      </section>
+      <HomeRituals />
 
       <Reveal as="section" className="editorial-split" y={32}>
         <div className="editorial-image" aria-hidden="true">
