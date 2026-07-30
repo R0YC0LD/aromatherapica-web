@@ -97,6 +97,8 @@ export interface NormalizedProduct {
   variants: NormalizedVariant[];
   seoTitle?: string;
   seoDescription?: string;
+  /** Live Ticimax product page (hybrid commerce). */
+  ticimaxUrl?: string;
 }
 
 export interface CartLineInput {

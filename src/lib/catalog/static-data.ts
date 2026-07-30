@@ -23,6 +23,7 @@ export type StaticProduct = {
   sku: string | null;
   barcode: string | null;
   vatRate: number | null;
+  ticimaxUrl?: string | null;
 };
 
 export type StaticCategory = {
@@ -85,6 +86,7 @@ function loadCatalogFile(): CatalogFile {
           sku: (p.sku as string) || null,
           barcode: (p.barcode as string) || null,
           vatRate: p.vatRate == null ? null : Number(p.vatRate),
+          ticimaxUrl: (p.ticimaxUrl as string) || null,
         })),
         categories: (raw.categories as Array<Record<string, unknown>>).map((c) => ({
           id: Number(c.ticimaxId),
@@ -138,6 +140,7 @@ export function toNormalizedProduct(p: StaticProduct): NormalizedProduct {
     ],
     seoTitle: p.name,
     seoDescription: (p.shortDesc || p.description || "").slice(0, 160) || undefined,
+    ticimaxUrl: p.ticimaxUrl || undefined,
   };
 }
 

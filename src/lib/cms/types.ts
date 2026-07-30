@@ -147,7 +147,7 @@ export const DEFAULT_CMS_SETTINGS: CmsSettings = {
   ticimaxBaseUrl: "",
   ticimaxUyeKodu: "",
   ticimaxAlanAdi: "",
-  ticimaxStoreUrl: "",
+  ticimaxStoreUrl: "https://aromatherapica.com",
   integrationEnabled: false,
   adminPasswordHint: "admin / 12345 (değiştirin)",
 

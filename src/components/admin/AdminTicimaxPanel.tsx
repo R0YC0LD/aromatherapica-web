@@ -7,7 +7,6 @@ import { withBasePath } from "@/lib/paths";
 const TICIMAX_DINAMIK_URL =
   "https://aromatherapica.com/Admin/DinamikScriptYonetimi.aspx?adminlang=tr&lang=tr";
 
-/** WebSitesi FINAL_TICIMAX_SITE panel paste order */
 const PANEL_SCRIPTS: Array<{
   id: string;
   file: string;
@@ -18,18 +17,14 @@ const PANEL_SCRIPTS: Array<{
     id: "01",
     file: "01-tum-sayfalar.txt",
     target: "Tüm Sayfalar",
-    note: "Global CSS+JS — header, footer, ürün kartları, arama",
+    note: "Global CSS+JS — header, footer, ürün kartları",
   },
-  {
-    id: "10",
-    file: "10-tum-sayfalar-header.txt",
-    target: "Tüm Sayfalar - Header",
-  },
+  { id: "10", file: "10-tum-sayfalar-header.txt", target: "Tüm Sayfalar - Header" },
   {
     id: "02",
     file: "02-anasayfa.txt",
     target: "Anasayfa",
-    note: "Hero + Ticimax .productItem vitrini (otomatik ürün çekimi)",
+    note: "Hero + Ticimax .productItem otomatik vitrin",
   },
   { id: "03", file: "03-kategori.txt", target: "Kategori" },
   { id: "04", file: "04-marka.txt", target: "Marka" },
@@ -88,33 +83,30 @@ export function AdminTicimaxPanel() {
 
   return (
     <div className="cms-card">
-      <h2>Ticimax yönetim paneli — tema aktarımı</h2>
-      <p className="cms-help">
-        Yönetim paneli olarak <strong>Ticimax Admin</strong> kullanılır. Aşağıdaki kodlar{" "}
-        <em>WebSitesi / FINAL_TICIMAX_SITE</em> paketinden üretilmiştir. Ürünler Ticimax’te yüklü
-        olan gerçek <code>.productItem</code> kartlarından otomatik çekilir; sepet, ödeme, üyelik
-        Ticimax native kalır.
-      </p>
+      <h2>Ticimax canlı mağaza (eksiksiz)</h2>
 
-      <div className="cms-flash" style={{ marginBottom: "1rem" }}>
-        Önemli: Daha önce eklenen <strong>GitHub Pages yönlendirme</strong> scriptini (varsa)
-        Dinamik Script listesinden <strong>silin veya pasifleştirin</strong>. Aksi halde tema
-        yerine GitHub sitesine kaçar.
+      <div className="cms-flash error" style={{ marginBottom: "1rem" }}>
+        <strong>Kritik:</strong> Yapıştırdığın GitHub yönlendirme scriptini (
+        <code>location.replace(...github.io...)</code>) Dinamik Script’ten{" "}
+        <strong>sil veya pasifleştir</strong>. Bu kod ürün/sepet/ödeme sayfalarını da GitHub’a
+        atıyor; Ticimax alım-satımı çalışmaz.
       </div>
+
+      <p className="cms-help">
+        Doğru model: <strong>Yönetim = Ticimax Admin</strong>, <strong>vitrin = FINAL tema</strong>,
+        ürün/görsel/sepet/ödeme = Ticimax native. GitHub Pages yalnızca yedek/önizleme olabilir.
+      </p>
 
       <ol className="cms-help" style={{ paddingLeft: "1.2rem", lineHeight: 1.75 }}>
         <li>
           <a href={TICIMAX_DINAMIK_URL} target="_blank" rel="noreferrer">
             Dinamik Script Yönetimi <ExternalLink size={12} style={{ display: "inline" }} />
           </a>{" "}
-          → yönetici girişi
+          → yönlendirme scriptini sil
         </li>
-        <li>Eski özel CSS/JS scriptlerini yedekleyip kapatın</li>
-        <li>
-          Amblemi yükleyin: <code>/Uploads/EditorUploads/aromatherapica-emblem.png</code>
-        </li>
-        <li>Aşağıdaki sırayla her satır için “Kopyala” → ilgili alana yapıştır → Kaydet</li>
-        <li>Önbelleği temizleyin · Anasayfada gerçek ürün vitrininin açık olduğunu doğrulayın</li>
+        <li>Eski çakışan CSS/JS’leri kapat</li>
+        <li>Aşağıdaki FINAL dosyaları sırayla kopyala → ilgili alana yapıştır → Kaydet</li>
+        <li>Önbellek temizle · Anasayfada gerçek ürün vitrininin açık olduğunu kontrol et</li>
       </ol>
 
       {loading ? <p className="cms-help">Panel dosyaları yükleniyor…</p> : null}
@@ -167,15 +159,6 @@ export function AdminTicimaxPanel() {
           Dosyaları yenile
         </button>
       </div>
-
-      <hr style={{ margin: "1.5rem 0", border: 0, borderTop: "1px solid #ddd" }} />
-
-      <h3>Otomatik ürün çekimi nasıl çalışır?</h3>
-      <p className="cms-help">
-        Tema, anasayfadaki Ticimax ürün vitrinindeki gerçek <code>.productItem</code> düğümlerini
-        okur; bağlantı, fiyat, görsel, favori ve sepete ekle düğmelerini korur. Ürün ekleme/silme
-        işlemini yalnızca Ticimax Ürün Yönetimi’nden yapın — vitrin otomatik güncellenir.
-      </p>
     </div>
   );
 }

@@ -128,19 +128,20 @@ export default function CartPage() {
               <span>Toplam</span>
               <strong>{formatCurrency(grandTotal)}</strong>
             </div>
-            <p>Kart numarası veya CVV bu sitede işlenmez; ödeme adımında Ticimax altyapısı kullanılır.</p>
-            <Link className="button button-primary" href="/odeme">
-              Siparişi tamamla
-            </Link>
-            {settings.ticimaxStoreUrl ? (
-              <a
-                className="button button-secondary"
-                href={`${settings.ticimaxStoreUrl.replace(/\/$/, "")}/Sepetim`}
-                rel="noreferrer"
-              >
-                Ticimax sepetinde öde
-              </a>
-            ) : null}
+            <p>Kart numarası veya CVV bu sitede işlenmez; ödeme Ticimax altyapısıyla tamamlanır.</p>
+            <a
+              className="button button-primary"
+              href={`${(settings.ticimaxStoreUrl || "https://aromatherapica.com").replace(/\/$/, "")}/checkout`}
+            >
+              Ticimax ile öde
+            </a>
+            <a
+              className="button button-secondary"
+              href={`${(settings.ticimaxStoreUrl || "https://aromatherapica.com").replace(/\/$/, "")}/Sepetim`}
+            >
+              Ticimax sepetini aç
+            </a>
+            <Link href="/odeme">Yerel sipariş formu</Link>
             <Link href="/kategori/tum-urunler">Alışverişe devam et</Link>
           </aside>
         </div>

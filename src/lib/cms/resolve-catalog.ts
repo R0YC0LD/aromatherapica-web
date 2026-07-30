@@ -19,6 +19,8 @@ export type CatalogRow = {
   description?: string | null;
   shortDesc?: string | null;
   sku?: string | null;
+  /** Live Ticimax product URL e.g. https://aromatherapica.com/slug-123 */
+  ticimaxUrl?: string | null;
 };
 
 export function customToNormalized(p: CustomProduct): NormalizedProduct {
@@ -69,6 +71,7 @@ export function catalogRowToNormalized(p: CatalogRow): NormalizedProduct {
     stock: p.stock,
     images: image ? [image] : [],
     seoDescription: p.shortDesc || undefined,
+    ticimaxUrl: p.ticimaxUrl || undefined,
     variants: [
       {
         id: p.variantId || p.id,

@@ -8,14 +8,19 @@ import { useCatalogOverrides } from "@/components/cms/CatalogOverridesProvider";
 import { useWishlist } from "@/components/WishlistProvider";
 import { productHref } from "@/lib/cms/product-href";
 import { formatCurrency } from "@/lib/format";
+import { ticimaxProductUrl } from "@/lib/ticimax/commerce";
 import type { NormalizedProduct } from "@/lib/ticimax/types";
 
 export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
   const { add } = useCart();
-  const { mergeProduct } = useCatalogOverrides();
+  const { mergeProduct, settings } = useCatalogOverrides();
   const { has, toggle } = useWishlist();
   const product = mergeProduct(raw);
   const href = productHref(product.slug, product.id);
+  const buyUrl = ticimaxProductUrl(
+    { slug: product.slug, id: product.id, ticimaxUrl: product.ticimaxUrl },
+    settings.ticimaxStoreUrl,
+  );
   const favorite = has(product.id);
   const [added, setAdded] = useState(false);
   const [heartFx, setHeartFx] = useState<"in" | "out" | null>(null);
@@ -29,6 +34,7 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
 
   function handleAdd() {
     if (outOfStock) return;
+    // Local cart snapshot for UI
     add({
       productId: product.id,
       variantId: variant?.id || product.id,
@@ -40,7 +46,10 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
       quantity: 1,
     });
     setAdded(true);
-    window.setTimeout(() => setAdded(false), 1400);
+    // Real Ticimax purchase path (stock/payment)
+    window.setTimeout(() => {
+      window.location.href = buyUrl;
+    }, 350);
   }
 
   function handleFavorite(e: React.MouseEvent<HTMLButtonElement>) {
@@ -121,7 +130,7 @@ export function ProductCard({ product: raw }: { product: NormalizedProduct }) {
             onClick={handleAdd}
           >
             <ShoppingBag aria-hidden />
-            {outOfStock ? "Stokta yok" : added ? "Sepete eklendi" : "Sepete ekle"}
+            {outOfStock ? "Stokta yok" : added ? "Ticimax’e gidiliyor…" : "Sepete ekle"}
           </button>
           <Link href={href} className="quick-button" aria-label="Ürünü incele">
             <Eye aria-hidden />

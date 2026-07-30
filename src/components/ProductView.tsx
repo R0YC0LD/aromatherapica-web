@@ -11,12 +11,13 @@ import { useWishlist } from "@/components/WishlistProvider";
 import { productStory, resolveIngredientsForProduct } from "@/lib/catalog/ingredients";
 import { formatCurrency, slugify } from "@/lib/format";
 import { withBasePath } from "@/lib/paths";
+import { ticimaxProductUrl } from "@/lib/ticimax/commerce";
 import type { NormalizedProduct } from "@/lib/ticimax/types";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function ProductView({ product: raw }: { product: NormalizedProduct }) {
-  const { mergeProduct } = useCatalogOverrides();
+  const { mergeProduct, settings } = useCatalogOverrides();
   const { add } = useCart();
   const { has, toggle } = useWishlist();
   const product = mergeProduct(raw);
@@ -24,6 +25,10 @@ export function ProductView({ product: raw }: { product: NormalizedProduct }) {
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const favorite = has(product.id);
+  const buyUrl = ticimaxProductUrl(
+    { slug: product.slug, id: product.id, ticimaxUrl: product.ticimaxUrl },
+    settings.ticimaxStoreUrl,
+  );
 
   const price =
     product.salePrice && product.salePrice < product.price ? product.salePrice : product.price;
@@ -47,7 +52,9 @@ export function ProductView({ product: raw }: { product: NormalizedProduct }) {
       quantity: qty,
     });
     setAdded(true);
-    window.setTimeout(() => setAdded(false), 1400);
+    window.setTimeout(() => {
+      window.location.href = buyUrl;
+    }, 350);
   }
 
   function handleFavorite(e: React.MouseEvent<HTMLButtonElement>) {
@@ -145,7 +152,7 @@ export function ProductView({ product: raw }: { product: NormalizedProduct }) {
               disabled={product.stock <= 0}
               onClick={addWithQty}
             >
-              {product.stock <= 0 ? "Stokta yok" : added ? "Sepete eklendi" : "Sepete ekle"}
+              {product.stock <= 0 ? "Stokta yok" : added ? "Ticimax’e gidiliyor…" : "Sepete ekle"}
             </button>
 
             <button
