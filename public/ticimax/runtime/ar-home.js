@@ -7,12 +7,17 @@
     var base = script && script.src ? script.src.replace(/ar-home\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = base + "ar-home.css?v=20260801-7";
+    link.href = base + "ar-home.css?v=20260801-11";
     link.setAttribute("data-ar-runtime", "home-v4");
     document.head.appendChild(link);
+    var polish = document.createElement("link");
+    polish.rel = "stylesheet";
+    polish.href = base + "ar-polish.css?v=20260801-11";
+    polish.setAttribute("data-ar-runtime", "home-polish-v11");
+    document.head.appendChild(polish);
   })();
 
-  var VERSION = "2026.08.01-exact-home-7";
+  var VERSION = "2026.08.01-exact-home-11";
   if (window.__AR_EXACT_HOME_VERSION__ === VERSION) return;
   window.__AR_EXACT_HOME_VERSION__ = VERSION;
 
@@ -49,7 +54,7 @@
   }
 
   function collectProducts() {
-    var seen = {};
+    var productById = {};
     var products = [];
     qsa(".bb-keep-product .productItem, #divIcerik .productItem").forEach(function (item) {
       var detail = qs(".productDetail", item);
@@ -59,15 +64,19 @@
       var cart = qs(".btnAddToCart", item);
       var favorite = qs(".favoriteslist", item);
       var id = detail && detail.dataset ? detail.dataset.id : "";
-      if (!id || seen[id] || !nameNode || !link) return;
+      if (!id || !nameNode || !link) return;
 
       var source = resolveProductImage(image);
-      if (!source) return;
-      seen[id] = true;
       var primaryCategory = detail.dataset.category1 || "";
       var leafCategory = detail.dataset.category || "";
       var category = /^(aromaterapi yağları|cilt bakımı|saç ve vücut bakımı)$/i.test(primaryCategory) && leafCategory ? leafCategory : (primaryCategory || leafCategory || "Aromatherapica");
-      products.push({
+      if (productById[id]) {
+        if (!productById[id].image && source) productById[id].image = source;
+        if (!productById[id].nativeFavorite && favorite) productById[id].nativeFavorite = favorite;
+        if (!productById[id].nativeCart && cart) productById[id].nativeCart = cart;
+        return;
+      }
+      productById[id] = {
         id: id,
         variantId: detail.dataset.variantId || "",
         category: category,
@@ -78,15 +87,18 @@
         unique: cart && cart.dataset ? cart.dataset.unique || "" : "",
         nativeFavorite: favorite,
         nativeCart: cart
-      });
+      };
+      products.push(productById[id]);
     });
-    return products.slice(0, 8);
+    return products;
   }
 
   function productCard(product, index) {
     var visuals = ["visual-rice", "visual-grape", "visual-calendula", "visual-cactus", "visual-lavender", "visual-rosemary", "visual-rose", "visual-hair"];
     var badges = ["Çok Sevilen", "Yeni", "Editörün Seçimi", "Günlük Ritüel", "Saf Uçucu Yağ", "Doğal Bakım", "Aromatherapica", "Özenli Seçki"];
-    var media = '<img src="' + esc(product.image) + '" alt="' + esc(product.name) + '" loading="' + (index < 4 ? "eager" : "lazy") + '" decoding="async">';
+    var media = product.image
+      ? '<img src="' + esc(product.image) + '" alt="' + esc(product.name) + '" loading="' + (index < 4 ? "eager" : "lazy") + '" decoding="async">'
+      : '<span class="ar-product-placeholder" role="img" aria-label="' + esc(product.name) + ' ürün görseli hazırlanıyor"><b>A</b><small>Görsel hazırlanıyor</small></span>';
     return (
       '<article class="product-card reveal" data-category="' + esc(product.category) + '">' +
         '<div class="product-image ' + visuals[index % visuals.length] + '">' +
@@ -155,11 +167,11 @@
         "</section>" +
         '<section class="brand-statement reveal" aria-label="Aromatherapica marka yaklaşımı"><p>Doğanın bilgeliğinden ilham alıyoruz</p><h2>Aromatherapica, bitkisel içerikleri duyusal ve özenli bakım ritüelleriyle buluşturur.</h2><strong>ÖDÜNSÜZ BAKIM</strong><span>SAF. ÖZENLİ. ETKİLİ.</span></section>' +
         '<section class="conscience-section" aria-label="Sorumlu alışveriş ilkeleri"><h2 class="reveal">Özenle alışveriş</h2><div class="conscience-grid">' +
-          '<article class="reveal"><i class="conscience-icon conscience-rabbit" aria-hidden="true"></i><h3>Hayvan dostu</h3><p>Ürünlerimiz hayvanlar üzerinde test edilmez.</p></article>' +
-          '<article class="reveal"><i class="conscience-icon conscience-leaf" aria-hidden="true"></i><h3>Bitkisel içerikler</h3><p>Formüllerimizde doğadan gelen içeriklere öncelik veririz.</p></article>' +
-          '<article class="reveal"><i class="conscience-icon conscience-drop" aria-hidden="true"></i><h3>Saf özler</h3><p>Aromaterapi seçkimiz özenle seçilmiş özlerden oluşur.</p></article>' +
-          '<article class="reveal"><i class="conscience-icon conscience-recycle" aria-hidden="true"></i><h3>Sorumlu ambalaj</h3><p>Geri dönüştürülebilir ambalaj seçeneklerini destekleriz.</p></article>' +
-          '<article class="reveal"><i class="conscience-icon conscience-heart" aria-hidden="true"></i><h3>İyi yaşam</h3><p>Bakımı günlük yaşamın sakin ve değerli bir parçası görürüz.</p></article>' +
+          '<article class="reveal"><i class="conscience-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M17 19c-2-7-1-13 2-14 4-1 6 8 6 14M27 19c1-8 5-14 8-12 3 2 0 10-3 14"/><path d="M12 28c0-7 5-11 13-11 8 0 13 4 13 11 0 8-6 13-14 13S12 36 12 28Z"/><path d="M29 27h.1M15 31c5 3 10 3 15 0"/></svg></i><h3>Hayvan dostu</h3><p>Ürünlerimiz hayvanlar üzerinde test edilmez.</p></article>' +
+          '<article class="reveal"><i class="conscience-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M39 8C23 10 12 18 10 39c18-2 27-12 29-31Z"/><path d="M12 37c7-8 14-14 23-22"/></svg></i><h3>Bitkisel içerikler</h3><p>Formüllerimizde doğadan gelen içeriklere öncelik veririz.</p></article>' +
+          '<article class="reveal"><i class="conscience-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 5C19 13 12 21 12 29a12 12 0 0 0 24 0c0-8-7-16-12-24Z"/><path d="M18 32c2 3 5 4 8 4"/></svg></i><h3>Saf özler</h3><p>Aromaterapi seçkimiz özenle seçilmiş özlerden oluşur.</p></article>' +
+          '<article class="reveal"><i class="conscience-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="m20 9 4-5 4 5M24 5v9c0 3 2 5 5 5h5"/><path d="m38 20 6 1-2 6M43 22l-8 14c-2 3-5 4-8 2l-4-2"/><path d="m18 39-2 6-5-4M16 43 8 29c-2-3 0-7 3-8l4-2"/></svg></i><h3>Sorumlu ambalaj</h3><p>Geri dönüştürülebilir ambalaj seçeneklerini destekleriz.</p></article>' +
+          '<article class="reveal"><i class="conscience-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 41S7 31 7 18c0-6 4-10 10-10 4 0 6 2 7 5 2-3 4-5 8-5 6 0 10 4 10 10 0 13-18 23-18 23Z"/></svg></i><h3>İyi yaşam</h3><p>Bakımı günlük yaşamın sakin ve değerli bir parçası görürüz.</p></article>' +
         "</div></section>" +
         '<section class="newsletter reveal"><div class="newsletter-copy"><p class="eyebrow">Aromatherapica dünyasına katılın</p><h2>İlk siparişinize özel %15 indirim</h2><p>Yeni ürünler, bakım notları ve özel tekliflerden ilk siz haberdar olun.</p></div><form class="newsletter-form" data-ar-newsletter><label for="ar-newsletter-email">E-posta adresiniz</label><div><input id="ar-newsletter-email" name="email" type="email" placeholder="E-posta adresiniz" required><button type="submit">Kayıt ol</button></div><label class="consent"><input type="checkbox" required><span>İletişim izni ve aydınlatma metnini kabul ediyorum.</span></label></form></section>' +
       "</main>"
