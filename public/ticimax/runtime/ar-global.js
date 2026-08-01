@@ -1,6 +1,17 @@
 (function (window, document) {
   "use strict";
 
+  (function ensureFreshStyles() {
+    if (document.querySelector('link[data-ar-runtime="global-v4"]')) return;
+    var script = document.currentScript;
+    var base = script && script.src ? script.src.replace(/ar-global\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = base + "ar-global.css?v=20260801-5";
+    link.setAttribute("data-ar-runtime", "global-v4");
+    document.head.appendChild(link);
+  })();
+
   if (/\/admin(?:\/|$)/i.test(window.location.pathname || "")) return;
   if (window.AromatherapicaTicimax) return;
 
