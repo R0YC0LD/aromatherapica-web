@@ -7,13 +7,13 @@
     var base = script && script.src ? script.src.replace(/ar-global\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = base + "ar-global.css?v=20260801-6";
+    link.href = base + "ar-global.css?v=20260801-7";
     link.setAttribute("data-ar-runtime", "global-v4");
     document.head.appendChild(link);
   })();
 
   if (/\/admin(?:\/|$)/i.test(window.location.pathname || "")) return;
-  var RUNTIME_VERSION = "20260801.6";
+  var RUNTIME_VERSION = "20260801.7";
   if (window.__AR_GLOBAL_RUNTIME_VERSION__ === RUNTIME_VERSION) return;
   window.__AR_GLOBAL_RUNTIME_VERSION__ = RUNTIME_VERSION;
 
@@ -257,6 +257,24 @@
     window.setTimeout(function () { var dismissed = false; try { dismissed = sessionStorage.getItem(key) === "1"; } catch (ignore) {} if (!dismissed) popup.classList.add("ar-popup-visible"); }, 6500);
   };
 
+  api.enableSmartHeader = function () {
+    var header = api.qs("#ar-exact-header");
+    if (!header || header.getAttribute("data-ar-smart-header") === "true") return;
+    header.setAttribute("data-ar-smart-header", "true");
+    var lastY = Math.max(0, window.scrollY || 0);
+    var ticking = false;
+    function update() {
+      var y = Math.max(0, window.scrollY || 0);
+      var delta = y - lastY;
+      if (y < 80 || delta < -8 || document.body.classList.contains("ar-panel-open")) header.classList.remove("is-scroll-hidden");
+      else if (delta > 8 && y > 180) header.classList.add("is-scroll-hidden");
+      header.classList.toggle("is-compact", y > 40);
+      lastY = y;
+      ticking = false;
+    }
+    window.addEventListener("scroll", function () { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }, { passive: true });
+  };
+
   window.AromatherapicaTicimax = api;
 
   api.ready(function () {
@@ -265,6 +283,7 @@
     if (path.indexOf("favori") > -1) api.addPageClass("favorites");
     api.watchEditors();
     api.buildExactShell();
+    api.enableSmartHeader();
     api.scheduleNewsletter();
     api.syncCartCount();
     api.enhanceProductCards(document);

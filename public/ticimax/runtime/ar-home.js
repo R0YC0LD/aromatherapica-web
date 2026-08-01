@@ -7,12 +7,12 @@
     var base = script && script.src ? script.src.replace(/ar-home\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = base + "ar-home.css?v=20260801-5";
+    link.href = base + "ar-home.css?v=20260801-7";
     link.setAttribute("data-ar-runtime", "home-v4");
     document.head.appendChild(link);
   })();
 
-  var VERSION = "2026.07.28-exact-home-1";
+  var VERSION = "2026.08.01-exact-home-7";
   if (window.__AR_EXACT_HOME_VERSION__ === VERSION) return;
   window.__AR_EXACT_HOME_VERSION__ = VERSION;
 
@@ -60,20 +60,24 @@
       var favorite = qs(".favoriteslist", item);
       var id = detail && detail.dataset ? detail.dataset.id : "";
       if (!id || seen[id] || !nameNode || !link) return;
-      seen[id] = true;
 
       var source = resolveProductImage(image);
       if (!source) return;
+      seen[id] = true;
+      var primaryCategory = detail.dataset.category1 || "";
+      var leafCategory = detail.dataset.category || "";
+      var category = /^(aromaterapi yağları|cilt bakımı|saç ve vücut bakımı)$/i.test(primaryCategory) && leafCategory ? leafCategory : (primaryCategory || leafCategory || "Aromatherapica");
       products.push({
         id: id,
         variantId: detail.dataset.variantId || "",
-        category: detail.dataset.category1 || detail.dataset.category || "Aromatherapica",
+        category: category,
         name: nameNode.textContent.replace(/\s+/g, " ").trim(),
         href: link.getAttribute("href") || "/urunler",
         image: source,
         price: (qs(".discountPriceSpan", item) || qs(".currentPrice", item) || {}).textContent || "",
         unique: cart && cart.dataset ? cart.dataset.unique || "" : "",
-        favoriteOnclick: favorite ? favorite.getAttribute("onclick") || "" : ""
+        nativeFavorite: favorite,
+        nativeCart: cart
       });
     });
     return products.slice(0, 8);
@@ -182,6 +186,8 @@
         if (!product) return;
         if (typeof window.productListAddToCartV2 === "function" && product.unique) {
           window.productListAddToCartV2(product.unique, Number(product.id), Number(product.variantId), 0, 1, product.href, 0, button);
+        } else if (product.nativeCart) {
+          product.nativeCart.click();
         } else {
           window.location.href = product.href;
         }
@@ -191,13 +197,15 @@
       button.addEventListener("click", function () {
         var index = Number(button.getAttribute("data-ar-favorite"));
         var product = products[index];
+        if (!product || !product.nativeFavorite) { window.location.href = "/favorilerim"; return; }
+        product.nativeFavorite.click();
         button.classList.toggle("is-active");
-        button.textContent = button.classList.contains("is-active") ? "♥" : "♡";
-        if (product && product.favoriteOnclick) {
-          var original = qsa(".bb-keep-product .productItem")[index];
-          var nativeFavorite = original ? qs(".favoriteslist", original) : null;
-          if (nativeFavorite) nativeFavorite.click();
-        }
+        button.setAttribute("aria-pressed", button.classList.contains("is-active") ? "true" : "false");
+        window.setTimeout(function () {
+          var dock = qs("#ar-wishlist-dock b");
+          var count = qs(".favoritesCount, .favoriteCount, #spanFavoriSayisi, [class*='favori'] .count");
+          if (dock && count) dock.textContent = (count.textContent.match(/\d+/) || ["0"])[0];
+        }, 350);
       });
     });
     qsa("[data-ar-filter]").forEach(function (button) {
