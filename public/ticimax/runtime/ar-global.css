@@ -488,18 +488,41 @@ body.ar-page-search .productList {
   gap: 42px 22px;
 }
 
+body.ar-page-product .contentProductDetail,
 body.ar-page-product .ProductDetail,
 body.ar-page-product .urunDetay,
-body.ar-page-product [class*="ProductDetail"] {
+body.ar-page-product #ProductDetailMain,
+body.ar-page-product .ProductDetailMainRow {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+body.ar-page-product .ProductDetail,
+body.ar-page-product .urunDetay {
+  padding: 64px 0 90px;
+}
+
+body.ar-page-product .TopDet {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+  align-items: start;
   gap: clamp(42px, 6vw, 100px);
-  padding: 64px 0 90px;
+  width: 100%;
+  min-width: 0;
+}
+
+body.ar-page-product .leftImage,
+body.ar-page-product .RightDetail {
+  float: none;
+  width: auto;
+  min-width: 0;
 }
 
 body.ar-page-product .ProductDetailImages,
 body.ar-page-product .Images,
-body.ar-page-product [class*="UrunResim"] {
+body.ar-page-product [class*="UrunResim"],
+body.ar-page-product .leftImage {
   min-width: 0;
   background: #f5f4f0;
 }
@@ -617,11 +640,13 @@ textarea[name*="Script"] {
     gap: 30px 12px;
   }
 
-  body.ar-page-product .ProductDetail,
-  body.ar-page-product .urunDetay,
-  body.ar-page-product [class*="ProductDetail"] {
+  body.ar-page-product .TopDet {
     grid-template-columns: 1fr;
     gap: 30px;
+  }
+
+  body.ar-page-product .ProductDetail,
+  body.ar-page-product .urunDetay {
     padding: 32px 0 64px;
   }
 }

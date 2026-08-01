@@ -282,6 +282,26 @@
     });
   };
 
+  /*
+   * Keep the visual catalogue button, but delegate the transaction to
+   * Ticimax's own button. This preserves stock, variant, campaign and cart
+   * rules instead of duplicating any commerce logic in the theme layer.
+   */
+  api.bridgeCatalogAddButtons = function () {
+    if (document.documentElement.getAttribute("data-ar-cart-bridge") === "true") return;
+    document.documentElement.setAttribute("data-ar-cart-bridge", "true");
+    document.addEventListener("click", function (event) {
+      var visualButton = event.target.closest && event.target.closest(".ny-add-to-cart");
+      if (!visualButton) return;
+      var card = visualButton.closest(".productItem,.ItemOrj,.ar-native-product-card");
+      var nativeButton = card && card.querySelector(".btnAddToCart,.Addtobasket,.addBasket,.ar-native-add-button");
+      if (!nativeButton || nativeButton === visualButton) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      nativeButton.click();
+    }, true);
+  };
+
   api.enableSmartHeader = function () {
     var header = api.qs("#ar-exact-header");
     if (!header || header.getAttribute("data-ar-smart-header") === "true") return;
@@ -309,6 +329,7 @@
     api.watchEditors();
     api.buildExactShell();
     api.fixWishlistLinks(document);
+    api.bridgeCatalogAddButtons();
     api.enableSmartHeader();
     api.scheduleNewsletter();
     api.syncCartCount();
