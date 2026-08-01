@@ -2,7 +2,7 @@
   "use strict";
 
   (function ensureFreshHomeStyles() {
-    if (document.querySelector('link[data-ar-runtime="home-v4"]')) return;
+    if (document.querySelector('link[data-ar-runtime="home-v4"],link[data-ar-asset="home-css"]')) return;
     var script = document.currentScript;
     var base = script && script.src ? script.src.replace(/ar-home\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var link = document.createElement("link");
@@ -266,9 +266,10 @@
   }
 
   function bindNewsletter() {
-    var form = qs("[data-ar-newsletter]");
+    var form = qs("[data-ar-newsletter]") || qs("#ar-exact-main .newsletter");
     if (!form) return;
-    form.addEventListener("submit", function (event) {
+    var submit = qs('button[type="submit"]', form);
+    function send(event) {
       event.preventDefault();
       var email = qs('input[type="email"]', form);
       var button = qs('button[type="submit"]', form);
@@ -304,7 +305,9 @@
       window.setTimeout(function () {
         if (button) button.disabled = false;
       }, 1800);
-    });
+    }
+    if (form.tagName === "FORM") form.addEventListener("submit", send);
+    else if (submit) submit.addEventListener("click", send);
   }
 
   function build() {
@@ -322,6 +325,9 @@
     bindProducts(products);
     bindMotion();
     bindNewsletter();
+    if (window.AromatherapicaTicimax && window.AromatherapicaTicimax.fixWishlistLinks) {
+      window.AromatherapicaTicimax.fixWishlistLinks(document);
+    }
     return true;
   }
 

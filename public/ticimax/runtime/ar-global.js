@@ -2,7 +2,7 @@
   "use strict";
 
   (function ensureFreshStyles() {
-    if (document.querySelector('link[data-ar-runtime="global-v4"]')) return;
+    if (document.querySelector('link[data-ar-runtime="global-v4"],link[data-ar-asset="global-css"]')) return;
     var script = document.currentScript;
     var base = script && script.src ? script.src.replace(/ar-global\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var link = document.createElement("link");
@@ -272,8 +272,14 @@
     popup.classList.remove("ar-popup-visible");
     var key = "ar-newsletter-dismissed";
     function close() { popup.classList.remove("ar-popup-visible"); try { sessionStorage.setItem(key, "1"); } catch (ignore) {} }
-    api.qsa("#ozel-popup-kapat, #popup-hayir, [data-popup-close], .popup-kapat", popup).forEach(function (button) { button.addEventListener("click", close); });
+    api.qsa("#ozel-popup-kapat, #popup-hayir, #popup-hayir-buton, [data-popup-close], .popup-kapat", popup).forEach(function (button) { button.addEventListener("click", close); });
     window.setTimeout(function () { var dismissed = false; try { dismissed = sessionStorage.getItem(key) === "1"; } catch (ignore) {} if (!dismissed) popup.classList.add("ar-popup-visible"); }, 6500);
+  };
+
+  api.fixWishlistLinks = function (root) {
+    api.qsa('a[href="/favorilerim"],a[href$="/favorilerim"]', root || document).forEach(function (link) {
+      link.setAttribute("href", "/Hesabim.aspx#/Favorilerim");
+    });
   };
 
   api.enableSmartHeader = function () {
@@ -302,6 +308,7 @@
     if (path.indexOf("favori") > -1) api.addPageClass("favorites");
     api.watchEditors();
     api.buildExactShell();
+    api.fixWishlistLinks(document);
     api.enableSmartHeader();
     api.scheduleNewsletter();
     api.syncCartCount();
