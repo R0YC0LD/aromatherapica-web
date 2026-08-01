@@ -7,13 +7,13 @@
     var base = script && script.src ? script.src.replace(/ar-global\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = base + "ar-global.css?v=20260801-9";
+    link.href = base + "ar-global.css?v=20260801-10";
     link.setAttribute("data-ar-runtime", "global-v4");
     document.head.appendChild(link);
   })();
 
   if (/\/admin(?:\/|$)/i.test(window.location.pathname || "")) return;
-  var RUNTIME_VERSION = "20260801.9";
+  var RUNTIME_VERSION = "20260801.10";
   if (window.__AR_GLOBAL_RUNTIME_VERSION__ === RUNTIME_VERSION) return;
   window.__AR_GLOBAL_RUNTIME_VERSION__ = RUNTIME_VERSION;
 
@@ -293,7 +293,7 @@
 
   api.ready(function () {
     var path = (window.location.pathname || "").toLowerCase();
-    if (path.indexOf("hesabim") > -1 || path.indexOf("uyelik") > -1) api.addPageClass("account");
+    if (/hesabim|uyelik|uyegiris|uyeol|sifremi/.test(path)) api.addPageClass("account");
     if (path.indexOf("favori") > -1) api.addPageClass("favorites");
     api.watchEditors();
     api.buildExactShell();
