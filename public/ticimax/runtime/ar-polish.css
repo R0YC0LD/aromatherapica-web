@@ -61,6 +61,16 @@ body.ar-page-account #divIcerik>div,body.ar-page-account #divIcerik>section{box-
   #ar-exact-footer .footer-top{box-sizing:border-box!important;display:block!important;width:100%!important;padding:48px var(--ar-mobile-pad) 30px!important}#ar-exact-footer .footer-brand p{margin:18px 0!important;font-size:11px!important}#ar-exact-footer .footer-links{grid-template-columns:1fr!important;gap:0!important;margin-top:28px!important}#ar-exact-footer .footer-links>div{padding:16px 0!important;border-top:1px solid rgba(255,255,255,.16)!important}#ar-exact-footer .footer-links h2{margin:0 0 12px!important;font-size:18px!important}#ar-exact-footer .footer-links a{margin-bottom:8px!important;font-size:11px!important}#ar-exact-footer .footer-assurances{width:100%!important;min-height:64px!important}#ar-exact-footer .footer-assurances span{font-size:9px!important}#ar-exact-footer .footer-bottom{box-sizing:border-box!important;display:block!important;width:100%!important;min-height:0!important;padding:22px var(--ar-mobile-pad) 76px!important;text-align:center!important}#ar-exact-footer .footer-bottom>div{justify-content:center!important;margin-top:12px!important}.payment-marks{justify-content:center!important}
   .ar-native-catalog :is(.ProductList,.productList,.ProductListContent){gap:28px 10px!important}.ar-native-product-card{min-width:0!important}.ar-native-product-card .productImage,.ar-native-product-card [class*="productImage"]{min-height:0!important;aspect-ratio:1/1.08!important}.ar-native-product-card .productName,.ar-native-product-card [class*="productName"]{min-height:38px!important;font-size:14px!important;line-height:1.2!important}.ar-native-product-card .ar-native-add-button{min-height:39px!important;border-radius:999px!important;font-size:8px!important;letter-spacing:.12em!important}
 }
+
+/* v16 final collision pass: legacy flex catalogue and wishlist widget. */
+@media(max-width:760px){
+  body:has(#ar-exact-header) #ozel-hizli-menu{display:none!important}
+  #ProductPageProductList.ProductList{display:flex!important;flex-flow:row wrap!important;align-items:stretch!important;gap:26px 10px!important}
+  #ProductPageProductList.ProductList>.ItemOrj{flex:0 0 calc(50% - 5px)!important;width:calc(50% - 5px)!important;max-width:calc(50% - 5px)!important}
+  body:has(#ar-wishlist-dock) .favori-link.headerButon.icon{display:none!important}
+  body:not(:has(#ar-wishlist-dock)) .favori-link.headerButon.icon{box-sizing:border-box!important;right:12px!important;bottom:14px!important;left:auto!important;top:auto!important;display:grid!important;place-items:center!important;width:48px!important;min-width:48px!important;height:48px!important;min-height:48px!important;padding:0!important;border-radius:50%!important;font-size:0!important;overflow:hidden!important}
+  body:not(:has(#ar-wishlist-dock)) .favori-link.headerButon.icon:after{content:none!important;display:none!important}
+}
 @media(max-width:359px){#ar-exact-header .header-main{grid-template-columns:62px minmax(40px,1fr) 102px!important;padding-inline:6px!important}#ar-exact-header .ar-head-button{width:33px!important;min-width:33px!important}#ar-exact-main .product-grid{gap-inline:8px!important}#ar-exact-main .product-info h3{font-size:13px!important}#ar-exact-main .add-button{font-size:7px!important}}
 
 /* v15 live Ticimax mobile corrections. */
