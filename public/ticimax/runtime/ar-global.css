@@ -11,6 +11,7 @@ body.ar-exact-shell {
 /* 2026 exact Ticimax shell: native data, original presentation */
 html.ar-exact-shell,body.ar-exact-shell{width:100%;min-width:0!important;margin:0!important;overflow-x:hidden}
 body.ar-exact-shell #headerNew,body.ar-exact-shell .headerBefore,body.ar-exact-shell .headerAfter{display:none!important}
+body.ar-exact-shell *:has(>a[href='/kampanyalar']){display:none!important}
 body.ar-exact-home #customFooterContent,body.ar-exact-home .custom-newsletter-section,body.ar-exact-home .aroma-trust-banner{display:none!important}
 #ar-exact-header{position:relative;z-index:1000;width:100%;color:#082f6b;background:#fff;border-bottom:1px solid #e8ebef}
 #ar-exact-header .ar-topline{display:flex;justify-content:space-between;padding:12px max(30px,calc((100vw - 1780px)/2));background:#eee9e0;font:500 12px "DM Sans",Arial,sans-serif;letter-spacing:.01em}
