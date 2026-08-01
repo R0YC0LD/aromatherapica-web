@@ -653,3 +653,17 @@ textarea[name*="Script"] {
   .ar-native-product-card,
   .ar-native-product-card img { transition: none; }
 }
+
+/* Final cascade guard — keep after all Ticimax compatibility rules. */
+body.ar-exact-shell #custom-top-bar,
+body.ar-exact-shell #custom-top-bar.announcement-bar,
+body.ar-exact-shell #headerNew,
+body.ar-exact-shell .headerBefore,
+body.ar-exact-shell .headerAfter { display: none !important; }
+
+#ar-shell-panels.menu-open .ar-shell-scrim,
+#ar-shell-panels.search-open .ar-shell-scrim,
+#ar-shell-panels.cart-open .ar-shell-scrim { visibility: visible !important; opacity: 1 !important; }
+#ar-shell-panels.menu-open .ar-shell-drawer { visibility: visible !important; transform: translateX(0) !important; }
+#ar-shell-panels.search-open .ar-shell-search { visibility: visible !important; opacity: 1 !important; transform: translateY(0) !important; }
+#ar-shell-panels.cart-open .ar-cart-drawer { visibility: visible !important; transform: translateX(0) !important; }
