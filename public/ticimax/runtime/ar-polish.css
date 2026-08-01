@@ -62,3 +62,27 @@ body.ar-page-account #divIcerik>div,body.ar-page-account #divIcerik>section{box-
   .ar-native-catalog :is(.ProductList,.productList,.ProductListContent){gap:28px 10px!important}.ar-native-product-card{min-width:0!important}.ar-native-product-card .productImage,.ar-native-product-card [class*="productImage"]{min-height:0!important;aspect-ratio:1/1.08!important}.ar-native-product-card .productName,.ar-native-product-card [class*="productName"]{min-height:38px!important;font-size:14px!important;line-height:1.2!important}.ar-native-product-card .ar-native-add-button{min-height:39px!important;border-radius:999px!important;font-size:8px!important;letter-spacing:.12em!important}
 }
 @media(max-width:359px){#ar-exact-header .header-main{grid-template-columns:62px minmax(40px,1fr) 102px!important;padding-inline:6px!important}#ar-exact-header .ar-head-button{width:33px!important;min-width:33px!important}#ar-exact-main .product-grid{gap-inline:8px!important}#ar-exact-main .product-info h3{font-size:13px!important}#ar-exact-main .add-button{font-size:7px!important}}
+
+/* v15 live Ticimax mobile corrections. */
+@media(max-width:760px){
+  body:has(#ar-exact-header) #custom-top-bar{display:none!important}
+  #ProductPageProductList.ProductList{box-sizing:border-box!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch!important;gap:26px 10px!important;width:100%!important;height:auto!important;margin:0!important;padding:0!important}
+  #ProductPageProductList.ProductList>.ItemOrj{box-sizing:border-box!important;display:block!important;float:none!important;flex:none!important;width:100%!important;max-width:none!important;height:auto!important;margin:0!important;padding:0!important}
+  #ProductPageProductList .productItem{box-sizing:border-box!important;width:100%!important;max-width:none!important;height:100%!important;margin:0!important;padding:5px!important}
+  #ProductPageProductList .productItem .productImage{width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:1/1.08!important}
+  #ProductPageProductList .productItem .productName{min-height:36px!important;margin:8px 0 4px!important;font-size:14px!important;line-height:1.2!important}
+  #ProductPageProductList .productItem .productPrice{margin-top:7px!important;font-size:13px!important}
+  #ProductPageProductList .productItem :is(.Addtobasket,.addBasket,.btnAddToCart,.ar-native-add-button){box-sizing:border-box!important;width:100%!important;min-height:40px!important;margin-top:9px!important;padding:0 5px!important;border-radius:999px!important;font-size:8px!important}
+  #cerekKullanimUyari.cerezPopupUyari{box-sizing:border-box!important;left:8px!important;right:auto!important;bottom:8px!important;top:auto!important;width:min(248px,calc(100vw - 78px))!important;height:auto!important;min-height:0!important;margin:0!important;padding:10px 30px 10px 12px!important;border-radius:12px!important;background:rgba(9,15,24,.94)!important;box-shadow:0 10px 30px rgba(0,0,0,.22)!important}
+  #cerekKullanimUyari .title{width:auto!important;height:auto!important;margin:0 0 3px!important;padding:0!important;font-size:11px!important;line-height:1.2!important}
+  #cerekKullanimUyari p{margin:0!important;padding:0!important;font-size:9px!important;line-height:1.35!important}
+  #cerekKullanimUyari .closeBtn{box-sizing:border-box!important;position:absolute!important;top:7px!important;right:7px!important;display:grid!important;place-items:center!important;width:22px!important;height:22px!important;border-radius:50%!important;font-size:11px!important;cursor:pointer!important}
+  #ozel-popup-kutu{width:min(430px,calc(100vw - 28px))!important;max-height:calc(100dvh - 28px)!important;padding:48px 18px 24px!important;border-radius:20px!important}
+  #ozel-popup-baslik{margin-bottom:16px!important;font-size:clamp(27px,8vw,34px)!important;line-height:1.02!important}
+  #ozel-popup-kutu p{margin-bottom:18px!important;font-size:13px!important;line-height:1.45!important}
+  #ozel-popup-kutu input[type=email],#ozel-popup-kutu input[type=text]{height:44px!important;font-size:16px!important}
+  #ozel-popup-kutu button,#popup-kayit-buton{min-height:48px!important;margin-top:16px!important;font-size:11px!important}
+  #ozel-popup-kutu #ozel-popup-kapat{top:10px!important;right:10px!important;width:34px!important;min-width:34px!important;height:34px!important;min-height:34px!important;margin:0!important;padding:0!important;border-radius:50%!important;background:#fff!important;color:#12263b!important;font-size:23px!important}
+  #ozel-popup-kutu #popup-hayir-buton{min-height:36px!important;margin-top:14px!important;background:transparent!important;color:#111!important}
+  #ozel-popup-kutu .popup-sartlar{margin-top:8px!important;font-size:10px!important}
+}
