@@ -11,7 +11,7 @@ body.ar-exact-shell {
 /* 2026 exact Ticimax shell: native data, original presentation */
 html.ar-exact-shell,body.ar-exact-shell{width:100%;min-width:0!important;margin:0!important;overflow-x:hidden}
 body.ar-exact-shell #headerNew,body.ar-exact-shell .headerBefore,body.ar-exact-shell .headerAfter{display:none!important}
-body.ar-exact-shell *:has(>a[href='/kampanyalar']){display:none!important}
+body.ar-exact-shell #custom-top-bar{display:none!important}
 body.ar-exact-home #customFooterContent,body.ar-exact-home .custom-newsletter-section,body.ar-exact-home .aroma-trust-banner{display:none!important}
 #ar-exact-header{position:relative;z-index:1000;width:100%;color:#082f6b;background:#fff;border-bottom:1px solid #e8ebef}
 #ar-exact-header .ar-topline{display:flex;justify-content:space-between;padding:12px max(30px,calc((100vw - 1780px)/2));background:#eee9e0;font:500 12px "DM Sans",Arial,sans-serif;letter-spacing:.01em}
@@ -20,7 +20,7 @@ body.ar-exact-home #customFooterContent,body.ar-exact-home .custom-newsletter-se
 #ar-exact-header .ar-head-nav,#ar-exact-header .ar-head-actions{display:flex;align-items:center;gap:clamp(14px,1.5vw,28px)}
 #ar-exact-header .ar-head-nav a{font:500 15px "DM Sans",Arial,sans-serif;white-space:nowrap}
 #ar-exact-header .ar-head-actions{justify-content:flex-end;gap:5px}
-#ar-exact-header .ar-wordmark{display:flex;align-items:center;gap:13px}.ar-wordmark img{width:47px;height:47px;object-fit:contain}.ar-wordmark>span{display:flex;flex-direction:column}.ar-wordmark strong{font:400 clamp(28px,2.3vw,40px) Italiana,Georgia,serif}.ar-wordmark small{margin-top:7px;font:600 8px "DM Sans",Arial,sans-serif;letter-spacing:.32em;text-align:center;text-transform:uppercase}
+#ar-exact-header .ar-wordmark{display:flex;align-items:center;gap:13px}.ar-wordmark img{display:none!important}.ar-wordmark:before{content:"";width:47px;height:47px;flex:0 0 47px;border-radius:50%;background:url('https://r0yc0ld.github.io/aromatherapica-web/aromatherapica-emblem.png') center/contain no-repeat}.ar-wordmark>span{display:flex;flex-direction:column}.ar-wordmark strong{font:400 clamp(28px,2.3vw,40px) Italiana,Georgia,serif}.ar-wordmark small{margin-top:7px;font:600 8px "DM Sans",Arial,sans-serif;letter-spacing:.32em;text-align:center;text-transform:uppercase}
 .ar-head-button{display:grid;place-items:center;width:42px;height:42px;padding:0;border:0;border-radius:50%;color:#082f6b;background:transparent;font-size:22px;cursor:pointer}.ar-head-button:hover{background:#f1f4f7}
 #ar-exact-header .ar-category-nav{display:flex;justify-content:center;gap:18px;padding:18px max(24px,calc((100vw - 1200px)/2));overflow-x:auto;border-top:1px solid #edf0f3;scrollbar-width:none}
 #ar-exact-header .ar-category-nav a{flex:0 0 auto;display:grid;place-items:center;min-height:54px;padding:0 25px;border:1px solid #d8dde3;border-radius:999px;font:500 14px "DM Sans",Arial,sans-serif;white-space:nowrap;transition:.25s}
