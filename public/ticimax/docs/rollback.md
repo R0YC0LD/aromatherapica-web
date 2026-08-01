@@ -1,7 +1,8 @@
-# Geri alma
+# v21 geri alma
 
-1. Ticimax Script Yönetimi’ndeki `20260801-12` loader snippetlerini kaldırın.
-2. Kurulum öncesi aldığınız alan yedeklerini geri yapıştırın.
-3. Kaydedip CDN önbelleğinin yenilenmesini bekleyin.
+1. Ticimax Script Yönetimi’nde değiştirdiğiniz 12 alanı açın.
+2. Kurulumdan önce aldığınız v20/panel yedeklerini aynı alanlara geri yapıştırın.
+3. Alternatif hızlı geri alma için tüm `20260802-21` loader snippetlerini kaldırın; Ticimax’ın yerel teması çalışmaya devam eder.
+4. Alanları kaydedin, 2–5 dakika bekleyin ve gizli pencerede doğrulayın.
 
-Runtime, Ticimax ürün/sepet/üyelik/ödeme verisini değiştirmez; kaldırılması veri kaybına yol açmaz.
+Runtime ürün, sipariş, müşteri veya ödeme verisini silmez. Geri alma yalnız görünüm/yükleyici katmanını değiştirir.

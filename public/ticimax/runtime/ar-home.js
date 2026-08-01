@@ -5,19 +5,20 @@
     if (document.querySelector('link[data-ar-runtime="home-v4"],link[data-ar-asset="home-css"]')) return;
     var script = document.currentScript;
     var base = script && script.src ? script.src.replace(/ar-home\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
+    var build = (window.AROMATHERAPICA_CONFIG && window.AROMATHERAPICA_CONFIG.version) || "20260802-21";
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = base + "ar-home.css?v=20260801-11";
+    link.href = base + "ar-home.css?v=" + encodeURIComponent(build);
     link.setAttribute("data-ar-runtime", "home-v4");
     document.head.appendChild(link);
     var polish = document.createElement("link");
     polish.rel = "stylesheet";
-    polish.href = base + "ar-polish.css?v=20260801-11";
-    polish.setAttribute("data-ar-runtime", "home-polish-v11");
+    polish.href = base + "ar-polish.css?v=" + encodeURIComponent(build);
+    polish.setAttribute("data-ar-runtime", "home-polish-v21");
     document.head.appendChild(polish);
   })();
 
-  var VERSION = "2026.08.01-exact-home-11";
+  var VERSION = "2026.08.02-exact-home-21";
   if (window.__AR_EXACT_HOME_VERSION__ === VERSION) return;
   window.__AR_EXACT_HOME_VERSION__ = VERSION;
 
@@ -95,21 +96,18 @@
 
   function productCard(product, index) {
     var visuals = ["visual-rice", "visual-grape", "visual-calendula", "visual-cactus", "visual-lavender", "visual-rosemary", "visual-rose", "visual-hair"];
-    var badges = ["Çok Sevilen", "Yeni", "Editörün Seçimi", "Günlük Ritüel", "Saf Uçucu Yağ", "Doğal Bakım", "Aromatherapica", "Özenli Seçki"];
     var media = product.image
       ? '<img src="' + esc(product.image) + '" alt="' + esc(product.name) + '" loading="' + (index < 4 ? "eager" : "lazy") + '" decoding="async">'
       : '<span class="ar-product-placeholder" role="img" aria-label="' + esc(product.name) + ' ürün görseli hazırlanıyor"><b>A</b><small>Görsel hazırlanıyor</small></span>';
     return (
       '<article class="product-card reveal" data-category="' + esc(product.category) + '">' +
         '<div class="product-image ' + visuals[index % visuals.length] + '">' +
-          '<span class="product-badge">' + badges[index % badges.length] + "</span>" +
           '<button class="favorite-button" type="button" data-ar-favorite="' + index + '" aria-label="Favorilere ekle: ' + esc(product.name) + '">♡</button>' +
           '<a href="' + esc(product.href) + '" aria-label="' + esc(product.name) + '">' + media + "</a>" +
         "</div>" +
         '<div class="product-info">' +
-          '<div class="product-meta"><span>' + esc(product.category) + '</span><span class="rating">★★★★★ <small>4.9</small></span></div>' +
+          '<div class="product-meta"><span>' + esc(product.category) + '</span></div>' +
           '<h3><a href="' + esc(product.href) + '">' + esc(product.name) + "</a></h3>" +
-          '<p class="product-subtitle">Doğal içeriklerle hazırlanan özenli Aromatherapica bakımı.</p>' +
           '<div class="price-row"><strong>' + esc(product.price.trim()) + "</strong></div>" +
           '<div class="card-actions">' +
             '<button class="add-button" type="button" data-ar-add="' + index + '">Sepete ekle</button>' +
@@ -209,7 +207,7 @@
       button.addEventListener("click", function () {
         var index = Number(button.getAttribute("data-ar-favorite"));
         var product = products[index];
-        if (!product || !product.nativeFavorite) { window.location.href = "/favorilerim"; return; }
+        if (!product || !product.nativeFavorite) { window.location.href = "/Hesabim.aspx#/Favorilerim"; return; }
         product.nativeFavorite.click();
         button.classList.toggle("is-active");
         button.setAttribute("aria-pressed", button.classList.contains("is-active") ? "true" : "false");
@@ -247,22 +245,6 @@
       reveal.forEach(function (node) { observer.observe(node); });
     }
 
-    var hero = qs("#ar-exact-main .hero");
-    if (hero && window.matchMedia("(hover:hover) and (pointer:fine)").matches) {
-      hero.addEventListener("pointermove", function (event) {
-        var rect = hero.getBoundingClientRect();
-        var x = (event.clientX - rect.left) / Math.max(1, rect.width) - 0.5;
-        var y = (event.clientY - rect.top) / Math.max(1, rect.height) - 0.5;
-        hero.style.setProperty("--hero-visual-x", (-x * 10).toFixed(2) + "px");
-        hero.style.setProperty("--hero-visual-y", (-y * 8).toFixed(2) + "px");
-        hero.style.setProperty("--hero-copy-x", (x * 4).toFixed(2) + "px");
-      });
-      hero.addEventListener("pointerleave", function () {
-        hero.style.removeProperty("--hero-visual-x");
-        hero.style.removeProperty("--hero-visual-y");
-        hero.style.removeProperty("--hero-copy-x");
-      });
-    }
   }
 
   function bindNewsletter() {

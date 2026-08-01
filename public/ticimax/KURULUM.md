@@ -1,42 +1,46 @@
-# WebSitesi → Ticimax birebir kurulum
+# Aromatherapica Ticimax v21 kurulumu
 
-Kaynak: `C:\Users\ongor\OneDrive\Desktop\WebSitesi\zmetik\zmetik` (HAZIR-KURULUM / canli-exact).
+Aktif sürüm: `20260802-21`
 
-Bu paket yerel WebSitesi görünümünü Ticimax’ın gerçek ürün, sepet, favori, üyelik ve ödeme altyapısıyla birleştirir. Ürün verisi sabitlenmez; Ticimax `.productItem` düğümleri biçimlendirilir.
+Kullanılacak dosyalar `snippets/` klasöründedir. Her dosya Ticimax’ın yaklaşık 600 satırlık panel sınırının çok altındadır; büyük CSS/JS dosyaları GitHub Pages üzerinden yüklenir.
 
-## 0. Temizlik
+## 1. Yedek ve temizlik
 
-1. `location.replace(...github.io...)` yönlendirme scriptini sil.
-2. Eski çakışan Dinamik Script / “Tema Önizlemesi” gömülü HTML’i kaldır.
-3. Panel yedeği al.
+1. Ticimax Dinamik Script Yönetimi’ndeki 12 alanı yedekleyin.
+2. Eski Aromatherapica loader satırlarını ve büyük gömülü CSS/JS bloklarını kaldırın.
+3. Aynı alanda v20 ve v21’i birlikte bırakmayın.
 
-## 1. Amblem
+## 2. Panel alanları
 
-`assets/aromatherapica-emblem.png` → `/Uploads/EditorUploads/aromatherapica-emblem.png`
+| Sıra | Ticimax alanı | Yapıştırılacak dosya |
+|---:|---|---|
+| 1 | Tüm Sayfalar - Header | `snippets/10-header.html` |
+| 2 | Tüm Sayfalar | `snippets/01-all-pages.html` |
+| 3 | Anasayfa | `snippets/02-home.html` |
+| 4 | Kategori | `snippets/03-category.html` |
+| 5 | Marka | `snippets/04-brand.html` |
+| 6 | Ürün Detay | `snippets/05-product-detail.html` |
+| 7 | Sipariş Tamamlandı | `snippets/06-order-success.html` |
+| 8 | Sepet | `snippets/07-cart.html` |
+| 9 | Üye Ol Sayfası | `snippets/08-register.html` |
+| 10 | Üyelik Tamamlandı | `snippets/09-register-success.html` |
+| 11 | Arama | `snippets/13-search.html` |
+| 12 | Sipariş Tamamla | `snippets/14-checkout.html` |
 
-## 2. Dinamik Script sırası
+Her alanı kaydedin. Son işlemden sonra 2–5 dakika bekleyip gizli pencerede `Ctrl+F5` yapın.
 
-| # | Dosya (`final/`) | Alan |
-|---|------------------|------|
-| 1 | `01-tum-sayfalar.txt` | Tüm Sayfalar |
-| 2 | `10-tum-sayfalar-header.txt` | Tüm Sayfalar - Header |
-| 3 | `02-anasayfa.txt` | Anasayfa |
-| 4 | `03-kategori.txt` | Kategori |
-| 5 | `04-marka.txt` | Marka |
-| 6 | `05-urun-detay.txt` | Ürün Detay |
-| 7 | `07-sepet.txt` | Sepet |
-| 8 | `13-arama.txt` | Arama |
-| 9 | `08-uye-ol-sayfasi.txt` | Üye Ol |
-| 10 | `09-uyelik-tamamlandi.txt` | Üyelik Tamamlandı |
-| 11 | `14-siparis-tamamla.txt` | Sipariş Tamamla |
-| 12 | `06-siparis-tamamlandi.txt` | Sipariş Tamamlandı |
+## 3. Ürün ve kategori davranışı
 
-## 3. Kategori üst blokları
+Tema ürün üretmez veya sabit ürün listesi tutmaz. Ticimax’ın `.productItem` kartları, ürün görselleri, fiyatları ve gerçek `.btnAddToCart` eylemleri kullanılır. Ticimax panelinde ürün, görsel, stok, fiyat veya kategori değiştirdiğinizde mağaza otomatik güncellenir. Görseli olmayan ürünlerde tema sahte resim yerine erişilebilir hazırlık alanı gösterir.
 
-`kategori-bloklari/` içindeki HTML’leri ilgili kategori açıklama alanına yapıştırın.
+## 4. Kontrol
 
-## 4. Yayın kontrolü
+- Mobil: 320/360/390/430 px, iki ürün kolonu.
+- Tablet: 768–1279 px, üç ürün kolonu.
+- Masaüstü: 1280–1920 px, dört ürün kolonu.
+- Favoriler: `/Hesabim.aspx#/Favorilerim`.
+- Menü: butona basınca sayfa kaymamalı, artılı gruplar açılmalı.
+- Sepet: sayaç artmalı ve ürün checkout’ta görünmeli.
+- Popup: 6,5 saniyede açılmalı, ekran içinde kalmalı ve kapatılabilmeli.
 
-Anasayfa · kategori · ürün · sepet · arama · üyelik · ödeme · mobil 360/390 · menü blur · duyuru barı scroll.
-
-Integrity: `final/SHA256SUMS.txt`
+Ayrıntılı kurulum: `docs/installation.md`. Sayfa/bileşen haritası: `docs/page-mapping.md`. Test ve geri alma: `docs/testing.md`, `docs/rollback.md`.

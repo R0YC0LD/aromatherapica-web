@@ -1,12 +1,14 @@
-# Test raporu ve kontrol listesi
+# v21 test raporu ve kontrol listesi
 
-Sürüm: `20260801-12`
+Sürüm: `20260802-21`
 
-- JavaScript sözdizimi: otomatik `node --check`.
-- Loader tekrarı: `data-ar-asset` ve modül bayraklarıyla engellenir.
-- Dinamik ürünler: ilgili katalog container’ında debounce edilmiş `MutationObserver`.
-- Ürün verisi: gerçek Ticimax kartından okunur; fiyat/stok/varyant uydurulmaz.
-- Progressive enhancement: asset hatası yakalanır, özgün Ticimax DOM’u kaldırılmaz.
-- Erişilebilirlik: ürün görseli alt metni ve gerçek eylem butonlarına erişilebilir ad eklenir.
+- JavaScript: `ar-loader.js`, `ar-global.js` ve `ar-home.js` `node --check` ile doğrulandı.
+- Görünüm matrisi: 320, 360, 390, 430, 768, 1280, 1440 ve 1920 px.
+- Yatay görünüm: 844 × 390 px.
+- Sayfalar: anasayfa, kategori, marka, arama, ürün detay, checkout ve üyelik.
+- Sonuç: yatay taşma, header çakışması, kırık tema görseli ve sabit kontrol taşması yok.
+- Katalog: telefon 2, tablet 3, masaüstü 4 sütun; ilk satır kart yükseklik farkı 0 px.
+- Etkileşim: popup, kapatma, menü, akordeon, scroll-hide, favori rotası, yerel sepete ekleme köprüsü ve checkout ürün devamlılığı doğrulandı.
+- Progressive enhancement: asset hatasında yerel Ticimax DOM’u korunur.
 
-Gerçek ödeme ve sipariş oluşturma testi güvenlik nedeniyle yalnız Ticimax test/sandbox hesabında mağaza sahibi tarafından tamamlanmalıdır. Safari/iPhone fiziksel cihaz doğrulaması da mağaza yayınından sonra yapılmalıdır.
+Ticimax’ın `ticimax.productlist.min.js` içindeki `null.map` ve arama partial uyarıları canlı platform paketinden gelmektedir; v21 dosyalarından kaynaklanan hata bulunmadı. Gerçek ödeme ve sipariş oluşturma mağaza sahibinin test/sandbox hesabında tamamlanmalıdır.

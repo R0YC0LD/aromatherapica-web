@@ -5,20 +5,21 @@
     if (document.querySelector('link[data-ar-runtime="global-v4"],link[data-ar-asset="global-css"]')) return;
     var script = document.currentScript;
     var base = script && script.src ? script.src.replace(/ar-global\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
+    var build = (window.AROMATHERAPICA_CONFIG && window.AROMATHERAPICA_CONFIG.version) || "20260802-21";
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = base + "ar-global.css?v=20260801-11";
+    link.href = base + "ar-global.css?v=" + encodeURIComponent(build);
     link.setAttribute("data-ar-runtime", "global-v4");
     document.head.appendChild(link);
     var polish = document.createElement("link");
     polish.rel = "stylesheet";
-    polish.href = base + "ar-polish.css?v=20260801-11";
-    polish.setAttribute("data-ar-runtime", "polish-v11");
+    polish.href = base + "ar-polish.css?v=" + encodeURIComponent(build);
+    polish.setAttribute("data-ar-runtime", "polish-v21");
     document.head.appendChild(polish);
   })();
 
   if (/\/admin(?:\/|$)/i.test(window.location.pathname || "")) return;
-  var RUNTIME_VERSION = "20260801.11";
+  var RUNTIME_VERSION = "20260802.21";
   if (window.__AR_GLOBAL_RUNTIME_VERSION__ === RUNTIME_VERSION) return;
   window.__AR_GLOBAL_RUNTIME_VERSION__ = RUNTIME_VERSION;
 
@@ -110,8 +111,14 @@
       ".CartProductNumber, .cart-product-count, .sepetUrunSayisi, [class*='SepetUrunSayisi'], [data-cart-count]"
     );
     var count = nativeCount ? (nativeCount.textContent || "0").replace(/\D/g, "") : "0";
-    api.qsa("[data-ar-cart-count]").forEach(function (node) {
+    api.qsa("[data-ar-cart-count], .ar-cart-badge").forEach(function (node) {
       node.textContent = count || "0";
+    });
+  };
+
+  api.scheduleCartSync = function () {
+    [80, 350, 900, 1800].forEach(function (delay) {
+      window.setTimeout(api.syncCartCount, delay);
     });
   };
 
@@ -219,13 +226,13 @@
     if (nativeHeader && !api.qs("#ar-exact-header")) {
       var header = document.createElement("header");
       header.id = "ar-exact-header";
-      header.innerHTML = '<div class="ar-topline"><a href="/aromaterapi-yaglari">Saf aromaterapi yağlarını keşfedin <span>→</span></a><a href="/urunler">Tüm siparişlerde ücretsiz kargo <span>→</span></a></div><div class="header-main"><nav class="ar-head-nav" aria-label="Ana menü"><button type="button" class="ar-head-button" data-ar-menu aria-label="Menüyü aç"><i class="ar-i ar-i-menu"></i></button><a href="/aromaterapi-yaglari">Aromaterapi</a><a href="/ozel-bakim-urunleri">Özel Bakım</a><a href="/cilt-bakimi">Cilt Bakımı</a><a href="/hakkimizda">Markamız</a></nav><a class="ar-wordmark" href="/" aria-label="Aromatherapica ana sayfa"><img src="https://r0yc0ld.github.io/aromatherapica-web/aromatherapica-emblem.png" alt=""><span><strong>Aromatherapica</strong><small>Essential Oils &amp; Aromatherapy</small></span></a><div class="ar-head-actions"><button type="button" class="ar-head-button" data-ar-search aria-label="Arama yap"><i class="ar-i ar-i-search"></i></button><a class="ar-head-button ar-account" href="/Hesabim" aria-label="Hesabım"><i class="ar-i ar-i-user"></i></a><a class="ar-head-button" href="/favorilerim" aria-label="İstek listesi"><i class="ar-i ar-i-heart"></i></a><button type="button" class="ar-head-button" data-ar-cart aria-label="Sepeti aç"><i class="ar-i ar-i-bag"></i><b class="ar-cart-badge">0</b></button></div></div><nav class="ar-category-nav" aria-label="Ürün kategorileri"><a href="/aromaterapi-yaglari">Uçucu Yağlar</a><a href="/cilt-bakimi">Cilt Bakımı</a><a href="/ozel-bakim-urunleri">Özel Bakım</a><a href="/sacvevucut-bakimi">Saç Bakımı</a><a href="/sacvevucut-bakimi">Vücut Bakımı</a><a href="/arama?q=gül+suyu">Gül Suları</a><a href="/arama?q=taşıyıcı+yağ">Taşıyıcı Yağlar</a><a href="/arama?q=hediye">Hediye</a></nav>';
+      header.innerHTML = '<div class="ar-topline"><a href="/aromaterapi-yaglari">Saf aromaterapi yağlarını keşfedin <span>→</span></a><a href="/urunler">Tüm siparişlerde ücretsiz kargo <span>→</span></a></div><div class="header-main"><nav class="ar-head-nav" aria-label="Ana menü"><button type="button" class="ar-head-button" data-ar-menu aria-label="Menüyü aç"><i class="ar-i ar-i-menu"></i></button><a href="/aromaterapi-yaglari">Aromaterapi</a><a href="/ozel-bakim-urunleri">Özel Bakım</a><a href="/cilt-bakimi">Cilt Bakımı</a><a href="/hakkimizda">Markamız</a></nav><a class="ar-wordmark" href="/" aria-label="Aromatherapica ana sayfa"><img src="https://r0yc0ld.github.io/aromatherapica-web/aromatherapica-emblem.png" alt=""><span><strong>Aromatherapica</strong><small>Essential Oils &amp; Aromatherapy</small></span></a><div class="ar-head-actions"><button type="button" class="ar-head-button" data-ar-search aria-label="Arama yap"><i class="ar-i ar-i-search"></i></button><a class="ar-head-button ar-account" href="/Hesabim" aria-label="Hesabım"><i class="ar-i ar-i-user"></i></a><a class="ar-head-button" href="/Hesabim.aspx#/Favorilerim" aria-label="İstek listesi"><i class="ar-i ar-i-heart"></i></a><button type="button" class="ar-head-button" data-ar-cart aria-label="Sepeti aç"><i class="ar-i ar-i-bag"></i><b class="ar-cart-badge">0</b></button></div></div><nav class="ar-category-nav" aria-label="Ürün kategorileri"><a href="/aromaterapi-yaglari">Uçucu Yağlar</a><a href="/cilt-bakimi">Cilt Bakımı</a><a href="/ozel-bakim-urunleri">Özel Bakım</a><a href="/sacvevucut-bakimi">Saç Bakımı</a><a href="/sacvevucut-bakimi">Vücut Bakımı</a><a href="/Arama?q=gül+suyu">Gül Suları</a><a href="/Arama?q=taşıyıcı+yağ">Taşıyıcı Yağlar</a><a href="/Arama?q=hediye">Hediye</a></nav>';
       nativeHeader.parentNode.insertBefore(header, nativeHeader);
     }
     var exactHeader = api.qs("#ar-exact-header");
     if (exactHeader && exactHeader.parentNode !== document.body) document.body.insertBefore(exactHeader, document.body.firstChild);
     if (!api.qs("#ar-shell-panels")) document.body.insertAdjacentHTML("beforeend", '<div id="ar-shell-panels"><button class="ar-shell-scrim" data-ar-close aria-label="Kapat"></button><aside class="ar-shell-drawer" aria-label="Alışveriş menüsü"><header><strong>KEŞFET</strong><button class="ar-shell-close" data-ar-close aria-label="Kapat"><i class="ar-i ar-i-close"></i></button></header><nav><section><button data-ar-accordion>Aromaterapi Yağları <i class="ar-i ar-i-plus"></i></button><div><a href="/aromaterapi-yaglari">Tüm Aromaterapi</a><a href="/arama?q=uçucu+yağ">Uçucu Yağlar</a><a href="/arama?q=taşıyıcı+yağ">Taşıyıcı Yağlar</a><a href="/arama?q=gül+suyu">Gül Suları</a></div></section><section><button data-ar-accordion>Cilt Bakımı <i class="ar-i ar-i-plus"></i></button><div><a href="/cilt-bakimi">Tüm Cilt Bakımı</a><a href="/arama?q=serum">Serumlar</a><a href="/arama?q=krem">Bakım Kremleri</a><a href="/arama?q=temizleme">Temizleme</a></div></section><section><button data-ar-accordion>Saç ve Vücut <i class="ar-i ar-i-plus"></i></button><div><a href="/sacvevucut-bakimi">Tümünü Gör</a><a href="/arama?q=saç">Saç Bakımı</a><a href="/arama?q=vücut">Vücut Bakımı</a></div></section><a class="ar-menu-direct" href="/ozel-bakim-urunleri">Özel Bakım</a><a class="ar-menu-direct" href="/arama?q=hediye">Hediye Seçenekleri</a><a class="ar-menu-direct" href="/hakkimizda">Markamız</a></nav></aside><div class="ar-shell-search" role="dialog" aria-modal="true" aria-label="Ürün ara"><header><strong>ARAMA</strong><button class="ar-shell-close" data-ar-close aria-label="Kapat"><i class="ar-i ar-i-close"></i></button></header><form action="/arama"><i class="ar-i ar-i-search"></i><input name="q" type="search" placeholder="Ürün veya içerik ara" aria-label="Ürün veya içerik ara"><button>Ara</button></form><div class="ar-search-chips"><a href="/arama?q=lavanta">Lavanta</a><a href="/arama?q=biberiye">Biberiye</a><a href="/arama?q=gül+suyu">Gül Suyu</a><a href="/arama?q=cilt+bakımı">Cilt Bakımı</a></div></div><aside class="ar-cart-drawer" aria-label="Sepet"><header><strong>SEPETİM</strong><button class="ar-shell-close" data-ar-close aria-label="Kapat"><i class="ar-i ar-i-close"></i></button></header><div class="ar-cart-copy"><i class="ar-i ar-i-bag"></i><h2>Sepetiniz sizi bekliyor</h2><p>Ürünleriniz Ticimax sepetinde güvenle saklanır.</p><a href="/checkout">SEPETE GİT</a></div></aside></div>');
-    if (!api.qs("#ar-wishlist-dock")) document.body.insertAdjacentHTML("beforeend", '<a id="ar-wishlist-dock" href="/favorilerim" aria-label="İstek listesine git"><i class="ar-i ar-i-heart"></i> İSTEK LİSTESİ <b>0</b></a>');
+    if (!api.qs("#ar-wishlist-dock")) document.body.insertAdjacentHTML("beforeend", '<a id="ar-wishlist-dock" href="/Hesabim.aspx#/Favorilerim" aria-label="İstek listesine git"><i class="ar-i ar-i-heart"></i> İSTEK LİSTESİ <b>0</b></a>');
     var panels = api.qs("#ar-shell-panels");
     api.qsa("[data-ar-menu],[data-ar-search],[data-ar-cart],[data-ar-close],[data-ar-accordion]", document).forEach(function (button) {
       if (button.tagName === "BUTTON") button.type = "button";
@@ -291,6 +298,11 @@
     if (document.documentElement.getAttribute("data-ar-cart-bridge") === "true") return;
     document.documentElement.setAttribute("data-ar-cart-bridge", "true");
     document.addEventListener("click", function (event) {
+      var nativeClick = event.target.closest && event.target.closest(".btnAddToCart,.Addtobasket,.addBasket,.ar-native-add-button");
+      if (nativeClick) {
+        api.scheduleCartSync();
+        return;
+      }
       var visualButton = event.target.closest && event.target.closest(".ny-add-to-cart");
       if (!visualButton) return;
       var card = visualButton.closest(".productItem,.ItemOrj,.ar-native-product-card");
@@ -299,6 +311,7 @@
       event.preventDefault();
       event.stopImmediatePropagation();
       nativeButton.click();
+      api.scheduleCartSync();
     }, true);
   };
 
