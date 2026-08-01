@@ -26,6 +26,17 @@
       !/resim-hazirlaniyor|noimage|no-image|data:image/i.test(url || "");
   }
 
+  function resolveProductImage(image) {
+    if (!image) return "";
+    var attrs = ["data-original", "data-src", "data-lazy-src", "data-original-src", "data-image", "src"];
+    var candidates = attrs.map(function (name) { return image.getAttribute(name) || ""; });
+    var srcset = image.getAttribute("data-srcset") || image.getAttribute("srcset") || "";
+    if (srcset) candidates.unshift(srcset.split(",").pop().trim().split(/\s+/)[0]);
+    candidates.push(image.currentSrc || "");
+    var source = candidates.filter(isRealImage)[0] || "";
+    return source.replace(/([?&])width=\d+/i, "$1width=720").replace(/\/\d+x\d+\//, "/720x720/");
+  }
+
   function collectProducts() {
     var seen = {};
     var products = [];
@@ -40,14 +51,15 @@
       if (!id || seen[id] || !nameNode || !link) return;
       seen[id] = true;
 
-      var source = image ? (image.currentSrc || image.getAttribute("data-src") || image.src || "") : "";
+      var source = resolveProductImage(image);
+      if (!source) return;
       products.push({
         id: id,
         variantId: detail.dataset.variantId || "",
         category: detail.dataset.category1 || detail.dataset.category || "Aromatherapica",
         name: nameNode.textContent.replace(/\s+/g, " ").trim(),
         href: link.getAttribute("href") || "/urunler",
-        image: isRealImage(source) ? source.replace(/width=240\b/i, "width=620") : "",
+        image: source,
         price: (qs(".discountPriceSpan", item) || qs(".currentPrice", item) || {}).textContent || "",
         unique: cart && cart.dataset ? cart.dataset.unique || "" : "",
         favoriteOnclick: favorite ? favorite.getAttribute("onclick") || "" : ""
@@ -59,9 +71,7 @@
   function productCard(product, index) {
     var visuals = ["visual-rice", "visual-grape", "visual-calendula", "visual-cactus", "visual-lavender", "visual-rosemary", "visual-rose", "visual-hair"];
     var badges = ["Çok Sevilen", "Yeni", "Editörün Seçimi", "Günlük Ritüel", "Saf Uçucu Yağ", "Doğal Bakım", "Aromatherapica", "Özenli Seçki"];
-    var media = product.image
-      ? '<img src="' + esc(product.image) + '" alt="' + esc(product.name) + '" loading="' + (index < 4 ? "eager" : "lazy") + '" decoding="async">'
-      : '<div class="css-product-bottle" aria-hidden="true"></div>';
+    var media = '<img src="' + esc(product.image) + '" alt="' + esc(product.name) + '" loading="' + (index < 4 ? "eager" : "lazy") + '" decoding="async">';
     return (
       '<article class="product-card reveal" data-category="' + esc(product.category) + '">' +
         '<div class="product-image ' + visuals[index % visuals.length] + '">' +
