@@ -213,6 +213,19 @@
     api.qsa("[data-ar-cart]").forEach(function (button) { button.onclick = function () { closePanels(); panels.classList.add("cart-open"); document.body.classList.add("ar-panel-open"); }; });
     api.qsa("[data-ar-accordion]", panels).forEach(function (button) { button.onclick = function () { var section = button.parentNode; api.qsa("section.is-open", button.closest("nav")).forEach(function (open) { if (open !== section) open.classList.remove("is-open"); }); section.classList.toggle("is-open"); }; });
     api.qsa("[data-ar-close]", panels).forEach(function (button) { button.onclick = closePanels; });
+    if (!window.__AR_V4_PANEL_EVENTS__) {
+      window.__AR_V4_PANEL_EVENTS__ = true;
+      document.addEventListener("click", function (event) {
+        var trigger = event.target.closest && event.target.closest("[data-ar-menu],[data-ar-search],[data-ar-cart],[data-ar-close],[data-ar-accordion]");
+        if (!trigger) return;
+        var shell = api.qs("#ar-shell-panels");
+        if (!shell) return;
+        if (trigger.hasAttribute("data-ar-close")) { shell.className = ""; document.body.classList.remove("ar-panel-open"); return; }
+        if (trigger.hasAttribute("data-ar-accordion")) { var group = trigger.parentNode; group.classList.toggle("is-open"); return; }
+        shell.className = trigger.hasAttribute("data-ar-menu") ? "menu-open" : trigger.hasAttribute("data-ar-search") ? "search-open" : "cart-open";
+        document.body.classList.add("ar-panel-open");
+      });
+    }
     document.addEventListener("keydown", function (event) { if (event.key === "Escape") closePanels(); });
     var count = api.qs(".favoritesCount, .favoriteCount, #spanFavoriSayisi, [class*='favori'] .count");
     if (count) api.qs("#ar-wishlist-dock b").textContent = (count.textContent.match(/\d+/) || ["0"])[0];
