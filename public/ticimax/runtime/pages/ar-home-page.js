@@ -1,0 +1,1 @@
+(function(w,d){var A=w.AROMATHERAPICA;if(!A||A.modules.home)return;A.modules.home=true;A.ready(function(){var T=w.AromatherapicaTicimax;if(T)T.addPageClass("home");var r=A.dom.findFirst(d,A.selectors.catalog);if(r)A.products.observe(r)})})(window,document);

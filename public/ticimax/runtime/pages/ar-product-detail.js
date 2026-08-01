@@ -1,0 +1,1 @@
+(function(w,d){var A=w.AROMATHERAPICA;if(!A||A.modules.productDetail)return;A.modules.productDetail=true;A.ready(function(){var T=w.AromatherapicaTicimax;if(T)T.addPageClass("product");var r=A.dom.findFirst(d,[".ProductDetail",".urunDetay","[itemtype*='Product']","#divIcerik"])||d.body;r.classList.add("ar-native-product-detail");A.products.enhanceRoot(r)})})(window,document);

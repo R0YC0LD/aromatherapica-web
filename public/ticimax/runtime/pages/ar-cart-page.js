@@ -1,0 +1,1 @@
+(function(w,d){var A=w.AROMATHERAPICA;if(!A||A.modules.cart)return;A.modules.cart=true;A.ready(function(){var T=w.AromatherapicaTicimax;if(T){T.addPageClass("cart");T.syncCartCount()}var r=A.dom.findFirst(d,[".sepetimBody",".CartPage","[class*='Sepet']","#divIcerik"])||d.body;r.classList.add("ar-native-cart")})})(window,document);

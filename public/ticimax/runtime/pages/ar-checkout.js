@@ -1,0 +1,1 @@
+(function(w,d){var A=w.AROMATHERAPICA;if(!A||A.modules.checkout)return;A.modules.checkout=true;A.ready(function(){var T=w.AromatherapicaTicimax;if(T)T.addPageClass("checkout");var r=A.dom.findFirst(d,[".CheckoutPage",".OdemePage","#divIcerik"])||d.body;r.classList.add("ar-native-checkout");if(T)T.labelForms(r)})})(window,document);

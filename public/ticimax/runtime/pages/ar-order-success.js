@@ -1,0 +1,1 @@
+(function(w,d){var A=w.AROMATHERAPICA;if(!A||A.modules.orderSuccess)return;A.modules.orderSuccess=true;A.ready(function(){var T=w.AromatherapicaTicimax;if(T)T.addPageClass("order-success");var r=A.dom.findFirst(d,["main","#mainHolder",".mainContainer","#divIcerik"]);if(r){r.setAttribute("role","status");r.setAttribute("aria-live","polite")}})})(window,document);

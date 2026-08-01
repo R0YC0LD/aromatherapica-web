@@ -1,0 +1,1 @@
+(function(w,d){var A=w.AROMATHERAPICA;if(!A||A.modules.register)return;A.modules.register=true;A.ready(function(){var T=w.AromatherapicaTicimax;if(T)T.addPageClass("register");var r=A.dom.findFirst(d,["form","#divIcerik"])||d.body;r.classList.add("ar-native-register");if(T)T.labelForms(r)})})(window,document);
