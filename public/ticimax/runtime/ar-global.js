@@ -229,7 +229,8 @@
   api.buildExactShell = function () {
     document.documentElement.classList.add("ar-exact-shell");
     document.body.classList.add("ar-exact-shell");
-    if (document.body.classList.contains("HomeBody")) document.body.classList.add("ar-exact-home");
+    // Never hide native home content here. ar-home.js adds ar-exact-home
+    // only after #ar-exact-main is successfully mounted.
     var nativeHeader = api.qs("#headerNew");
     if (nativeHeader && !api.qs("#ar-exact-header")) {
       var header = document.createElement("header");

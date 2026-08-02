@@ -104,7 +104,7 @@ html body #ozel-hizli-menu#ozel-hizli-menu {
   display: none;
 }
 
-:where(button, input, select, textarea) {
+:where(button, input, textarea) {
   font: inherit;
 }
 
@@ -2391,4 +2391,68 @@ body:has(#ar-wishlist-dock) .favori-link.headerButon.icon {
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* Home blank-page safety: never hide native home unless custom main exists */
+body.ar-exact-home:not(:has(#ar-exact-main)) #divIcerik,
+body.ar-exact-home:not(:has(#ar-exact-main)) .bb-keep-product,
+body.ar-exact-home:not(:has(#ar-exact-main)) .ar-hero,
+body.ar-exact-home:not(:has(#ar-exact-main)) #customFooterContent,
+body.ar-exact-home:not(:has(#ar-exact-main)) .custom-newsletter-section,
+body.ar-exact-home:not(:has(#ar-exact-main)) [class*="ticimax-footer"] {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Catalogue sorting select: stop inheriting huge categoryTitle font-size */
+body:is(.ar-page-category, .ar-page-brand, .ar-page-search) select,
+body:is(.ar-page-category, .ar-page-brand, .ar-page-search) .categoryTitle select,
+#divIcerik select[name*="sira" i],
+#divIcerik select[id*="sira" i],
+#divIcerik select[class*="sira" i],
+select[name*="sira" i],
+select[id*="sira" i] {
+  box-sizing: border-box !important;
+  display: inline-block !important;
+  width: auto !important;
+  max-width: min(260px, calc(100vw - 48px)) !important;
+  min-width: 148px !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+  margin: 0 !important;
+  padding: 0 34px 0 14px !important;
+  border: 1px solid rgba(8, 47, 107, .18) !important;
+  border-radius: 999px !important;
+  color: #172536 !important;
+  background-color: #fff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  font-family: "DM Sans", Arial, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  vertical-align: middle !important;
+  -webkit-appearance: menulist !important;
+  appearance: auto !important;
+}
+
+body:is(.ar-page-category, .ar-page-brand, .ar-page-search) select option,
+#divIcerik select[name*="sira" i] option,
+#divIcerik select[id*="sira" i] option,
+select[name*="sira" i] option,
+select[id*="sira" i] option {
+  font-family: "DM Sans", Arial, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+  letter-spacing: normal !important;
+  color: #172536 !important;
+  background: #fff !important;
 }

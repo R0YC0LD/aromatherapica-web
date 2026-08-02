@@ -7,7 +7,7 @@
     var base = script && script.src ? script.src.replace(/ar-home\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var configuredBuild = window.AROMATHERAPICA_CONFIG && String(window.AROMATHERAPICA_CONFIG.version || "");
     var buildMatch = /^(\d{8})-(\d+)$/.exec(configuredBuild || "");
-    var build = buildMatch && ((Number(buildMatch[1]) * 1000) + Number(buildMatch[2])) >= 20260802024 ? configuredBuild : "20260802-24";
+    var build = buildMatch && ((Number(buildMatch[1]) * 1000) + Number(buildMatch[2])) >= 20260802024 ? configuredBuild : "20260802-26";
     var link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = base + "ar-home.css?v=" + encodeURIComponent(build);
@@ -16,11 +16,11 @@
     var polish = document.createElement("link");
     polish.rel = "stylesheet";
     polish.href = base + "ar-polish.css?v=" + encodeURIComponent(build);
-    polish.setAttribute("data-ar-runtime", "home-polish-v24");
+    polish.setAttribute("data-ar-runtime", "home-polish-v26");
     document.head.appendChild(polish);
   })();
 
-  var VERSION = "2026.08.02-exact-home-24";
+  var VERSION = "2026.08.02-exact-home-26";
   if (window.__AR_EXACT_HOME_VERSION__ === VERSION) return;
   window.__AR_EXACT_HOME_VERSION__ = VERSION;
 
@@ -296,16 +296,19 @@
 
   function build() {
     if (qs("#ar-exact-main")) return true;
-    var anchor = qs(".ar-hero") || qs("#divIcerik");
-    var originalFooter = qs("#customFooterContent");
-    if (!anchor || !originalFooter) return false;
+    var anchor = qs(".ar-hero") || qs("#divIcerik") || qs("#mainHolder") || qs("body");
+    if (!anchor) return false;
     var products = collectProducts();
-    if (products.length < 4) return false;
+    var originalFooter = qs("#customFooterContent") || qs("[class*='ticimax-footer']") || qs("#footer") || qs("footer");
+
+    // Mount custom home even with few/no products so the page never goes blank.
+    // Hide native blocks only after successful mount.
+    anchor.insertAdjacentHTML(anchor === document.body ? "afterbegin" : "beforebegin", mainMarkup(products));
+    if (originalFooter) originalFooter.insertAdjacentHTML("beforebegin", footerMarkup());
+    else document.body.insertAdjacentHTML("beforeend", footerMarkup());
 
     document.body.classList.add("ar-exact-home");
     document.documentElement.classList.add("ar-exact-home");
-    anchor.insertAdjacentHTML("beforebegin", mainMarkup(products));
-    originalFooter.insertAdjacentHTML("beforebegin", footerMarkup());
     bindProducts(products);
     bindMotion();
     bindNewsletter();
@@ -321,7 +324,15 @@
     var attempts = 0;
     var timer = window.setInterval(function () {
       attempts += 1;
-      if (build() || attempts > 40) window.clearInterval(timer);
+      var ready = build();
+      if (ready || attempts > 40) {
+        window.clearInterval(timer);
+        // Safety net: if custom main never mounted, restore native home visibility.
+        if (!qs("#ar-exact-main")) {
+          document.body.classList.remove("ar-exact-home");
+          document.documentElement.classList.remove("ar-exact-home");
+        }
+      }
     }, 150);
   }
 
