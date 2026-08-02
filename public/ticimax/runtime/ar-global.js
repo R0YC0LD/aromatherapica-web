@@ -286,9 +286,27 @@
     }
     popup.classList.remove("ar-popup-visible");
     var key = "ar-newsletter-dismissed";
-    function close() { popup.classList.remove("ar-popup-visible"); try { sessionStorage.setItem(key, "1"); } catch (ignore) {} }
+    function close() {
+      api.qsa("#ozel-popup-overlay").forEach(function (current) { current.classList.remove("ar-popup-visible"); });
+      try { sessionStorage.setItem(key, "1"); } catch (ignore) {}
+    }
     api.qsa("#ozel-popup-kapat, #popup-hayir, #popup-hayir-buton, [data-popup-close], .popup-kapat", popup).forEach(function (button) { button.addEventListener("click", close); });
-    window.setTimeout(function () { var dismissed = false; try { dismissed = sessionStorage.getItem(key) === "1"; } catch (ignore) {} if (!dismissed) popup.classList.add("ar-popup-visible"); }, 6500);
+    if (!window.__AR_NEWSLETTER_CLOSE_EVENTS__) {
+      window.__AR_NEWSLETTER_CLOSE_EVENTS__ = true;
+      document.addEventListener("click", function (event) {
+        var button = event.target.closest && event.target.closest("#ozel-popup-kapat, #popup-hayir, #popup-hayir-buton, [data-popup-close], .popup-kapat");
+        if (!button) return;
+        event.preventDefault();
+        close();
+      }, true);
+      document.addEventListener("keydown", function (event) { if (event.key === "Escape") close(); });
+    }
+    window.setTimeout(function () {
+      var dismissed = false;
+      try { dismissed = sessionStorage.getItem(key) === "1"; } catch (ignore) {}
+      var current = api.qs("#ozel-popup-overlay");
+      if (!dismissed && current) current.classList.add("ar-popup-visible");
+    }, 6500);
   };
 
   api.fixWishlistLinks = function (root) {

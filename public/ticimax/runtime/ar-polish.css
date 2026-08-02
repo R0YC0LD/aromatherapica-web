@@ -44,6 +44,11 @@ body {
   overflow-x: clip;
 }
 
+html {
+  --ar-green: #082f6b !important;
+  --ar-navy: #082f6b !important;
+}
+
 *,
 *::before,
 *::after {
@@ -165,16 +170,20 @@ html body #ozel-hizli-menu#ozel-hizli-menu {
   transform: none !important;
 }
 
-.body-ready .reveal {
+.body-ready .reveal,
+body.ar-exact-home #ar-exact-main .reveal,
+body.ar-exact-home #ar-exact-footer .reveal {
   filter: none !important;
-  opacity: 0;
-  transform: translateY(7px);
-  transition: opacity var(--ar-motion-medium) ease, transform var(--ar-motion-medium) var(--ar-ease-soft);
+  opacity: 0 !important;
+  transform: translateY(7px) !important;
+  transition: opacity var(--ar-motion-medium) ease, transform var(--ar-motion-medium) var(--ar-ease-soft) !important;
 }
 
-.body-ready .reveal.is-visible {
-  opacity: 1;
-  transform: none;
+.body-ready .reveal.is-visible,
+body.ar-exact-home #ar-exact-main .reveal.is-visible,
+body.ar-exact-home #ar-exact-footer .reveal.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .product-card,
@@ -2170,5 +2179,11 @@ body:has(#ar-wishlist-dock) .favori-link.headerButon.icon {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
+  }
+
+  #ar-exact-main .reveal,
+  #ar-exact-footer .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
