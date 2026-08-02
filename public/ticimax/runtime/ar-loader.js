@@ -7,7 +7,11 @@
   var config = window.AROMATHERAPICA_CONFIG || {};
   var page = (currentScript && currentScript.dataset.arPage) || "all";
   var base = config.baseUrl || DEFAULT_BASE;
-  var build = config.version || DEFAULT_BUILD;
+  function buildRank(value) {
+    var match = /^(\d{8})-(\d+)$/.exec(String(value || ""));
+    return match ? (Number(match[1]) * 1000) + Number(match[2]) : 0;
+  }
+  var build = buildRank(config.version) >= buildRank(DEFAULT_BUILD) ? String(config.version) : DEFAULT_BUILD;
   var pages = {
     home: "pages/ar-home-page.js",
     category: "pages/ar-category.js",

@@ -38,7 +38,7 @@ JavaScript yalnız kabuk etkileşimleri ve progressive enhancement için kullan�
 
 ## 5. Panel sürüm yükseltmesi
 
-Tüm loader snippetleri ve Header config `20260802-21` sürümüne yükseltildi. Header alanı runtime yüklemez. Kullanılacak tek dosya takımı `public/ticimax/snippets/` ve bunun `final/` kopyasıdır; eski `final-full/` klasörü yayın akışında kullanılmaz.
+Tüm loader snippet dosyaları ve Header config `20260802-21` sürümüne yükseltildi. Loader, panelde kalmış daha eski bir config değerinin v21 cache anahtarını geriye almasını engeller. Header alanı runtime yüklemez. Kullanılacak tek dosya takımı `public/ticimax/snippets/` ve bunun `final/` kopyasıdır; eski `final-full/` klasörü yayın akışında kullanılmaz. Canlı Ticimax panelinde Üye Ol alanı loader çalıştırmadığı için `08-register.html` dahil 12 v21 snippetinin panelde yeniden kaydedilmesi zorunludur.
 
 ## 6. Cihaz test matrisi
 

@@ -5,7 +5,9 @@
     if (document.querySelector('link[data-ar-runtime="home-v4"],link[data-ar-asset="home-css"]')) return;
     var script = document.currentScript;
     var base = script && script.src ? script.src.replace(/ar-home\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
-    var build = (window.AROMATHERAPICA_CONFIG && window.AROMATHERAPICA_CONFIG.version) || "20260802-21";
+    var configuredBuild = window.AROMATHERAPICA_CONFIG && String(window.AROMATHERAPICA_CONFIG.version || "");
+    var buildMatch = /^(\d{8})-(\d+)$/.exec(configuredBuild || "");
+    var build = buildMatch && ((Number(buildMatch[1]) * 1000) + Number(buildMatch[2])) >= 20260802021 ? configuredBuild : "20260802-21";
     var link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = base + "ar-home.css?v=" + encodeURIComponent(build);
