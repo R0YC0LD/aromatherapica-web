@@ -1,4 +1,4 @@
-# Ticimax manuel kurulum — v21 (`20260802-21`)
+# Ticimax manuel kurulum — v21 (`20260802-22`)
 
 Bu paket Ticimax ürün, kategori, fiyat, stok, varyant, favori, sepet, üyelik ve ödeme akışlarını değiştirmez. Görünüm katmanı uzak GitHub Pages runtime’ından yüklenir; ürünler ve görseller Ticimax’ın kendi HTML’inden canlı okunur.
 
@@ -27,8 +27,8 @@ Her alanı tek tek kaydedin. Snippetlerin her biri 600 satır sınırının çok
 
 ## Zorunlu yayın kontrolü
 
-- Sayfa kaynağında `20260802-21` görünmelidir.
-- Konsolda `window.AROMATHERAPICA.version` değeri `20260802-21` olmalıdır.
+- Sayfa kaynağında `20260802-22` görünmelidir.
+- Konsolda `window.AROMATHERAPICA.version` değeri `20260802-22` olmalıdır.
 - Mobilde iki, tablette üç, masaüstünde dört katalog sütunu görünmelidir.
 - Favori bağlantısı `/Hesabim.aspx#/Favorilerim` olmalıdır.
 - Bir ürünü sepete eklediğinizde header sayacı artmalı ve ürün `/checkout` içinde görünmelidir.

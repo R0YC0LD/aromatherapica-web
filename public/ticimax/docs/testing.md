@@ -1,6 +1,6 @@
 # v21 test raporu ve kontrol listesi
 
-Sürüm: `20260802-21`
+Sürüm: `20260802-22`
 
 - JavaScript: `ar-loader.js`, `ar-global.js` ve `ar-home.js` `node --check` ile doğrulandı.
 - Görünüm matrisi: 320, 360, 390, 430, 768, 1280, 1440 ve 1920 px.

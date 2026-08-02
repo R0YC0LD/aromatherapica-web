@@ -5,17 +5,20 @@
  */
 
 :root {
-  --ar-ink: #1f2a24;
-  --ar-ink-soft: #45524a;
+  --ar-ink: #172536;
+  --ar-ink-soft: #526174;
   --ar-paper: #fbfaf7;
   --ar-cream: #f7f4ef;
   --ar-stone: #eeeae2;
-  --ar-mist: #e7f0ec;
-  --ar-sage: #a9b9aa;
-  --ar-green: #466354;
-  --ar-navy: #0b3a61;
+  --ar-mist: #e8eff6;
+  --ar-sage: #aab9ca;
+  --ar-green: #082f6b;
+  --ar-navy: #082f6b;
   --ar-gold: #b99655;
-  --ar-line: rgba(31, 42, 36, .14);
+  --ar-line: rgba(8, 47, 107, .14);
+  --ar-motion-fast: 160ms;
+  --ar-motion-medium: 280ms;
+  --ar-ease-soft: cubic-bezier(.22, .61, .36, 1);
   --ar-pad: clamp(16px, 4vw, 28px);
   --ar-container: min(1280px, calc(100vw - (var(--ar-pad) * 2)));
   --ar-gap: clamp(12px, 2vw, 28px);
@@ -104,6 +107,23 @@ html body #ozel-hizli-menu#ozel-hizli-menu {
   min-height: 44px;
 }
 
+/* Keep native checkboxes compact while making their labelled hit area thumb-safe. */
+:where(label:has(input[type="checkbox"]), label:has(input[type="radio"])) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+:where(input[type="checkbox"], input[type="radio"]) {
+  flex: 0 0 auto;
+  inline-size: 20px;
+  block-size: 20px;
+  margin: 0;
+  accent-color: var(--ar-green);
+}
+
 :where(a, button, input, select, textarea):focus-visible {
   outline: 2px solid var(--ar-gold);
   outline-offset: 3px;
@@ -127,6 +147,14 @@ html body #ozel-hizli-menu#ozel-hizli-menu {
   display: none !important;
 }
 
+.hero-bottle,
+.ingredient-track,
+.hero-orbit,
+.botanical-leaf,
+.bottle-glow {
+  animation: none !important;
+}
+
 .hero-visual,
 .hero-copy,
 .ritual-card,
@@ -140,8 +168,8 @@ html body #ozel-hizli-menu#ozel-hizli-menu {
 .body-ready .reveal {
   filter: none !important;
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity .45s ease, transform .45s ease;
+  transform: translateY(7px);
+  transition: opacity var(--ar-motion-medium) ease, transform var(--ar-motion-medium) var(--ar-ease-soft);
 }
 
 .body-ready .reveal.is-visible {
@@ -156,7 +184,7 @@ html body #ozel-hizli-menu#ozel-hizli-menu {
 .conscience-grid article,
 .conscience-icon {
   box-shadow: none !important;
-  transition: transform .25s ease, color .25s ease, background-color .25s ease, border-color .25s ease !important;
+  transition: transform var(--ar-motion-fast) var(--ar-ease-soft), color var(--ar-motion-fast) ease, background-color var(--ar-motion-fast) ease, border-color var(--ar-motion-fast) ease !important;
 }
 
 /* Exact shell */
@@ -168,10 +196,12 @@ html body #ozel-hizli-menu#ozel-hizli-menu {
   max-width: 100% !important;
   border-bottom: 1px solid var(--ar-line) !important;
   color: var(--ar-ink) !important;
-  background: rgba(251, 250, 247, .98) !important;
+  background: var(--ar-paper) !important;
   box-shadow: none !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition: transform var(--ar-motion-medium) var(--ar-ease-soft), box-shadow var(--ar-motion-fast) ease !important;
+  will-change: auto !important;
 }
 
 #ar-exact-header.is-compact {
@@ -318,6 +348,15 @@ html body #ozel-hizli-menu#ozel-hizli-menu {
 #ar-shell-panels .ar-cart-drawer,
 #ar-shell-panels .ar-shell-search {
   max-width: calc(100vw - var(--ar-safe-left) - var(--ar-safe-right)) !important;
+  transition-duration: var(--ar-motion-medium), var(--ar-motion-fast), 0s !important;
+  transition-timing-function: var(--ar-ease-soft), ease, linear !important;
+  will-change: transform;
+}
+
+#ar-shell-panels .ar-shell-scrim {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition-duration: var(--ar-motion-fast) !important;
 }
 
 .ar-shell-drawer nav section > div {
@@ -520,8 +559,14 @@ html body #ozel-hizli-menu#ozel-hizli-menu {
 }
 
 #ar-exact-main .product-image::after {
-  opacity: .35 !important;
-  filter: blur(12px) !important;
+  opacity: .14 !important;
+  filter: none !important;
+}
+
+#ar-exact-main .product-image > a img,
+#ar-exact-main .css-product-bottle {
+  transition: transform var(--ar-motion-medium) var(--ar-ease-soft) !important;
+  will-change: auto !important;
 }
 
 #ar-exact-main .product-image > a {
@@ -676,7 +721,7 @@ html body #ozel-hizli-menu#ozel-hizli-menu {
 
 #ar-exact-main .editorial-image {
   min-height: 620px !important;
-  background: linear-gradient(145deg, #c9ddd4, #a7c3b7) !important;
+  background: linear-gradient(145deg, #dce8f1, #a9bfce) !important;
 }
 
 #ar-exact-main .editorial-copy {
@@ -1168,9 +1213,9 @@ body.ar-page-account :is(.hesabimSag, .HesabimSag, .hesabimRight, .accountRight,
 #ozel-popup-overlay {
   box-sizing: border-box !important;
   padding: max(14px, var(--ar-safe-top)) max(14px, var(--ar-safe-right)) max(14px, var(--ar-safe-bottom)) max(14px, var(--ar-safe-left)) !important;
-  background: rgba(18, 27, 23, .58) !important;
-  backdrop-filter: blur(3px) !important;
-  -webkit-backdrop-filter: blur(3px) !important;
+  background: rgba(7, 24, 49, .56) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 #ozel-popup-kutu {
@@ -1184,7 +1229,7 @@ body.ar-page-account :is(.hesabimSag, .HesabimSag, .hesabimRight, .accountRight,
   border-radius: 18px !important;
   background: var(--ar-paper) !important;
   background-image: none !important;
-  box-shadow: 0 24px 70px rgba(18, 27, 23, .22) !important;
+  box-shadow: 0 24px 70px rgba(8, 47, 107, .18) !important;
   text-align: center !important;
 }
 
@@ -2109,6 +2154,11 @@ body:has(#ar-wishlist-dock) .favori-link.headerButon.icon {
   #ar-exact-main .conscience-grid article:hover,
   #ProductPageProductList .productItem:hover {
     transform: translateY(-2px) !important;
+  }
+
+  #ar-exact-main .product-card:hover .product-image img,
+  #ar-exact-main .product-card:hover .css-product-bottle {
+    transform: translateY(-2px) scale(1.008) !important;
   }
 }
 

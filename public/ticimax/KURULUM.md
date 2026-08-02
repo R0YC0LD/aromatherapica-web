@@ -1,6 +1,6 @@
 # Aromatherapica Ticimax v21 kurulumu
 
-Aktif sürüm: `20260802-21`
+Aktif sürüm: `20260802-22`
 
 Kullanılacak dosyalar `snippets/` klasöründedir. Her dosya Ticimax’ın yaklaşık 600 satırlık panel sınırının çok altındadır; büyük CSS/JS dosyaları GitHub Pages üzerinden yüklenir.
 

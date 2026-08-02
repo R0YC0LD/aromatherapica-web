@@ -1,3 +1,3 @@
 <meta name="theme-color" content="#466354">
 <link rel="preconnect" href="https://r0yc0ld.github.io" crossorigin>
-<script>window.AROMATHERAPICA_CONFIG={baseUrl:"https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/",version:"20260802-21",debug:false};</script>
+<script>window.AROMATHERAPICA_CONFIG={baseUrl:"https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/",version:"20260802-22",debug:false};</script>
