@@ -1,6 +1,6 @@
-# v21 test raporu ve kontrol listesi
+# v23 test raporu ve kontrol listesi
 
-Sürüm: `20260802-22`
+Sürüm: `20260802-23`
 
 - JavaScript: `ar-loader.js`, `ar-global.js` ve `ar-home.js` `node --check` ile doğrulandı.
 - Görünüm matrisi: 320, 360, 390, 430, 768, 1280, 1440 ve 1920 px.
@@ -11,4 +11,4 @@ Sürüm: `20260802-22`
 - Etkileşim: popup, kapatma, menü, akordeon, scroll-hide, favori rotası, yerel sepete ekleme köprüsü ve checkout ürün devamlılığı doğrulandı.
 - Progressive enhancement: asset hatasında yerel Ticimax DOM’u korunur.
 
-Ticimax’ın `ticimax.productlist.min.js` içindeki `null.map` ve arama partial uyarıları canlı platform paketinden gelmektedir; v21 dosyalarından kaynaklanan hata bulunmadı. Gerçek ödeme ve sipariş oluşturma mağaza sahibinin test/sandbox hesabında tamamlanmalıdır.
+Ticimax’ın `ticimax.productlist.min.js` içindeki `null.map` ve arama partial uyarıları canlı platform paketinden gelmektedir; v23 dosyalarından kaynaklanan hata bulunmadı. Gerçek ödeme ve sipariş oluşturma mağaza sahibinin test/sandbox hesabında tamamlanmalıdır.

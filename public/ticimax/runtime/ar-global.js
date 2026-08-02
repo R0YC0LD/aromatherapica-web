@@ -7,7 +7,7 @@
     var base = script && script.src ? script.src.replace(/ar-global\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var configuredBuild = window.AROMATHERAPICA_CONFIG && String(window.AROMATHERAPICA_CONFIG.version || "");
     var buildMatch = /^(\d{8})-(\d+)$/.exec(configuredBuild || "");
-    var build = buildMatch && ((Number(buildMatch[1]) * 1000) + Number(buildMatch[2])) >= 20260802022 ? configuredBuild : "20260802-22";
+    var build = buildMatch && ((Number(buildMatch[1]) * 1000) + Number(buildMatch[2])) >= 20260802023 ? configuredBuild : "20260802-23";
     var link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = base + "ar-global.css?v=" + encodeURIComponent(build);
@@ -16,12 +16,12 @@
     var polish = document.createElement("link");
     polish.rel = "stylesheet";
     polish.href = base + "ar-polish.css?v=" + encodeURIComponent(build);
-    polish.setAttribute("data-ar-runtime", "polish-v21");
+    polish.setAttribute("data-ar-runtime", "polish-v23");
     document.head.appendChild(polish);
   })();
 
   if (/\/admin(?:\/|$)/i.test(window.location.pathname || "")) return;
-  var RUNTIME_VERSION = "20260802.22";
+  var RUNTIME_VERSION = "20260802.23";
   if (window.__AR_GLOBAL_RUNTIME_VERSION__ === RUNTIME_VERSION) return;
   window.__AR_GLOBAL_RUNTIME_VERSION__ = RUNTIME_VERSION;
 
@@ -288,8 +288,15 @@
     var key = "ar-newsletter-dismissed";
     function close() {
       api.qsa("#ozel-popup-overlay").forEach(function (current) { current.classList.remove("ar-popup-visible"); });
+      document.documentElement.classList.add("ar-popup-dismissed");
       try { sessionStorage.setItem(key, "1"); } catch (ignore) {}
     }
+    try {
+      if (sessionStorage.getItem(key) === "1") {
+        document.documentElement.classList.add("ar-popup-dismissed");
+        return;
+      }
+    } catch (ignore) {}
     api.qsa("#ozel-popup-kapat, #popup-hayir, #popup-hayir-buton, [data-popup-close], .popup-kapat", popup).forEach(function (button) { button.addEventListener("click", close); });
     if (!window.__AR_NEWSLETTER_CLOSE_EVENTS__) {
       window.__AR_NEWSLETTER_CLOSE_EVENTS__ = true;
@@ -307,6 +314,129 @@
       var current = api.qs("#ozel-popup-overlay");
       if (!dismissed && current) current.classList.add("ar-popup-visible");
     }, 6500);
+  };
+
+  /*
+   * Ticimax injects the member profile after the hash route changes and its
+   * class names vary between theme generations. Detect the native form from
+   * its field labels, add layout hooks only, and leave all form controls,
+   * names, values and submit handlers untouched.
+   */
+  api.enhanceMemberProfile = function (root) {
+    if (!/hesabim|uyelik/i.test(window.location.pathname || "")) return;
+    var searchRoot = root && root.querySelectorAll ? root : document;
+    function normalized(value) {
+      var text = String(value || "");
+      try { return text.toLocaleLowerCase("tr-TR"); } catch (ignore) { return text.toLowerCase(); }
+    }
+    function directChild(ancestor, node) {
+      var current = node;
+      while (current && current.parentElement && current.parentElement !== ancestor) current = current.parentElement;
+      return current && current.parentElement === ancestor ? current : null;
+    }
+    function commonAncestor(first, second) {
+      var parents = [];
+      var current = first;
+      while (current) { parents.push(current); current = current.parentElement; }
+      current = second;
+      while (current) { if (parents.indexOf(current) > -1) return current; current = current.parentElement; }
+      return null;
+    }
+    var labels = ["adınız", "soyadınız", "cep telefonunuz", "e-posta adresiniz", "cinsiyet", "ülke", "şehir", "öğrenim durumu", "doğum tarihi"];
+    function scoreFor(element) {
+      var text = normalized(element && element.textContent);
+      return labels.filter(function (label) { return text.indexOf(label) > -1; }).length;
+    }
+    var profiles = api.qsa("form:not(#formGlobal)", searchRoot).filter(function (form) { return scoreFor(form) >= 4; });
+    if (!profiles.length) {
+      profiles = api.qsa("section, article, fieldset, div", searchRoot).filter(function (element) {
+        if (element.id === "divIcerik" || element.id === "mainHolder" || element.id === "formGlobal") return false;
+        return scoreFor(element) >= 5 && api.qsa("input:not([type='hidden']), select, textarea", element).length >= 5;
+      }).sort(function (a, b) {
+        var scoreDifference = scoreFor(b) - scoreFor(a);
+        return scoreDifference || api.qsa("*", a).length - api.qsa("*", b).length;
+      }).slice(0, 1);
+      profiles = profiles.map(function (profile) {
+        var content = profile.closest("#divIcerik");
+        var controlCount = api.qsa("input:not([type='hidden']), select, textarea", profile).length;
+        var cursor = profile.parentElement;
+        while (cursor && cursor !== content && cursor.id !== "mainHolder" && cursor.id !== "formGlobal") {
+          var sameFields = scoreFor(cursor) >= scoreFor(profile) &&
+            api.qsa("input:not([type='hidden']), select, textarea", cursor).length === controlCount;
+          if (!sameFields) break;
+          if (api.qs("h1, h2, h3, button, input[type='submit']", cursor)) return cursor;
+          cursor = cursor.parentElement;
+        }
+        return profile;
+      });
+    }
+    profiles.forEach(function (form) {
+      if (form.classList.contains("ar-member-profile-form")) return;
+      form.classList.add("ar-member-profile-form");
+      if (document.body) document.body.classList.add("ar-member-profile-page");
+      var fields = [];
+      api.qsa("input:not([type='hidden']), select, textarea", form).forEach(function (control) {
+        control.classList.add("ar-member-control");
+        var node = control.parentElement;
+        var candidate = node;
+        var depth = 0;
+        while (node && node !== form && depth < 5) {
+          var controls = api.qsa("input:not([type='hidden']), select, textarea", node).length;
+          if (controls > 4) break;
+          candidate = node;
+          if (node.matches(".form-group,.formGroup,.uyeFormGroup,.formItem,.inputBox,.input-box,.control-group,.form-control,[class*='col-'],li,td")) break;
+          node = node.parentElement;
+          depth += 1;
+        }
+        if (candidate && candidate !== form) {
+          candidate.classList.add("ar-member-field");
+          if (fields.indexOf(candidate) === -1) fields.push(candidate);
+        }
+      });
+
+      var parents = [];
+      fields.forEach(function (field) {
+        if (field.parentElement && field.parentElement !== form && parents.indexOf(field.parentElement) === -1) parents.push(field.parentElement);
+      });
+      parents.forEach(function (parent) {
+        var count = fields.filter(function (field) { return field.parentElement === parent; }).length;
+        if (count > 1) parent.classList.add("ar-member-field-row");
+      });
+      if (fields.filter(function (field) { return field.parentElement === form; }).length > 1) form.classList.add("ar-member-direct-grid");
+
+      var content = form.closest("#divIcerik") || document.querySelector("#divIcerik");
+      if (!content) return;
+      var sidebarCandidates = api.qsa("aside, nav, ul, div", content).filter(function (element) {
+        if (element.contains(form)) return false;
+        var menuText = normalized(element.textContent);
+        var hits = ["üyelik bilgilerim", "siparişlerim", "iade taleplerim", "adres defterim", "favorilerim"].filter(function (item) { return menuText.indexOf(item) > -1; }).length;
+        return hits >= 3 && api.qsa("a", element).length >= 3;
+      }).sort(function (a, b) { return api.qsa("*", a).length - api.qsa("*", b).length; });
+      var sidebar = sidebarCandidates[0];
+      if (!sidebar) return;
+      var layout = commonAncestor(sidebar, form);
+      if (!layout || layout === document.body || !content.contains(layout)) return;
+      var sidebarColumn = directChild(layout, sidebar);
+      var mainColumn = directChild(layout, form);
+      if (!sidebarColumn || !mainColumn || sidebarColumn === mainColumn) return;
+      layout.classList.add("ar-member-layout");
+      sidebarColumn.classList.add("ar-member-sidebar");
+      mainColumn.classList.add("ar-member-main");
+    });
+  };
+
+  api.observeMemberProfile = function () {
+    if (!/hesabim|uyelik/i.test(window.location.pathname || "")) return;
+    var target = api.qs("#divIcerik") || document.body;
+    if (!target || target.getAttribute("data-ar-member-observer") === "true") return;
+    target.setAttribute("data-ar-member-observer", "true");
+    var scheduled = false;
+    var observer = new MutationObserver(function () {
+      if (scheduled) return;
+      scheduled = true;
+      window.requestAnimationFrame(function () { scheduled = false; api.enhanceMemberProfile(target); });
+    });
+    observer.observe(target, { childList: true, subtree: true });
   };
 
   api.fixWishlistLinks = function (root) {
@@ -371,6 +501,8 @@
     api.bridgeCatalogAddButtons();
     api.enableSmartHeader();
     api.scheduleNewsletter();
+    api.enhanceMemberProfile(document);
+    api.observeMemberProfile();
     api.syncCartCount();
     api.enhanceProductCards(document);
     if (api.qs(cardSelector)) api.observeProducts(document.body);

@@ -1,4 +1,4 @@
-# Ticimax manuel kurulum — v21 (`20260802-22`)
+# Ticimax manuel kurulum — v23 (`20260802-23`)
 
 Bu paket Ticimax ürün, kategori, fiyat, stok, varyant, favori, sepet, üyelik ve ödeme akışlarını değiştirmez. Görünüm katmanı uzak GitHub Pages runtime’ından yüklenir; ürünler ve görseller Ticimax’ın kendi HTML’inden canlı okunur.
 
@@ -6,7 +6,7 @@ Bu paket Ticimax ürün, kategori, fiyat, stok, varyant, favori, sepet, üyelik 
 
 1. Ticimax **Dinamik Script Yönetimi** içindeki 12 alanın mevcut metnini ayrı dosyalara yedekleyin.
 2. Eski Aromatherapica loader veya büyük gömülü CSS/JS bloklarını aynı alanlarda bırakmayın.
-3. `10-header.html` alanına runtime loader koymayın; bu alan yalnız v21 yapılandırmasıdır.
+3. `10-header.html` alanına runtime loader koymayın; bu alan yalnız v23 yapılandırmasıdır.
 
 ## Yapıştırma sırası
 
@@ -27,11 +27,13 @@ Her alanı tek tek kaydedin. Snippetlerin her biri 600 satır sınırının çok
 
 ## Zorunlu yayın kontrolü
 
-- Sayfa kaynağında `20260802-22` görünmelidir.
-- Konsolda `window.AROMATHERAPICA.version` değeri `20260802-22` olmalıdır.
+- Sayfa kaynağında `20260802-23` görünmelidir.
+- Konsolda `window.AROMATHERAPICA.version` değeri `20260802-23` olmalıdır.
 - Mobilde iki, tablette üç, masaüstünde dört katalog sütunu görünmelidir.
 - Favori bağlantısı `/Hesabim.aspx#/Favorilerim` olmalıdır.
 - Bir ürünü sepete eklediğinizde header sayacı artmalı ve ürün `/checkout` içinde görünmelidir.
+- Giriş yapılmış `Üyelik Bilgilerim` ekranında alanlar dar şeritlere dönüşmemeli; telefonda tek, geniş ekranda iki sütun olmalıdır.
+- Ana vurgu `#082f6b`, footer `#061f49` olmalı; eski yeşil yüzey görünmemelidir.
 
 ## Ticimax sınırlaması/fallback
 

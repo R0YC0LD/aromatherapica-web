@@ -1,5 +1,5 @@
 /*
- * Aromatherapica Ticimax v21
+ * Aromatherapica Ticimax v23
  * Single terminal responsive layer. Loaded after ar-global.css.
  * Native Ticimax commerce DOM and handlers remain authoritative.
  */
@@ -214,7 +214,7 @@ body.ar-exact-home #ar-exact-footer .reveal.is-visible {
 }
 
 #ar-exact-header.is-compact {
-  box-shadow: 0 8px 22px rgba(31, 42, 36, .06) !important;
+  box-shadow: 0 8px 22px rgba(16,38,68, .06) !important;
 }
 
 #ar-exact-header.is-scroll-hidden {
@@ -309,7 +309,7 @@ body.ar-exact-home #ar-exact-footer .reveal.is-visible {
 }
 
 #ar-exact-header .ar-head-button:hover {
-  background: rgba(169, 185, 170, .16) !important;
+  background: rgba(169,185,204, .16) !important;
   transform: translateY(-1px) !important;
 }
 
@@ -406,7 +406,7 @@ body.ar-exact-home #ar-exact-footer .reveal.is-visible {
 #ar-exact-main .hero-visual {
   min-width: 0 !important;
   min-height: 560px !important;
-  background: linear-gradient(145deg, #dbe9e4, #b8d0c6) !important;
+  background: linear-gradient(145deg, #dce8f3, #b8cede) !important;
 }
 
 #ar-exact-main .hero-copy {
@@ -598,7 +598,7 @@ body.ar-exact-home #ar-exact-footer .reveal.is-visible {
   left: 10px !important;
   max-width: calc(100% - 58px) !important;
   padding: 5px 8px !important;
-  border: 1px solid rgba(31, 42, 36, .08) !important;
+  border: 1px solid rgba(16,38,68, .08) !important;
   border-radius: var(--ar-control-radius) !important;
   color: var(--ar-ink-soft) !important;
   background: rgba(251, 250, 247, .9) !important;
@@ -612,7 +612,7 @@ body.ar-exact-home #ar-exact-footer .reveal.is-visible {
   right: 9px !important;
   width: 38px !important;
   height: 38px !important;
-  border: 1px solid rgba(31, 42, 36, .08) !important;
+  border: 1px solid rgba(16,38,68, .08) !important;
   color: var(--ar-green) !important;
   background: rgba(251, 250, 247, .92) !important;
   backdrop-filter: none !important;
@@ -705,7 +705,7 @@ body.ar-exact-home #ar-exact-footer .reveal.is-visible {
 }
 
 #ar-exact-main .ritual-blue {
-  background: #355d66 !important;
+  background: #174a73 !important;
 }
 
 #ar-exact-main .ritual-clay {
@@ -713,7 +713,8 @@ body.ar-exact-home #ar-exact-footer .reveal.is-visible {
 }
 
 #ar-exact-main .ritual-sage {
-  background: #b8c9b4 !important;
+  color: #102b4d !important;
+  background: #bccbdd !important;
 }
 
 #ar-exact-main .ritual-card-copy h3 {
@@ -848,7 +849,7 @@ body.ar-exact-home #ar-exact-footer .reveal.is-visible {
 #ar-exact-main .newsletter-form > div {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) auto !important;
-  border: 1px solid rgba(31, 42, 36, .28) !important;
+  border: 1px solid rgba(16,38,68, .28) !important;
   border-radius: var(--ar-control-radius) !important;
   overflow: hidden !important;
   background: rgba(251, 250, 247, .72) !important;
@@ -998,7 +999,7 @@ body.ar-page-search #ProductPageProductList.ProductList {
   display: grid !important;
   place-items: center !important;
   overflow: hidden !important;
-  background: linear-gradient(145deg, #eef3ef, #dce7e1) !important;
+  background: linear-gradient(145deg, #eef3f8, #dce7f1) !important;
 }
 
 .ar-v3-image-missing > a {
@@ -1113,7 +1114,7 @@ body.ar-page-product .ar-product-image-missing .GalleryArea {
   overflow: hidden !important;
   border: 1px solid var(--ar-line) !important;
   border-radius: var(--ar-radius) !important;
-  background: linear-gradient(145deg, #edf4f0, #d8e6df) !important;
+  background: linear-gradient(145deg, #edf3f8, #d8e5f0) !important;
 }
 
 body.ar-page-product .ar-product-image-missing .GalleryArea::before {
@@ -1126,7 +1127,7 @@ body.ar-page-product .ar-product-image-missing .GalleryArea::before {
   place-items: center !important;
   width: 82px !important;
   height: 82px !important;
-  border: 1px solid rgba(70, 99, 84, .42) !important;
+  border: 1px solid rgba(47, 82, 124, .42) !important;
   border-radius: 50% !important;
   color: var(--ar-green) !important;
   font-family: Georgia, serif !important;
@@ -1218,7 +1219,161 @@ body.ar-page-account :is(.hesabimSag, .HesabimSag, .hesabimRight, .accountRight,
   min-width: 0 !important;
 }
 
+/* Native Ticimax member profile: layout hooks are added by ar-global.js. */
+body.ar-member-profile-page #divIcerik {
+  width: min(1320px, calc(100vw - (var(--ar-pad) * 2))) !important;
+  max-width: 100% !important;
+  margin-inline: auto !important;
+  padding: clamp(34px, 5vw, 74px) 0 var(--ar-section-y) !important;
+}
+
+body.ar-member-profile-page .ar-member-layout {
+  display: grid !important;
+  grid-template-columns: minmax(220px, 270px) minmax(0, 1fr) !important;
+  align-items: start !important;
+  gap: clamp(28px, 4vw, 64px) !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+body.ar-member-profile-page .ar-member-sidebar,
+body.ar-member-profile-page .ar-member-main {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+body.ar-member-profile-page .ar-member-sidebar {
+  position: sticky !important;
+  top: calc(var(--ar-header-h) + 20px) !important;
+  padding: clamp(16px, 2vw, 24px) !important;
+  border: 1px solid var(--ar-line) !important;
+  border-radius: 20px !important;
+  background: #f3f6fa !important;
+}
+
+body.ar-member-profile-page .ar-member-sidebar :where(ul, ol) {
+  display: grid;
+  gap: 4px;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+body.ar-member-profile-page .ar-member-sidebar li {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+body.ar-member-profile-page .ar-member-sidebar a {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 44px !important;
+  padding: 9px 12px !important;
+  border-radius: 12px !important;
+  color: var(--ar-ink) !important;
+  line-height: 1.3 !important;
+  text-decoration: none !important;
+  transition: color var(--ar-motion-fast) ease, background-color var(--ar-motion-fast) ease !important;
+}
+
+body.ar-member-profile-page .ar-member-sidebar a:is(:hover, :focus-visible),
+body.ar-member-profile-page .ar-member-sidebar a[href*="UyelikBilgileri" i] {
+  color: #fff !important;
+  background: var(--ar-navy) !important;
+}
+
+body.ar-member-profile-page .ar-member-profile-form {
+  box-sizing: border-box !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(18px, 2vw, 26px) !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: clamp(24px, 4vw, 48px) !important;
+  border: 1px solid var(--ar-line) !important;
+  border-radius: 24px !important;
+  background: #fff !important;
+  box-shadow: 0 18px 52px rgba(8, 47, 107, .08) !important;
+}
+
+body.ar-member-profile-page .ar-member-profile-form :where(.ar-member-field-row, .row, [class*="Row"], [class*="row"]) {
+  box-sizing: border-box !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  align-items: start !important;
+  gap: 18px 22px !important;
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+body.ar-member-profile-page .ar-member-profile-form .ar-member-field {
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  float: none !important;
+}
+
+body.ar-member-profile-page .ar-member-profile-form :where(label, .label, [class*="Label"], [class*="label"]) {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 0 8px !important;
+  color: var(--ar-ink) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+}
+
+body.ar-member-profile-page .ar-member-profile-form :where(.ar-member-control, input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]), select, textarea, [class*="phone" i], [class*="tel" i]) {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  min-height: 50px !important;
+  margin: 0 !important;
+  border: 1px solid rgba(8, 47, 107, .18) !important;
+  border-radius: 12px !important;
+  color: var(--ar-ink) !important;
+  background: #fff !important;
+}
+
+body.ar-member-profile-page .ar-member-profile-form :where(input, textarea) {
+  padding-inline: 14px !important;
+}
+
+body.ar-member-profile-page .ar-member-profile-form :where(button, input[type="submit"], .button, .btn) {
+  min-height: 48px !important;
+  padding-inline: 24px !important;
+  border: 1px solid var(--ar-navy) !important;
+  border-radius: var(--ar-control-radius) !important;
+  color: #fff !important;
+  background: var(--ar-navy) !important;
+}
+
+body.ar-member-profile-page .ar-member-profile-form :where(h1, h2, h3, .title, .formTitle, .button-row, .buttons, [class*="Button"], [class*="button"]) {
+  grid-column: 1 / -1 !important;
+}
+
 /* Popup */
+html.ar-popup-dismissed #ozel-popup-overlay {
+  display: none !important;
+}
+
 #ozel-popup-overlay {
   box-sizing: border-box !important;
   padding: max(14px, var(--ar-safe-top)) max(14px, var(--ar-safe-right)) max(14px, var(--ar-safe-bottom)) max(14px, var(--ar-safe-left)) !important;
@@ -1331,7 +1486,7 @@ body.ar-page-account :is(.hesabimSag, .HesabimSag, .hesabimRight, .accountRight,
 #ar-exact-footer {
   display: block !important;
   color: #fff !important;
-  background: #18352d !important;
+  background: #061f49 !important;
 }
 
 #ar-exact-footer .footer-top {
@@ -1400,7 +1555,7 @@ body.ar-page-account :is(.hesabimSag, .HesabimSag, .hesabimRight, .accountRight,
   margin: 0 !important;
   border-radius: var(--ar-control-radius) !important;
   background: var(--ar-green) !important;
-  box-shadow: 0 10px 30px rgba(31, 42, 36, .18) !important;
+  box-shadow: 0 10px 30px rgba(8, 47, 107, .2) !important;
   transform: none !important;
 }
 
@@ -1425,8 +1580,8 @@ body.ar-page-account :is(.hesabimSag, .HesabimSag, .hesabimRight, .accountRight,
   margin: 0 !important;
   padding: 10px 32px 10px 12px !important;
   border-radius: 10px !important;
-  background: rgba(24, 35, 30, .95) !important;
-  box-shadow: 0 10px 28px rgba(18, 27, 23, .18) !important;
+  background: rgba(11,30,61, .95) !important;
+  box-shadow: 0 10px 28px rgba(7,24,49, .18) !important;
 }
 
 #cerekKullanimUyari .title {
@@ -1473,7 +1628,7 @@ body:not(:has(#ar-wishlist-dock)) .favori-link.headerButon.icon {
   border-radius: 50% !important;
   color: #fff !important;
   background: var(--ar-green) !important;
-  box-shadow: 0 10px 30px rgba(31, 42, 36, .18) !important;
+  box-shadow: 0 10px 30px rgba(16,38,68, .18) !important;
   font-size: 0 !important;
   transform: none !important;
 }
@@ -1581,6 +1736,40 @@ body:has(#ar-wishlist-dock) .favori-link.headerButon.icon {
     border-radius: var(--ar-control-radius) !important;
   }
 
+  body.ar-member-profile-page .ar-member-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 22px !important;
+  }
+
+  body.ar-member-profile-page .ar-member-sidebar {
+    position: static !important;
+    top: auto !important;
+    max-height: none !important;
+    padding: 10px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    border-radius: 16px !important;
+    scrollbar-width: none;
+  }
+
+  body.ar-member-profile-page .ar-member-sidebar::-webkit-scrollbar {
+    display: none;
+  }
+
+  body.ar-member-profile-page .ar-member-sidebar :where(ul, nav) {
+    display: flex !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    width: max-content !important;
+    min-width: 100% !important;
+  }
+
+  body.ar-member-profile-page .ar-member-sidebar :where(li, a) {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: max-content !important;
+  }
+
   #ar-exact-footer .footer-top {
     grid-template-columns: minmax(0, 1fr) !important;
     gap: 44px !important;
@@ -1652,6 +1841,22 @@ body:has(#ar-wishlist-dock) .favori-link.headerButon.icon {
     --ar-chip-h: 40px;
     --ar-section-y: 58px;
     --ar-product-columns: 2;
+  }
+
+  body.ar-member-profile-page #divIcerik {
+    width: calc(100vw - 24px) !important;
+    padding: 24px 0 72px !important;
+  }
+
+  body.ar-member-profile-page .ar-member-profile-form,
+  body.ar-member-profile-page .ar-member-profile-form :where(.ar-member-field-row, .row, [class*="Row"], [class*="row"]) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  body.ar-member-profile-page .ar-member-profile-form {
+    gap: 18px !important;
+    padding: 22px 16px !important;
+    border-radius: 18px !important;
   }
 
   #ar-exact-header .ar-topline {
@@ -2063,7 +2268,7 @@ body:has(#ar-wishlist-dock) .favori-link.headerButon.icon {
   }
 
   #ar-exact-main .newsletter-form input[type="email"] {
-    border: 1px solid rgba(31, 42, 36, .28) !important;
+    border: 1px solid rgba(16,38,68, .28) !important;
     border-radius: var(--ar-control-radius) !important;
     background: rgba(251, 250, 247, .72) !important;
   }

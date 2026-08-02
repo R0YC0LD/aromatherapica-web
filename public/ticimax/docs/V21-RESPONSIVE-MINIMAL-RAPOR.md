@@ -1,4 +1,4 @@
-# Aromatherapica Ticimax v21 — responsive minimal teslim raporu
+# Aromatherapica Ticimax v23 — responsive minimal teslim raporu
 
 ## 1. Kısa teşhis
 
@@ -28,10 +28,11 @@
 ## 3. Uygulanan yamalar
 
 - `ar-polish.css`: tek terminal responsive sistem, global taşma kilidi, safe-area, eski lacivert/mavi marka vurgusu, dengeli header, katalog geometrisi, ürün/sepet/üyelik/popup/footer düzenleri, etiketli checkbox/radio kontrollerinde 44 px dokunma alanı ve minimal hareket dili.
-- `ar-global.js`: v21 sürümü, doğru favori rotası, akıllı header, menü akordeonu, popup zamanlaması, yerel Ticimax sepete ekleme delegasyonu ve sayaç senkronu.
+- `ar-global.js`: v23 sürümü, doğru favori rotası, akıllı header, menü akordeonu, popup zamanlaması, yerel Ticimax sepete ekleme delegasyonu, sayaç senkronu ve hash ile sonradan gelen native Üyelik Bilgilerim formunu güvenli biçimde tanıyan layout işaretleyicileri.
 - `ar-home.js`: sahte yıldız/rozetlerin kaldırılması, yerel Ticimax ürün içeriği, minimal kart metni ve parallax kaldırma.
 - `ar-loader.js`: `global.css → home.css (yalnız anasayfa) → polish.css → JS` sırası; polish her zaman terminal katmandır.
 - Native ürün, fiyat, stok, varyant, form, üyelik, checkout ve sipariş kontrolleri silinmedi veya yeniden üretilmedi.
+- Runtime CSS/JS içindeki doygun yeşil hex ve RGB renkler otomatik renk taramasından geçirildi; kalan yeşil renk sayısı sıfırlandı. Footer `#061f49`, ana vurgu `#082f6b`, açık yüzeyler mavi-gri palete taşındı.
 
 ## 4. Minimal JavaScript notu
 
@@ -41,7 +42,7 @@ Hareket katmanı kısa `160–280 ms` süreler ve yalnızca `opacity/transform` 
 
 ## 5. Panel sürüm yükseltmesi
 
-Tüm loader snippet dosyaları ve Header config lacivert/mavi + akıcılık yamasıyla `20260802-22` sürümüne yükseltildi. Loader, panelde kalmış daha eski bir config değerinin güncel cache anahtarını geriye almasını engeller. Header alanı runtime yüklemez. Kullanılacak tek dosya takımı `public/ticimax/snippets/` ve bunun `final/` kopyasıdır; eski `final-full/` klasörü yayın akışında kullanılmaz. Canlı Ticimax panelinde Üye Ol alanı loader çalıştırmadığı için `08-register.html` dahil 12 güncel snippetin panelde yeniden kaydedilmesi zorunludur.
+Tüm loader snippet dosyaları ve Header config lacivert/mavi + akıcılık yamasıyla `20260802-23` sürümüne yükseltildi. Loader, panelde kalmış daha eski bir config değerinin güncel cache anahtarını geriye almasını engeller. Header alanı runtime yüklemez. Kullanılacak tek dosya takımı `public/ticimax/snippets/` ve bunun `final/` kopyasıdır; eski `final-full/` klasörü yayın akışında kullanılmaz. Canlı Ticimax panelinde Üye Ol alanı loader çalıştırmadığı için `08-register.html` dahil 12 güncel snippetin panelde yeniden kaydedilmesi zorunludur.
 
 ## 6. Cihaz test matrisi
 
@@ -51,7 +52,7 @@ Tüm loader snippet dosyaları ve Header config lacivert/mavi + akıcılık yama
 | 360 × 844 | 2 kolon | 2 kolon | tek kolon | tek kolon | tek kolon | taşma yok |
 | 390 × 844 | 2 kolon | 2 kolon | tek kolon | tek kolon | tek kolon | taşma yok |
 | 430 × 844 | 2 kolon | 2 kolon | tek kolon | tek kolon | tek kolon | taşma yok |
-| 768 × 1024 | 3 kolon | 3 kolon | dengeli 2 panel | tek kolon | tek kolon | taşma yok |
+| 768 × 1024 | 3 kolon | 3 kolon | dengeli 2 panel | tek kolon | iki kolon | taşma yok |
 | 1280 × 1024 | 4 kolon | 4 kolon | 2 panel | yerel akış | merkez form | taşma yok |
 | 1440 × 1024 | 4 kolon | 4 kolon | 2 panel | yerel akış | merkez form | taşma yok |
 | 1920 × 1024 | 4 kolon | 4 kolon | 2 panel | yerel akış | merkez form | taşma yok |
@@ -59,6 +60,8 @@ Tüm loader snippet dosyaları ve Header config lacivert/mavi + akıcılık yama
 
 Ek sistem sayfası doğrulamasında sepet, checkout, üye ol, üyelik tamamlandı ve sipariş tamamlandı için 5 genişlikte 25 koşu yapıldı. Native form kimliği, varyant/adet alanları, favori bağlantısı ve Ticimax header korunurken yatay taşma, küçük dokunma hedefi ve modül yükleme hatası görülmedi. Başarı ekranlarına `role="status"` ve `aria-live="polite"` uygulandığı doğrulandı.
 
+Üyelik Bilgilerim için ayrıca dar native kolon kuralları içeren temsilî Ticimax DOM’u test edilir. Form `id/name/action`, input `name/value` ve submit düğmesi korunurken masaüstünde iki kolon, telefonda tek kolon ve en az 44 px dokunma alanı beklenir.
+
 ## 7. Geri alma
 
-Ticimax panelindeki 12 v21 snippetini kurulum öncesi yedeklerle değiştirin veya v21 loader satırlarını kaldırın. Kaydedip CDN yenilenmesini bekleyin. İşlem yalnız görünüm/yükleyici katmanını geri alır; Ticimax ürün, üye, sepet ve sipariş verilerine dokunmaz.
+Ticimax panelindeki 12 v23 snippetini kurulum öncesi yedeklerle değiştirin veya v23 loader satırlarını kaldırın. Kaydedip CDN yenilenmesini bekleyin. İşlem yalnız görünüm/yükleyici katmanını geri alır; Ticimax ürün, üye, sepet ve sipariş verilerine dokunmaz.

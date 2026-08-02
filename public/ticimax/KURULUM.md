@@ -1,6 +1,6 @@
-# Aromatherapica Ticimax v21 kurulumu
+# Aromatherapica Ticimax v23 kurulumu
 
-Aktif sürüm: `20260802-22`
+Aktif sürüm: `20260802-23`
 
 Kullanılacak dosyalar `snippets/` klasöründedir. Her dosya Ticimax’ın yaklaşık 600 satırlık panel sınırının çok altındadır; büyük CSS/JS dosyaları GitHub Pages üzerinden yüklenir.
 
@@ -8,7 +8,7 @@ Kullanılacak dosyalar `snippets/` klasöründedir. Her dosya Ticimax’ın yakl
 
 1. Ticimax Dinamik Script Yönetimi’ndeki 12 alanı yedekleyin.
 2. Eski Aromatherapica loader satırlarını ve büyük gömülü CSS/JS bloklarını kaldırın.
-3. Aynı alanda v20 ve v21’i birlikte bırakmayın.
+3. Aynı alanda eski bir sürüm ile v23’ü birlikte bırakmayın.
 
 ## 2. Panel alanları
 
@@ -42,5 +42,7 @@ Tema ürün üretmez veya sabit ürün listesi tutmaz. Ticimax’ın `.productIt
 - Menü: butona basınca sayfa kaymamalı, artılı gruplar açılmalı.
 - Sepet: sayaç artmalı ve ürün checkout’ta görünmeli.
 - Popup: 6,5 saniyede açılmalı, ekran içinde kalmalı ve kapatılabilmeli.
+- Üyelik Bilgilerim: masaüstünde menü + geniş form, mobilde tek kolon form görünmeli; alanlar dar dikey şeritlere dönüşmemeli.
+- Renk: footer dahil tüm ana yüzeyler Aromatherapica lacivert/mavi paletinde olmalı; eski koyu yeşil görünmemeli.
 
 Ayrıntılı kurulum: `docs/installation.md`. Sayfa/bileşen haritası: `docs/page-mapping.md`. Test ve geri alma: `docs/testing.md`, `docs/rollback.md`.

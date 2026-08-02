@@ -1,7 +1,7 @@
 (function (window, document) {
   "use strict";
 
-  var DEFAULT_BUILD = "20260802-22";
+  var DEFAULT_BUILD = "20260802-23";
   var DEFAULT_BASE = "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
   var currentScript = document.currentScript;
   var config = window.AROMATHERAPICA_CONFIG || {};
