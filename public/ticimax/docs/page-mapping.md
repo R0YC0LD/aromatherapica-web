@@ -1,4 +1,4 @@
-# v23 sayfa ve bileşen haritası
+# v24 sayfa ve bileşen haritası
 
 | Ticimax alanı | Snippet | `data-ar-page` | Yüklenen sayfa modülü |
 |---|---|---|---|

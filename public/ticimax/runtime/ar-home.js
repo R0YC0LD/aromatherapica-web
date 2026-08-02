@@ -7,7 +7,7 @@
     var base = script && script.src ? script.src.replace(/ar-home\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var configuredBuild = window.AROMATHERAPICA_CONFIG && String(window.AROMATHERAPICA_CONFIG.version || "");
     var buildMatch = /^(\d{8})-(\d+)$/.exec(configuredBuild || "");
-    var build = buildMatch && ((Number(buildMatch[1]) * 1000) + Number(buildMatch[2])) >= 20260802023 ? configuredBuild : "20260802-23";
+    var build = buildMatch && ((Number(buildMatch[1]) * 1000) + Number(buildMatch[2])) >= 20260802024 ? configuredBuild : "20260802-24";
     var link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = base + "ar-home.css?v=" + encodeURIComponent(build);
@@ -16,11 +16,11 @@
     var polish = document.createElement("link");
     polish.rel = "stylesheet";
     polish.href = base + "ar-polish.css?v=" + encodeURIComponent(build);
-    polish.setAttribute("data-ar-runtime", "home-polish-v23");
+    polish.setAttribute("data-ar-runtime", "home-polish-v24");
     document.head.appendChild(polish);
   })();
 
-  var VERSION = "2026.08.02-exact-home-23";
+  var VERSION = "2026.08.02-exact-home-24";
   if (window.__AR_EXACT_HOME_VERSION__ === VERSION) return;
   window.__AR_EXACT_HOME_VERSION__ = VERSION;
 

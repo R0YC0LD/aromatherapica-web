@@ -1,6 +1,6 @@
-# Aromatherapica Ticimax v23 kurulumu
+# Aromatherapica Ticimax v24 kurulumu
 
-Aktif sürüm: `20260802-23`
+Aktif sürüm: `20260802-24`
 
 Kullanılacak dosyalar `snippets/` klasöründedir. Her dosya Ticimax’ın yaklaşık 600 satırlık panel sınırının çok altındadır; büyük CSS/JS dosyaları GitHub Pages üzerinden yüklenir.
 
@@ -8,7 +8,7 @@ Kullanılacak dosyalar `snippets/` klasöründedir. Her dosya Ticimax’ın yakl
 
 1. Ticimax Dinamik Script Yönetimi’ndeki 12 alanı yedekleyin.
 2. Eski Aromatherapica loader satırlarını ve büyük gömülü CSS/JS bloklarını kaldırın.
-3. Aynı alanda eski bir sürüm ile v23’ü birlikte bırakmayın.
+3. Aynı alanda eski bir sürüm ile v24’ü birlikte bırakmayın.
 
 ## 2. Panel alanları
 

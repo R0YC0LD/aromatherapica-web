@@ -1,4 +1,4 @@
-# Aromatherapica Ticimax v23 — responsive minimal teslim raporu
+# Aromatherapica Ticimax v24 — responsive minimal teslim raporu
 
 ## 1. Kısa teşhis
 
@@ -28,7 +28,7 @@
 ## 3. Uygulanan yamalar
 
 - `ar-polish.css`: tek terminal responsive sistem, global taşma kilidi, safe-area, eski lacivert/mavi marka vurgusu, dengeli header, katalog geometrisi, ürün/sepet/üyelik/popup/footer düzenleri, etiketli checkbox/radio kontrollerinde 44 px dokunma alanı ve minimal hareket dili.
-- `ar-global.js`: v23 sürümü, doğru favori rotası, akıllı header, menü akordeonu, popup zamanlaması, yerel Ticimax sepete ekleme delegasyonu, sayaç senkronu ve hash ile sonradan gelen native Üyelik Bilgilerim formunu güvenli biçimde tanıyan layout işaretleyicileri.
+- `ar-global.js`: v24 sürümü, doğru favori rotası, akıllı header, menü akordeonu, popup zamanlaması, yerel Ticimax sepete ekleme delegasyonu, sayaç senkronu ve hash ile sonradan gelen native Üyelik Bilgilerim formunu güvenli biçimde tanıyan layout işaretleyicileri.
 - `ar-home.js`: sahte yıldız/rozetlerin kaldırılması, yerel Ticimax ürün içeriği, minimal kart metni ve parallax kaldırma.
 - `ar-loader.js`: `global.css → home.css (yalnız anasayfa) → polish.css → JS` sırası; polish her zaman terminal katmandır.
 - Native ürün, fiyat, stok, varyant, form, üyelik, checkout ve sipariş kontrolleri silinmedi veya yeniden üretilmedi.
@@ -42,7 +42,7 @@ Hareket katmanı kısa `160–280 ms` süreler ve yalnızca `opacity/transform` 
 
 ## 5. Panel sürüm yükseltmesi
 
-Tüm loader snippet dosyaları ve Header config lacivert/mavi + akıcılık yamasıyla `20260802-23` sürümüne yükseltildi. Loader, panelde kalmış daha eski bir config değerinin güncel cache anahtarını geriye almasını engeller. Header alanı runtime yüklemez. Kullanılacak tek dosya takımı `public/ticimax/snippets/` ve bunun `final/` kopyasıdır; eski `final-full/` klasörü yayın akışında kullanılmaz. Canlı Ticimax panelinde Üye Ol alanı loader çalıştırmadığı için `08-register.html` dahil 12 güncel snippetin panelde yeniden kaydedilmesi zorunludur.
+Tüm loader snippet dosyaları ve Header config lacivert/mavi + akıcılık yamasıyla `20260802-24` sürümüne yükseltildi. Loader, panelde kalmış daha eski bir config değerinin güncel cache anahtarını geriye almasını engeller. Header alanı runtime yüklemez. Kullanılacak ana dosya takımı `public/ticimax/snippets/` ve bunun `final/` kopyasıdır. Eski büyük gömülü kodlar içeren `final-full/` dosyaları da yanlışlıkla seçildiklerinde yeşil temayı geri getirmemeleri ve 600 satır sınırını aşmamaları için aynı v24 kısa yükleyicilerine dönüştürüldü. Canlı Ticimax panelinde Üye Ol alanı loader çalıştırmadığı için `08-register.html` dahil 12 güncel snippetin panelde yeniden kaydedilmesi zorunludur.
 
 ## 6. Cihaz test matrisi
 
@@ -64,4 +64,4 @@ Ek sistem sayfası doğrulamasında sepet, checkout, üye ol, üyelik tamamland�
 
 ## 7. Geri alma
 
-Ticimax panelindeki 12 v23 snippetini kurulum öncesi yedeklerle değiştirin veya v23 loader satırlarını kaldırın. Kaydedip CDN yenilenmesini bekleyin. İşlem yalnız görünüm/yükleyici katmanını geri alır; Ticimax ürün, üye, sepet ve sipariş verilerine dokunmaz.
+Ticimax panelindeki 12 v24 snippetini kurulum öncesi yedeklerle değiştirin veya v24 loader satırlarını kaldırın. Kaydedip CDN yenilenmesini bekleyin. İşlem yalnız görünüm/yükleyici katmanını geri alır; Ticimax ürün, üye, sepet ve sipariş verilerine dokunmaz.
