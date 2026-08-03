@@ -8,7 +8,7 @@
     var base = script && script.src ? script.src.replace(/ar-home\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var configuredBuild = window.AROMATHERAPICA_CONFIG && String(window.AROMATHERAPICA_CONFIG.version || "");
     var buildMatch = /^(\d{8})-(\d+)$/.exec(configuredBuild || "");
-    var build = buildMatch ? configuredBuild : "20260803-01";
+    var build = buildMatch ? configuredBuild : "20260803-02";
     var link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = base + "ar-home.css?v=" + encodeURIComponent(build);
@@ -17,7 +17,7 @@
     document.head.appendChild(link);
   })();
 
-  var VERSION = "20260803-01";
+  var VERSION = "20260803-02";
   if (window.__AR_EXACT_HOME_VERSION__ === VERSION) return;
   window.__AR_EXACT_HOME_VERSION__ = VERSION;
 
@@ -101,7 +101,7 @@
     return (
       '<article class="product-card reveal" data-category="' + esc(product.category) + '">' +
         '<div class="product-image ' + visuals[index % visuals.length] + '">' +
-          '<button class="favorite-button" type="button" data-ar-favorite="' + index + '" aria-label="Favorilere ekle: ' + esc(product.name) + '">♡</button>' +
+          '<button class="favorite-button" type="button" data-ar-favorite="' + index + '" data-ar-fixed="favorite" aria-label="Favorilere ekle: ' + esc(product.name) + '" aria-pressed="false"></button>' +
           '<a href="' + esc(product.href) + '" aria-label="' + esc(product.name) + '">' + media + "</a>" +
         "</div>" +
         '<div class="product-info">' +
@@ -180,7 +180,7 @@
       '<footer id="ar-exact-footer" class="site-footer">' +
         '<div class="footer-top">' +
           '<div class="footer-brand"><a class="wordmark wordmark-light ar-exact-wordmark" href="/"><i class="ar-exact-emblem" aria-hidden="true"><b>AR</b></i><span class="ar-exact-wordmark-copy"><strong>Aromatherapica</strong><small>Essential Oils &amp; Aromatherapy</small></span></a><p>Doğanın bilgisini modern bakım ritüelleriyle buluşturan, özenli ve duyusal Aromatherapica dünyası.</p><div class="social-links" aria-label="Sosyal medya bağlantıları"><a href="https://www.instagram.com/aromatherapica/" target="_blank" rel="noopener" aria-label="Instagram"><i class="social-icon social-icon-instagram" aria-hidden="true"></i></a><a href="https://www.pinterest.com/" target="_blank" rel="noopener" aria-label="Pinterest"><i class="social-icon social-icon-pinterest" aria-hidden="true"></i></a><a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube"><i class="social-icon social-icon-youtube" aria-hidden="true"></i></a></div></div>' +
-          '<div class="footer-links"><div><h2>Yardım</h2><a href="/iletisim">Müşteri Hizmetleri</a><a href="/sikca-sorulan-sorular">Sıkça Sorulan Sorular</a><a href="/kargo-ve-teslimat">Kargo ve Teslimat</a><a href="/iade-ve-degisim">İade ve Değişim</a></div><div><h2>Hesabım</h2><a href="/Hesabim">Üyelik</a><a href="/Hesabim#/Siparislerim">Siparişlerim</a><a href="/Hesabim.aspx#/Favorilerim">Favorilerim</a><a href="/kvkk">KVKK</a></div><div><h2>Aromatherapica</h2><a href="/hakkimizda">Hakkımızda</a><a href="/iceriklerimiz">İçeriklerimiz</a><a href="/blog">Bakım Günlüğü</a><a href="/iletisim">Bize Ulaşın</a></div></div>' +
+          '<div class="footer-links"><div><h2>Yardım</h2><a href="/iletisim">Müşteri Hizmetleri</a><a href="/sikca-sorulan-sorular">Sıkça Sorulan Sorular</a><a href="/kargo-ve-teslimat">Kargo ve Teslimat</a><a href="/iade-ve-degisim">İade ve Değişim</a></div><div><h2>Hesabım</h2><a href="/UyeOl">Üyelik</a><a href="/Hesabim#/Siparislerim">Siparişlerim</a><a href="/Hesabim.aspx#/Favorilerim">Favorilerim</a><a href="/kvkk">KVKK</a></div><div><h2>Aromatherapica</h2><a href="/hakkimizda">Hakkımızda</a><a href="/blog">İçeriklerimiz</a><a href="/blog">Bakım Günlüğü</a><a href="/iletisim">Bize Ulaşın</a></div></div>' +
         "</div>" +
         '<div class="footer-assurances"><span><i class="icon-lock" aria-hidden="true"></i> Güvenli ödeme</span><span><i class="icon-box" aria-hidden="true"></i> Özenli paketleme</span><span><i class="icon-leaf" aria-hidden="true"></i> Bitkisel içerikler</span></div>' +
         '<div class="footer-bottom"><p>© 2026 Aromatherapica. Tüm hakları saklıdır.</p><div><a href="/kullanim-kosullari">Kullanım Koşulları</a><a href="/kvkk">Gizlilik</a><a href="/cerez-politikasi">Çerezler</a></div><div class="payment-marks" aria-label="Ödeme yöntemleri"><b>VISA</b><b>MC</b><b>TROY</b></div></div>' +

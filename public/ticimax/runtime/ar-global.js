@@ -8,7 +8,7 @@
     var base = script && script.src ? script.src.replace(/ar-global\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var configuredBuild = window.AROMATHERAPICA_CONFIG && String(window.AROMATHERAPICA_CONFIG.version || "");
     var buildMatch = /^(\d{8})-(\d+)$/.exec(configuredBuild || "");
-    var build = buildMatch ? configuredBuild : "20260803-01";
+    var build = buildMatch ? configuredBuild : "20260803-02";
     var link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = base + "ar-global.css?v=" + encodeURIComponent(build);
@@ -24,11 +24,42 @@
   })();
 
   if (/\/admin(?:\/|$)/i.test(window.location.pathname || "")) return;
-  var RUNTIME_VERSION = "20260803-01";
+  var RUNTIME_VERSION = "20260803-02";
   if (window.__AR_GLOBAL_RUNTIME_VERSION__ === RUNTIME_VERSION) return;
   window.__AR_GLOBAL_RUNTIME_VERSION__ = RUNTIME_VERSION;
 
   var api = window.AromatherapicaTicimax || {};
+  // Verified against live aromatherapica.com (2026-08-03). brandStory/legal pages
+  // must be created in Ticimax panel — do not point them at "/" or "#".
+  var AR_ROUTES = api.routes = {
+    home: "/",
+    brandStory: "/hakkimizda",
+    cart: "/checkout",
+    account: "/Hesabim",
+    login: "/UyeGiris",
+    register: "/UyeOl",
+    forgotPassword: "/SifremiUnuttum",
+    wishlist: "/Hesabim.aspx#/Favorilerim",
+    contact: "/iletisim",
+    blog: "/blog",
+    aromatherapy: "/aromaterapi-yaglari",
+    skinCare: "/cilt-bakimi",
+    specialCare: "/ozel-bakim-urunleri",
+    hairBody: "/sacvevucut-bakimi",
+    // No /gul-sulari category exists yet; products currently list under skinCare.
+    // After panel creates the category, change this to "/gul-sulari".
+    gulWaters: "/Arama?q=g%C3%BCl+suyu",
+    search: "/Arama",
+    faq: "/sikca-sorulan-sorular",
+    shipping: "/kargo-ve-teslimat",
+    returns: "/iade-ve-degisim",
+    kvkk: "/kvkk",
+    terms: "/kullanim-kosullari",
+    cookies: "/cerez-politikasi",
+    contents: "/iceriklerimiz"
+  };
+  if (window.AROMATHERAPICA) window.AROMATHERAPICA.routes = AR_ROUTES;
+
   var cardSelector = [
     ".productItem",
     ".product-item",
@@ -91,7 +122,14 @@
       );
       if (favorite) {
         favorite.classList.add("ar-native-favorite");
+        favorite.setAttribute("data-ar-fixed", "favorite");
         if (!favorite.getAttribute("aria-label")) favorite.setAttribute("aria-label", "Favorilere ekle");
+        if (!favorite.getAttribute("aria-pressed")) favorite.setAttribute("aria-pressed", "false");
+        // Keep a single visible heart: strip nested decorative icons/images.
+        api.qsa("img, svg, i, span.icon, .fa, .icon", favorite).forEach(function (node) {
+          node.setAttribute("aria-hidden", "true");
+          node.classList.add("ar-favorite-hide");
+        });
       }
     });
   };
@@ -228,52 +266,129 @@
     document.body.classList.add("ar-exact-shell");
     // Never hide native home content here. ar-home.js adds ar-exact-home
     // only after #ar-exact-main is successfully mounted.
+    var R = AR_ROUTES;
     var nativeHeader = api.qs("#headerNew");
     if (nativeHeader && !api.qs("#ar-exact-header")) {
       var header = document.createElement("header");
       header.id = "ar-exact-header";
-      header.innerHTML = '<div class="ar-topline"><a href="/aromaterapi-yaglari">Saf aromaterapi yağlarını keşfedin <span>→</span></a><a href="/urunler">Tüm siparişlerde ücretsiz kargo <span>→</span></a></div><div class="header-main"><nav class="ar-head-nav" aria-label="Ana menü"><button type="button" class="ar-head-button" data-ar-menu aria-label="Menüyü aç"><i class="ar-i ar-i-menu"></i></button><a href="/aromaterapi-yaglari">Aromaterapi</a><a href="/ozel-bakim-urunleri">Özel Bakım</a><a href="/cilt-bakimi">Cilt Bakımı</a><a href="/hakkimizda">Markamız</a></nav><a class="ar-wordmark" href="/" aria-label="Aromatherapica ana sayfa"><img src="https://r0yc0ld.github.io/aromatherapica-web/aromatherapica-emblem.png" alt=""><span><strong>Aromatherapica</strong><small>Essential Oils &amp; Aromatherapy</small></span></a><div class="ar-head-actions"><button type="button" class="ar-head-button" data-ar-search aria-label="Arama yap"><i class="ar-i ar-i-search"></i></button><a class="ar-head-button ar-account" href="/Hesabim" aria-label="Hesabım"><i class="ar-i ar-i-user"></i></a><a class="ar-head-button" href="/Hesabim.aspx#/Favorilerim" aria-label="İstek listesi"><i class="ar-i ar-i-heart"></i></a><button type="button" class="ar-head-button" data-ar-cart aria-label="Sepeti aç"><i class="ar-i ar-i-bag"></i><b class="ar-cart-badge">0</b></button></div></div><nav class="ar-category-nav" aria-label="Ürün kategorileri"><a href="/aromaterapi-yaglari">Uçucu Yağlar</a><a href="/cilt-bakimi">Cilt Bakımı</a><a href="/ozel-bakim-urunleri">Özel Bakım</a><a href="/sacvevucut-bakimi">Saç Bakımı</a><a href="/sacvevucut-bakimi">Vücut Bakımı</a><a href="/Arama?q=gül+suyu">Gül Suları</a><a href="/Arama?q=taşıyıcı+yağ">Taşıyıcı Yağlar</a><a href="/Arama?q=hediye">Hediye</a></nav>';
+      header.innerHTML =
+        '<div class="ar-topline"><a href="' + R.aromatherapy + '">Saf aromaterapi yağlarını keşfedin <span>→</span></a><a href="' + R.aromatherapy + '">Özenli bakım, güvenli alışveriş <span>→</span></a></div>' +
+        '<div class="header-main"><nav class="ar-head-nav" aria-label="Ana menü">' +
+          '<button type="button" class="ar-head-button" data-ar-menu aria-label="Menüyü aç"><i class="ar-i ar-i-menu"></i></button>' +
+          '<a href="' + R.aromatherapy + '">Aromaterapi</a><a href="' + R.specialCare + '">Özel Bakım</a><a href="' + R.skinCare + '">Cilt Bakımı</a><a href="' + R.brandStory + '">Markamız</a>' +
+        '</nav><a class="ar-wordmark" href="' + R.home + '" aria-label="Aromatherapica ana sayfa"><img src="https://r0yc0ld.github.io/aromatherapica-web/aromatherapica-emblem.png" alt=""><span><strong>Aromatherapica</strong><small>Essential Oils &amp; Aromatherapy</small></span></a>' +
+        '<div class="ar-head-actions"><button type="button" class="ar-head-button" data-ar-search aria-label="Arama yap"><i class="ar-i ar-i-search"></i></button>' +
+          '<a class="ar-head-button ar-account" href="' + R.account + '" aria-label="Hesabım"><i class="ar-i ar-i-user"></i></a>' +
+          '<a class="ar-head-button" href="' + R.wishlist + '" aria-label="Favorilerim"><i class="ar-i ar-i-heart"></i></a>' +
+          '<button type="button" class="ar-head-button" data-ar-cart aria-label="Sepeti aç"><i class="ar-i ar-i-bag"></i><b class="ar-cart-badge">0</b></button></div></div>' +
+        '<nav class="ar-category-nav" aria-label="Ürün kategorileri">' +
+          '<a href="' + R.aromatherapy + '">Uçucu Yağlar</a><a href="' + R.skinCare + '">Cilt Bakımı</a><a href="' + R.specialCare + '">Özel Bakım</a>' +
+          '<a href="' + R.hairBody + '">Saç Bakımı</a><a href="' + R.hairBody + '">Vücut Bakımı</a>' +
+          '<a href="' + R.gulWaters + '">Gül Suları</a><a href="' + R.search + '?q=ta%C5%9F%C4%B1y%C4%B1c%C4%B1+ya%C4%9F">Taşıyıcı Yağlar</a><a href="' + R.search + '?q=hediye">Hediye</a>' +
+        "</nav>";
       nativeHeader.parentNode.insertBefore(header, nativeHeader);
     }
     var exactHeader = api.qs("#ar-exact-header");
     if (exactHeader && exactHeader.parentNode !== document.body) document.body.insertBefore(exactHeader, document.body.firstChild);
-    if (!api.qs("#ar-shell-panels")) document.body.insertAdjacentHTML("beforeend", '<div id="ar-shell-panels"><button class="ar-shell-scrim" data-ar-close aria-label="Kapat"></button><aside class="ar-shell-drawer" aria-label="Alışveriş menüsü"><header><strong>KEŞFET</strong><button class="ar-shell-close" data-ar-close aria-label="Kapat"><i class="ar-i ar-i-close"></i></button></header><nav><section><button data-ar-accordion>Aromaterapi Yağları <i class="ar-i ar-i-plus"></i></button><div><a href="/aromaterapi-yaglari">Tüm Aromaterapi</a><a href="/arama?q=uçucu+yağ">Uçucu Yağlar</a><a href="/arama?q=taşıyıcı+yağ">Taşıyıcı Yağlar</a><a href="/arama?q=gül+suyu">Gül Suları</a></div></section><section><button data-ar-accordion>Cilt Bakımı <i class="ar-i ar-i-plus"></i></button><div><a href="/cilt-bakimi">Tüm Cilt Bakımı</a><a href="/arama?q=serum">Serumlar</a><a href="/arama?q=krem">Bakım Kremleri</a><a href="/arama?q=temizleme">Temizleme</a></div></section><section><button data-ar-accordion>Saç ve Vücut <i class="ar-i ar-i-plus"></i></button><div><a href="/sacvevucut-bakimi">Tümünü Gör</a><a href="/arama?q=saç">Saç Bakımı</a><a href="/arama?q=vücut">Vücut Bakımı</a></div></section><a class="ar-menu-direct" href="/ozel-bakim-urunleri">Özel Bakım</a><a class="ar-menu-direct" href="/arama?q=hediye">Hediye Seçenekleri</a><a class="ar-menu-direct" href="/hakkimizda">Markamız</a></nav></aside><div class="ar-shell-search" role="dialog" aria-modal="true" aria-label="Ürün ara"><header><strong>ARAMA</strong><button class="ar-shell-close" data-ar-close aria-label="Kapat"><i class="ar-i ar-i-close"></i></button></header><form action="/arama"><i class="ar-i ar-i-search"></i><input name="q" type="search" placeholder="Ürün veya içerik ara" aria-label="Ürün veya içerik ara"><button>Ara</button></form><div class="ar-search-chips"><a href="/arama?q=lavanta">Lavanta</a><a href="/arama?q=biberiye">Biberiye</a><a href="/arama?q=gül+suyu">Gül Suyu</a><a href="/arama?q=cilt+bakımı">Cilt Bakımı</a></div></div><aside class="ar-cart-drawer" aria-label="Sepet"><header><strong>SEPETİM</strong><button class="ar-shell-close" data-ar-close aria-label="Kapat"><i class="ar-i ar-i-close"></i></button></header><div class="ar-cart-copy"><i class="ar-i ar-i-bag"></i><h2>Sepetiniz sizi bekliyor</h2><p>Ürünleriniz Ticimax sepetinde güvenle saklanır.</p><a href="/checkout">SEPETE GİT</a></div></aside></div>');
-    if (!api.qs("#ar-wishlist-dock")) document.body.insertAdjacentHTML("beforeend", '<a id="ar-wishlist-dock" href="/Hesabim.aspx#/Favorilerim" aria-label="İstek listesine git"><i class="ar-i ar-i-heart"></i> İSTEK LİSTESİ <b>0</b></a>');
+    if (!api.qs("#ar-shell-panels")) {
+      document.body.insertAdjacentHTML("beforeend",
+        '<div id="ar-shell-panels" data-ar-fixed="mobile-menu">' +
+          '<button type="button" class="ar-shell-scrim" data-ar-close aria-label="Kapat"></button>' +
+          '<aside class="ar-shell-drawer" aria-label="Alışveriş menüsü"><header><strong>KEŞFET</strong><button type="button" class="ar-shell-close" data-ar-close aria-label="Kapat"><i class="ar-i ar-i-close"></i></button></header>' +
+          '<nav>' +
+            '<section><button type="button" data-ar-accordion aria-expanded="false"><span class="ar-menu-acc-label">Aromaterapi Yağları</span><i class="ar-i ar-i-plus" aria-hidden="true"></i></button>' +
+              '<div><a href="' + R.aromatherapy + '">Tüm Aromaterapi</a><a href="' + R.search + '?q=u%C3%A7ucu+ya%C4%9F">Uçucu Yağlar</a><a href="' + R.search + '?q=ta%C5%9F%C4%B1y%C4%B1c%C4%B1+ya%C4%9F">Taşıyıcı Yağlar</a><a href="' + R.gulWaters + '">Gül Suları</a></div></section>' +
+            '<section><button type="button" data-ar-accordion aria-expanded="false"><span class="ar-menu-acc-label">Cilt Bakımı</span><i class="ar-i ar-i-plus" aria-hidden="true"></i></button>' +
+              '<div><a href="' + R.skinCare + '">Tüm Cilt Bakımı</a><a href="' + R.search + '?q=serum">Serumlar</a><a href="' + R.search + '?q=krem">Bakım Kremleri</a><a href="' + R.search + '?q=temizleme">Temizleme</a></div></section>' +
+            '<section><button type="button" data-ar-accordion aria-expanded="false"><span class="ar-menu-acc-label">Saç ve Vücut</span><i class="ar-i ar-i-plus" aria-hidden="true"></i></button>' +
+              '<div><a href="' + R.hairBody + '">Tümünü Gör</a><a href="' + R.search + '?q=sa%C3%A7">Saç Bakımı</a><a href="' + R.search + '?q=v%C3%BCcut">Vücut Bakımı</a></div></section>' +
+            '<a class="ar-menu-direct" href="' + R.specialCare + '">Özel Bakım</a>' +
+            '<a class="ar-menu-direct" href="' + R.search + '?q=hediye">Hediye Seçenekleri</a>' +
+            '<a class="ar-menu-direct" href="' + R.brandStory + '">Markamız</a>' +
+            '<a class="ar-menu-direct" href="' + R.wishlist + '">Favorilerim</a>' +
+          '</nav></aside>' +
+          '<div class="ar-shell-search" role="dialog" aria-modal="true" aria-label="Ürün ara"><header><strong>ARAMA</strong><button type="button" class="ar-shell-close" data-ar-close aria-label="Kapat"><i class="ar-i ar-i-close"></i></button></header>' +
+            '<form action="' + R.search + '"><i class="ar-i ar-i-search"></i><input name="q" type="search" placeholder="Ürün veya içerik ara" aria-label="Ürün veya içerik ara"><button type="submit">Ara</button></form>' +
+            '<div class="ar-search-chips"><a href="' + R.search + '?q=lavanta">Lavanta</a><a href="' + R.search + '?q=biberiye">Biberiye</a><a href="' + R.gulWaters + '">Gül Suyu</a><a href="' + R.skinCare + '">Cilt Bakımı</a></div></div>' +
+          '<aside class="ar-cart-drawer" aria-label="Sepet"><header><strong>SEPETİM</strong><button type="button" class="ar-shell-close" data-ar-close aria-label="Kapat"><i class="ar-i ar-i-close"></i></button></header>' +
+            '<div class="ar-cart-copy"><i class="ar-i ar-i-bag"></i><h2>Sepetiniz sizi bekliyor</h2><p>Ürünleriniz Ticimax sepetinde güvenle saklanır.</p><a href="' + R.cart + '">SEPETE GİT</a></div></aside>' +
+        "</div>"
+      );
+    }
+    if (!api.qs("#ar-wishlist-dock")) {
+      document.body.insertAdjacentHTML("beforeend",
+        '<a id="ar-wishlist-dock" href="' + R.wishlist + '" aria-label="Favorilerim"><i class="ar-i ar-i-heart"></i> Favorilerim <b>0</b></a>'
+      );
+    }
     var panels = api.qs("#ar-shell-panels");
+    function closePanels() {
+      if (!panels) return;
+      panels.classList.remove("menu-open", "search-open", "cart-open");
+      document.body.classList.remove("ar-panel-open", "panel-open");
+      document.documentElement.classList.remove("ar-panel-open");
+    }
+    // Always start closed (membership/account pages were keeping overlay open).
+    closePanels();
     api.qsa("[data-ar-menu],[data-ar-search],[data-ar-cart],[data-ar-close],[data-ar-accordion]", document).forEach(function (button) {
       if (button.tagName === "BUTTON") button.type = "button";
       if (button.hasAttribute("data-ar-accordion") && !button.hasAttribute("aria-expanded")) button.setAttribute("aria-expanded", "false");
     });
-    function closePanels() { panels.classList.remove("menu-open", "search-open", "cart-open"); document.body.classList.remove("ar-panel-open"); }
-    api.qsa("[data-ar-menu]").forEach(function (button) { button.onclick = function () { closePanels(); panels.classList.add("menu-open"); document.body.classList.add("ar-panel-open"); }; });
-    api.qsa("[data-ar-search]").forEach(function (button) { button.onclick = function () { closePanels(); panels.classList.add("search-open"); document.body.classList.add("ar-panel-open"); window.setTimeout(function () { var input = api.qs("input", panels); if (input) input.focus(); }, 80); }; });
-    api.qsa("[data-ar-cart]").forEach(function (button) { button.onclick = function () { closePanels(); panels.classList.add("cart-open"); document.body.classList.add("ar-panel-open"); }; });
+    api.qsa("[data-ar-menu]").forEach(function (button) {
+      button.onclick = function () { closePanels(); panels.classList.add("menu-open"); document.body.classList.add("ar-panel-open"); };
+    });
+    api.qsa("[data-ar-search]").forEach(function (button) {
+      button.onclick = function () {
+        closePanels();
+        panels.classList.add("search-open");
+        document.body.classList.add("ar-panel-open");
+        window.setTimeout(function () { var input = api.qs("input", panels); if (input) input.focus(); }, 80);
+      };
+    });
+    api.qsa("[data-ar-cart]").forEach(function (button) {
+      button.onclick = function () { closePanels(); panels.classList.add("cart-open"); document.body.classList.add("ar-panel-open"); };
+    });
     api.qsa("[data-ar-close]", panels).forEach(function (button) { button.onclick = closePanels; });
     if (!window.__AR_V4_PANEL_EVENTS__) {
       window.__AR_V4_PANEL_EVENTS__ = true;
       document.addEventListener("click", function (event) {
         var trigger = event.target.closest && event.target.closest("[data-ar-menu],[data-ar-search],[data-ar-cart],[data-ar-close],[data-ar-accordion]");
-        if (!trigger) return;
-        event.preventDefault();
-        event.stopPropagation();
         var shell = api.qs("#ar-shell-panels");
         if (!shell) return;
-        if (trigger.hasAttribute("data-ar-close")) { shell.className = ""; document.body.classList.remove("ar-panel-open"); return; }
+        if (!trigger) {
+          // Outside click closes open panels (except clicks inside open drawers).
+          if (!document.body.classList.contains("ar-panel-open")) return;
+          if (event.target.closest && event.target.closest(".ar-shell-drawer, .ar-shell-search, .ar-cart-drawer, [data-ar-menu], [data-ar-search], [data-ar-cart]")) return;
+          closePanels();
+          return;
+        }
+        event.preventDefault();
+        event.stopPropagation();
+        if (trigger.hasAttribute("data-ar-close")) { closePanels(); return; }
         if (trigger.hasAttribute("data-ar-accordion")) {
           var group = trigger.parentNode;
           var opening = !group.classList.contains("is-open");
-          api.qsa("section.is-open", group.parentNode).forEach(function (open) { open.classList.remove("is-open"); var control = api.qs("[data-ar-accordion]", open); if (control) control.setAttribute("aria-expanded", "false"); });
+          api.qsa("section.is-open", group.parentNode).forEach(function (open) {
+            open.classList.remove("is-open");
+            var control = api.qs("[data-ar-accordion]", open);
+            if (control) control.setAttribute("aria-expanded", "false");
+          });
           group.classList.toggle("is-open", opening);
           trigger.setAttribute("aria-expanded", opening ? "true" : "false");
           return;
         }
-        shell.className = trigger.hasAttribute("data-ar-menu") ? "menu-open" : trigger.hasAttribute("data-ar-search") ? "search-open" : "cart-open";
+        shell.classList.remove("menu-open", "search-open", "cart-open");
+        if (trigger.hasAttribute("data-ar-menu")) shell.classList.add("menu-open");
+        else if (trigger.hasAttribute("data-ar-search")) shell.classList.add("search-open");
+        else shell.classList.add("cart-open");
         document.body.classList.add("ar-panel-open");
       });
+      document.addEventListener("keydown", function (event) { if (event.key === "Escape") closePanels(); });
+      window.addEventListener("pageshow", closePanels);
+      window.addEventListener("popstate", closePanels);
     }
-    document.addEventListener("keydown", function (event) { if (event.key === "Escape") closePanels(); });
     var count = api.qs(".favoritesCount, .favoriteCount, #spanFavoriSayisi, [class*='favori'] .count");
-    if (count) api.qs("#ar-wishlist-dock b").textContent = (count.textContent.match(/\d+/) || ["0"])[0];
+    var dockBadge = api.qs("#ar-wishlist-dock b");
+    if (count && dockBadge) dockBadge.textContent = (count.textContent.match(/\d+/) || ["0"])[0];
   };
 
   api.scheduleNewsletter = function (attempt) {
@@ -487,12 +602,36 @@
     window.addEventListener("scroll", function () { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }, { passive: true });
   };
 
+  api.enhanceMemberAuthPages = function () {
+    var path = (window.location.pathname || "").toLowerCase();
+    if (!/uyegiris|uyeol|sifremi|hesabim|uyelik/.test(path)) return;
+    var root = api.qs("#divIcerik, .mainContainer, #mainHolder") || document.body;
+    if (root.getAttribute("data-ar-fixed") === "member-page") return;
+    root.setAttribute("data-ar-fixed", "member-page");
+    root.classList.add("ar-member-page");
+    document.body.classList.add("ar-member-auth");
+    var form = api.qs("form:not(#formGlobal)", root);
+    if (form) {
+      form.classList.add("ar-member-card");
+      api.labelForms(form);
+    }
+    // Ensure overlays cannot block auth forms.
+    document.body.classList.remove("ar-panel-open", "panel-open");
+    var panels = api.qs("#ar-shell-panels");
+    if (panels) panels.classList.remove("menu-open", "search-open", "cart-open");
+  };
+
   window.AromatherapicaTicimax = api;
 
   api.ready(function () {
     var path = (window.location.pathname || "").toLowerCase();
     if (/hesabim|uyelik|uyegiris|uyeol|sifremi/.test(path)) api.addPageClass("account");
+    if (/uyegiris|sifremi/.test(path)) api.addPageClass("login");
+    if (/uyeol/.test(path)) api.addPageClass("register");
     if (path.indexOf("favori") > -1) api.addPageClass("favorites");
+    // Membership surfaces must never boot with an open menu overlay.
+    document.body.classList.remove("ar-panel-open", "panel-open");
+    document.documentElement.classList.remove("ar-panel-open");
     api.watchEditors();
     api.buildExactShell();
     api.fixWishlistLinks(document);
@@ -501,6 +640,7 @@
     api.scheduleNewsletter();
     api.enhanceMemberProfile(document);
     api.observeMemberProfile();
+    api.enhanceMemberAuthPages();
     api.syncCartCount();
     // Product enhance/observe owned by ar-core; only fill gaps if core is absent.
     if (window.AROMATHERAPICA && window.AROMATHERAPICA.products) {

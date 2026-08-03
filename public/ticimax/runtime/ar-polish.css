@@ -2526,3 +2526,217 @@ select[id*="sira" i] option {
   opacity: .45;
   cursor: not-allowed;
 }
+
+/* =========================================================
+   20260803-02 targeted fixes only (menu / favorite / grid / member / image)
+   ========================================================= */
+
+/* Mobile menu accordion labels must stay visible (single heart-style + not covering text) */
+#ar-shell-panels .ar-shell-drawer [data-ar-accordion] {
+  display: flex !important; /* Ticimax button resets can collapse layout */
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  width: 100% !important;
+  min-height: 56px !important;
+  color: #10263d !important;
+  background: transparent !important;
+  font: 500 17px/1.3 "DM Sans", Arial, sans-serif !important;
+  text-align: left !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#ar-shell-panels .ar-shell-drawer .ar-menu-acc-label {
+  display: inline-block !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  color: #10263d !important;
+  font: inherit !important;
+  font-size: 17px !important;
+  line-height: 1.3 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  white-space: normal !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#ar-shell-panels .ar-shell-drawer [data-ar-accordion] .ar-i-plus {
+  flex: 0 0 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  margin-left: 8px !important;
+  color: #10263d !important;
+  pointer-events: none;
+}
+
+#ar-shell-panels .ar-shell-drawer .ar-menu-direct {
+  color: #10263d !important;
+  font: 500 17px/1.3 "DM Sans", Arial, sans-serif !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Member / login / register visual layer — Ticimax form nodes untouched */
+body:is(.ar-page-login, .ar-page-register):not(.ar-member-profile-page) #divIcerik,
+body.ar-member-auth:not(.ar-member-profile-page) #divIcerik {
+  width: min(calc(100% - 32px), 620px) !important;
+  margin-inline: auto !important;
+  padding-block: clamp(32px, 7vw, 80px) !important;
+}
+
+body:is(.ar-page-login, .ar-page-register):not(.ar-member-profile-page) .ar-member-card,
+body:is(.ar-page-login, .ar-page-register):not(.ar-member-profile-page) #divIcerik form:not(#formGlobal),
+body.ar-member-auth:not(.ar-member-profile-page) .ar-member-card,
+body.ar-member-auth:not(.ar-member-profile-page) #divIcerik form:not(#formGlobal) {
+  width: 100% !important;
+  max-width: 620px !important;
+  margin-inline: auto !important;
+  padding: clamp(20px, 4vw, 40px) !important;
+  border: 1px solid var(--ar-line) !important;
+  border-radius: 20px !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+body:is(.ar-page-login, .ar-page-register, .ar-member-auth):not(.ar-member-profile-page) #divIcerik :is(input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]), select, textarea) {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 48px !important;
+  border: 1px solid rgba(8, 47, 107, .18) !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+}
+
+body:is(.ar-page-login, .ar-page-register, .ar-member-auth):not(.ar-member-profile-page) #divIcerik :is(input, select, textarea):focus {
+  outline: 2px solid rgba(8, 47, 107, .35) !important;
+  outline-offset: 1px !important;
+}
+
+body:is(.ar-page-login, .ar-page-register, .ar-member-auth):not(.ar-member-profile-page) #divIcerik :is(button[type="submit"], input[type="submit"], .btn, .button) {
+  min-height: 48px !important;
+  border-radius: 999px !important;
+  color: #fff !important;
+  background: var(--ar-navy) !important;
+}
+
+/* Single favorite heart on catalog + home cards */
+#ProductPageProductList .ar-native-favorite,
+#ProductPageProductList .favoriteslist,
+#ar-exact-main .favorite-button {
+  box-sizing: border-box !important;
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 3 !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(8, 47, 107, .14) !important;
+  border-radius: 50% !important;
+  color: var(--ar-navy) !important;
+  background: rgba(251, 250, 247, .94) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: 0 !important;
+}
+
+#ProductPageProductList .ar-native-favorite .ar-favorite-hide,
+#ProductPageProductList .favoriteslist .ar-favorite-hide,
+#ProductPageProductList .ar-native-favorite img,
+#ProductPageProductList .favoriteslist img,
+#ProductPageProductList .ar-native-favorite svg,
+#ProductPageProductList .favoriteslist svg,
+#ProductPageProductList .ar-native-favorite i,
+#ProductPageProductList .favoriteslist i {
+  display: none !important;
+}
+
+#ProductPageProductList .ar-native-favorite::before,
+#ProductPageProductList .favoriteslist::before,
+#ar-exact-main .favorite-button::before {
+  content: "" !important;
+  display: block !important;
+  width: 18px !important;
+  height: 16px !important;
+  border: 1.7px solid currentColor !important;
+  border-radius: 10px 10px 7px 0 !important;
+  background: transparent !important;
+  transform: rotate(-45deg) !important;
+}
+
+#ProductPageProductList .ar-native-favorite[aria-pressed="true"]::before,
+#ProductPageProductList .favoriteslist.active::before,
+#ProductPageProductList .favoriteslist.selected::before,
+#ar-exact-main .favorite-button[aria-pressed="true"]::before {
+  background: currentColor !important;
+}
+
+/* Mobile product grid centering */
+@media (max-width: 767px) {
+  body:is(.ar-page-category, .ar-page-brand, .ar-page-search) .ProductListContent,
+  body:is(.ar-page-category, .ar-page-brand, .ar-page-search) #ProductPageProductList.ProductList {
+    width: min(calc(100% - 24px), 1440px) !important;
+    max-width: 100% !important;
+    margin-inline: auto !important;
+    padding-inline: 0 !important;
+    float: none !important;
+  }
+
+  body:is(.ar-page-category, .ar-page-brand, .ar-page-search) #divIcerik {
+    width: min(calc(100% - 16px), var(--ar-container)) !important;
+    margin-inline: auto !important;
+    padding-inline: 0 !important;
+  }
+
+  html body.ar-exact-shell.ar-page-category #ProductPageProductList.ProductList.ProductList > .ItemOrj.ItemOrj,
+  html body.ar-exact-shell.ar-page-brand #ProductPageProductList.ProductList.ProductList > .ItemOrj.ItemOrj,
+  html body.ar-exact-shell.ar-page-search #ProductPageProductList.ProductList.ProductList > .ItemOrj.ItemOrj {
+    flex: 0 0 50% !important;
+    width: 50% !important;
+    max-width: 50% !important;
+    padding-inline: 8px !important;
+  }
+
+  #ProductPageProductList .productItem {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-inline: auto !important;
+  }
+}
+
+/* Missing product image: keep grid geometry, center placeholder */
+#ProductPageProductList .productImage img[src*="resim-hazirlaniyor"],
+#ProductPageProductList .productImage img[src*="no-image"],
+#ProductPageProductList .productImage img[src*="noimage"],
+body.ar-product-image-missing .ProductGallery img,
+#ar-exact-main .product-image img[src*="resim-hazirlaniyor"] {
+  object-fit: contain !important;
+  object-position: center !important;
+  opacity: .72 !important;
+}
+
+#ProductPageProductList .productImage {
+  display: grid !important;
+  place-items: center !important;
+  aspect-ratio: 1 / 1.08 !important;
+  background: var(--ar-cream) !important;
+}
+
+/* Floating wishlist + back-to-top safe area (position only) */
+#ar-wishlist-dock {
+  right: calc(12px + var(--ar-safe-right)) !important;
+  bottom: calc(16px + var(--ar-safe-bottom)) !important;
+}
+
+/* Ticimax sponsored footer brand: leave visible (license/footer widget).
+   Do NOT hide #divTicimaxCopyrightContent or .mobilTicimaxLogo. */
