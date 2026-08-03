@@ -1,1 +1,13 @@
-(function(w,d){var A=w.AROMATHERAPICA;if(!A||A.modules.registerSuccess)return;A.modules.registerSuccess=true;A.ready(function(){var T=w.AromatherapicaTicimax;if(T)T.addPageClass("member-success");var r=A.dom.findFirst(d,["main","#mainHolder",".mainContainer","#divIcerik"]);if(r){r.setAttribute("role","status");r.setAttribute("aria-live","polite")}})})(window,document);
+(function (w, d) {
+  "use strict";
+  var A = w.AROMATHERAPICA;
+  if (!A || !A.registerModule) return;
+  A.registerModule("registerSuccess", function (api) {
+    api.ready(function () {
+      var T = w.AromatherapicaTicimax;
+      if (T) T.addPageClass("register-success");
+      var root = api.dom.findFirst(d, ["#divIcerik", ".mainContainer"]) || d.body;
+      root.classList.add("ar-native-register-success");
+    });
+  });
+})(window, document);

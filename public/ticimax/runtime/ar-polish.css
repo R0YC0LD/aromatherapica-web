@@ -1,24 +1,37 @@
 /*
- * Aromatherapica Ticimax v24
- * Single terminal responsive layer. Loaded after ar-global.css.
- * Native Ticimax commerce DOM and handlers remain authoritative.
+ * Aromatherapica Ticimax 20260803-01
+ * Terminal polish layer after ar-global.css.
+ * Brand: navy #082f6b (no sage-green pivot). Ticimax commerce DOM stays authoritative.
+ *
+ * Token table (single source for spacing/type/color):
+ *   Brand  --ar-navy / --ar-green (=navy alias) / --ar-gold
+ *   Ink    --ar-ink / --ar-ink-soft
+ *   Surface --ar-paper / --ar-cream / --ar-stone / --ar-mist
+ *   Type   --ar-type-hero / --ar-type-h2 / --ar-type-body / --ar-type-meta
+ *   Space  --ar-pad / --ar-gap / --ar-section-y / --ar-container
+ *   Motion --ar-motion-fast / --ar-motion-medium / --ar-ease-soft
  */
 
 :root {
+  /* Brand */
+  --ar-navy: #082f6b;
+  --ar-green: #082f6b;
+  --ar-gold: #b99655;
+  --ar-line: rgba(8, 47, 107, .14);
+  /* Ink */
   --ar-ink: #172536;
   --ar-ink-soft: #526174;
+  /* Surface */
   --ar-paper: #fbfaf7;
   --ar-cream: #f7f4ef;
   --ar-stone: #eeeae2;
   --ar-mist: #e8eff6;
   --ar-sage: #aab9ca;
-  --ar-green: #082f6b;
-  --ar-navy: #082f6b;
-  --ar-gold: #b99655;
-  --ar-line: rgba(8, 47, 107, .14);
+  /* Motion */
   --ar-motion-fast: 160ms;
   --ar-motion-medium: 280ms;
   --ar-ease-soft: cubic-bezier(.22, .61, .36, 1);
+  /* Space */
   --ar-pad: clamp(16px, 4vw, 28px);
   --ar-container: min(1280px, calc(100vw - (var(--ar-pad) * 2)));
   --ar-gap: clamp(12px, 2vw, 28px);
@@ -27,11 +40,13 @@
   --ar-control-radius: 999px;
   --ar-header-h: 84px;
   --ar-chip-h: 46px;
+  /* Type */
   --ar-type-hero: clamp(36px, 6vw, 72px);
   --ar-type-h2: clamp(28px, 4vw, 52px);
   --ar-type-body: clamp(14px, 1.2vw, 17px);
   --ar-type-meta: clamp(10px, .9vw, 12px);
   --ar-product-columns: 4;
+  /* Safe area */
   --ar-safe-top: env(safe-area-inset-top, 0px);
   --ar-safe-right: env(safe-area-inset-right, 0px);
   --ar-safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -2455,4 +2470,59 @@ select[id*="sira" i] option {
   letter-spacing: normal !important;
   color: #172536 !important;
   background: #fff !important;
+}
+
+/* Catalog filter drawer — style wrap only; never rewrite filter inputs/names */
+.ar-filter-drawer[data-ar-filter="safe-wrap"] {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.ar-filter-drawer[data-ar-filter="safe-wrap"] :is(input, select, label, a, button) {
+  max-width: 100% !important;
+}
+
+/* Mobile PDP sticky CTA — proxies native add-to-cart click only */
+.ar-pdp-sticky {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1200;
+  display: none;
+  padding: 12px var(--ar-pad) calc(12px + var(--ar-safe-bottom));
+  border-top: 1px solid var(--ar-line);
+  background: rgba(251, 250, 247, .96);
+  box-shadow: 0 -8px 24px rgba(8, 47, 107, .08);
+}
+
+@media (max-width: 900px) {
+  body.ar-page-product .ar-pdp-sticky {
+    display: block;
+  }
+
+  body.ar-page-product {
+    padding-bottom: calc(76px + var(--ar-safe-bottom));
+  }
+}
+
+.ar-pdp-sticky-btn {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  margin: 0;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--ar-control-radius);
+  color: #fff;
+  background: var(--ar-navy);
+  font: 600 15px/1.2 "DM Sans", Arial, sans-serif;
+  letter-spacing: .02em;
+  cursor: pointer;
+}
+
+.ar-pdp-sticky-btn.is-disabled,
+.ar-pdp-sticky-btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
 }

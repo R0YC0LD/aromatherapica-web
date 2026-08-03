@@ -1,7 +1,7 @@
 (function (window, document) {
   "use strict";
 
-  var DEFAULT_BUILD = "20260802-26";
+  var DEFAULT_BUILD = "20260803-01";
   var DEFAULT_BASE = "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
   var currentScript = document.currentScript;
   var config = window.AROMATHERAPICA_CONFIG || {};
@@ -31,11 +31,31 @@
     initialized: false,
     modules: {},
     state: {},
-    debug: /[?&]ar_debug=1(?:&|$)/.test(window.location.search)
+    observers: {},
+    cleanups: {},
+    debug: /[?&]ar_debug=1(?:&|$)/.test(window.location.search) || !!config.debug
   };
   api.version = build;
+  api.config = Object.assign({}, api.config || {}, config, { baseUrl: base, version: build });
   api.requested = api.requested || {};
   api.requested[page] = true;
+
+  api.registerModule = api.registerModule || function registerModule(name, initializer) {
+    if (!name || typeof initializer !== "function") return false;
+    if (api.modules[name] && api.modules[name].initialized) return false;
+    api.modules[name] = api.modules[name] || { initializer: initializer, initialized: false };
+    if (!api.modules[name].initializer) api.modules[name].initializer = initializer;
+    if (api.modules[name].initialized) return false;
+    try {
+      var cleanup = initializer(api);
+      api.modules[name].initialized = true;
+      if (typeof cleanup === "function") api.cleanups[name] = cleanup;
+    } catch (error) {
+      api.state.lastModuleError = String(error && error.message || error);
+      if (api.debug && window.console) window.console.error("[AR module " + name + "]", error);
+    }
+    return true;
+  };
 
   function asset(tag, url, id) {
     return new Promise(function (resolve, reject) {
@@ -51,6 +71,7 @@
       }
       var element = document.createElement(tag);
       element.dataset.arAsset = id;
+      element.dataset.arVersion = build;
       if (tag === "link") {
         element.rel = "stylesheet";
         element.href = url;
@@ -104,7 +125,9 @@
     })
     .then(function () {
       api.initialized = true;
-      log("Hazır", page);
+      document.documentElement.classList.add("ar-runtime");
+      document.documentElement.dataset.arVersion = build;
+      log("Hazır", page, Object.keys(api.requested));
     })
     .catch(function (error) {
       api.state.loaderError = String(error && error.message || error);

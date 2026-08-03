@@ -2,26 +2,29 @@
   "use strict";
 
   (function ensureFreshStyles() {
-    if (document.querySelector('link[data-ar-runtime="global-v4"],link[data-ar-asset="global-css"]')) return;
+    // Loader owns CSS. Only inject if neither loader nor prior runtime marked assets exist.
+    if (document.querySelector('link[data-ar-asset="global-css"],link[data-ar-asset="polish-css"],link[data-ar-runtime="global-v4"]')) return;
     var script = document.currentScript;
     var base = script && script.src ? script.src.replace(/ar-global\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var configuredBuild = window.AROMATHERAPICA_CONFIG && String(window.AROMATHERAPICA_CONFIG.version || "");
     var buildMatch = /^(\d{8})-(\d+)$/.exec(configuredBuild || "");
-    var build = buildMatch && ((Number(buildMatch[1]) * 1000) + Number(buildMatch[2])) >= 20260802024 ? configuredBuild : "20260802-24";
+    var build = buildMatch ? configuredBuild : "20260803-01";
     var link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = base + "ar-global.css?v=" + encodeURIComponent(build);
     link.setAttribute("data-ar-runtime", "global-v4");
+    link.setAttribute("data-ar-asset", "global-css");
     document.head.appendChild(link);
     var polish = document.createElement("link");
     polish.rel = "stylesheet";
     polish.href = base + "ar-polish.css?v=" + encodeURIComponent(build);
-    polish.setAttribute("data-ar-runtime", "polish-v24");
+    polish.setAttribute("data-ar-runtime", "polish-v4");
+    polish.setAttribute("data-ar-asset", "polish-css");
     document.head.appendChild(polish);
   })();
 
   if (/\/admin(?:\/|$)/i.test(window.location.pathname || "")) return;
-  var RUNTIME_VERSION = "20260802.24";
+  var RUNTIME_VERSION = "20260803-01";
   if (window.__AR_GLOBAL_RUNTIME_VERSION__ === RUNTIME_VERSION) return;
   window.__AR_GLOBAL_RUNTIME_VERSION__ = RUNTIME_VERSION;
 
@@ -94,8 +97,16 @@
   };
 
   api.observeProducts = function (root) {
+    // Single authority: prefer ar-core product observer; never attach a second body-wide observer.
+    var A = window.AROMATHERAPICA;
+    if (A && A.products && typeof A.products.observe === "function") {
+      A.products.enhanceRoot(root || document);
+      A.products.observe(root);
+      return;
+    }
     var target = root || document.body;
-    if (!target || !window.MutationObserver) return;
+    if (!target || !window.MutationObserver || target.getAttribute("data-ar-product-observed") === "true") return;
+    target.setAttribute("data-ar-product-observed", "true");
     var queued = false;
     var observer = new MutationObserver(function () {
       if (queued) return;
@@ -165,6 +176,11 @@
   };
 
   api.watchEditors = function () {
+    // Only watch editors on admin / script management surfaces — not the full storefront body.
+    var path = (window.location.pathname || "").toLowerCase();
+    var isEditorSurface = /admin|script|dinamik|tasarim|editor/i.test(path) ||
+      !!api.qs(".CodeMirror, .ace_editor, .monaco-editor, textarea[id*='txtbxJs'], textarea[id*='Script']");
+    if (!isEditorSurface) return;
     var root = document.body;
     if (!root || root.getAttribute("data-ar-editor-watch") === "true") return;
     root.setAttribute("data-ar-editor-watch", "true");
@@ -184,25 +200,6 @@
       api.qsa(".CodeMirror, .ace_editor, .monaco-editor").forEach(function (editor) {
         resizeObserver.observe(editor);
         if (editor.parentElement) resizeObserver.observe(editor.parentElement);
-      });
-    }
-
-    if (window.MutationObserver) {
-      var mutationObserver = new MutationObserver(function (mutations) {
-        var shouldRefresh = mutations.some(function (mutation) {
-          return mutation.type === "childList" ||
-            (mutation.type === "attributes" &&
-              (mutation.attributeName === "class" ||
-               mutation.attributeName === "style" ||
-               mutation.attributeName === "hidden"));
-        });
-        if (shouldRefresh) api.refreshEditors(root);
-      });
-      mutationObserver.observe(root, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ["class", "style", "hidden"]
       });
     }
 
@@ -505,7 +502,19 @@
     api.enhanceMemberProfile(document);
     api.observeMemberProfile();
     api.syncCartCount();
-    api.enhanceProductCards(document);
-    if (api.qs(cardSelector)) api.observeProducts(document.body);
+    // Product enhance/observe owned by ar-core; only fill gaps if core is absent.
+    if (window.AROMATHERAPICA && window.AROMATHERAPICA.products) {
+      window.AROMATHERAPICA.products.enhanceRoot(document);
+      var catalog = window.AROMATHERAPICA.dom && window.AROMATHERAPICA.dom.findFirst
+        ? window.AROMATHERAPICA.dom.findFirst(document, window.AROMATHERAPICA.selectors.catalog)
+        : api.qs(".ProductListContent, .ProductList, #divIcerik");
+      if (catalog) window.AROMATHERAPICA.products.observe(catalog);
+    } else if (api.qs(cardSelector)) {
+      api.enhanceProductCards(document);
+      api.observeProducts(api.qs(".ProductListContent, .ProductList, #divIcerik") || document.body);
+    }
+    if (window.AROMATHERAPICA && typeof window.AROMATHERAPICA.registerModule === "function") {
+      window.AROMATHERAPICA.registerModule("global-shell", function () { return function () {}; });
+    }
   });
 })(window, document);

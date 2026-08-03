@@ -2,25 +2,22 @@
   "use strict";
 
   (function ensureFreshHomeStyles() {
-    if (document.querySelector('link[data-ar-runtime="home-v4"],link[data-ar-asset="home-css"]')) return;
+    // Loader owns CSS when present. Fallback inject only if home CSS was never marked.
+    if (document.querySelector('link[data-ar-asset="home-css"],link[data-ar-runtime="home-v4"]')) return;
     var script = document.currentScript;
     var base = script && script.src ? script.src.replace(/ar-home\.js.*$/i, "") : "https://r0yc0ld.github.io/aromatherapica-web/ticimax/runtime/";
     var configuredBuild = window.AROMATHERAPICA_CONFIG && String(window.AROMATHERAPICA_CONFIG.version || "");
     var buildMatch = /^(\d{8})-(\d+)$/.exec(configuredBuild || "");
-    var build = buildMatch && ((Number(buildMatch[1]) * 1000) + Number(buildMatch[2])) >= 20260802024 ? configuredBuild : "20260802-26";
+    var build = buildMatch ? configuredBuild : "20260803-01";
     var link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = base + "ar-home.css?v=" + encodeURIComponent(build);
     link.setAttribute("data-ar-runtime", "home-v4");
+    link.setAttribute("data-ar-asset", "home-css");
     document.head.appendChild(link);
-    var polish = document.createElement("link");
-    polish.rel = "stylesheet";
-    polish.href = base + "ar-polish.css?v=" + encodeURIComponent(build);
-    polish.setAttribute("data-ar-runtime", "home-polish-v26");
-    document.head.appendChild(polish);
   })();
 
-  var VERSION = "2026.08.02-exact-home-26";
+  var VERSION = "20260803-01";
   if (window.__AR_EXACT_HOME_VERSION__ === VERSION) return;
   window.__AR_EXACT_HOME_VERSION__ = VERSION;
 
